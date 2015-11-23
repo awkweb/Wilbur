@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="top-bar small-10 small-centered columns">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">Budget</li>
+                <li><a href="{% url 'budget:overview' %}">Overview</a></li>
+                <li><a href="{% url 'budget:revenue' %}">Revenue</a></li>
+                <li><a href="{% url 'budget:expenses' %}">Expenses</a></li>
+                <li><a href="{% url 'budget:add' %}">Add Item</a></li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+                <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Budget - Add Item{% endblock %}
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<br>
+<br>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <h3>Add Item</h3>
+    </div>
+</div>
+
+<div class="row">
+  <div class="small-10 small-centered columns">
+      <form method="post" action="{% url 'budget:submit' %}">
+          {% csrf_token %}
+          Type: <input type="text" name="type" />
+          Frequency: <input type="text" name="type" />
+          Name: <input type="text" name="name" />
+          Amount: <input type="text" name="number" />
+          Date: <input type="date" name="date" />
+          <input type="submit" value="Submit" class="button" />
+      </form>
+  </div>
+</div>
+{% endblock %}

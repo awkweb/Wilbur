@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="row login">
+  <div class="small-4 small-centered columns">
+      <form method="post" action="{% url 'budget:login' %}">
+          {% csrf_token %}
+          Username: <input type="text" name="username" />
+          Password: <input type="password" name="password" />
+          <input type="submit" value="Login" class="button" />
+      </form>
+  </div>
+</div>
+
+{% if error_message %}
+<div class="row alert">
+  <div class="small-4 small-centered columns callout warning" data-closable>
+      <button class="close-button" data-close aria-label="Dismiss alert">&times;</button>
+      <p>{{ error_message }}</p>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
