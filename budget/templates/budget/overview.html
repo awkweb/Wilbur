@@ -5,12 +5,77 @@
 
 {% include 'navbar.html' %}
 
+{% widthratio total_spent budget.amount 100 as spent_percentage %}
+
 <br>
 <br>
 
 <div class="row">
     <div class="small-10 small-centered columns">
         <h3>Overview</h3>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <div class="clearfix">
+            <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
+            <a href="{% url 'budget:budget' %}" class="small secondary hollow button float-right">View budget</a>
+        </div>
+        <div class="stat">{{ spent_percentage }}%</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <div class="success progress" role="progressbar" tabindex="0" aria-valuenow="{{ total_spent }}"
+             aria-valuemin="0"
+             aria-valuetext="25 percent" aria-valuemax="{{ budget.amount }}">
+            <div class="progress-meter" style="width: {{ spent_percentage }}%"></div>
+        </div>
+        <p class="lead">${{ total_spent }} out of ${{ budget.amount }}</p>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <div class="clearfix">
+            <h4 class="subheader float-left">Recent transactions</h4>
+
+            <div class="small button-group float-right">
+                <a href="#" class="secondary hollow button">Add transaction</a>
+                <a href="{% url 'budget:transactions' %}" class="secondary hollow button">View transactions</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <table class="hover">
+            <thead>
+            <tr>
+                <th width="250">Date</th>
+                <th width="250">Type</th>
+                <th width="250">Amount</th>
+                <th width="250">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.creation_date }}</td>
+                <td>{{ transaction.type.name }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.description }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 

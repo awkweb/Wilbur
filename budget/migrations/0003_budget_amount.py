@@ -7,13 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budget', '0003_remove_item_type'),
+        ('budget', '0002_auto_20151124_1506'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='item',
-            name='type',
-            field=models.IntegerField(choices=[(-1, 'Expense'), (1, 'Revenue')], default=1),
+            model_name='budget',
+            name='amount',
+            field=models.DecimalField(max_digits=10, verbose_name='Amount', decimal_places=2, default=0),
         ),
     ]

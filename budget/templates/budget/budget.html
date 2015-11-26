@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Budget - Budget{% endblock %}
+{% block content %}
+
+{% include 'navbar.html' %}
+
+{% widthratio total_spent budget.amount 100 as spent_percentage %}
+
+<br>
+<br>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <h3>Budget</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <table class="hover">
+            <thead>
+            <tr>
+                <th width="250">Date</th>
+                <th width="250">Type</th>
+                <th width="250">Amount</th>
+                <th width="250">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.creation_date }}</td>
+                <td>{{ item.type.name }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.description }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+{% endblock %}

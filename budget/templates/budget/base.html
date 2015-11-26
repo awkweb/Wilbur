@@ -5,14 +5,18 @@
     <title>{% block title %}Budget{% endblock %}</title>
 
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'budget/css/foundation.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'budget/css/styles.css' %}" />
-
-    <script src="{% static 'budget/js/jquery.min.js' %}"></script>
-    <script src="{% static 'budget/js/foundation.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'budget/css/foundation.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'budget/css/styles.css' %}"/>
 </head>
 <body>
 {% block content %}
 {% endblock %}
+
+<script src="{% static 'budget/js/jquery.min.js' %}"></script>
+<script src="{% static 'budget/js/foundation.min.js' %}"></script>
+
+<script>
+  $(document).foundation();
+</script>
 </body>
 </html>

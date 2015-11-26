@@ -1,74 +1,56 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.views.generic.base import TemplateView
 
-from .models import Item
-
-
-def overview(request):
-    user_id = None
-    try:
-        user_id = request.session['_auth_user_id']
-    finally:
-        if user_id is not None:
-            user = User.objects.get(pk=user_id)
-            items = Item.objects.filter(user=user)
-            return render(request, 'budget/overview.html', {
-                'user': user,
-            })
-        else:
-            return render(request, 'budget/login.html')
+from budget.models import Budget
 
 
-def revenue(request):
-    user_id = None
-    try:
-        user_id = request.session['_auth_user_id']
-    finally:
-        if user_id is not None:
-            user = User.objects.get(pk=user_id)
-            items = Item.objects.filter(user=user).filter(type=1)
-            return render(request, 'budget/revenue.html', {
-                'user': user,
-                'items': items,
-            })
-        else:
-            return render(request, 'budget/login.html')
+class IndexView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        user_id = None
+        try:
+            user_id = request.session['_auth_user_id']
+        finally:
+            if user_id is not None:
+                user = User.objects.get(pk=user_id)
+                budget = Budget.objects.get(user=user)
+                items = budget.get_items()
+                transactions = items.get_transactions()[:5]
+                total_spent = budget.get_total_for_transactions()
+                return render(request, 'budget/overview.html', {
+                    'budget': budget,
+                    'items': items,
+                    'total_spent': total_spent,
+                })
+            else:
+                return render(request, 'budget/login.html')
 
 
-def expenses(request):
-    user_id = None
-    try:
-        user_id = request.session['_auth_user_id']
-    finally:
-        if user_id is not None:
-            user = User.objects.get(pk=user_id)
-            items = Item.objects.filter(user=user).filter(type=-1)
-            return render(request, 'budget/expenses.html', {
-                'user': user,
-                'items': items,
-            })
-        else:
-            return render(request, 'budget/login.html')
+class BudgetView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'budget/budget.html')
 
 
-def add(request):
-    user_id = None
-    try:
-        user_id = request.session['_auth_user_id']
-    finally:
-        if user_id is not None:
-            user = User.objects.get(pk=user_id)
-            return render(request, 'budget/add.html', {
-                'user': user,
-            })
-        else:
-            return render(request, 'budget/login.html')
+class TransactionsView(TemplateView):
 
-
-def add_submit(request):
-    print("User id: " + user)
-    print(request)
+    def get(self, request, *args, **kwargs):
+        user_id = None
+        try:
+            user_id = request.session['_auth_user_id']
+        finally:
+            if user_id is not None:
+                user = User.objects.get(pk=user_id)
+                budget = Budget.objects.get(user=user)
+                items = budget.get_items()
+                transactions = items.get_transactions()[:5]
+                return render(request, 'budget/transactions.html', {
+                    'transactions': transactions,
+                })
+            else:
+                return render(request, 'budget/transactions.html')
 
 
 def login_user(request):

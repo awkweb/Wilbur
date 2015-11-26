@@ -4,6 +4,7 @@
 {% block content %}
 <div class="row login">
   <div class="small-4 small-centered columns">
+      <h3>Login</h3>
       <form method="post" action="{% url 'budget:login' %}">
           {% csrf_token %}
           Username: <input type="text" name="username" />
@@ -16,7 +17,7 @@
 {% if error_message %}
 <div class="row alert">
   <div class="small-4 small-centered columns callout warning" data-closable>
-      <button class="close-button" data-close aria-label="Dismiss alert">&times;</button>
+      <!--<button class="close-button" data-close aria-label="Dismiss alert">&times;</button>-->
       <p>{{ error_message }}</p>
   </div>
 </div>

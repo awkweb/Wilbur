@@ -18,11 +18,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.overview, name='overview'),
-    url(r'^revenue/$', views.revenue, name='revenue'),
-    url(r'^expenses/$', views.expenses, name='expenses'),
-    url(r'^add/$', views.add, name='add'),
-    url(r'^add/submit/$', views.add_submit, name='submit'),
+    url(r'^$', views.IndexView.as_view(), name='overview'),
+    url(r'^budget$', views.BudgetView.as_view(), name='budget'),
+    url(r'^transactions', views.TransactionsView.as_view(), name='transactions'),
     url(r'^login/$', views.login_user, name='login'),
     url(r'^logout/$', views.logout_user, name='logout'),
 ]
