@@ -14,12 +14,25 @@ class Budget(models.Model):
         items = Item.objects.filter(budget=self)
         return items
 
-    def get_total_for_transactions(self):
-        items = self.get_budget_items()
+    def get_transactions(self):
+        items = self.get_items()
+        transaction_list = []
+        for item in items:
+            transactions = item.get_transactions()
+            for transaction in transactions:
+                transaction_list.append(transaction)
+        return transaction_list
+
+    def get_sum_transactions(self):
+        items = self.get_items()
         total = 0
         for item in items:
-            total += item.amount
+            total += item.get_sum_transactions()
         return total
+
+    def get_percent_spent(self):
+        total = self.get_sum_transactions()
+        return total / self.amount * 100
 
 
 class ItemType(models.Model):
@@ -43,6 +56,17 @@ class Item(models.Model):
     def get_transactions(self):
         transactions = Transaction.objects.filter(item=self)
         return transactions
+
+    def get_sum_transactions(self):
+        transactions = self.get_transactions()
+        total = 0
+        for transaction in transactions:
+            total += transaction.amount
+        return total
+
+    def get_percent_spent(self):
+        total = self.get_sum_transactions()
+        return total / self.amount * 100
 
 
 class Transaction(models.Model):

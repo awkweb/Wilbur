@@ -7,7 +7,6 @@ from budget.models import Budget
 
 
 class IndexView(TemplateView):
-
     def get(self, request, *args, **kwargs):
         user_id = None
         try:
@@ -16,41 +15,36 @@ class IndexView(TemplateView):
             if user_id is not None:
                 user = User.objects.get(pk=user_id)
                 budget = Budget.objects.get(user=user)
-                items = budget.get_items()
-                transactions = items.get_transactions()[:5]
-                total_spent = budget.get_total_for_transactions()
+                transactions = budget.get_transactions()[:4]
                 return render(request, 'budget/overview.html', {
                     'budget': budget,
-                    'items': items,
-                    'total_spent': total_spent,
+                    'transactions': transactions,
                 })
             else:
                 return render(request, 'budget/login.html')
 
 
 class BudgetView(TemplateView):
-
     def get(self, request, *args, **kwargs):
-        return render(request, 'budget/budget.html')
+        user_id = request.session['_auth_user_id']
+        user = User.objects.get(pk=user_id)
+        budget = Budget.objects.get(user=user)
+        items = budget.get_items()
+        return render(request, 'budget/budget.html', {
+            'budget': budget,
+            'items': items,
+        })
 
 
 class TransactionsView(TemplateView):
-
     def get(self, request, *args, **kwargs):
-        user_id = None
-        try:
-            user_id = request.session['_auth_user_id']
-        finally:
-            if user_id is not None:
-                user = User.objects.get(pk=user_id)
-                budget = Budget.objects.get(user=user)
-                items = budget.get_items()
-                transactions = items.get_transactions()[:5]
-                return render(request, 'budget/transactions.html', {
-                    'transactions': transactions,
-                })
-            else:
-                return render(request, 'budget/transactions.html')
+        user_id = request.session['_auth_user_id']
+        user = User.objects.get(pk=user_id)
+        budget = Budget.objects.get(user=user)
+        transactions = budget.get_transactions()
+        return render(request, 'budget/transactions.html', {
+            'transactions': transactions,
+        })
 
 
 def login_user(request):

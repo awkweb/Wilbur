@@ -30,10 +30,10 @@
             <tbody>
             {% for transaction in transactions %}
             <tr>
-                <td>{{ transaction.creation_date }}</td>
-                <td>{{ transaction.type.name }}</td>
+                <td>{{ transaction.transaction_date }}</td>
+                <td>{{ transaction.item.type.name }}</td>
                 <td>{{ transaction.amount }}</td>
-                <td>{{ transaction.description }}</td>
+                <td>{{ transaction.name }}</td>
             </tr>
             {% endfor %}
             </tbody>

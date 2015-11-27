@@ -5,7 +5,7 @@
 
 {% include 'navbar.html' %}
 
-{% widthratio total_spent budget.amount 100 as spent_percentage %}
+{% widthratio budget.get_sum_transactions budget.amount 100 as spent_percentage %}
 
 <br>
 <br>
@@ -16,13 +16,11 @@
     </div>
 </div>
 
-<br>
-
 <div class="row">
     <div class="small-10 small-centered columns">
         <div class="clearfix">
             <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
-            <a href="{% url 'budget:budget' %}" class="small secondary hollow button float-right">View budget</a>
+            <a href="{% url 'budget:budget' %}" class="small hollow button float-right">View budget</a>
         </div>
         <div class="stat">{{ spent_percentage }}%</div>
     </div>
@@ -30,12 +28,15 @@
 
 <div class="row">
     <div class="small-10 small-centered columns">
-        <div class="success progress" role="progressbar" tabindex="0" aria-valuenow="{{ total_spent }}"
+        {% with budget.get_percent_spent as total %}
+        <div class="{% if total <= 40 %}success{% elif total > 40 and total <= 80 %}warning{% else %}alert{% endif %} progress"
+             role="progressbar" tabindex="0" aria-valuenow="{{ item.get_sum_transactions }}"
              aria-valuemin="0"
-             aria-valuetext="25 percent" aria-valuemax="{{ budget.amount }}">
+             aria-valuetext="{{ spent_percentage }} percent" aria-valuemax="{{ budget.amount }}">
             <div class="progress-meter" style="width: {{ spent_percentage }}%"></div>
         </div>
-        <p class="lead">${{ total_spent }} out of ${{ budget.amount }}</p>
+        {% endwith %}
+        <p class="lead">${{ budget.get_sum_transactions }} out of ${{ budget.amount }}</p>
     </div>
 </div>
 
@@ -47,8 +48,8 @@
             <h4 class="subheader float-left">Recent transactions</h4>
 
             <div class="small button-group float-right">
-                <a href="#" class="secondary hollow button">Add transaction</a>
-                <a href="{% url 'budget:transactions' %}" class="secondary hollow button">View transactions</a>
+                <a href="#" class="hollow button">Add transaction</a>
+                <a href="{% url 'budget:transactions' %}" class="hollow button">View transactions</a>
             </div>
         </div>
     </div>
@@ -68,10 +69,10 @@
             <tbody>
             {% for transaction in transactions %}
             <tr>
-                <td>{{ transaction.creation_date }}</td>
-                <td>{{ transaction.type.name }}</td>
+                <td>{{ transaction.transaction_date }}</td>
+                <td>{{ transaction.item.type.name }}</td>
                 <td>{{ transaction.amount }}</td>
-                <td>{{ transaction.description }}</td>
+                <td>{{ transaction.name }}</td>
             </tr>
             {% endfor %}
             </tbody>

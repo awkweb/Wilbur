@@ -23,7 +23,7 @@ class ItemAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,
-            {'fields': ['budget_item', 'type', 'name', 'amount', 'transaction_date', 'creation_date']}),
+            {'fields': ['item', 'type', 'name', 'amount', 'transaction_date', 'creation_date']}),
     ]
     list_display = ('item', 'name', 'amount', 'transaction_date', 'type',)
     list_filter = ['type', 'amount', 'transaction_date']
