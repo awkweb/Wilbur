@@ -48,7 +48,7 @@
             <h4 class="subheader float-left">Recent transactions</h4>
 
             <div class="small button-group float-right">
-                <a href="#" class="hollow button">Add transaction</a>
+                <a href="{% url 'budget:add-transaction' %}" class="hollow button">Add transaction</a>
                 <a href="{% url 'budget:transactions' %}" class="hollow button">View transactions</a>
             </div>
         </div>
@@ -69,7 +69,7 @@
             <tbody>
             {% for transaction in transactions %}
             <tr>
-                <td>{{ transaction.transaction_date }}</td>
+                <td><a href="{% url 'budget:edit-transaction' transaction.id %}">{{ transaction.transaction_date }}</a></td>
                 <td>{{ transaction.item.type.name }}</td>
                 <td>{{ transaction.amount }}</td>
                 <td>{{ transaction.name }}</td>

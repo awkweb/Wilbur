@@ -19,8 +19,11 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='overview'),
-    url(r'^budget$', views.BudgetView.as_view(), name='budget'),
-    url(r'^transactions', views.TransactionsView.as_view(), name='transactions'),
+    url(r'^budget/$', views.BudgetView.as_view(), name='budget'),
+    url(r'^transactions/', views.TransactionsView.as_view(), name='transactions'),
+    url(r'^add-transaction/', views.add_transaction, name='add-transaction'),
+    url(r'^edit-transaction/(?P<transaction_id>[0-9]+)', views.edit_transaction, name='edit-transaction'),
+    url(r'^delete-transaction/(?P<transaction_id>[0-9]+)', views.delete_transaction, name='delete-transaction'),
     url(r'^login/$', views.login_user, name='login'),
     url(r'^logout/$', views.logout_user, name='logout'),
 ]

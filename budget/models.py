@@ -21,7 +21,7 @@ class Budget(models.Model):
             transactions = item.get_transactions()
             for transaction in transactions:
                 transaction_list.append(transaction)
-        return transaction_list
+        return sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
 
     def get_sum_transactions(self):
         items = self.get_items()

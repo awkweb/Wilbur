@@ -18,6 +18,15 @@
 
 <div class="row">
     <div class="small-10 small-centered columns">
+        <div class="clearfix">
+            <h4 class="subheader float-left">{{ transactions|length }} transactions</h4>
+            <a href="{% url 'budget:add-transaction' %}" class="small hollow button float-right">Add transaction</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
         <table class="hover">
             <thead>
             <tr>
@@ -30,7 +39,8 @@
             <tbody>
             {% for transaction in transactions %}
             <tr>
-                <td>{{ transaction.transaction_date }}</td>
+                <td><a href="{% url 'budget:edit-transaction' transaction.id %}">{{ transaction.transaction_date }}</a>
+                </td>
                 <td>{{ transaction.item.type.name }}</td>
                 <td>{{ transaction.amount }}</td>
                 <td>{{ transaction.name }}</td>
@@ -42,4 +52,23 @@
 </div>
 
 <br>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <ul class="pagination text-center" role="navigation" aria-label="Pagination">
+            {% if transactions.has_previous %}
+                <li class="pagination-previous"><a href="?page={{ transactions.previous_page_number }}"
+                                                   aria-label="Previous page">Previous</a>
+                </li>
+            {% endif %}
+                <li><span
+                        class="current">Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.</span>
+                </li>
+            {% if transactions.has_next %}
+                <li class="pagination-next"><a href="?page={{ transactions.next_page_number }}" aria-label="Next page">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
