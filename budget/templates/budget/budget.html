@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block title %}Budget - Budget{% endblock %}
 {% block content %}
 
-{% include 'navbar.html' %}
-
-{% widthratio budget.get_sum_transactions budget.amount 100 as spent_percentage %}
+{% include 'includes/navbar.html' %}
 
 <br>
 <br>
@@ -20,25 +20,12 @@
     <div class="small-10 small-centered columns">
         <div class="clearfix">
             <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
-            <a href="#" class="small hollow button float-right">Edit budget</a>
+            <a href="{% url 'budget:edit-budget' %}" class="small hollow button float-right">Edit budget</a>
         </div>
-        <div class="stat">{{ spent_percentage }}%</div>
     </div>
 </div>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        {% with budget.get_percent_spent as total %}
-        <div class="{% if total <= 40 %}success{% elif total > 40 and total <= 80 %}warning{% else %}alert{% endif %} progress"
-             role="progressbar" tabindex="0" aria-valuenow="{{ item.get_sum_transactions }}"
-             aria-valuemin="0"
-             aria-valuetext="{{ spent_percentage }} percent" aria-valuemax="{{ budget.amount }}">
-            <div class="progress-meter" style="width: {{ spent_percentage }}%"></div>
-        </div>
-        {% endwith %}
-        <p class="lead">${{ budget.get_sum_transactions }} out of ${{ budget.amount }}</p>
-    </div>
-</div>
+{% include 'includes/budget-overview.html' %}
 
 <div class="row">
     <div class="small-10 small-centered columns">
@@ -46,27 +33,26 @@
     </div>
 </div>
 
-{% for item in items %}
-{% widthratio item.get_sum_transactions item.amount 100 as spent_percentage %}
+{% for item in item_list %}
 <div class="row">
     <div class="small-10 small-centered columns">
-        <h4 class="subheader">{{ item.type.name }}</h4>
-        <div class="stat">{{ spent_percentage }}%</div>
+        <h4 class="subheader">{{ item.0|capfirst }}</h4>
+        <div class="stat">{{ item.3|floatformat:1 }}%</div>
     </div>
 </div>
 
 <div class="row">
     <div class="small-10 small-centered columns">
-        {% with item.get_percent_spent as total %}
+        {% with item.3 as total %}
         <div class="{% if total <= 40 %}success{% elif total > 40 and total <= 80 %}warning{% else %}alert{% endif %} progress"
              role="progressbar" tabindex="0"
-             aria-valuenow="{{ item.get_sum_transactions }}"
+             aria-valuenow="{{ total }}"
              aria-valuemin="0"
-             aria-valuetext="{{ spent_percentage }} percent" aria-valuemax="{{ item.amount }}">
-            <div class="progress-meter" style="width: {{ spent_percentage }}%"></div>
+             aria-valuetext="{{ total }} percent" aria-valuemax="{{ item.1 }}">
+            <div class="progress-meter" style="width: {{ total }}%"></div>
         </div>
         {% endwith %}
-        <p class="lead">${{ item.get_sum_transactions }} out of ${{ item.amount }}</p>
+        <p class="lead">${{ item.2|intcomma }} out of ${{ item.1|intcomma }}</p>
     </div>
 </div>
 {% endfor %}

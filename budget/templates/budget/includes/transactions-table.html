@@ -1,0 +1,25 @@
+{% load humanize %}
+
+<table class="hover">
+    <thead>
+    <tr>
+        <th width="250">Date</th>
+        <th width="250">Type</th>
+        <th width="250">Amount</th>
+        <th width="250">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for transaction in transactions %}
+    <tr>
+        <td>
+            <a href="{% url 'budget:edit-transaction' transaction.id %}">{{transaction.transaction_date|naturaltime}}</a>
+        </td>
+        <td>{{ transaction.item.type.name }}</td>
+        <td>{{ transaction.amount|intcomma }}</td>
+        <td>{{ transaction.name }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+

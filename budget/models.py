@@ -14,20 +14,20 @@ class Budget(models.Model):
         items = Item.objects.filter(budget=self)
         return items
 
-    def get_transactions(self):
+    def get_transactions_for_month_and_year(self, month, year):
         items = self.get_items()
         transaction_list = []
         for item in items:
-            transactions = item.get_transactions()
+            transactions = item.get_transactions_for_month_and_year(month, year)
             for transaction in transactions:
                 transaction_list.append(transaction)
         return sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
 
-    def get_sum_transactions(self):
+    def get_sum_transactions_for_month_and_year(self, month, year):
         items = self.get_items()
         total = 0
         for item in items:
-            total += item.get_sum_transactions()
+            total += item.get_sum_transactions_for_month_and_year(month, year)
         return total
 
     def get_percent_spent(self):
@@ -53,20 +53,17 @@ class Item(models.Model):
     def __str__(self):
         return "budget=%s, amount=%s, type=%s" % (self.budget, self.amount, self.type)
 
-    def get_transactions(self):
-        transactions = Transaction.objects.filter(item=self)
+    def get_transactions_for_month_and_year(self, month, year):
+        transactions = Transaction.objects.filter(item=self).filter(transaction_date__year=year).filter(
+            transaction_date__month=month)
         return transactions
 
-    def get_sum_transactions(self):
-        transactions = self.get_transactions()
+    def get_sum_transactions_for_month_and_year(self, month, year):
+        transactions = self.get_transactions_for_month_and_year(month, year)
         total = 0
         for transaction in transactions:
             total += transaction.amount
         return total
-
-    def get_percent_spent(self):
-        total = self.get_sum_transactions()
-        return total / self.amount * 100
 
 
 class Transaction(models.Model):

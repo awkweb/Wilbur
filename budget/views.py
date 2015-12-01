@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.generic.base import TemplateView
-from django.utils.timezone import now
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils.timezone import now
+from pytz import timezone
+import pytz
 
-from .models import Budget, Transaction, Item
+from .models import Budget, Transaction
 from .forms import AddTransactionForm
 
 
@@ -18,10 +20,18 @@ class IndexView(TemplateView):
             if user_id is not None:
                 user = User.objects.get(pk=user_id)
                 budget = Budget.objects.get(user=user)
-                transactions = budget.get_transactions()[:4]
+
+                today = now()
+                current_month = today.month
+                current_year = today.year
+                transactions = budget.get_transactions_for_month_and_year(current_month, current_year)[:4]
+                total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
+                spent_percentage = total_spent / budget.amount * 100
                 return render(request, 'budget/overview.html', {
                     'budget': budget,
                     'transactions': transactions,
+                    'total_spent': total_spent,
+                    'spent_percentage': spent_percentage,
                 })
             else:
                 return render(request, 'budget/login.html')
@@ -32,10 +42,23 @@ class BudgetView(TemplateView):
         user_id = request.session['_auth_user_id']
         user = User.objects.get(pk=user_id)
         budget = Budget.objects.get(user=user)
+
+        today = now()
+        current_month = today.month
+        current_year = today.year
+        total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
+        spent_percentage = total_spent / budget.amount * 100
         items = budget.get_items()
+        item_list = []
+        for item in items:
+            item_total_spent = item.get_sum_transactions_for_month_and_year(current_month, current_year)
+            item_spent_percentage = item_total_spent / item.amount * 100
+            item_list.append((item.type.name, item.amount, item_total_spent, item_spent_percentage))
         return render(request, 'budget/budget.html', {
             'budget': budget,
-            'items': items,
+            'total_spent': total_spent,
+            'spent_percentage': spent_percentage,
+            'item_list': item_list,
         })
 
 
@@ -45,7 +68,10 @@ class TransactionsView(TemplateView):
         user = User.objects.get(pk=user_id)
         budget = Budget.objects.get(user=user)
 
-        transaction_list = budget.get_transactions()
+        today = now()
+        current_month = today.month
+        current_year = today.year
+        transaction_list = budget.get_transactions_for_month_and_year(current_month, current_year)
         paginator = Paginator(transaction_list, 10)
 
         page = request.GET.get('page')
@@ -57,8 +83,13 @@ class TransactionsView(TemplateView):
             transactions = paginator.page(paginator.num_pages)
 
         return render_to_response('budget/transactions.html', {
+            'transaction_list': transaction_list,
             'transactions': transactions,
         })
+
+
+def edit_budget(request):
+    return render(request, 'forms/edit-budget.html')
 
 
 def add_transaction(request):
@@ -68,7 +99,8 @@ def add_transaction(request):
             item = form.cleaned_data['item']
             name = form.cleaned_data['name']
             amount = form.cleaned_data['amount']
-            transaction_date = form.cleaned_data['transaction_date']
+            new_york = timezone('America/New_York')
+            transaction_date = form.cleaned_data['transaction_date'].astimezone(new_york)
             creation_date = now()
             transaction = Transaction(item=item, name=name, amount=amount, transaction_date=transaction_date,
                                       creation_date=creation_date)
@@ -76,7 +108,7 @@ def add_transaction(request):
             return redirect('budget:transactions')
     else:
         form = AddTransactionForm()
-        return render(request, 'add-transaction.html', {
+        return render(request, 'forms/add-transaction.html', {
             'form': form,
         })
 
@@ -96,7 +128,6 @@ def edit_transaction(request, transaction_id):
                 for field in form.changed_data:
                     cleaned_data = form.cleaned_data[field]
                     if field == 'item':
-                        print("item")
                         transaction.item = cleaned_data
                     elif field == 'name':
                         transaction.name = cleaned_data
@@ -108,7 +139,7 @@ def edit_transaction(request, transaction_id):
             return redirect('budget:transactions')
     else:
         form = AddTransactionForm(data)
-        return render(request, 'edit-transaction.html', {
+        return render(request, 'forms/edit-transaction.html', {
             'form': form,
             'transaction_id': transaction.id,
         })

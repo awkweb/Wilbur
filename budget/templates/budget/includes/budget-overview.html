@@ -1,0 +1,20 @@
+{% load humanize %}
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <div class="stat">{{ spent_percentage|floatformat:1 }}%</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-10 small-centered columns">
+        <div class="{% if spent_percentage <= 40 %}success{% elif spent_percentage > 40 and spent_percentage <= 80 %}
+        warning{% else %}alert{% endif %} progress"
+             role="progressbar" tabindex="0" aria-valuenow="{{ item.get_sum_transactions }}"
+             aria-valuemin="0"
+             aria-valuetext="{{ spent_percentage }} percent" aria-valuemax="{{ budget.amount }}">
+            <div class="progress-meter" style="width: {{ spent_percentage }}%"></div>
+        </div>
+        <p class="lead">${{ total_spent|intcomma }} out of ${{ budget.amount|intcomma }}</p>
+    </div>
+</div>

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block title %}Budget - Overview{% endblock %}
 {% block content %}
 
-{% include 'navbar.html' %}
-
-{% widthratio budget.get_sum_transactions budget.amount 100 as spent_percentage %}
+{% include 'includes/navbar.html' %}
 
 <br>
 <br>
@@ -22,23 +22,10 @@
             <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
             <a href="{% url 'budget:budget' %}" class="small hollow button float-right">View budget</a>
         </div>
-        <div class="stat">{{ spent_percentage }}%</div>
     </div>
 </div>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        {% with budget.get_percent_spent as total %}
-        <div class="{% if total <= 40 %}success{% elif total > 40 and total <= 80 %}warning{% else %}alert{% endif %} progress"
-             role="progressbar" tabindex="0" aria-valuenow="{{ item.get_sum_transactions }}"
-             aria-valuemin="0"
-             aria-valuetext="{{ spent_percentage }} percent" aria-valuemax="{{ budget.amount }}">
-            <div class="progress-meter" style="width: {{ spent_percentage }}%"></div>
-        </div>
-        {% endwith %}
-        <p class="lead">${{ budget.get_sum_transactions }} out of ${{ budget.amount }}</p>
-    </div>
-</div>
+{% include 'includes/budget-overview.html' %}
 
 <br>
 
@@ -46,37 +33,14 @@
     <div class="small-10 small-centered columns">
         <div class="clearfix">
             <h4 class="subheader float-left">Recent transactions</h4>
-
-            <div class="small button-group float-right">
-                <a href="{% url 'budget:add-transaction' %}" class="hollow button">Add transaction</a>
-                <a href="{% url 'budget:transactions' %}" class="hollow button">View transactions</a>
-            </div>
+            <a href="{% url 'budget:transactions' %}" class="small hollow button float-right">View transactions</a>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="small-10 small-centered columns">
-        <table class="hover">
-            <thead>
-            <tr>
-                <th width="250">Date</th>
-                <th width="250">Type</th>
-                <th width="250">Amount</th>
-                <th width="250">Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for transaction in transactions %}
-            <tr>
-                <td><a href="{% url 'budget:edit-transaction' transaction.id %}">{{ transaction.transaction_date }}</a></td>
-                <td>{{ transaction.item.type.name }}</td>
-                <td>{{ transaction.amount }}</td>
-                <td>{{ transaction.name }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        {% include 'includes/transactions-table.html' %}
     </div>
 </div>
 
