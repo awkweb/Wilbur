@@ -14,17 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
 
 from . import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='overview'),
     url(r'^budget/$', views.BudgetView.as_view(), name='budget'),
-    url(r'^transactions/', views.TransactionsView.as_view(), name='transactions'),
-    url(r'^edit-budget/', views.edit_budget, name='edit-budget'),
-    url(r'^add-transaction/', views.add_transaction, name='add-transaction'),
-    url(r'^edit-transaction/(?P<transaction_id>[0-9]+)', views.edit_transaction, name='edit-transaction'),
-    url(r'^delete-transaction/(?P<transaction_id>[0-9]+)', views.delete_transaction, name='delete-transaction'),
-    url(r'^login/$', views.login_user, name='login'),
-    url(r'^logout/$', views.logout_user, name='logout'),
+    url(r'^budget/edit/$', views.edit_budget, name='edit-budget'),
+    url(r'^transactions/$', views.TransactionsView.as_view(), name='transactions'),
+    url(r'^transactions/add/$', views.add_transaction, name='add-transaction'),
+    url(r'^transactions/edit/(?P<transaction_id>[0-9]+)/$', views.edit_transaction, name='edit-transaction'),
+    url(r'^transactions/delete/(?P<transaction_id>[0-9]+)/$', views.delete_transaction, name='delete-transaction'),
+    url('^login/$', auth_views.login, {
+        'template_name': 'budget/login.html',
+        'redirect_field_name': 'next'}, name="login"),
+    url('^logout/$', auth_views.logout, {'next_page': '/budget/'}, name="logout", ),
 ]

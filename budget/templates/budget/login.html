@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}Login{% endblock %}
+
 {% block content %}
+
 <div class="row login">
   <div class="small-4 small-centered columns">
       <h3>Login</h3>
@@ -9,12 +11,13 @@
           {% csrf_token %}
           Username: <input type="text" name="username" />
           Password: <input type="password" name="password" />
+          <input type="hidden" name="next" value="{{ next }}" />
           <input type="submit" value="Login" class="button" />
       </form>
   </div>
 </div>
 
-{% if error_message %}
+{% if form.errors %}
 <div class="row error">
   <div class="small-4 small-centered columns callout warning" data-closable>
       <!--<button class="close-button" data-close aria-label="Dismiss alert">&times;</button>-->
@@ -22,4 +25,5 @@
   </div>
 </div>
 {% endif %}
+
 {% endblock %}

@@ -1,43 +1,43 @@
 from django.shortcuts import render, redirect, render_to_response
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.timezone import now
 from pytz import timezone
 import pytz
-
 from .models import Budget, Transaction
 from .forms import AddTransactionForm
 
 
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin, TemplateView):
+    login_url = '/budget/login/'
+    redirect_field_name = 'next'
+
     def get(self, request, *args, **kwargs):
-        user_id = None
-        try:
-            user_id = request.session['_auth_user_id']
-        finally:
-            if user_id is not None:
-                user = User.objects.get(pk=user_id)
-                budget = Budget.objects.get(user=user)
+        user_id = request.session['_auth_user_id']
+        user = User.objects.get(pk=user_id)
+        budget = Budget.objects.get(user=user)
 
-                today = now()
-                current_month = today.month
-                current_year = today.year
-                transactions = budget.get_transactions_for_month_and_year(current_month, current_year)[:4]
-                total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
-                spent_percentage = total_spent / budget.amount * 100
-                return render(request, 'budget/overview.html', {
-                    'budget': budget,
-                    'transactions': transactions,
-                    'total_spent': total_spent,
-                    'spent_percentage': spent_percentage,
-                })
-            else:
-                return render(request, 'budget/login.html')
+        today = now()
+        current_month = today.month
+        current_year = today.year
+        transactions = budget.get_transactions_for_month_and_year(current_month, current_year)[:4]
+        total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
+        spent_percentage = total_spent / budget.amount * 100
+        return render(request, 'budget/overview.html', {
+            'budget': budget,
+            'transactions': transactions,
+            'total_spent': total_spent,
+            'spent_percentage': spent_percentage,
+        })
 
 
-class BudgetView(TemplateView):
+class BudgetView(LoginRequiredMixin, TemplateView):
+    login_url = '/budget/login/'
+    redirect_field_name = 'next'
+
     def get(self, request, *args, **kwargs):
         user_id = request.session['_auth_user_id']
         user = User.objects.get(pk=user_id)
@@ -62,7 +62,10 @@ class BudgetView(TemplateView):
         })
 
 
-class TransactionsView(TemplateView):
+class TransactionsView(LoginRequiredMixin, TemplateView):
+    login_url = '/budget/login/'
+    redirect_field_name = 'next'
+
     def get(self, request, *args, **kwargs):
         user_id = request.session['_auth_user_id']
         user = User.objects.get(pk=user_id)
@@ -88,10 +91,12 @@ class TransactionsView(TemplateView):
         })
 
 
+@login_required(login_url='/budget/login/', redirect_field_name='next')
 def edit_budget(request):
     return render(request, 'forms/edit-budget.html')
 
 
+@login_required(login_url='/budget/login/', redirect_field_name='next')
 def add_transaction(request):
     if request.method == 'POST':
         form = AddTransactionForm(request.POST)
@@ -113,6 +118,7 @@ def add_transaction(request):
         })
 
 
+@login_required(login_url='/budget/login/', redirect_field_name='next')
 def edit_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     data = {
@@ -145,30 +151,8 @@ def edit_transaction(request, transaction_id):
         })
 
 
+@login_required(login_url='/budget/login/', redirect_field_name='next')
 def delete_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     transaction.delete()
     return redirect('budget:transactions')
-
-
-def login_user(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return redirect('/budget/')
-        else:
-            return render(request, 'budget/login.html', {
-                'error_message': "Disabled account",
-            })
-    else:
-        return render(request, 'budget/login.html', {
-            'error_message': "Invalid credentials",
-        })
-
-
-def logout_user(request):
-    logout(request)
-    return redirect('/budget/')
