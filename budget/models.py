@@ -68,7 +68,7 @@ class Item(models.Model):
 
 class Transaction(models.Model):
     item = models.ForeignKey(Item)
-    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount")
     transaction_date = models.DateTimeField()
     creation_date = models.DateTimeField()

@@ -23,9 +23,9 @@ class ItemAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,
-            {'fields': ['item', 'type', 'name', 'amount', 'transaction_date', 'creation_date']}),
+            {'fields': ['item', 'type', 'description', 'amount', 'transaction_date', 'creation_date']}),
     ]
-    list_display = ('item', 'name', 'amount', 'transaction_date', 'type',)
+    list_display = ('item', 'description', 'amount', 'transaction_date', 'type',)
     list_filter = ['type', 'amount', 'transaction_date']
 
 admin.site.register(Budget, BudgetAdmin)

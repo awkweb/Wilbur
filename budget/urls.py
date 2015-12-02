@@ -20,12 +20,15 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='overview'),
+
     url(r'^budget/$', views.BudgetView.as_view(), name='budget'),
-    url(r'^budget/edit/$', views.edit_budget, name='edit-budget'),
+    url(r'^budget/edit/(?P<budget_id>[0-9]+)/$', views.edit_budget, name='edit-budget'),
+
     url(r'^transactions/$', views.TransactionsView.as_view(), name='transactions'),
     url(r'^transactions/add/$', views.add_transaction, name='add-transaction'),
     url(r'^transactions/edit/(?P<transaction_id>[0-9]+)/$', views.edit_transaction, name='edit-transaction'),
     url(r'^transactions/delete/(?P<transaction_id>[0-9]+)/$', views.delete_transaction, name='delete-transaction'),
+
     url('^login/$', auth_views.login, {
         'template_name': 'budget/login.html',
         'redirect_field_name': 'next'}, name="login"),

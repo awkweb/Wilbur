@@ -3,17 +3,28 @@
 {% block title %}Budget - Edit Budget{% endblock %}
 {% block content %}
 
-{% include 'includes/navbar.html' %}
+    {% include 'includes/navbar.html' %}
 
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <h3>Edit Budget</h3>
+    <div class="row">
+        <div class="small-10 small-centered columns">
+            <h3>Edit Budget</h3>
+        </div>
     </div>
-</div>
 
-<br>
+    <div class="row">
+        <div class="small-10 small-centered columns">
+            <form method="post" action="{% url 'budget:edit-budget' budget_id %}">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Submit" class="large button"/>
+                <a class="secondary large button" href="{% url 'budget:budget' %}">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <br>
 {% endblock %}

@@ -20,7 +20,7 @@
         <form method="post" action="{% url 'budget:edit-transaction' transaction_id %}">
             {% csrf_token %}
             {{ form }}
-            <input type="submit" value="Edit Transaction" class="large button"/>
+            <input type="submit" value="Submit" class="large button"/>
             <a class="secondary large button" href="{% url 'budget:transactions' %}">Cancel</a>
             <a class="alert large button" href="{% url 'budget:delete-transaction' transaction_id %}">Delete</a>
         </form>

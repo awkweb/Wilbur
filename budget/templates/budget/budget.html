@@ -20,7 +20,7 @@
     <div class="small-10 small-centered columns">
         <div class="clearfix">
             <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
-            <a href="{% url 'budget:edit-budget' %}" class="small hollow button float-right">Edit budget</a>
+            <a href="{% url 'budget:edit-budget' budget.id %}" class="small hollow button float-right">Edit budget</a>
         </div>
     </div>
 </div>
