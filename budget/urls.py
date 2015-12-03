@@ -23,6 +23,9 @@ urlpatterns = [
 
     url(r'^budget/$', views.BudgetView.as_view(), name='budget'),
     url(r'^budget/edit/(?P<budget_id>[0-9]+)/$', views.edit_budget, name='edit-budget'),
+    url(r'^budget/(?P<budget_id>[0-9]+)/item/add/$', views.add_item, name='add-item'),
+    url(r'^budget/item/edit/(?P<item_id>[0-9]+)/$', views.edit_item, name='edit-item'),
+    url(r'^budget/item/delete/(?P<item_id>[0-9]+)/$', views.delete_item, name='delete-item'),
 
     url(r'^transactions/$', views.TransactionsView.as_view(), name='transactions'),
     url(r'^transactions/add/$', views.add_transaction, name='add-transaction'),

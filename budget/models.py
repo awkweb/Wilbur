@@ -44,7 +44,7 @@ class ItemType(models.Model):
 
 
 class Item(models.Model):
-    budget = models.ForeignKey(Budget)
+    budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount")
     type = models.ForeignKey(ItemType)
     description = models.CharField(max_length=100, blank=True)
@@ -67,7 +67,7 @@ class Item(models.Model):
 
 
 class Transaction(models.Model):
-    item = models.ForeignKey(Item)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     description = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount")
     transaction_date = models.DateTimeField()

@@ -5,57 +5,60 @@
 {% block title %}Budget - Budget{% endblock %}
 {% block content %}
 
-{% include 'includes/navbar.html' %}
+    {% include 'includes/navbar.html' %}
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <h3>Budget</h3>
-    </div>
-</div>
-
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <div class="clearfix">
-            <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
-            <a href="{% url 'budget:edit-budget' budget.id %}" class="small hollow button float-right">Edit budget</a>
+    <div class="row">
+        <div class="small-10 small-centered columns">
+            <h3>Budget</h3>
         </div>
     </div>
-</div>
 
-{% include 'includes/budget-overview.html' %}
-
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <hr>
-    </div>
-</div>
-
-{% for item in item_list %}
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <h4 class="subheader">{{ item.0|capfirst }}</h4>
-        <div class="stat">{{ item.3|floatformat:1 }}%</div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="small-10 small-centered columns">
-        {% with item.3 as total %}
-        <div class="{% if total <= 40 %}success{% elif total > 40 and total <= 80 %}warning{% else %}alert{% endif %} progress"
-             role="progressbar" tabindex="0"
-             aria-valuenow="{{ total }}"
-             aria-valuemin="0"
-             aria-valuetext="{{ total }} percent" aria-valuemax="{{ item.1 }}">
-            <div class="progress-meter" style="width: {{ total }}%"></div>
+    <div class="row">
+        <div class="small-10 small-centered columns">
+            <div class="clearfix">
+                <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
+                <a href="{% url 'budget:edit-budget' budget.id %}" class="small hollow button float-right">Edit
+                    budget</a>
+                <a href="{% url 'budget:add-item' budget.id %}" class="small hollow button float-right">Add Item</a>
+            </div>
         </div>
-        {% endwith %}
-        <p class="lead">${{ item.2|intcomma }} out of ${{ item.1|intcomma }}</p>
     </div>
-</div>
-{% endfor %}
 
-<br>
+    {% include 'includes/budget-overview.html' %}
+
+    <div class="row">
+        <div class="small-10 small-centered columns">
+            <hr>
+        </div>
+    </div>
+
+    {% for item in item_list %}
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                <h4 class="subheader"><a href="{% url 'budget:edit-item' item.0 %}">{{ item.1|capfirst }}</a></h4>
+
+                <div class="stat">{{ item.4|floatformat:1 }}%</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                {% with item.4 as total %}
+                    <div class="{% if total <= 40 %}success{% elif total > 40 and total <= 80 %}warning{% else %}alert{% endif %} progress"
+                         role="progressbar" tabindex="0"
+                         aria-valuenow="{{ total }}"
+                         aria-valuemin="0"
+                         aria-valuetext="{{ total }} percent" aria-valuemax="{{ item.2 }}">
+                        <div class="progress-meter" style="width: {{ total }}%"></div>
+                    </div>
+                {% endwith %}
+                <p class="lead">${{ item.3|intcomma }} out of ${{ item.2|intcomma }}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+    <br>
 {% endblock %}

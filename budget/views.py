@@ -7,9 +7,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.timezone import now
 from pytz import timezone
 import pytz
-
-from .models import Budget, Transaction
-from .forms import TransactionForm, BudgetForm
+from .models import Budget, Transaction, Item
+from .forms import TransactionForm, BudgetForm, ItemForm
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -54,7 +53,7 @@ class BudgetView(LoginRequiredMixin, TemplateView):
         for item in items:
             item_total_spent = item.get_sum_transactions_for_month_and_year(current_month, current_year)
             item_spent_percentage = item_total_spent / item.amount * 100
-            item_list.append((item.type.name, item.amount, item_total_spent, item_spent_percentage))
+            item_list.append((item.id, item.type.name, item.amount, item_total_spent, item_spent_percentage))
         return render(request, 'budget/budget.html', {
             'budget': budget,
             'total_spent': total_spent,
@@ -114,6 +113,65 @@ def edit_budget(request, budget_id):
             'form': form,
             'budget_id': budget.id,
         })
+
+
+@login_required(login_url='/budget/login/', redirect_field_name='next')
+def add_item(request, budget_id):
+    budget = Budget.objects.get(pk=budget_id)
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            item_type = form.cleaned_data['type']
+            amount = form.cleaned_data['amount']
+            description = form.cleaned_data['description']
+            creation_date = now()
+            item = Item(budget=budget, amount=amount, type=item_type, description=description,
+                        creation_date=creation_date)
+            item.save()
+            return redirect('budget:budget')
+    else:
+        form = ItemForm()
+        return render(request, 'forms/add-item.html', {
+            'form': form,
+            'budget_id': budget.id,
+        })
+
+
+@login_required(login_url='/budget/login/', redirect_field_name='next')
+def edit_item(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    data = {
+        'type': item.type.id,
+        'amount': item.amount,
+        'description': item.description,
+    }
+    if request.method == 'POST':
+        form = ItemForm(request.POST, initial=data)
+        if form.is_valid():
+            if form.has_changed():
+                for field in form.changed_data:
+                    cleaned_data = form.cleaned_data[field]
+                    if field == 'type':
+                        item.item = cleaned_data
+                    elif field == 'amount':
+                        item.amount = cleaned_data
+                    elif field == 'description':
+                        item.description = cleaned_data
+                item.save()
+            return redirect('budget:budget')
+    else:
+        form = ItemForm(data)
+        return render(request, 'forms/edit-item.html', {
+            'form': form,
+            'item_id': item.id,
+        })
+
+
+@login_required(login_url='/budget/login/', redirect_field_name='next')
+def delete_item(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    item.delete()
+    return redirect('budget:budget')
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
