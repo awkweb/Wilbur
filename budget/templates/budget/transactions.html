@@ -3,44 +3,19 @@
 {% block title %}Budget - Transactions{% endblock %}
 {% block content %}
 
-{% include 'includes/navbar.html' %}
+    {% include 'includes/navbar.html' %}
 
-{% widthratio total_spent budget.amount 100 as spent_percentage %}
+    {% widthratio total_spent budget.amount 100 as spent_percentage %}
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <h3>Transactions</h3>
-        <h4 class="subheader">Displaying {{ transactions|length }} of {{ transaction_list|length }}</h4>
+    <div class="row">
+        <div class="small-10 small-centered columns">
+            <h3>Transactions</h3>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        {% include 'includes/transactions-table.html' %}
-    </div>
-</div>
+    {% include 'includes/transactions-table.html' %}
 
-<br>
-
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <ul class="pagination text-center" role="navigation" aria-label="Pagination">
-            {% if transactions.has_previous %}
-                <li class="pagination-previous"><a href="?page={{ transactions.previous_page_number }}"
-                                                   aria-label="Previous page">Previous</a>
-                </li>
-            {% endif %}
-                <li><span
-                        class="current">Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.</span>
-                </li>
-            {% if transactions.has_next %}
-                <li class="pagination-next"><a href="?page={{ transactions.next_page_number }}" aria-label="Next page">Next</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
-</div>
 {% endblock %}

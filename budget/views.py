@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.timezone import now
+from django.http import HttpResponse
 from pytz import timezone
 import pytz
 from .models import Budget, Transaction, Item
@@ -16,22 +17,24 @@ class IndexView(LoginRequiredMixin, TemplateView):
     redirect_field_name = 'next'
 
     def get(self, request, *args, **kwargs):
-        user_id = request.session['_auth_user_id']
-        user = User.objects.get(pk=user_id)
-        budget = Budget.objects.get(user=user)
+        user = get_user_in_session(request.session)
+        budget = get_budget_for_user(user)
 
-        today = now()
-        current_month = today.month
-        current_year = today.year
-        transactions = budget.get_transactions_for_month_and_year(current_month, current_year)[:4]
-        total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
-        spent_percentage = total_spent / budget.amount * 100
-        return render(request, 'budget/overview.html', {
-            'budget': budget,
-            'transactions': transactions,
-            'total_spent': total_spent,
-            'spent_percentage': spent_percentage,
-        })
+        if budget is not None:
+            today = now()
+            current_month = today.month
+            current_year = today.year
+            transactions = budget.get_transactions_for_month_and_year(current_month, current_year)[:4]
+            total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
+            spent_percentage = total_spent / budget.amount * 100
+            return render(request, 'budget/overview.html', {
+                'budget': budget,
+                'transactions': transactions,
+                'total_spent': total_spent,
+                'spent_percentage': spent_percentage,
+            })
+        else:
+            return render(request, 'budget/overview.html')
 
 
 class BudgetView(LoginRequiredMixin, TemplateView):
@@ -39,27 +42,29 @@ class BudgetView(LoginRequiredMixin, TemplateView):
     redirect_field_name = 'next'
 
     def get(self, request, *args, **kwargs):
-        user_id = request.session['_auth_user_id']
-        user = User.objects.get(pk=user_id)
-        budget = Budget.objects.get(user=user)
+        user = get_user_in_session(request.session)
+        budget = get_budget_for_user(user)
 
-        today = now()
-        current_month = today.month
-        current_year = today.year
-        total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
-        spent_percentage = total_spent / budget.amount * 100
-        items = budget.get_items()
-        item_list = []
-        for item in items:
-            item_total_spent = item.get_sum_transactions_for_month_and_year(current_month, current_year)
-            item_spent_percentage = item_total_spent / item.amount * 100
-            item_list.append((item.id, item.type.name, item.amount, item_total_spent, item_spent_percentage))
-        return render(request, 'budget/budget.html', {
-            'budget': budget,
-            'total_spent': total_spent,
-            'spent_percentage': spent_percentage,
-            'item_list': item_list,
-        })
+        if budget is not None:
+            today = now()
+            current_month = today.month
+            current_year = today.year
+            total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
+            spent_percentage = total_spent / budget.amount * 100
+            items = budget.get_items()
+            item_list = []
+            for item in items:
+                item_total_spent = item.get_sum_transactions_for_month_and_year(current_month, current_year)
+                item_spent_percentage = item_total_spent / item.amount * 100
+                item_list.append((item.id, item.type.name, item.amount, item_total_spent, item_spent_percentage))
+            return render(request, 'budget/budget.html', {
+                'budget': budget,
+                'total_spent': total_spent,
+                'spent_percentage': spent_percentage,
+                'item_list': item_list,
+            })
+        else:
+            return render(request, 'budget/budget.html')
 
 
 class TransactionsView(LoginRequiredMixin, TemplateView):
@@ -92,6 +97,24 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
+def add_budget(request):
+    if request.method == 'POST':
+        form = BudgetForm(request.POST)
+        if form.is_valid():
+            user = get_user_in_session(request.session)
+            amount = form.cleaned_data['amount']
+            creation_date = now()
+            budget = Budget(user=user, amount=amount, creation_date=creation_date)
+            budget.save()
+            return redirect('budget:budget')
+    else:
+        form = BudgetForm()
+        return render(request, 'forms/add-budget.html', {
+            'form': form,
+        })
+
+
+@login_required(login_url='/budget/login/', redirect_field_name='next')
 def edit_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
     data = {
@@ -113,6 +136,13 @@ def edit_budget(request, budget_id):
             'form': form,
             'budget_id': budget.id,
         })
+
+
+@login_required(login_url='/budget/login/', redirect_field_name='next')
+def delete_budget(request, budget_id):
+    budget = Budget.objects.get(pk=budget_id)
+    budget.delete()
+    return redirect('budget:budget')
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
@@ -235,3 +265,20 @@ def delete_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     transaction.delete()
     return redirect('budget:transactions')
+
+
+def get_user_in_session(session):
+    user_id = session['_auth_user_id']
+    user = User.objects.get(pk=user_id)
+    return user
+
+
+def get_budget_for_user(user):
+    budget = None
+    try:
+        budget = Budget.objects.get(user=user)
+    finally:
+        if budget is None:
+            return None
+        else:
+            return budget

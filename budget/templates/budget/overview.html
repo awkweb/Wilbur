@@ -5,43 +5,50 @@
 {% block title %}Budget - Overview{% endblock %}
 {% block content %}
 
-{% include 'includes/navbar.html' %}
+    {% include 'includes/navbar.html' %}
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <h3>Overview</h3>
-    </div>
-</div>
+    {% if budget %}
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <div class="clearfix">
-            <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
-            <a href="{% url 'budget:budget' %}" class="small hollow button float-right">View budget</a>
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                <h3>Overview</h3>
+            </div>
         </div>
-    </div>
-</div>
 
-{% include 'includes/budget-overview.html' %}
-
-<br>
-
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <div class="clearfix">
-            <h4 class="subheader float-left">Recent transactions</h4>
-            <a href="{% url 'budget:transactions' %}" class="small hollow button float-right">View transactions</a>
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                <div class="clearfix">
+                    <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
+                    <a href="{% url 'budget:budget' %}" class="small hollow button float-right">View budget</a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="row">
-    <div class="small-10 small-centered columns">
+        {% include 'includes/budget-overview.html' %}
+
+        <br>
+
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                <div class="clearfix">
+                    <h4 class="subheader float-left">Recent transactions</h4>
+                    <a href="{% url 'budget:transactions' %}" class="small hollow button float-right">View
+                        transactions</a>
+                </div>
+            </div>
+        </div>
+
         {% include 'includes/transactions-table.html' %}
-    </div>
-</div>
+
+    {% else %}
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                <h4>No budget exists. <a href="{% url 'budget:add-budget' %}">Create a budget.</a></h4>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock %}

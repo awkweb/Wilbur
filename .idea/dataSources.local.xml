@@ -7,5 +7,11 @@
       <schema-pattern>budget.pg_catalog budget.public</schema-pattern>
       <default-schemas>budget.public</default-schemas>
     </data-source>
+    <data-source name="Django default" uuid="44bc4391-028e-4740-9664-de1a1c68eeb3">
+      <user-name>postgres</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <schema-pattern>budget.pg_catalog budget.public</schema-pattern>
+      <default-schemas>budget.public</default-schemas>
+    </data-source>
   </component>
 </project>
