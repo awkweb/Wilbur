@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Budget{% endblock %}</title>
 
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'budget/css/foundation.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'budget/css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'budget/css/styles.css' %}"/>
+
+    <script src="{% static 'budget/js/jquery.min.js' %}"></script>
+    <script src="{% static 'budget/js/bootstrap.min.js' %}"></script>
 </head>
 <body>
-{% block content %}
-{% endblock %}
-
-<script src="{% static 'budget/js/jquery.min.js' %}"></script>
-<script src="{% static 'budget/js/foundation.min.js' %}"></script>
-
-<script>
-  $(document).foundation();
-</script>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

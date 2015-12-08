@@ -10,20 +10,17 @@
     <br>
     <br>
 
-    {% if budget %}
-
-        <div class="row">
-            <div class="small-10 small-centered columns">
-                <h3>Overview</h3>
-            </div>
+    <div class="row">
+        <div class="small-10 small-centered columns">
+            <h3>Overview</h3>
         </div>
+    </div>
 
+    {% if budget %}
         <div class="row">
             <div class="small-10 small-centered columns">
-                <div class="clearfix">
-                    <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
-                    <a href="{% url 'budget:budget' %}" class="small hollow button float-right">View budget</a>
-                </div>
+                <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
+                <a href="{% url 'budget:budget' %}" class="small hollow button float-right">View budget</a>
             </div>
         </div>
 
@@ -46,7 +43,7 @@
     {% else %}
         <div class="row">
             <div class="small-10 small-centered columns">
-                <h4>No budget exists. <a href="{% url 'budget:add-budget' %}">Create a budget.</a></h4>
+                <h4><a href="{% url 'budget:add-budget' %}">Create a budget to get started.</a></h4>
             </div>
         </div>
     {% endif %}

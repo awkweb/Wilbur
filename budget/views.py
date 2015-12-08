@@ -67,35 +67,6 @@ class BudgetView(LoginRequiredMixin, TemplateView):
             return render(request, 'budget/budget.html')
 
 
-class TransactionsView(LoginRequiredMixin, TemplateView):
-    login_url = '/budget/login/'
-    redirect_field_name = 'next'
-
-    def get(self, request, *args, **kwargs):
-        user_id = request.session['_auth_user_id']
-        user = User.objects.get(pk=user_id)
-        budget = Budget.objects.get(user=user)
-
-        today = now()
-        current_month = today.month
-        current_year = today.year
-        transaction_list = budget.get_transactions_for_month_and_year(current_month, current_year)
-        paginator = Paginator(transaction_list, 10)
-
-        page = request.GET.get('page')
-        try:
-            transactions = paginator.page(page)
-        except PageNotAnInteger:
-            transactions = paginator.page(1)
-        except EmptyPage:
-            transactions = paginator.page(paginator.num_pages)
-
-        return render_to_response('budget/transactions.html', {
-            'transaction_list': transaction_list,
-            'transactions': transactions,
-        })
-
-
 @login_required(login_url='/budget/login/', redirect_field_name='next')
 def add_budget(request):
     if request.method == 'POST':
@@ -202,6 +173,41 @@ def delete_item(request, item_id):
     item = Item.objects.get(pk=item_id)
     item.delete()
     return redirect('budget:budget')
+
+
+class TransactionsView(LoginRequiredMixin, TemplateView):
+    login_url = '/budget/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, *args, **kwargs):
+        user = get_user_in_session(request.session)
+        budget = get_budget_for_user(user)
+
+        if budget is not None:
+            user_id = request.session['_auth_user_id']
+            user = User.objects.get(pk=user_id)
+            budget = Budget.objects.get(user=user)
+
+            today = now()
+            current_month = today.month
+            current_year = today.year
+            transaction_list = budget.get_transactions_for_month_and_year(current_month, current_year)
+            paginator = Paginator(transaction_list, 10)
+
+            page = request.GET.get('page')
+            try:
+                transactions = paginator.page(page)
+            except PageNotAnInteger:
+                transactions = paginator.page(1)
+            except EmptyPage:
+                transactions = paginator.page(paginator.num_pages)
+
+            return render_to_response('budget/transactions.html', {
+                'transaction_list': transaction_list,
+                'transactions': transactions,
+            })
+        else:
+            return render_to_response('budget/transactions.html')
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')

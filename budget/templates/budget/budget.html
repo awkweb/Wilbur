@@ -69,6 +69,12 @@
                 </div>
             </div>
         {% endif %}
+    {% else %}
+        <div class="row">
+            <div class="small-10 small-centered columns">
+                <h4>No budget exists. <a href="{% url 'budget:add-budget' %}">Create a budget.</a></h4>
+            </div>
+        </div>
     {% endif %}
 
     <br>
