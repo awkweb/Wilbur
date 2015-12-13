@@ -8,10 +8,13 @@
       <default-schemas>budget.public</default-schemas>
     </data-source>
     <data-source name="Django default" uuid="44bc4391-028e-4740-9664-de1a1c68eeb3">
-      <user-name>postgres</user-name>
       <user-password>dfd8dfc5dfc5dfde</user-password>
       <schema-pattern>budget.pg_catalog budget.public</schema-pattern>
       <default-schemas>budget.public</default-schemas>
+    </data-source>
+    <data-source name="PostgreSQL - postgres@localhost" uuid="711d0cc0-f20b-40e3-b03d-628b067d0ef1">
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
     </data-source>
   </component>
 </project>

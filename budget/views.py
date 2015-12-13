@@ -5,9 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.timezone import now
-from django.http import HttpResponse
 from pytz import timezone
-import pytz
 from .models import Budget, Transaction, Item
 from .forms import TransactionForm, BudgetForm, ItemForm
 
@@ -28,6 +26,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
             total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
             spent_percentage = total_spent / budget.amount * 100
             return render(request, 'budget/overview.html', {
+                'title': 'Overview',
                 'budget': budget,
                 'transactions': transactions,
                 'total_spent': total_spent,
@@ -288,3 +287,16 @@ def get_budget_for_user(user):
             return None
         else:
             return budget
+
+
+def get_paginator_for_list(request, array_list, max_pages):
+    paginator = Paginator(array_list, max_pages)
+
+    page = request.GET.get('page')
+    try:
+        array = paginator.page(page)
+    except PageNotAnInteger:
+        array = paginator.page(1)
+    except EmptyPage:
+        array = paginator.page(paginator.num_pages)
+    return array

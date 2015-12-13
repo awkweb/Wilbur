@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1472248643">
+  <component name="DataSourceManagerImpl" format="xml" hash="2307870964">
     <data-source source="LOCAL" name="PostgreSQL - budget@127.0.0.1" uuid="5e8cb427-493e-4056-9ba9-49bc5339ef43">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
@@ -13,7 +13,7 @@
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/casper/settings.py</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/budget</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <explain-plan-config>
         <provider>com.intellij.database.plan.ExplainPlanProvider.NullExplainPlanProvider</provider>
       </explain-plan-config>
@@ -25,6 +25,12 @@
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-9.4-1201.jdbc4.jar</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - postgres@localhost" uuid="711d0cc0-f20b-40e3-b03d-628b067d0ef1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
     </data-source>
   </component>
 </project>

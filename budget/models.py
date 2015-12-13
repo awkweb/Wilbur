@@ -83,4 +83,4 @@ class Transaction(models.Model):
                                default=EXPENSE)
 
     def __str__(self):
-        return "name=%s, amount=%s, type=%s" % (self.name, self.amount, self.type)
+        return "description=%s, amount=%s, type=%s" % (self.description, self.amount, self.type)

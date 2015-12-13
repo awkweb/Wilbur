@@ -1,44 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base_navbar.html' %}
 
 {% load humanize %}
 
-{% block title %}Budget - Overview{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
 {% block content %}
-
-    {% include 'includes/navbar.html' %}
-
-    <br>
-    <br>
-
-    <div class="row">
-        <div class="small-10 small-centered columns">
-            <h3>Overview</h3>
-        </div>
-    </div>
 
     {% if budget %}
         <div class="row">
-            <div class="small-10 small-centered columns">
-                <h4 class="subheader float-left">Total spent for {% now "F" %}</h4>
-                <a href="{% url 'budget:budget' %}" class="small hollow button float-right">View budget</a>
+            <div class="col-sm-12">
+                <h2>Total spent for {% now "F" %} <small>{{ spent_percentage|floatformat:1 }}%</small></h2>
             </div>
         </div>
 
-        {% include 'includes/budget-overview.html' %}
-
-        <br>
+        {% include 'includes/budget_overview.html' %}
 
         <div class="row">
-            <div class="small-10 small-centered columns">
+            <div class="col-sm-12">
                 <div class="clearfix">
-                    <h4 class="subheader float-left">Recent transactions</h4>
-                    <a href="{% url 'budget:transactions' %}" class="small hollow button float-right">View
-                        transactions</a>
+                    <h2>Recent transactions</h2>
                 </div>
             </div>
         </div>
 
-        {% include 'includes/transactions-table.html' %}
+        {% include 'includes/transactions_table.html' %}
 
     {% else %}
         <div class="row">

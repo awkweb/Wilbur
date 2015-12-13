@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_no_navbar.html' %}
 
 {% block title %}Login{% endblock %}
 
@@ -28,7 +28,7 @@
         </div>
 
         {% if form.errors %}
-            <div class="col-sm-4 col-sm-offset-4 alert alert-danger alert-dismissible error" role="alert">
+            <div class="col-sm-4 col-sm-offset-4 alert alert-danger alert-dismissible error fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <strong>Oh snap!</strong> Invalid credentials.

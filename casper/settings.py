@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'casper.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'budget',
-        'USER': 'postgres',
+        'NAME': 'postgres',
+        'USER': '',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
