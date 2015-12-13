@@ -18,7 +18,7 @@
                         <td>
                             <a href="{% url 'budget:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturaltime }}</a>
                         </td>
-                        <td>{{ transaction.item.type.name }}</td>
+                        <td>{{ transaction.item.type.name|capfirst }}</td>
                         <td>{{ transaction.amount|intcomma }}</td>
                         <td>{{ transaction.description }}</td>
                     </tr>

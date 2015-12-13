@@ -1,0 +1,23 @@
+{% extends 'base_navbar.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post" action="{% url 'budget:add-transaction' %}" class="form-horizontal">
+            {% csrf_token %}
+
+            {% for field in form %}
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+            {% endfor %}
+
+            <input type="submit" value="Submit" class="large button" />
+            <a class="secondary large button" href="{% url 'budget:transactions' %}">Cancel</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

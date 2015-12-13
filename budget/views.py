@@ -57,6 +57,7 @@ class BudgetView(LoginRequiredMixin, TemplateView):
                 item_spent_percentage = item_total_spent / item.amount * 100
                 item_list.append((item.id, item.type.name, item.amount, item_total_spent, item_spent_percentage))
             return render(request, 'budget/budget.html', {
+                'title': 'Budget',
                 'budget': budget,
                 'total_spent': total_spent,
                 'spent_percentage': spent_percentage,
@@ -202,6 +203,8 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
                 transactions = paginator.page(paginator.num_pages)
 
             return render_to_response('budget/transactions.html', {
+                'title': 'Transactions',
+                'user': user,
                 'transaction_list': transaction_list,
                 'transactions': transactions,
             })
@@ -227,7 +230,8 @@ def add_transaction(request):
             return redirect('budget:transactions')
     else:
         form = TransactionForm()
-        return render(request, 'forms/add-transaction.html', {
+        return render(request, 'forms/transactions_add.html', {
+            'title': 'Add Transaction',
             'form': form,
         })
 
@@ -259,7 +263,8 @@ def edit_transaction(request, transaction_id):
             return redirect('budget:transactions')
     else:
         form = TransactionForm(data)
-        return render(request, 'forms/edit-transaction.html', {
+        return render(request, 'forms/transactions_edit.html', {
+            'title': 'Edit Transaction',
             'form': form,
             'transaction_id': transaction.id,
         })

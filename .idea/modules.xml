@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/casper.iml" filepath="$PROJECT_DIR$/.idea/casper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Wilbur/.idea/wilbur.iml" filepath="$PROJECT_DIR$/../Wilbur/.idea/wilbur.iml" />
     </modules>
   </component>
 </project>

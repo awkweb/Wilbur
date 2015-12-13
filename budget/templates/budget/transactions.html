@@ -1,20 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base_navbar.html' %}
 
-{% block title %}Budget - Transactions{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
 {% block content %}
 
-    {% include 'includes/navbar.html' %}
-
     {% widthratio total_spent budget.amount 100 as spent_percentage %}
-
-    <br>
-    <br>
-
-    <div class="row">
-        <div class="small-10 small-centered columns">
-            <h3>Transactions</h3>
-        </div>
-    </div>
 
     {% include 'includes/transactions_table.html' %}
 
