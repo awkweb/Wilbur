@@ -3,11 +3,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
+from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.timezone import now
 from pytz import timezone
 from .models import Budget, Transaction, Item
-from .forms import TransactionForm, BudgetForm, ItemForm
+from .forms import TransactionAddForm, TransactionEditForm, BudgetForm, ItemAddForm, ItemEditForm
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -33,7 +34,9 @@ class IndexView(LoginRequiredMixin, TemplateView):
                 'spent_percentage': spent_percentage,
             })
         else:
-            return render(request, 'budget/overview.html')
+            return render(request, 'budget/overview.html', {
+                'title': 'Overview',
+            })
 
 
 class BudgetView(LoginRequiredMixin, TemplateView):
@@ -64,7 +67,9 @@ class BudgetView(LoginRequiredMixin, TemplateView):
                 'item_list': item_list,
             })
         else:
-            return render(request, 'budget/budget.html')
+            return render(request, 'budget/budget.html', {
+                'title': 'Budget',
+            })
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
@@ -122,7 +127,7 @@ def delete_budget(request, budget_id):
 def add_item(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemAddForm(request.POST)
         if form.is_valid():
             item_type = form.cleaned_data['type']
             amount = form.cleaned_data['amount']
@@ -133,11 +138,11 @@ def add_item(request, budget_id):
             item.save()
             return redirect('budget:budget')
     else:
-        form = ItemForm()
+        form = ItemAddForm()
+        form.helper.form_action = reverse('budget:add-item', kwargs={'budget_id': budget.id})
         return render(request, 'forms/item_add.html', {
             'title': 'Add Item',
             'form': form,
-            'budget_id': budget.id,
         })
 
 
@@ -150,7 +155,7 @@ def edit_item(request, item_id):
         'description': item.description,
     }
     if request.method == 'POST':
-        form = ItemForm(request.POST, initial=data)
+        form = ItemEditForm(request.POST, initial=data)
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
@@ -164,7 +169,8 @@ def edit_item(request, item_id):
                 item.save()
             return redirect('budget:budget')
     else:
-        form = ItemForm(data)
+        form = ItemEditForm(data)
+        form.helper.form_action = reverse('budget:edit-item', kwargs={'item_id': item.id})
         return render(request, 'forms/item_edit.html', {
             'title': 'Edit Item',
             'form': form,
@@ -213,13 +219,19 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
                 'transactions': transactions,
             })
         else:
-            return render_to_response('budget/transactions.html')
+            return render_to_response('budget/transactions.html', {
+                'title': 'Transactions',
+            })
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
 def add_transaction(request):
+    user = get_user_in_session(request.session)
+    budget = get_budget_for_user(user)
+    data = {'budget': budget}
+
     if request.method == 'POST':
-        form = TransactionForm(request.POST)
+        form = TransactionAddForm(request.POST, initial=data)
         if form.is_valid():
             item = form.cleaned_data['item']
             description = form.cleaned_data['description']
@@ -227,13 +239,17 @@ def add_transaction(request):
             new_york = timezone('America/New_York')
             transaction_date = form.cleaned_data['transaction_date'].astimezone(new_york)
             creation_date = now()
-            transaction = Transaction(item=item, description=description, amount=amount,
-                                      transaction_date=transaction_date,
-                                      creation_date=creation_date)
+            transaction = Transaction(
+                    item=item,
+                    description=description,
+                    amount=amount,
+                    transaction_date=transaction_date,
+                    creation_date=creation_date
+            )
             transaction.save()
             return redirect('budget:transactions')
     else:
-        form = TransactionForm()
+        form = TransactionAddForm(initial=data)
         return render(request, 'forms/transactions_add.html', {
             'title': 'Add Transaction',
             'form': form,
@@ -243,14 +259,17 @@ def add_transaction(request):
 @login_required(login_url='/budget/login/', redirect_field_name='next')
 def edit_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
+    user = get_user_in_session(request.session)
+    budget = get_budget_for_user(user)
     data = {
         'item': transaction.item.id,
         'description': transaction.description,
         'amount': transaction.amount,
         'transaction_date': transaction.transaction_date,
+        'budget': budget
     }
     if request.method == 'POST':
-        form = TransactionForm(request.POST, initial=data)
+        form = TransactionEditForm(request.POST, initial=data)
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
@@ -266,7 +285,8 @@ def edit_transaction(request, transaction_id):
                 transaction.save()
             return redirect('budget:transactions')
     else:
-        form = TransactionForm(data)
+        form = TransactionEditForm(data, initial={'budget': budget})
+        form.helper.form_action = reverse('budget:edit-transaction', kwargs={'transaction_id': transaction.id})
         return render(request, 'forms/transactions_edit.html', {
             'title': 'Edit Transaction',
             'form': form,

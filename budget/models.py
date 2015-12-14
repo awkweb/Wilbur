@@ -8,7 +8,7 @@ class Budget(models.Model):
     creation_date = models.DateTimeField()
 
     def __str__(self):
-        return "user=%s" % self.user
+        return "%s" % self.user
 
     def get_items(self):
         items = Item.objects.filter(budget=self)
@@ -40,7 +40,7 @@ class ItemType(models.Model):
     creation_date = models.DateTimeField()
 
     def __str__(self):
-        return "name=%s" % self.name
+        return self.name
 
 
 class Item(models.Model):
@@ -51,7 +51,7 @@ class Item(models.Model):
     creation_date = models.DateTimeField()
 
     def __str__(self):
-        return "budget=%s, amount=%s, type=%s" % (self.budget, self.amount, self.type)
+        return self.type.name
 
     def get_transactions_for_month_and_year(self, month, year):
         transactions = Transaction.objects.filter(item=self).filter(transaction_date__year=year).filter(

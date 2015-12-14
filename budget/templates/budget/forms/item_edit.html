@@ -1,19 +1,11 @@
 {% extends 'base_navbar.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <form method="post" action="{% url 'budget:edit-item' item_id %}">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit" class="large button" />
-            <a class="secondary large button" href="{% url 'budget:budget' %}">Cancel</a>
-            <a class="alert large button" href="{% url 'budget:delete-item' item_id %}">Delete</a>
-        </form>
-    </div>
-</div>
+    {% crispy form %}
 
 {% endblock %}

@@ -11,7 +11,7 @@
         <div class="progress">
             <div class="progress-bar progress-bar-{% if spent_percentage <= 40 %}success
         {% elif spent_percentage > 40 and spent_percentage <= 80 %}warning{% else %}alert
-        {% endif %}" role="progressbar" aria-valuenow="{{ spent_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+        {% endif %}" role="progressbar" aria-valuenow="{{ spent_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ spent_percentage }}%;">
                 <span class="sr-only">{{ spent_percentage }}% Complete</span>
             </div>
         </div>

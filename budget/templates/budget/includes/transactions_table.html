@@ -61,7 +61,7 @@
 {% else %}
     <div class="row">
         <div class="col-sm-12">
-            <h4>No transactions :(</h4>
+            <h4><a href="{% url 'budget:add-transaction' %}">Add a transaction</a></h4>
         </div>
     </div>
 {% endif %}
