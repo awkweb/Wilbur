@@ -80,7 +80,8 @@ def add_budget(request):
             return redirect('budget:budget')
     else:
         form = BudgetForm()
-        return render(request, 'forms/add-budget.html', {
+        return render(request, 'forms/budget_add.html', {
+            'title': 'Add Budget',
             'form': form,
         })
 
@@ -103,7 +104,8 @@ def edit_budget(request, budget_id):
             return redirect('budget:budget')
     else:
         form = BudgetForm(data)
-        return render(request, 'forms/edit-budget.html', {
+        return render(request, 'forms/budget_edit.html', {
+            'title': 'Edit Budget',
             'form': form,
             'budget_id': budget.id,
         })
@@ -132,7 +134,8 @@ def add_item(request, budget_id):
             return redirect('budget:budget')
     else:
         form = ItemForm()
-        return render(request, 'forms/add-item.html', {
+        return render(request, 'forms/item_add.html', {
+            'title': 'Add Item',
             'form': form,
             'budget_id': budget.id,
         })
@@ -162,7 +165,8 @@ def edit_item(request, item_id):
             return redirect('budget:budget')
     else:
         form = ItemForm(data)
-        return render(request, 'forms/edit-item.html', {
+        return render(request, 'forms/item_edit.html', {
+            'title': 'Edit Item',
             'form': form,
             'item_id': item.id,
         })

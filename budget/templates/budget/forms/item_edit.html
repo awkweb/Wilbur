@@ -1,19 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'base_navbar.html' %}
 
-{% block title %}Budget - Edit Item{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
 {% block content %}
-
-{% include 'includes/navbar.html' %}
-
-
-<br>
-<br>
-
-<div class="row">
-    <div class="small-10 small-centered columns">
-        <h3>Edit Item</h3>
-    </div>
-</div>
 
 <div class="row">
     <div class="small-10 small-centered columns">
@@ -27,5 +16,4 @@
     </div>
 </div>
 
-<br>
 {% endblock %}
