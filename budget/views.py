@@ -23,7 +23,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
             today = now()
             current_month = today.month
             current_year = today.year
-            transactions = budget.get_transactions_for_month_and_year(current_month, current_year)[:4]
+            transactions = budget.get_transactions_for_month_and_year(current_month, current_year)[:5]
             total_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
             spent_percentage = total_spent / budget.amount * 100
             return render(request, 'budget/overview.html', {
@@ -85,6 +85,7 @@ def add_budget(request):
             return redirect('budget:budget')
     else:
         form = BudgetForm()
+        form.helper.form_action = reverse('budget:add-budget')
         return render(request, 'forms/budget_add.html', {
             'title': 'Add Budget',
             'form': form,
@@ -109,6 +110,7 @@ def edit_budget(request, budget_id):
             return redirect('budget:budget')
     else:
         form = BudgetForm(data)
+        form.helper.form_action = reverse('budget:edit-budget', kwargs={'budget_id': budget.id})
         return render(request, 'forms/budget_edit.html', {
             'title': 'Edit Budget',
             'form': form,

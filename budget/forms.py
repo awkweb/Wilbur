@@ -8,15 +8,28 @@ from .models import Item, ItemType
 
 
 class BudgetForm(forms.Form):
-    error_css_class = 'error'
-    required_css_class = 'required'
+    amount = forms.DecimalField(
+            label='Amount',
+            min_value=0,
+            max_digits=10,
+            decimal_places=2,
+            required=True
+    )
 
-    amount = forms.DecimalField(min_value=0, max_digits=10, decimal_places=2)
+    def __init__(self, *args, **kwargs):
+        super(BudgetForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+                PrependedAppendedText('amount', '$'),
+                StrictButton('Submit', css_class='btn-default', type='submit'),
+                HTML("""<a class="btn btn-link" href="{% url 'budget:budget' %}" role="button">Cancel</a>""")
+        )
 
 
 class ItemAddForm(forms.Form):
     type = forms.ModelChoiceField(
-            label='Item type',
+            label='Type',
             queryset=ItemType.objects.all(),
             empty_label='',
             required=True,
@@ -49,7 +62,7 @@ class ItemAddForm(forms.Form):
 
 class ItemEditForm(forms.Form):
     type = forms.ModelChoiceField(
-            label='Item type',
+            label='Type',
             queryset=ItemType.objects.all(),
             empty_label='',
             required=True,

@@ -32,26 +32,17 @@
         <div class="row">
             <div class="col-sm-12">
                 <nav>
-                    <ul class="pagination">
-                        <li>
-                            <a href="?page={{ transactions.previous_page_number }}" class="{% if transactions.number == 1 %}disabled
-                        {% endif %}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><span
-                                class="current">Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.</span>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="?page={{ transactions.next_page_number }}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                    <ul class="pager btn-bottom-toolbar">
+                        {% with transactions.number as page_number %}
+                            <li class="previous {% if page_number == 1 %}disabled{% endif %}">
+                                <a {% if page_number > 1 %}href="?page={{ transactions.previous_page_number }}"{% endif %}>
+                                    <span aria-hidden="true">&larr;</span> Older</a>
+                            </li>
+                            <li class="next {% if page_number == transactions|length %}disabled{% endif %}">
+                                <a {% if page_number < transactions|length %}href="?page={{ transactions.next_page_number }}"{% endif %}>
+                                    Newer <span aria-hidden="true">&rarr;</span></a>
+                            </li>
+                        {% endwith %}
                     </ul>
                 </nav>
             </div>

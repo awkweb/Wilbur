@@ -6,6 +6,18 @@
 
     {% widthratio total_spent budget.amount 100 as spent_percentage %}
 
-    {% include 'includes/transactions_table.html' %}
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="input-group btn-toolbar">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button></span>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <a href="{% url 'budget:add-transaction' %}" class="btn btn-default btn-toolbar pull-right">Add transaction</a>
+        </div>
+    </div>
+
+    {% include 'includes/transactions_table.html' with pagination=True %}
 
 {% endblock %}

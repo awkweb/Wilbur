@@ -5,3 +5,13 @@
 .error {
     margin-top: 2rem;
 }
+
+.btn-toolbar {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 0;
+}
+
+.btn-bottom-toolbar {
+    margin-top: -1rem;
+}

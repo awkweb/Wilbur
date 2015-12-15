@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <p class="lead">${{ total_spent|intcomma }} out of ${{ budget.amount|intcomma }}</p>
+        <p class="lead">{{ spent_percentage|floatformat:1 }}% or ${{ total_spent|intcomma }} out of ${{ budget.amount|intcomma }}</p>
     </div>
 </div>
 
