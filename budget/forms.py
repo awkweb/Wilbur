@@ -125,14 +125,16 @@ class TransactionAddForm(forms.Form):
         self.fields['item'].to_field_name = 'id'
 
         self.helper = FormHelper()
+        self.helper.form_id = 'transaction-add'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:add-transaction'
+        self.helper.attrs = {'next': '/budget/transactions/'}
         self.helper.layout = Layout(
                 'item',
                 'description',
                 PrependedAppendedText('amount', '$'),
                 'transaction_date',
-                StrictButton('Submit', css_class='btn-default', type='submit'),
+                StrictButton('Submit', type='submit', css_class='btn-default', css_id='transaction-add-submit'),
                 HTML("""<a class="btn btn-link" href="{% url 'budget:transactions' %}" role="button">Cancel</a>""")
         )
 

@@ -1,12 +1,17 @@
-from django.shortcuts import render, redirect, render_to_response
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django.views.generic.base import TemplateView
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render, redirect, render_to_response
+from django.template import RequestContext
 from django.utils.timezone import now
+from django.views.generic.base import TemplateView
+
+from jsonview.decorators import json_view
 from pytz import timezone
+from crispy_forms.utils import render_crispy_form
+
 from .models import Budget, Transaction, Item
 from .forms import TransactionAddForm, TransactionEditForm, BudgetForm, ItemAddForm, ItemEditForm
 
@@ -86,7 +91,7 @@ def add_budget(request):
     else:
         form = BudgetForm()
         form.helper.form_action = reverse('budget:add-budget')
-        return render(request, 'forms/budget_add.html', {
+        return render(request, 'base_form.html', {
             'title': 'Add Budget',
             'form': form,
         })
@@ -111,7 +116,7 @@ def edit_budget(request, budget_id):
     else:
         form = BudgetForm(data)
         form.helper.form_action = reverse('budget:edit-budget', kwargs={'budget_id': budget.id})
-        return render(request, 'forms/budget_edit.html', {
+        return render(request, 'base_form.html', {
             'title': 'Edit Budget',
             'form': form,
             'budget_id': budget.id,
@@ -142,7 +147,7 @@ def add_item(request, budget_id):
     else:
         form = ItemAddForm()
         form.helper.form_action = reverse('budget:add-item', kwargs={'budget_id': budget.id})
-        return render(request, 'forms/item_add.html', {
+        return render(request, 'base_form.html', {
             'title': 'Add Item',
             'form': form,
         })
@@ -173,7 +178,7 @@ def edit_item(request, item_id):
     else:
         form = ItemEditForm(data)
         form.helper.form_action = reverse('budget:edit-item', kwargs={'item_id': item.id})
-        return render(request, 'forms/item_edit.html', {
+        return render(request, 'base_form.html', {
             'title': 'Edit Item',
             'form': form,
             'item_id': item.id,
@@ -227,6 +232,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
+@json_view
 def add_transaction(request):
     user = get_user_in_session(request.session)
     budget = get_budget_for_user(user)
@@ -249,10 +255,18 @@ def add_transaction(request):
                     creation_date=creation_date
             )
             transaction.save()
-            return redirect('budget:transactions')
+            return {
+                'success': True,
+            }
+        request_context = RequestContext(request)
+        form_html = render_crispy_form(form, context=request_context)
+        return {
+            'success': False,
+            'form_html': form_html,
+        }
     else:
         form = TransactionAddForm(initial=data)
-        return render(request, 'forms/transactions_add.html', {
+        return render(request, 'base_form.html', {
             'title': 'Add Transaction',
             'form': form,
         })
@@ -289,7 +303,7 @@ def edit_transaction(request, transaction_id):
     else:
         form = TransactionEditForm(data, initial={'budget': budget})
         form.helper.form_action = reverse('budget:edit-transaction', kwargs={'transaction_id': transaction.id})
-        return render(request, 'forms/transactions_edit.html', {
+        return render(request, 'base_form.html', {
             'title': 'Edit Transaction',
             'form': form,
             'transaction_id': transaction.id,
