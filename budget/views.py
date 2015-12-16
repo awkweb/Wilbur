@@ -12,8 +12,8 @@ from jsonview.decorators import json_view
 from pytz import timezone
 from crispy_forms.utils import render_crispy_form
 
-from .models import Budget, Transaction, Item
-from .forms import TransactionAddForm, TransactionEditForm, BudgetForm, ItemAddForm, ItemEditForm
+from .models import Budget, Transaction
+from .forms import TransactionAddForm, TransactionEditForm, BudgetForm
 
 
 class IndexView(LoginRequiredMixin, TemplateView):

@@ -13,13 +13,13 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="{% url 'budget:overview' %}">Overview</a></li>
-                <li><a href="{% url 'budget:budget' %}">Budget</a></li>
-                <li><a href="{% url 'budget:transactions' %}">Transactions</a></li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="disabled">{{ user.last_name }}, {{ user.first_name }}</a></li>
+                <li><a href="{% url 'budget:overview' %}">Overview</a></li>
+                <li><a href="{% url 'budget:budget' %}">Budgets</a></li>
+                <li><a href="{% url 'budget:transactions' %}">Transactions</a></li>
                 <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
             </ul>
         </div>

@@ -2,17 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    creation_date = models.DateField()
+
+    def __str__(self):
+        return self.name
+
+
 class Budget(models.Model):
     user = models.ForeignKey(User)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount")
-    creation_date = models.DateTimeField()
+    category = models.ForeignKey(Category)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.CharField(max_length=100)
+    creation_date = models.DateField()
 
     def __str__(self):
         return "%s" % self.user
-
-    def get_items(self):
-        items = Item.objects.filter(budget=self)
-        return items
 
     def get_transactions_for_month_and_year(self, month, year):
         items = self.get_items()
@@ -35,43 +41,12 @@ class Budget(models.Model):
         return total / self.amount * 100
 
 
-class ItemType(models.Model):
-    name = models.CharField(max_length=100)
-    creation_date = models.DateTimeField()
-
-    def __str__(self):
-        return self.name
-
-
-class Item(models.Model):
-    budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount")
-    type = models.ForeignKey(ItemType)
-    description = models.CharField(max_length=100, blank=True)
-    creation_date = models.DateTimeField()
-
-    def __str__(self):
-        return self.type.name
-
-    def get_transactions_for_month_and_year(self, month, year):
-        transactions = Transaction.objects.filter(item=self).filter(transaction_date__year=year).filter(
-            transaction_date__month=month)
-        return transactions
-
-    def get_sum_transactions_for_month_and_year(self, month, year):
-        transactions = self.get_transactions_for_month_and_year(month, year)
-        total = 0
-        for transaction in transactions:
-            total += transaction.amount
-        return total
-
-
 class Transaction(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=100)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Amount")
-    transaction_date = models.DateTimeField()
-    creation_date = models.DateTimeField()
+    transaction_date = models.DateField()
+    creation_date = models.DateField()
 
     EXPENSE = -1
     REVENUE = 1
