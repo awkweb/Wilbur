@@ -209,15 +209,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             current_month = today.month
             current_year = today.year
             transaction_list = budget.get_transactions_for_month_and_year(current_month, current_year)
-            paginator = Paginator(transaction_list, 10)
-
-            page = request.GET.get('page')
-            try:
-                transactions = paginator.page(page)
-            except PageNotAnInteger:
-                transactions = paginator.page(1)
-            except EmptyPage:
-                transactions = paginator.page(paginator.num_pages)
+            transactions = get_paginator_for_list(request, transaction_list, 10)
 
             return render_to_response('budget/transactions.html', {
                 'title': 'Transactions',
@@ -334,8 +326,8 @@ def get_budget_for_user(user):
             return budget
 
 
-def get_paginator_for_list(request, array_list, max_pages):
-    paginator = Paginator(array_list, max_pages)
+def get_paginator_for_list(request, array_list, max_per_page):
+    paginator = Paginator(array_list, max_per_page)
 
     page = request.GET.get('page')
     try:
