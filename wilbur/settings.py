@@ -84,8 +84,8 @@ WSGI_APPLICATION = 'wilbur.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wilbur',
-        'USER': 'postgres',
+        'NAME': 'postgres',
+        'USER': '',
         'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '5432',

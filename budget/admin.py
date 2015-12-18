@@ -4,7 +4,7 @@ from .models import Budget, Category, Transaction
 
 
 class BudgetAdmin(admin.ModelAdmin):
-    list_display = ('user', 'amount', 'category')
+    list_display = ('user', 'amount', 'category',)
 
 
 class CategoryAdmin(admin.ModelAdmin):
