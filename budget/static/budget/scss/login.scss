@@ -1,12 +1,8 @@
 .welcome {
   color: $green;
   font-family: $pacifico;
-  margin-top: 8rem;
-}
-
-.light {
-  color: $gray;
-  margin-bottom: 1.5rem;
+  margin-top: 10rem;
+  margin-bottom: 3rem;
 }
 
 .form-section {
@@ -36,6 +32,7 @@
 }
 
 .button {
+  margin-top: .5rem;
   text-align: center;
   cursor: pointer;
   font-weight: 600;

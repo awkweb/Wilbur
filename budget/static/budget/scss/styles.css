@@ -16,11 +16,8 @@ h1, h2, h3, h4, h5, h6, p {
 .welcome {
   color: #00b27f;
   font-family: "Pacifico", cursive;
-  margin-top: 8rem; }
-
-.light {
-  color: #666666;
-  margin-bottom: 1.5rem; }
+  margin-top: 10rem;
+  margin-bottom: 3rem; }
 
 .form-section {
   margin-bottom: 1.5rem; }
@@ -55,6 +52,7 @@ h1, h2, h3, h4, h5, h6, p {
     border-color: #666666; }
 
 .button {
+  margin-top: .5rem;
   text-align: center;
   cursor: pointer;
   font-weight: 600;
