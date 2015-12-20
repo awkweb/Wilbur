@@ -1,9 +1,10 @@
-.login {
-    margin-top: 10rem;
+body {
+    background-color: #FBFBFB;
 }
 
-.error {
-    margin-top: 2rem;
+h1, h2, h3, h4, h5, h6, p {
+    color: $gray;
+    font-family: $open-sans;
 }
 
 .btn-toolbar {

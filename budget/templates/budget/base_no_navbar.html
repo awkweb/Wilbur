@@ -2,14 +2,15 @@
 
 {% block section %}
 
-<div class="container">
-    {% block content %}
+    <div class="container">
         <div class="row">
-            <div class="small-10 small-centered columns">
-                <h3>{{ section.title }}</h3>
+            <div class="col-sm-12">
+                <h1>{{ title }}</h1>
             </div>
         </div>
-    {% endblock %}
-</div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
 
 {% endblock %}

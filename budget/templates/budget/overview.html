@@ -1,27 +1,10 @@
 {% extends 'base_navbar.html' %}
 
-{% load humanize %}
-
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 
-    {% if budget %}
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Total spent for {% now "F" %}</h2>
-            </div>
-        </div>
-
-        {% include 'includes/budget_overview.html' %}
-
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Recent transactions</h2>
-            </div>
-        </div>
-
-        {% include 'includes/transactions_table.html' %}
+    {% if budgets %}
 
     {% else %}
         <div class="row">

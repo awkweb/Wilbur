@@ -36,11 +36,11 @@
                         {% if transactions.has_previous or transactions.has_next %}
                             <li class="previous {% if not transactions.has_previous %}disabled{% endif %}">
                                 <a {% if transactions.has_previous %}href="?page={{ transactions.previous_page_number }}"{% endif %}>
-                                    <span aria-hidden="true">&larr;</span> Older</a>
+                                    <span aria-hidden="true">&larr;</span> Newer</a>
                             </li>
                             <li class="next {% if not transactions.has_next %}disabled{% endif %}">
                                 <a {% if transactions.has_next %}href="?page={{ transactions.next_page_number }}"{% endif %}>
-                                    Newer <span aria-hidden="true">&rarr;</span></a>
+                                    Older <span aria-hidden="true">&rarr;</span></a>
                             </li>
                         {% endif %}
                     </ul>
