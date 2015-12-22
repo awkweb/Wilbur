@@ -16,9 +16,9 @@
                 {% for transaction in transactions %}
                     <tr>
                         <td>
-                            <a href="{% url 'budget:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturaltime }}</a>
+                            <a href="{% url 'budget:edit-transaction' transaction.id %}">{{ transaction.transaction_date }}</a>
                         </td>
-                        <td>{{ transaction.item.type.name|capfirst }}</td>
+                        <td>{{ transaction.budget.category.name|capfirst }}</td>
                         <td>{{ transaction.amount|intcomma }}</td>
                         <td>{{ transaction.description }}</td>
                     </tr>
@@ -48,11 +48,4 @@
             </div>
         </div>
     {% endif %}
-
-{% else %}
-    <div class="row">
-        <div class="col-sm-12">
-            <h4><a href="{% url 'budget:add-transaction' %}">Add a transaction</a></h4>
-        </div>
-    </div>
 {% endif %}

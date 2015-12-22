@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML
 from crispy_forms.bootstrap import StrictButton, PrependedAppendedText
 
-from .models import Category
+from .models import Budget
 
 
 class BudgetForm(forms.Form):
@@ -28,8 +28,8 @@ class BudgetForm(forms.Form):
 
 
 class TransactionAddForm(forms.Form):
-    item = forms.ModelChoiceField(
-            label='Budget item',
+    budget = forms.ModelChoiceField(
+            label='Budget',
             queryset=None,
             empty_label='',
             required=True,
@@ -46,7 +46,7 @@ class TransactionAddForm(forms.Form):
             decimal_places=2,
             required=True,
     )
-    transaction_date = forms.DateTimeField(
+    transaction_date = forms.DateField(
             label='Transaction date',
             widget=DateTimeInput(attrs={'type': 'datetime'}),
             required=True,
@@ -54,27 +54,27 @@ class TransactionAddForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(TransactionAddForm, self).__init__(*args, **kwargs)
-        self.fields['item'].queryset = Category.objects.filter(budget=self.initial['budget'])
-        self.fields['item'].to_field_name = 'id'
+        self.fields['budget'].queryset = Budget.objects.filter(user=self.initial['user'])
+        self.fields['budget'].to_field_name = 'id'
 
         self.helper = FormHelper()
-        self.helper.form_id = 'transaction-add'
+        self.helper.form_id = 'form-grab'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:add-transaction'
         self.helper.attrs = {'next': '/budget/transactions/'}
         self.helper.layout = Layout(
-                'item',
+                'budget',
                 'description',
                 PrependedAppendedText('amount', '$'),
                 'transaction_date',
-                StrictButton('Submit', type='submit', css_class='btn-default', css_id='transaction-add-submit'),
+                StrictButton('Submit', type='submit', css_class='btn-default', css_id='form-submit'),
                 HTML("""<a class="btn btn-link" href="{% url 'budget:transactions' %}" role="button">Cancel</a>""")
         )
 
 
 class TransactionEditForm(forms.Form):
-    item = forms.ModelChoiceField(
-            label='Budget item',
+    budget = forms.ModelChoiceField(
+            label='Budget',
             queryset=None,
             empty_label='',
             required=True,
@@ -91,7 +91,7 @@ class TransactionEditForm(forms.Form):
             decimal_places=2,
             required=True,
     )
-    transaction_date = forms.DateTimeField(
+    transaction_date = forms.DateField(
             label='Transaction date',
             widget=DateTimeInput(attrs={'type': 'datetime'}),
             required=True,
@@ -99,17 +99,20 @@ class TransactionEditForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(TransactionEditForm, self).__init__(*args, **kwargs)
-        self.fields['item'].queryset = Category.objects.filter(budget=self.initial['budget'])
-        self.fields['item'].to_field_name = 'id'
+        self.fields['budget'].queryset = Budget.objects.filter(user=self.initial['user'])
+        self.fields['budget'].to_field_name = 'id'
 
         self.helper = FormHelper()
+        self.helper.form_id = 'form-grab'
         self.helper.form_method = 'post'
+        self.helper.form_action = 'budget:edit-transaction'
+        self.helper.attrs = {'next': '/budget/transactions/'}
         self.helper.layout = Layout(
-                'item',
+                'budget',
                 'description',
                 PrependedAppendedText('amount', '$'),
                 'transaction_date',
-                StrictButton('Submit', css_class='btn-default', type='submit'),
+                StrictButton('Submit', css_class='btn-default', type='submit', css_id='form-submit'),
                 HTML("""<a class="btn btn-link" href="{% url 'budget:transactions' %}" role="button">Cancel</a>"""),
                 HTML("""<a class="btn btn-danger pull-right" href="{% url 'budget:delete-transaction' transaction_id %}" role="button">Delete</a>""")
         )

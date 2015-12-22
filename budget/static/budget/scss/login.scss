@@ -1,8 +1,11 @@
 .welcome {
   color: $green;
   font-family: $pacifico;
-  margin-top: 10rem;
-  margin-bottom: 3rem;
+  font-size: 36px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 6.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-section {
@@ -10,7 +13,12 @@
 
   label {
     color: $gray;
+    font-family: $open-sans;
     font-weight: 600;
+    font-size: 14px;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
   }
 }
 
@@ -22,6 +30,7 @@
   color: $gray;
   border: 2px solid $gray-light;
   outline: 0;
+  box-sizing: border-box;
   @include vendor-prefix(transition, 0.25s);
   @include vendor-prefix(appearance, none);
   @include vendor-prefix(border-radius, 4px);
@@ -35,6 +44,7 @@
   margin-top: .5rem;
   text-align: center;
   cursor: pointer;
+  font-size: 1rem;
   font-weight: 600;
   height: 40px;
   border: 1px solid $gray;

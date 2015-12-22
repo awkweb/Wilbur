@@ -1,7 +1,7 @@
-$("#transaction-add-submit").click(function(event) {
+$("#form-submit").click(function(event) {
     event.preventDefault();
 
-    var form = $('#transaction-add');
+    var form = $('#form-grab');
 
     $.ajax({
         url: form.attr('action'),
