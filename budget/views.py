@@ -13,7 +13,7 @@ from pytz import timezone
 from crispy_forms.utils import render_crispy_form
 
 from .models import Budget, Transaction
-from .forms import TransactionAddForm, TransactionEditForm, BudgetForm
+from .forms import TransactionAddForm, TransactionEditForm, BudgetAddForm, BudgetEditForm
 
 
 class BudgetsView(LoginRequiredMixin, TemplateView):
@@ -24,24 +24,54 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
 
-        return render(request, 'budget/budget.html', {
+        today = now()
+        current_month = today.month
+        current_year = today.year
+        budget_list = []
+        for budget in budgets:
+            amount_spent = budget.get_sum_transactions_for_month_and_year(current_month, current_year)
+            data = {
+                'id': budget.id,
+                'name': budget.category.name,
+                'amount': budget.amount,
+                'amount_spent': amount_spent,
+                'amount_left': budget.amount - amount_spent,
+                'description': budget.description,
+                'percent': amount_spent / budget.amount * 100
+            }
+            budget_list.append(data)
+
+        return render(request, 'budget/budgets.html', {
             'title': 'Budget',
+            'budgets': budgets,
+            'budget_list': budget_list,
         })
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
+@json_view
 def add_budget(request):
     if request.method == 'POST':
-        form = BudgetForm(request.POST)
+        form = BudgetAddForm(request.POST)
         if form.is_valid():
             user = get_user_in_session(request.session)
+            category = form.cleaned_data['category']
             amount = form.cleaned_data['amount']
-            creation_date = now()
-            budget = Budget(user=user, amount=amount, creation_date=creation_date)
+            description = form.cleaned_data['description']
+            creation_date = now().date()
+            budget = Budget(user=user, category=category, amount=amount, description=description, creation_date=creation_date)
             budget.save()
-            return redirect('budget:budget')
+            return {
+                'success': True,
+            }
+        request_context = RequestContext(request)
+        form_html = render_crispy_form(form, context=request_context)
+        return {
+            'success': False,
+            'form_html': form_html,
+        }
     else:
-        form = BudgetForm()
+        form = BudgetAddForm()
         form.helper.form_action = reverse('budget:add-budget')
         return render(request, 'base_form.html', {
             'title': 'Add Budget',
@@ -50,23 +80,39 @@ def add_budget(request):
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
+@json_view
 def edit_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
     data = {
+        'category': budget.category.id,
         'amount': budget.amount,
+        'description': budget.description,
     }
     if request.method == 'POST':
-        form = BudgetForm(request.POST, initial=data)
+        form = BudgetEditForm(request.POST, initial=data)
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
                     cleaned_data = form.cleaned_data[field]
-                    if field == 'amount':
+                    if field == 'category':
+                        budget.category = cleaned_data
+                    elif field == 'amount':
                         budget.amount = cleaned_data
+                    elif field == 'description':
+                        budget.description = cleaned_data
                 budget.save()
-            return redirect('budget:budget')
+            return {
+                'success': True,
+            }
+        request_context = RequestContext(request)
+        form_html = render_crispy_form(form, context=request_context)
+        return {
+            'success': False,
+            'form_html': form_html,
+            'budget_id': budget.id,
+        }
     else:
-        form = BudgetForm(data)
+        form = BudgetEditForm(data)
         form.helper.form_action = reverse('budget:edit-budget', kwargs={'budget_id': budget.id})
         return render(request, 'base_form.html', {
             'title': 'Edit Budget',
@@ -79,7 +125,7 @@ def edit_budget(request, budget_id):
 def delete_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
     budget.delete()
-    return redirect('budget:budget')
+    return redirect('budget:budgets')
 
 
 class TransactionsView(LoginRequiredMixin, TemplateView):
@@ -96,6 +142,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         for budget in budgets:
             t_list = budget.get_transactions_for_month_and_year(current_month, current_year)
             transaction_list.extend(t_list)
+        transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
         return render_to_response('budget/transactions.html', {
             'title': 'Transactions',
@@ -115,9 +162,8 @@ def add_transaction(request):
             budget = form.cleaned_data['budget']
             description = form.cleaned_data['description']
             amount = form.cleaned_data['amount']
-            new_york = timezone('America/New_York')
-            transaction_date = form.cleaned_data['transaction_date'].astimezone(new_york)
-            creation_date = now()
+            transaction_date = form.cleaned_data['transaction_date']
+            creation_date = now().date()
             transaction = Transaction(
                     budget=budget,
                     description=description,
@@ -144,6 +190,7 @@ def add_transaction(request):
 
 
 @login_required(login_url='/budget/login/', redirect_field_name='next')
+@json_view
 def edit_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     user = get_user_in_session(request.session)
@@ -177,6 +224,7 @@ def edit_transaction(request, transaction_id):
         return {
             'success': False,
             'form_html': form_html,
+            'transaction_id': transaction.id,
         }
     else:
         form = TransactionEditForm(data, initial={'user': user})

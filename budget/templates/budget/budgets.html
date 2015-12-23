@@ -1,0 +1,42 @@
+{% extends 'base_navbar.html' %}
+
+{% load humanize %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <a href="{% url 'budget:add-budget' %}">Add budget</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Left</th>
+                    <th>Spent</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Percent</th>
+                </tr>
+                </thead>
+                {% for budget in budget_list %}
+                    <tr>
+                        <td><a href="{% url 'budget:edit-budget' budget.id %}">{{ budget.name|capfirst }}</a></td>
+                        <td>{{ budget.amount_left|floatformat:0|intcomma }}</td>
+                        <td>{{ budget.amount_spent|floatformat:0|intcomma }}</td>
+                        <td>{{ budget.amount|floatformat:0|intcomma }}</td>
+                        <td>{{ budget.description }}</td>
+                        <td>{{ budget.percent }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
