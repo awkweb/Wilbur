@@ -20,13 +20,14 @@
                 </div>
                 <input type="hidden" name="next" value="{{ next }}"/>
                 <button type="submit" class="button">Log In</button>
+                <a class="request" href="#">or Sign Up</a>
             </form>
         </div>
     </div>
 
     {% if form.errors %}
-        <div class="col-sm-4 col-sm-offset-4 error">
-            <strong>Oh snap!</strong> Invalid credentials.
+        <div class="col-sm-4 col-sm-offset-4">
+            <p class="error"><strong>Oh snap!</strong> Invalid credentials.</p>
         </div>
     {% endif %}
 

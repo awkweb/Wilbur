@@ -1,0 +1,54 @@
+.navbar {
+  position: relative;
+  height: 60px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid $gray-lightest;
+
+  &::after {
+    clear: both;
+  }
+}
+
+.navbar-left {
+  float: left;
+  margin-left: 10rem;
+
+  @media screen and (max-width: $small) {
+    margin-left: 2rem;
+  }
+}
+
+.navbar-right {
+  float: right;
+  margin-right: 10rem;
+
+  @media screen and (max-width: $small) {
+    margin-right: 2rem;
+  }
+}
+
+.brand {
+  font-family: $pacifico;
+  font-size: 2rem;
+  color: $green;
+}
+
+.inline {
+  padding: 1.35rem 0;
+
+  li {
+    display: inline-block;
+    font-family: $open-sans;
+    margin-left: 2rem;
+  }
+
+  a {
+    @include vendor-prefix(transition, 0.25s);
+    color: $gray;
+
+    &:hover {
+      color: $green;
+      padding-bottom: 1rem;
+    }
+  }
+}
