@@ -2,7 +2,7 @@
   position: relative;
   height: 60px;
   margin: 0 0 20px;
-  border-bottom: 1px solid $gray-lightest;
+  border-bottom: 1px solid $gray-lighter;
 
   &::after {
     clear: both;
@@ -11,26 +11,21 @@
 
 .navbar-left {
   float: left;
-  margin-left: 10rem;
-
-  @media screen and (max-width: $small) {
-    margin-left: 2rem;
-  }
 }
 
 .navbar-right {
   float: right;
-  margin-right: 10rem;
-
-  @media screen and (max-width: $small) {
-    margin-right: 2rem;
-  }
 }
 
 .brand {
   font-family: $pacifico;
   font-size: 2rem;
   color: $green;
+}
+
+.active {
+  border-bottom: 1px solid $green;
+  padding-bottom: 15px;
 }
 
 .inline {

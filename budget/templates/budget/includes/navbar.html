@@ -1,12 +1,18 @@
 <nav class="navbar">
-    <div class="navbar-left">
-        <a class="brand" href="{% url 'budget:transactions' %}">Wilbur</a>
-    </div>
-    <div class="navbar-right">
-        <ul class="inline">
-            <li><a href="{% url 'budget:budgets' %}">Budgets</a></li>
-            <li><a href="{% url 'budget:transactions' %}">Transactions</a></li>
-            <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
-        </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="navbar-left">
+                    <a class="brand" href="{% url 'budget:transactions' %}">Wilbur</a>
+                </div>
+                <div class="navbar-right">
+                    <ul class="inline">
+                        <li {% if title == 'Budgets' %}class="active"{% endif %}><a href="{% url 'budget:budgets' %}">Budgets</a></li>
+                        <li {% if title == 'Transactions' %}class="active"{% endif %}><a href="{% url 'budget:transactions' %}">Transactions</a></li>
+                        <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>

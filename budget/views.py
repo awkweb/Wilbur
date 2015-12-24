@@ -42,7 +42,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             budget_list.append(data)
 
         return render(request, 'budget/budgets.html', {
-            'title': 'Budget',
+            'title': 'Budgets',
             'budgets': budgets,
             'budget_list': budget_list,
         })
