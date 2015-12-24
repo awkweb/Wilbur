@@ -4,34 +4,31 @@
 
 {% block content %}
 
-    <section class="container">
+    <h1 class="welcome">Welcome to Wilbur.</h1>
 
-        <h1 class="welcome text-center">Welcome to Wilbur.</h1>
-
-        <div class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-                <form method="post" action="{% url 'budget:login' %}">
-                    {% csrf_token %}
-                    <div class="form-section">
-                        <label for="inputUsername">Username</label>
-                        <input type="text" name="username" class="form-input" id="username" autofocus>
-                    </div>
-                    <div class="form-section">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" name="password" class="form-input" id="exampleInputPassword1">
-                    </div>
-                    <input type="hidden" name="next" value="{{ next }}"/>
-                    <button type="submit" class="button">Log In</button>
-                </form>
-            </div>
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <form method="post" action="{% url 'budget:login' %}">
+                {% csrf_token %}
+                <div class="form-section">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" name="username" class="form-input" id="username" autofocus>
+                </div>
+                <div class="form-section">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" class="form-input" id="exampleInputPassword1">
+                </div>
+                <input type="hidden" name="next" value="{{ next }}"/>
+                <button type="submit" class="button">Log In</button>
+                <a class="request" href="#">or Sign Up</a>
+            </form>
         </div>
+    </div>
 
-        {% if form.errors %}
-            <div class="col-sm-4 col-sm-offset-4 error">
-                <strong>Oh snap!</strong> Invalid credentials.
-            </div>
-        {% endif %}
-
-    </section>
+    {% if form.errors %}
+        <div class="col-sm-4 col-sm-offset-4">
+            <p class="error"><strong>Oh snap!</strong> Invalid credentials.</p>
+        </div>
+    {% endif %}
 
 {% endblock %}

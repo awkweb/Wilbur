@@ -6,9 +6,13 @@
 
 {% block content %}
 
-    {% crispy form %}
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            {% crispy form %}
 
-    {% load staticfiles %}
-    <script src="{% static 'budget/js/validator.js' %}"></script>
+            {% load staticfiles %}
+            <script src="{% static 'budget/js/validator.js' %}"></script>
+        </div>
+    </div>
 
 {% endblock %}

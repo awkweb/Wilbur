@@ -1,0 +1,49 @@
+.navbar {
+  position: relative;
+  height: 60px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid $gray-lighter;
+
+  &::after {
+    clear: both;
+  }
+}
+
+.navbar-left {
+  float: left;
+}
+
+.navbar-right {
+  float: right;
+}
+
+.brand {
+  font-family: $pacifico;
+  font-size: 2rem;
+  color: $green;
+}
+
+.active {
+  border-bottom: 1px solid $green;
+  padding-bottom: 15px;
+}
+
+.inline {
+  padding: 1.35rem 0;
+
+  li {
+    display: inline-block;
+    font-family: $open-sans;
+    margin-left: 2rem;
+  }
+
+  a {
+    @include vendor-prefix(transition, 0.25s);
+    color: $gray;
+
+    &:hover {
+      color: $green;
+      padding-bottom: 1rem;
+    }
+  }
+}

@@ -1,27 +1,18 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'budget:overview' %}">Wilbur</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'budget:overview' %}">Overview</a></li>
-                <li><a href="{% url 'budget:budgets' %}">Budgets</a></li>
-                <li><a href="{% url 'budget:transactions' %}">Transactions</a></li>
-                <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
-            </ul>
+<nav class="navbar">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="navbar-left">
+                    <a class="brand" href="{% url 'budget:transactions' %}">Wilbur</a>
+                </div>
+                <div class="navbar-right">
+                    <ul class="inline">
+                        <li {% if title == 'Budgets' %}class="active"{% endif %}><a href="{% url 'budget:budgets' %}">Budgets</a></li>
+                        <li {% if title == 'Transactions' %}class="active"{% endif %}><a href="{% url 'budget:transactions' %}">Transactions</a></li>
+                        <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </nav>

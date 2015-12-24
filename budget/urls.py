@@ -19,12 +19,10 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.OverviewView.as_view(), name='overview'),
-
-    url(r'^budget/$', views.BudgetsView.as_view(), name='budgets'),
-    url(r'^budget/add/$', views.add_budget, name='add-budget'),
-    url(r'^budget/edit/(?P<budget_id>[0-9]+)/$', views.edit_budget, name='edit-budget'),
-    url(r'^budget/delete/(?P<budget_id>[0-9]+)/$', views.delete_budget, name='delete-budget'),
+    url(r'^budgets/$', views.BudgetsView.as_view(), name='budgets'),
+    url(r'^budgets/add/$', views.add_budget, name='add-budget'),
+    url(r'^budgets/edit/(?P<budget_id>[0-9]+)/$', views.edit_budget, name='edit-budget'),
+    url(r'^budgets/delete/(?P<budget_id>[0-9]+)/$', views.delete_budget, name='delete-budget'),
 
     url(r'^transactions/$', views.TransactionsView.as_view(), name='transactions'),
     url(r'^transactions/add/$', views.add_transaction, name='add-transaction'),
@@ -34,5 +32,5 @@ urlpatterns = [
     url('^login/$', auth_views.login, {
         'template_name': 'budget/login.html',
         'redirect_field_name': 'next'}, name="login"),
-    url('^logout/$', auth_views.logout, {'next_page': '/budget/'}, name="logout", ),
+    url('^logout/$', auth_views.logout, {'next_page': '/budget/transactions'}, name="logout"),
 ]

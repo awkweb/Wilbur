@@ -1,6 +1,9 @@
 // colors
 $gray: #666666;
-$gray-light: #E5E5EA;
+$gray-darkest: #333;
+$gray-light: #ababab;
+$gray-lighter: #E5E5EA;
+$gray-lightest: #F9F9F9;
 $green: #00b27f;
 $white: #fff;
 $red: #da371c;
@@ -8,3 +11,6 @@ $red: #da371c;
 // fonts
 $open-sans: 'Open Sans', Helvetica, sans-serif;
 $pacifico: 'Pacifico', cursive;
+
+// widths
+$small: 775px;
