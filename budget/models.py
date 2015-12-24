@@ -7,7 +7,7 @@ class Category(models.Model):
     creation_date = models.DateField()
 
     def __str__(self):
-        return self.name
+        return self.name.title()
 
 
 class Budget(models.Model):
@@ -18,7 +18,7 @@ class Budget(models.Model):
     creation_date = models.DateField()
 
     def __str__(self):
-        return self.category.name
+        return self.category.name.title()
 
     def get_transactions_for_month_and_year(self, month, year):
         transactions = Transaction.objects.filter(budget=self).filter(transaction_date__year=year)\

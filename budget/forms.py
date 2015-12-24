@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.widgets import DateInput
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, HTML
+from crispy_forms.layout import Layout, HTML, Field
 from crispy_forms.bootstrap import StrictButton, PrependedAppendedText
 
 from .models import Budget, Category
@@ -31,15 +31,16 @@ class BudgetAddForm(forms.Form):
         super(BudgetAddForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'form-grab'
+        self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:add-budget'
         self.helper.attrs = {'next': '/budget/budgets/'}
         self.helper.layout = Layout(
                 'category',
-                PrependedAppendedText('amount', '$'),
+                'amount',
                 'description',
-                StrictButton('Submit', type='submit', css_class='btn-default', css_id='form-submit'),
-                HTML("""<a class="btn btn-link" href="{% url 'budget:budgets' %}" role="button">Cancel</a>""")
+                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                HTML("""<a href="{% url 'budget:budgets' %}" class="button-cancel" role="button">Cancel</a>""")
         )
 
 
@@ -67,16 +68,19 @@ class BudgetEditForm(forms.Form):
         super(BudgetEditForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'form-grab'
+        self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:edit-budget'
         self.helper.attrs = {'next': '/budget/budgets/'}
         self.helper.layout = Layout(
                 'category',
-                PrependedAppendedText('amount', '$'),
+                'amount',
                 'description',
-                StrictButton('Submit', type='submit', css_class='btn-default', css_id='form-submit'),
-                HTML("""<a href="{% url 'budget:budgets' %}" role="button">Cancel</a>"""),
-                HTML("""<a href="{% url 'budget:delete-budget' budget_id %}" role="button">Delete</a>""")
+                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                HTML("""<a href="{% url 'budget:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
+                HTML("""
+                <a href="{% url 'budget:delete-budget' budget_id %}" class="button-delete pull-right" role="button">Delete</a>
+                """)
         )
 
 
@@ -100,7 +104,7 @@ class TransactionAddForm(forms.Form):
             required=True,
     )
     transaction_date = forms.DateField(
-            label='Transaction date',
+            label='Transaction Date',
             widget=DateInput(attrs={'type': 'date'}),
             required=True,
     )
@@ -112,16 +116,18 @@ class TransactionAddForm(forms.Form):
 
         self.helper = FormHelper()
         self.helper.form_id = 'form-grab'
+        self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:add-transaction'
         self.helper.attrs = {'next': '/budget/transactions/'}
         self.helper.layout = Layout(
                 'budget',
-                'description',
-                PrependedAppendedText('amount', '$'),
+                'amount',
                 'transaction_date',
-                StrictButton('Submit', type='submit', css_class='btn-default', css_id='form-submit'),
-                HTML("""<a class="btn btn-link" href="{% url 'budget:transactions' %}" role="button">Cancel</a>""")
+                'description',
+                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                HTML("""
+                <a href="{% url 'budget:transactions' %}" class="button-cancel" role="button">Cancel</a>""")
         )
 
 
@@ -145,7 +151,7 @@ class TransactionEditForm(forms.Form):
             required=True,
     )
     transaction_date = forms.DateField(
-            label='Transaction date',
+            label='Transaction Date',
             widget=DateInput(attrs={'type': 'date'}),
             required=True,
     )
@@ -157,15 +163,19 @@ class TransactionEditForm(forms.Form):
 
         self.helper = FormHelper()
         self.helper.form_id = 'form-grab'
+        self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:edit-transaction'
         self.helper.attrs = {'next': '/budget/transactions/'}
         self.helper.layout = Layout(
                 'budget',
-                'description',
-                PrependedAppendedText('amount', '$'),
+                'amount',
                 'transaction_date',
-                StrictButton('Submit', type='submit', css_id='form-submit'),
-                HTML("""<a href="{% url 'budget:transactions' %}" role="button">Cancel</a>"""),
-                HTML("""<a href="{% url 'budget:delete-transaction' transaction_id %}" role="button">Delete</a>""")
+                'description',
+                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                HTML("""
+                <a href="{% url 'budget:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
+                HTML("""
+                <a href="{% url 'budget:delete-transaction' transaction_id %}" class="button-delete pull-right" role="button">Delete</a>
+                """)
         )

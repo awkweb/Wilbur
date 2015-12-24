@@ -5,3 +5,16 @@
   -o-#{$name}: $value;
   #{$name}: $value;
 }
+
+@mixin button-form($color-background, $color-text, $color-hover) {
+  @extend .button;
+  border: 1px solid $color-background;
+  padding: 6px 15px;
+  background-color: $color-background;
+  color: $color-text;
+  font-size: .9rem;
+
+  &:hover {
+    background-color: $color-hover;
+  }
+}

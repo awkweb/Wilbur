@@ -1,5 +1,5 @@
 .welcome {
-  margin: 6.5rem 0 1.5rem;
+  margin: 6.5rem 0 1rem;
   text-align: center;
   font: 500 36px $pacifico;
   color: $green;
@@ -13,7 +13,7 @@
     max-width: 100%;
     margin-bottom: 5px;
     font: 600 .9rem $open-sans;
-    color: $gray;
+    color: $gray-dark;
   }
 }
 
@@ -28,10 +28,10 @@
   border: 2px solid $gray-lighter;
   outline: 0;
   font-size: 1rem;
-  color: $gray;
+  color: $gray-dark;
 
   &:focus {
-    border-color: $gray;
+    border-color: $gray-dark;
   }
 }
 

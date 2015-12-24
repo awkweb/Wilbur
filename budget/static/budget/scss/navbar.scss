@@ -39,7 +39,7 @@
 
   a {
     @include vendor-prefix(transition, 0.25s);
-    color: $gray;
+    color: $gray-dark;
 
     &:hover {
       color: $green;

@@ -12,9 +12,9 @@
 
 .button-login {
   @extend .button;
-  border: 1px solid $gray;
+  border: 1px solid $gray-dark;
   padding: 6px 35px;
-  background-color: $gray;
+  background-color: $gray-dark;
   color: $white;
   font-size: .95rem;
 
@@ -29,10 +29,27 @@
   border: 1px solid $gray-lighter;
   padding: 6px 15px;
   background-color: $gray-lightest;
-  color: $gray;
+  color: $gray-dark;
   font-size: .9rem;
 
   &:hover {
+    border-color: $gray-light;
     background-color: $gray-lighter;
   }
+}
+
+.button-submit {
+  @include button-form($green, $white, $green-dark);
+  margin-right: 1rem;
+}
+
+.button-cancel {
+  @include button-form($gray-light, $white, $gray);
+  padding: 9.5px 15px;
+  margin-right: 1rem;
+}
+
+.button-delete {
+  @include button-form($red, $white, $red-dark);
+  padding: 9.5px 15px;
 }

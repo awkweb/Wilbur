@@ -19,7 +19,6 @@
   clear: both;
   @include vendor-prefix(border-radius, 4px);
   height: 1.5rem;
-  margin: .25rem 0 0;
   overflow: hidden;
   background-color: $gray-lightest;
   border: 1px solid $gray-lighter;
@@ -31,7 +30,6 @@
   height: 100%;
   font-size: .95rem;
   line-height: 20px;
-  color: $white;
   text-align: center;
 }
 
@@ -47,14 +45,21 @@
   }
 }
 
+.progress-empty {
+  color: $gray-dark;
+}
+
 .progress-green {
   background-color: $green;
+  color: $white;
 }
 
 .progress-yellow {
   background-color: $yellow;
+  color: $white;
 }
 
 .progress-red {
   background-color: $red;
+  color: $white;
 }
