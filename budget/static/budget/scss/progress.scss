@@ -1,0 +1,60 @@
+.progress {
+  clear: both;
+  margin: 0 0 2rem;
+}
+
+.progress-title {
+  font-size: 1.15rem;
+
+  & a {
+    font-weight: 600;
+  }
+
+  & span {
+    color: $gray-light;
+  }
+}
+
+.progress-background {
+  clear: both;
+  @include vendor-prefix(border-radius, 4px);
+  height: 1.5rem;
+  margin: .25rem 0 0;
+  overflow: hidden;
+  background-color: $gray-lightest;
+  border: 1px solid $gray-lighter;
+}
+
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: .95rem;
+  line-height: 20px;
+  color: $white;
+  text-align: center;
+}
+
+.progress-footer {
+  ul > li {
+    display: inline-block;
+    margin-left: 1rem;
+    font-size: .85rem;
+  }
+
+  a {
+    color: $gray-light;
+  }
+}
+
+.progress-green {
+  background-color: $green;
+}
+
+.progress-yellow {
+  background-color: $yellow;
+}
+
+.progress-red {
+  background-color: $red;
+}

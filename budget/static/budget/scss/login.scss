@@ -35,28 +35,6 @@
   }
 }
 
-.button {
-  @include vendor-prefix(transition, 0.25s);
-  @include vendor-prefix(border-radius, 4px);
-  margin-top: .5rem;
-  text-align: center;
-  cursor: pointer;
-  font-size: .95rem;
-  font-weight: 600;
-  font-family: $open-sans;
-  height: 40px;
-  border: 1px solid $gray;
-  padding: 6px 35px;
-  background-color: $gray;
-  color: $white;
-  text-decoration: none;
-
-  &:hover {
-    background-color: $green;
-    border-color: $green;
-  }
-}
-
 .request {
   @include vendor-prefix(transition, 0.25s);
   display: none;

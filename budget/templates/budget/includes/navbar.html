@@ -6,7 +6,7 @@
                     <a class="brand" href="{% url 'budget:transactions' %}">Wilbur</a>
                 </div>
                 <div class="navbar-right">
-                    <ul class="inline">
+                    <ul class="nav-inline">
                         <li {% if title == 'Budgets' %}class="active"{% endif %}><a href="{% url 'budget:budgets' %}">Budgets</a></li>
                         <li {% if title == 'Transactions' %}class="active"{% endif %}><a href="{% url 'budget:transactions' %}">Transactions</a></li>
                         <li><a href="{% url 'budget:logout' %}">Log Out</a></li>

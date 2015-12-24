@@ -6,30 +6,41 @@
 
 {% block content %}
 
-    <div class="row">
+    <section class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <a href="{% url 'budget:add-budget' %}">Add budget</a>
+            <div class="toolbar">
+                <a href="{% url 'budget:add-budget' %}" class="button-toolbar">Add Budget</a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="row">
+    <section class="row">
         <div class="col-sm-10 col-sm-offset-1">
             {% for budget in budget_list %}
                 <div class="progress">
                     <div class="progress-title">
-                        <p class="pull-left"><a href="{% url 'budget:edit-budget' budget.id %}">{{ budget.name|capfirst }}</a>
-                            <span>{{ budget.description|lower }}</span></p>
+                        <p class="pull-left">{{ budget.name|capfirst }} <span>{{ budget.description|lower }}</span></p>
                         <p class="pull-right">${{ budget.amount_left|floatformat:0|intcomma }} left</p>
                     </div>
                     <div class="progress-background">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100"
+                        <div class="progress-bar
+                        {% if budget.percent < 85 %}progress-green
+                        {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
+                        {% else %}progress-red{% endif %}"
+                             role="progressbar" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100"
                              style="width: {{ budget.percent }}%;">
                             ${{ budget.amount_spent|floatformat:0|intcomma }} of ${{ budget.amount|floatformat:0|intcomma }}
                         </div>
                     </div>
+                    <div class="progress-footer">
+                        <ul class="pull-right">
+                            <li><a href="{% url 'budget:edit-budget' budget.id %}">Edit</a></li>
+                            <li><a href="#">View transactions</a></li>
+                        </ul>
+                    </div>
                 </div>
             {% endfor %}
         </div>
-    </div>
+    </section>
 
 {% endblock %}
