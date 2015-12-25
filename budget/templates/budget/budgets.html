@@ -8,9 +8,7 @@
 
     <section class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <div class="toolbar">
-                <a href="{% url 'budget:add-budget' %}" class="button-toolbar">Add Budget</a>
-            </div>
+            <a href="{% url 'budget:add-budget' %}" class="button-toolbar">Add Budget</a>
         </div>
     </section>
 
@@ -29,7 +27,7 @@
                         {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
                         {% else %}progress-red{% endif %}"
                              role="progressbar" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100"
-                             style="width: {% if budget.percent == 0 %}10{% elif budget.percent <= 100 and budget.percent > 0 %}{{ budget.percent }}{% else %}100{% endif %}%;">
+                             style="width: {% if budget.percent == 0 %}100{% elif budget.percent <= 100 and budget.percent > 0 %}{{ budget.percent }}{% else %}100{% endif %}%;">
                             ${{ budget.amount_spent|floatformat:0|intcomma }} of ${{ budget.amount|floatformat:0|intcomma }}
                         </div>
                     </div>

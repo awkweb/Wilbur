@@ -26,7 +26,8 @@ class Budget(models.Model):
         return transactions
 
     def get_sum_transactions_for_month_and_year(self, month, year):
-        transactions = Transaction.objects.filter(budget=self)
+        transactions = Transaction.objects.filter(budget=self).filter(transaction_date__year=year)\
+            .filter(transaction_date__month=month)
         total = 0
         for transaction in transactions:
             total += transaction.amount

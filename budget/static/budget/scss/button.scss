@@ -26,7 +26,10 @@
 
 .button-toolbar {
   @extend .button;
+  margin: 1rem 0;
+  display: inline-block;
   border: 1px solid $gray-lighter;
+  height: inherit;
   padding: 6px 15px;
   background-color: $gray-lightest;
   color: $gray-dark;

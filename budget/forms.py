@@ -124,6 +124,13 @@ class TransactionAddForm(forms.Form):
                 'budget',
                 'amount',
                 'transaction_date',
+                HTML("""
+                <script>
+                    $("#id_transaction_date").minical({
+                        initialize_with_date: false,
+                    });
+                </script>
+                """),
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
@@ -171,6 +178,11 @@ class TransactionEditForm(forms.Form):
                 'budget',
                 'amount',
                 'transaction_date',
+                HTML("""
+                <script>
+                    $("#id_transaction_date").minical();
+                </script>
+                """),
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
