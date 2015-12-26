@@ -37,10 +37,10 @@ date_tools =
 
 templates =
   clear_link: ->
-    $("<p />", { class: "minical_clear" })
+    $("<p />", { class: "minical_clear pull-left" })
     .append $("<a />", { href: "#", text: "Clear Date" })
   today_link: ->
-    $("<p />", { class: "minical_today" })
+    $("<p />", { class: "minical_today pull-right" })
     .append $("<a />", { href: "#", text: "Today" })
   day: (date) ->
     $("<td />")
@@ -86,8 +86,8 @@ minical =
   initialize_with_date: true
   move_on_resize: true
   read_only: true
-  show_clear_link: false
-  show_today_link: false
+  show_clear_link: true
+  show_today_link: true
   add_timezone_offset: false
   appendCalendarTo: -> $('body')
   date_format: (date) ->
@@ -248,8 +248,7 @@ minical =
       @$el.minical('clear')
       return false
     if $t.parent().is(".minical_today")
-      today = new Date
-      @$el.minical('select', today)
+      @$el.minical('today')
       return false
     return true if $t.is(@$el) or $t.is(@$trigger) or $t.closest(".minical").length
     @$cal.trigger('hide.minical')
@@ -299,6 +298,11 @@ minical =
       .removeData('minical')
     select: (date) ->
       @data('minical').selectDay(date, true)
+    today: ->
+      mc = @data('minical')
+      today = new Date
+      @trigger('hide.minical')
+      mc.selectDay(today, true)
   init: ->
     @id = $(".minical").length
     mc = @

@@ -62,12 +62,12 @@ ul.minical {
           color: $mc_text;
           font-size: 1.5rem;
           &.minical_prev {
-            left: 5px;
+            left: 10px;
             right: auto;
           }
           &.minical_next {
             left: auto;
-            right: 5px;
+            right: 10px;
           }
         }
       }
@@ -75,16 +75,16 @@ ul.minical {
         margin-bottom: 10px;
         p.minical_clear, .minical_today {
           font-size: 0.7em;
-          display: block;
+          display: inline-block;
           text-align: center;
           font-weight: bold;
           padding-top: 10px;
-          margin: 0;
+          margin: 0 10px 10px;
           a {
             text-decoration: none;
             color: $mc_highlight;
             &:hover {
-              color: lighten($mc_highlight, 10%);
+              color: darken($mc_highlight, 5%);
             }
           }
         }

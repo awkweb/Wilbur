@@ -350,25 +350,25 @@ ul.minical {
           color: #666666;
           font-size: 1.5rem; }
           ul.minical li article header a.minical_prev {
-            left: 5px;
+            left: 10px;
             right: auto; }
           ul.minical li article header a.minical_next {
             left: auto;
-            right: 5px; }
+            right: 10px; }
       ul.minical li article section {
         margin-bottom: 10px; }
         ul.minical li article section p.minical_clear, ul.minical li article section .minical_today {
           font-size: 0.7em;
-          display: block;
+          display: inline-block;
           text-align: center;
           font-weight: bold;
           padding-top: 10px;
-          margin: 0; }
+          margin: 0 10px 10px; }
           ul.minical li article section p.minical_clear a, ul.minical li article section .minical_today a {
             text-decoration: none;
             color: #00b27f; }
             ul.minical li article section p.minical_clear a:hover, ul.minical li article section .minical_today a:hover {
-              color: #00e5a3; }
+              color: #00996d; }
         ul.minical li article section table {
           width: 100%;
           color: inherit;

@@ -25,7 +25,7 @@
   templates = {
     clear_link: function() {
       return $("<p />", {
-        "class": "minical_clear"
+        "class": "minical_clear pull-left"
       }).append($("<a />", {
         href: "#",
         text: "Clear Date"
@@ -33,7 +33,7 @@
     },
     today_link: function() {
       return $("<p />", {
-        "class": "minical_today"
+        "class": "minical_today pull-right"
       }).append($("<a />", {
         href: "#",
         text: "Today"
@@ -76,8 +76,8 @@
     initialize_with_date: true,
     move_on_resize: true,
     read_only: true,
-    show_clear_link: false,
-    show_today_link: false,
+    show_clear_link: true,
+    show_today_link: true,
     add_timezone_offset: false,
     appendCalendarTo: function() {
       return $('body');
@@ -315,7 +315,7 @@
       }
     },
     outsideClick: function(e) {
-      var $t, today;
+      var $t;
       $t = $(e.target);
       this.$last_clicked = $t;
       if ($t.parent().is(".minical_clear")) {
@@ -323,8 +323,7 @@
         return false;
       }
       if ($t.parent().is(".minical_today")) {
-        today = new Date;
-        this.$el.minical('select', today);
+        this.$el.minical('today');
         return false;
       }
       if ($t.is(this.$el) || $t.is(this.$trigger) || $t.closest(".minical").length) {
@@ -399,6 +398,13 @@
       },
       select: function(date) {
         return this.data('minical').selectDay(date, true);
+      },
+      today: function() {
+        var mc, today;
+        mc = this.data('minical');
+        today = new Date;
+        this.trigger('hide.minical');
+        return mc.selectDay(today, true);
       }
     },
     init: function() {
