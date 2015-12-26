@@ -55,25 +55,30 @@ ul.minical {
           font-family: $mc_font_family;
         }
         a {
+          @include vendor-prefix(transition, .25s);
           display: block;
           position: absolute;
           top: 35%;
-          margin-top: -0.5em;
+          margin-top: -0.6em;
           color: $mc_text;
-          font-size: 1.5rem;
+          font-size: 1.75rem;
+          &:hover {
+            color: $mc_highlight;
+          }
           &.minical_prev {
-            left: 10px;
+            left: 15px;
             right: auto;
           }
           &.minical_next {
             left: auto;
-            right: 10px;
+            right: 15px;
           }
         }
       }
       section {
         margin-bottom: 10px;
         p.minical_clear, .minical_today {
+          @include vendor-prefix(transition, .25s);
           font-size: 0.7em;
           display: inline-block;
           text-align: center;
@@ -82,9 +87,9 @@ ul.minical {
           margin: 0 10px 10px;
           a {
             text-decoration: none;
-            color: $mc_highlight;
+            color: $mc_text;
             &:hover {
-              color: darken($mc_highlight, 5%);
+              color: $mc_highlight;
             }
           }
         }

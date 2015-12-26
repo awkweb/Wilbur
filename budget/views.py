@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.template import RequestContext
 from django.utils.timezone import now
 from django.views.generic.base import TemplateView
+from django.core.context_processors import csrf
 
 from jsonview.decorators import json_view
 from pytz import timezone
@@ -17,7 +18,7 @@ from .forms import TransactionAddForm, TransactionEditForm, BudgetAddForm, Budge
 
 
 class BudgetsView(LoginRequiredMixin, TemplateView):
-    login_url = '/budget/login/'
+    login_url = '/login/'
     redirect_field_name = 'next'
 
     def get(self, request, *args, **kwargs):
@@ -48,7 +49,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         })
 
 
-@login_required(login_url='/budget/login/', redirect_field_name='next')
+@login_required(login_url='/login/', redirect_field_name='next')
 @json_view
 def add_budget(request):
     if request.method == 'POST':
@@ -79,7 +80,7 @@ def add_budget(request):
         })
 
 
-@login_required(login_url='/budget/login/', redirect_field_name='next')
+@login_required(login_url='/login/', redirect_field_name='next')
 @json_view
 def edit_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
@@ -121,7 +122,7 @@ def edit_budget(request, budget_id):
         })
 
 
-@login_required(login_url='/budget/login/', redirect_field_name='next')
+@login_required(login_url='/login/', redirect_field_name='next')
 def delete_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
     budget.delete()
@@ -129,7 +130,7 @@ def delete_budget(request, budget_id):
 
 
 class TransactionsView(LoginRequiredMixin, TemplateView):
-    login_url = '/budget/login/'
+    login_url = '/login/'
     redirect_field_name = 'next'
 
     def get(self, request, *args, **kwargs):
@@ -150,7 +151,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         })
 
 
-@login_required(login_url='/budget/login/', redirect_field_name='next')
+@login_required(login_url='/login/', redirect_field_name='next')
 @json_view
 def add_transaction(request):
     user = get_user_in_session(request.session)
@@ -175,8 +176,9 @@ def add_transaction(request):
             return {
                 'success': True,
             }
-        request_context = RequestContext(request)
-        form_html = render_crispy_form(form, context=request_context)
+        context = {}
+        context.update(csrf(request))
+        form_html = render_crispy_form(form, context=context)
         return {
             'success': False,
             'form_html': form_html,
@@ -189,7 +191,7 @@ def add_transaction(request):
         })
 
 
-@login_required(login_url='/budget/login/', redirect_field_name='next')
+@login_required(login_url='/login/', redirect_field_name='next')
 @json_view
 def edit_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
@@ -236,7 +238,7 @@ def edit_transaction(request, transaction_id):
         })
 
 
-@login_required(login_url='/budget/login/', redirect_field_name='next')
+@login_required(login_url='/login/', redirect_field_name='next')
 def delete_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     transaction.delete()

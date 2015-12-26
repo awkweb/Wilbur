@@ -34,11 +34,21 @@
   background-color: $gray-lightest;
   color: $gray-dark;
   font-size: .9rem;
+}
+
+.button-toolbar-active {
+  @extend .button-toolbar;
 
   &:hover {
     border-color: $gray-light;
     background-color: $gray-lighter;
   }
+}
+
+.button-toolbar-disabled {
+  @extend .button-toolbar;
+  opacity: .65;
+  cursor: not-allowed;
 }
 
 .button-submit {

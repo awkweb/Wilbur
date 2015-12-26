@@ -38,12 +38,11 @@
   }
 
   a {
-    @include vendor-prefix(transition, 0.25s);
     color: $gray-dark;
 
     &:hover {
-      color: $green;
-      padding-bottom: 1rem;
+      border-bottom: 1px solid $green;
+      padding-bottom: 15px;
     }
   }
 }

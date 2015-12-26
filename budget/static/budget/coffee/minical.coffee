@@ -58,8 +58,8 @@ templates =
       <article>
         <header>
           <h1>#{date_tools.getMonthName(date)} #{date.getFullYear()}</h1>
-          <a href='#' class='minical_prev'>&larr;</a>
-          <a href='#' class='minical_next'>&rarr;</a>
+          <a href='#' class='minical_prev'>&lsaquo;</a>
+          <a href='#' class='minical_next'>&rsaquo;</a>
         </header>
         <section>
           <table>
@@ -88,7 +88,7 @@ minical =
   read_only: true
   show_clear_link: true
   show_today_link: true
-  add_timezone_offset: false
+  add_timezone_offset: true
   appendCalendarTo: -> $('body')
   date_format: (date) ->
     [date.getMonth()+1, date.getDate(), date.getFullYear()].join("/")

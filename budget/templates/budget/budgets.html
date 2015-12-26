@@ -8,7 +8,7 @@
 
     <section class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <a href="{% url 'budget:add-budget' %}" class="button-toolbar">Add Budget</a>
+            <a href="{% url 'budget:add-budget' %}" class="button-toolbar-active">Add Budget</a>
         </div>
     </section>
 
@@ -23,7 +23,8 @@
                     <div class="progress-background">
                         <div class="progress-bar
                         {% if budget.percent == 0 %}progress-empty
-                        {% elif budget.percent < 85 and budget.percent > 0 %}progress-green
+                        {% elif budget.percent > 0 and budget.percent <= 10 %}progress-green-small
+                        {% elif budget.percent < 85 and budget.percent > 10 %}progress-green
                         {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
                         {% else %}progress-red{% endif %}"
                              role="progressbar" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100"

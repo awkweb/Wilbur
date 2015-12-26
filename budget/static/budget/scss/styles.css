@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6, p {
   min-height: .01%;
   overflow-x: auto; }
 
-.button, .button-login, .button-toolbar, .button-submit, .button-cancel, .button-delete {
+.button, .button-login, .button-toolbar, .button-toolbar-active, .button-toolbar-disabled, .button-submit, .button-cancel, .button-delete {
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
   -ms-transition: 0.25s;
@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: #00b27f;
     border-color: #00b27f; }
 
-.button-toolbar {
+.button-toolbar, .button-toolbar-active, .button-toolbar-disabled {
   margin: 1rem 0;
   display: inline-block;
   border: 1px solid #E5E5EA;
@@ -100,9 +100,14 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: #F9F9F9;
   color: #666666;
   font-size: .9rem; }
-  .button-toolbar:hover {
-    border-color: #ababab;
-    background-color: #E5E5EA; }
+
+.button-toolbar-active:hover {
+  border-color: #ababab;
+  background-color: #E5E5EA; }
+
+.button-toolbar-disabled {
+  opacity: .65;
+  cursor: not-allowed; }
 
 .button-submit {
   border: 1px solid #00b27f;
@@ -173,9 +178,10 @@ h1, h2, h3, h4, h5, h6, p {
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
+  margin-top: 3px;
   width: 100%;
   padding: 6px 14px;
-  border: 1px solid #E5E5EA;
+  border: 2px solid #E5E5EA;
   outline: 0;
   font-size: 1rem;
   color: #666666; }
@@ -217,15 +223,10 @@ h1, h2, h3, h4, h5, h6, p {
     font-family: "Open Sans", Helvetica, sans-serif;
     margin-left: 2rem; }
   .nav-inline a {
-    -webkit-transition: 0.25s;
-    -moz-transition: 0.25s;
-    -ms-transition: 0.25s;
-    -o-transition: 0.25s;
-    transition: 0.25s;
     color: #666666; }
     .nav-inline a:hover {
-      color: #00b27f;
-      padding-bottom: 1rem; }
+      border-bottom: 1px solid #00b27f;
+      padding-bottom: 15px; }
 
 .progress {
   clear: both;
@@ -272,6 +273,10 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: #00b27f;
   color: #fff; }
 
+.progress-green-small {
+  background-color: #00b27f;
+  color: transparent; }
+
 .progress-yellow {
   background-color: #ec971f;
   color: #fff; }
@@ -280,14 +285,8 @@ h1, h2, h3, h4, h5, h6, p {
   background-color: #FA5744;
   color: #fff; }
 
-.pager {
-  margin-top: .25rem; }
-  .pager li {
-    display: inline-block; }
-
-.disabled a {
-  opacity: .65;
-  cursor: not-allowed; }
+.pager li {
+  display: inline-block; }
 
 .previous {
   float: left; }
@@ -343,21 +342,33 @@ ul.minical {
           margin: 0;
           font-family: "Open Sans", Helvetica, sans-serif; }
         ul.minical li article header a {
+          -webkit-transition: 0.25s;
+          -moz-transition: 0.25s;
+          -ms-transition: 0.25s;
+          -o-transition: 0.25s;
+          transition: 0.25s;
           display: block;
           position: absolute;
           top: 35%;
-          margin-top: -0.5em;
+          margin-top: -0.6em;
           color: #666666;
-          font-size: 1.5rem; }
+          font-size: 1.75rem; }
+          ul.minical li article header a:hover {
+            color: #00b27f; }
           ul.minical li article header a.minical_prev {
-            left: 10px;
+            left: 15px;
             right: auto; }
           ul.minical li article header a.minical_next {
             left: auto;
-            right: 10px; }
+            right: 15px; }
       ul.minical li article section {
         margin-bottom: 10px; }
         ul.minical li article section p.minical_clear, ul.minical li article section .minical_today {
+          -webkit-transition: 0.25s;
+          -moz-transition: 0.25s;
+          -ms-transition: 0.25s;
+          -o-transition: 0.25s;
+          transition: 0.25s;
           font-size: 0.7em;
           display: inline-block;
           text-align: center;
@@ -366,9 +377,9 @@ ul.minical {
           margin: 0 10px 10px; }
           ul.minical li article section p.minical_clear a, ul.minical li article section .minical_today a {
             text-decoration: none;
-            color: #00b27f; }
+            color: #666666; }
             ul.minical li article section p.minical_clear a:hover, ul.minical li article section .minical_today a:hover {
-              color: #00996d; }
+              color: #00b27f; }
         ul.minical li article section table {
           width: 100%;
           color: inherit;

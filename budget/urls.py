@@ -32,5 +32,5 @@ urlpatterns = [
     url('^login/$', auth_views.login, {
         'template_name': 'budget/login.html',
         'redirect_field_name': 'next'}, name="login"),
-    url('^logout/$', auth_views.logout, {'next_page': '/budget/transactions'}, name="logout"),
+    url('^logout/$', auth_views.logout, {'next_page': '/transactions/'}, name="logout"),
 ]

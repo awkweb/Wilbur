@@ -34,7 +34,7 @@ class BudgetAddForm(forms.Form):
         self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:add-budget'
-        self.helper.attrs = {'next': '/budget/budgets/'}
+        self.helper.attrs = {'next': '/budgets/'}
         self.helper.layout = Layout(
                 'category',
                 'amount',
@@ -71,7 +71,7 @@ class BudgetEditForm(forms.Form):
         self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:edit-budget'
-        self.helper.attrs = {'next': '/budget/budgets/'}
+        self.helper.attrs = {'next': '/budgets/'}
         self.helper.layout = Layout(
                 'category',
                 'amount',
@@ -119,7 +119,7 @@ class TransactionAddForm(forms.Form):
         self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:add-transaction'
-        self.helper.attrs = {'next': '/budget/transactions/'}
+        self.helper.attrs = {'next': '/transactions/'}
         self.helper.layout = Layout(
                 'budget',
                 'amount',
@@ -173,7 +173,7 @@ class TransactionEditForm(forms.Form):
         self.helper.form_class = 'form-crispy'
         self.helper.form_method = 'post'
         self.helper.form_action = 'budget:edit-transaction'
-        self.helper.attrs = {'next': '/budget/transactions/'}
+        self.helper.attrs = {'next': '/transactions/'}
         self.helper.layout = Layout(
                 'budget',
                 'amount',

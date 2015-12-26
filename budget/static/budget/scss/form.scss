@@ -25,9 +25,10 @@
   @include vendor-prefix(transition, 0.25s);
   @include vendor-prefix(appearance, none);
   @include vendor-prefix(border-radius, 4px);
+  margin-top: 3px;
   width: 100%;
   padding: 6px 14px;
-  border: 1px solid $gray-lighter;
+  border: 2px solid $gray-lighter;
   outline: 0;
   font-size: 1rem;
   color: $gray-dark;

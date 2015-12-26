@@ -112,4 +112,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# Other variables
+
+LOGIN_REDIRECT_URL = '/transactions/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

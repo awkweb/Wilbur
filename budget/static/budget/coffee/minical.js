@@ -59,7 +59,7 @@
       $li = $("<li />", {
         "class": "minical_" + (date_tools.getMonthName(date).toLowerCase())
       });
-      $li.html("<article> <header> <h1>" + (date_tools.getMonthName(date)) + " " + (date.getFullYear()) + "</h1> <a href='#' class='minical_prev'>&larr;</a> <a href='#' class='minical_next'>&rarr;</a> </header> <section> <table> <thead> <tr> </tr> </thead> <tbody> </tbody> </table> </section> </article>");
+      $li.html("<article> <header> <h1>" + (date_tools.getMonthName(date)) + " " + (date.getFullYear()) + "</h1> <a href='#' class='minical_prev'>&lsaquo;</a> <a href='#' class='minical_next'>&rsaquo;</a> </header> <section> <table> <thead> <tr> </tr> </thead> <tbody> </tbody> </table> </section> </article>");
       $li.find('thead').append(this.dayHeader());
       return $li;
     }
@@ -78,7 +78,7 @@
     read_only: true,
     show_clear_link: true,
     show_today_link: true,
-    add_timezone_offset: false,
+    add_timezone_offset: true,
     appendCalendarTo: function() {
       return $('body');
     },
