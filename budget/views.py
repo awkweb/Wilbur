@@ -10,7 +10,6 @@ from django.views.generic.base import TemplateView
 from django.core.context_processors import csrf
 
 from jsonview.decorators import json_view
-from pytz import timezone
 from crispy_forms.utils import render_crispy_form
 
 from .models import Budget, Transaction

@@ -2,7 +2,7 @@ from django import forms
 from django.forms.widgets import DateInput
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML, Field
-from crispy_forms.bootstrap import StrictButton, PrependedAppendedText
+from crispy_forms.bootstrap import StrictButton
 
 from .models import Budget, Category
 
@@ -11,7 +11,7 @@ class BudgetAddForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
             queryset=Category.objects.all(),
-            empty_label='',
+            empty_label='Select',
             required=True,
     )
     amount = forms.DecimalField(
@@ -37,6 +37,13 @@ class BudgetAddForm(forms.Form):
         self.helper.attrs = {'next': '/budgets/'}
         self.helper.layout = Layout(
                 'category',
+                HTML("""
+                <script>
+                    $(document).ready(function() {
+                        $('select').niceSelect();
+                    });
+                </script>
+                """),
                 'amount',
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
@@ -48,7 +55,7 @@ class BudgetEditForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
             queryset=Category.objects.all(),
-            empty_label='',
+            empty_label='Select',
             required=True,
     )
     amount = forms.DecimalField(
@@ -74,6 +81,13 @@ class BudgetEditForm(forms.Form):
         self.helper.attrs = {'next': '/budgets/'}
         self.helper.layout = Layout(
                 'category',
+                HTML("""
+                <script>
+                    $(document).ready(function() {
+                        $('select').niceSelect();
+                    });
+                </script>
+                """),
                 'amount',
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
@@ -88,7 +102,7 @@ class TransactionAddForm(forms.Form):
     budget = forms.ModelChoiceField(
             label='Budget',
             queryset=None,
-            empty_label='',
+            empty_label='Select',
             required=True,
     )
     description = forms.CharField(
@@ -122,6 +136,13 @@ class TransactionAddForm(forms.Form):
         self.helper.attrs = {'next': '/transactions/'}
         self.helper.layout = Layout(
                 'budget',
+                HTML("""
+                <script>
+                    $(document).ready(function() {
+                        $('select').niceSelect();
+                    });
+                </script>
+                """),
                 'amount',
                 'transaction_date',
                 HTML("""
@@ -142,7 +163,7 @@ class TransactionEditForm(forms.Form):
     budget = forms.ModelChoiceField(
             label='Budget',
             queryset=None,
-            empty_label='',
+            empty_label='Select',
             required=True,
     )
     description = forms.CharField(
@@ -176,6 +197,13 @@ class TransactionEditForm(forms.Form):
         self.helper.attrs = {'next': '/transactions/'}
         self.helper.layout = Layout(
                 'budget',
+                HTML("""
+                <script>
+                    $(document).ready(function() {
+                        $('select').niceSelect();
+                    });
+                </script>
+                """),
                 'amount',
                 'transaction_date',
                 HTML("""

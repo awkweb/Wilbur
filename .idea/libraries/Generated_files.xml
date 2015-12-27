@@ -2,11 +2,18 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/budget/static/budget/coffee/minical.js" />
+        <item url="file://$PROJECT_DIR$/budget/static/budget/js/niceselect.js" />
+        <item url="file://$PROJECT_DIR$/budget/static/budget/js/minical.js" />
+        <item url="file://$PROJECT_DIR$/budget/static/budget/js/validator.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/budget/static/budget/coffee/validator.js" />
       <root url="file://$PROJECT_DIR$/budget/static/budget/coffee/minical.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/coffee/minical.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/js/niceselect.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/js/minical.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/js/validator.js" />
     </CLASSES>
     <SOURCES />
   </library>

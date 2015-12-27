@@ -1,24 +1,18 @@
 // styles for jQuery Minical v0.9
 
-$mc_font_family: $open-sans !default;
-$mc_background: $white !default;
-$mc_border: $gray-lighter !default;
-$mc_text: $gray-dark !default;
-$mc_highlight: $green !default;
-
 ul.minical {
+  @include vendor-prefix(border-radius, 4px);
   position: absolute;
   display: none;
-  color: $mc_text;
-  background: $mc_background;
-  border: 1px solid $mc_border;
+  color: $gray-dark;
+  background: $white;
   margin: 0;
   padding: 0;
   text-shadow: none;
   width: 16em;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
   z-index: 9327;
-  font-family: $mc_font_family;
+  font-family: $open-sans;
   font-size: 1.1em;
   &.minical-inline {
     @include vendor-prefix(box-shadow, none);
@@ -40,9 +34,8 @@ ul.minical {
       float: left;
       width: 100%;
       header {
-        background: transparentize($mc_border, 0.5);
-        color: $mc_text;
-        border: 1px solid $mc_border;
+        background: $gray-lightest;
+        color: $gray-dark;
         padding: 2px 0;
         position: relative;
         margin: 0 -9px;
@@ -52,7 +45,7 @@ ul.minical {
           text-align: center;
           padding: 0.2em 0;
           margin: 0;
-          font-family: $mc_font_family;
+          font-family: $open-sans;
         }
         a {
           @include vendor-prefix(transition, .25s);
@@ -60,10 +53,10 @@ ul.minical {
           position: absolute;
           top: 35%;
           margin-top: -0.6em;
-          color: $mc_text;
+          color: $gray;
           font-size: 1.75rem;
           &:hover {
-            color: $mc_highlight;
+            color: $green;
           }
           &.minical_prev {
             left: 15px;
@@ -87,9 +80,9 @@ ul.minical {
           margin: 0 10px 10px;
           a {
             text-decoration: none;
-            color: $mc_text;
+            color: $gray;
             &:hover {
-              color: $mc_highlight;
+              color: $green;
             }
           }
         }
@@ -105,7 +98,7 @@ ul.minical {
                 text-align: center;
                 font-size: 0.7em;
                 font-weight: bold;
-                color: $mc_text;
+                color: $gray-dark;
               }
             }
           }
@@ -117,32 +110,32 @@ ul.minical {
                 font-size: 0.9em;
                 a {
                   display: block;
-                  border: 1px solid transparentize($mc_border, 0.5);
-                  color: $mc_text;
+                  border: 1px solid transparentize($gray-lighter, 0.5);
+                  color: $gray-dark;
                   padding: 0.1em 0.3em;
                   text-decoration: none;
                 }
                 &.minical_highlighted a {
-                  border-color: transparentize($mc_highlight, 0.5);
-                  color: $mc_text;
+                  border-color: $green;
+                  color: $gray-dark;
                 }
                 &.minical_selected a {
-                  border-color: $mc_highlight;
-                  color: $mc_text;
+                  border-color: $green;
+                  color: $gray-dark;
                 }
                 &.minical_past_month a,
                 &.minical_future_month a {
-                  color: transparentize($mc_text, 0.5);
+                  color: transparentize($gray-dark, 0.5);
                 }
                 &.minical_today_date a {
-                  border-color: $mc_highlight;
-                  background: $mc_highlight;
-                  color: $mc_background;
+                  border-color: $green;
+                  background: $green;
+                  color: $white;
                 }
                 &.minical_disabled a {
-                  color: transparentize($mc_text, 0.5);
-                  background: transparentize($mc_border, 0.8);
-                  border-color: transparentize($mc_border, 0.8);
+                  color: transparentize($gray-dark, 0.5);
+                  background: transparentize($gray-lighter, 0.8);
+                  border-color: transparentize($gray-lighter, 0.8);
                 }
               }
             }

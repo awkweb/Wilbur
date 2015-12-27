@@ -21,18 +21,18 @@
                         <p class="pull-right">${{ budget.amount_left|floatformat:0|intcomma }} left</p>
                     </div>
                     <div class="progress-background">
+                        {% if budget.percent > 0 %}
                         <div class="progress-bar
-                        {% if budget.percent == 0 %}progress-empty
-                        {% elif budget.percent > 0 and budget.percent <= 10 %}progress-green-small
-                        {% elif budget.percent < 85 and budget.percent > 10 %}progress-green
+                        {% if budget.percent < 85 and budget.percent > 0 %}progress-green
                         {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
                         {% else %}progress-red{% endif %}"
                              role="progressbar" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100"
-                             style="width: {% if budget.percent == 0 %}100{% elif budget.percent <= 100 and budget.percent > 0 %}{{ budget.percent }}{% else %}100{% endif %}%;">
-                            ${{ budget.amount_spent|floatformat:0|intcomma }} of ${{ budget.amount|floatformat:0|intcomma }}
+                             style="width: {% if budget.percent <= 100 %}{{ budget.percent }}{% else %}100{% endif %}%;">
                         </div>
+                        {% endif %}
                     </div>
                     <div class="progress-footer">
+                        <p class="pull-left">${{ budget.amount_spent|floatformat:0|intcomma }} of ${{ budget.amount|floatformat:0|intcomma }}</p>
                         <ul class="pull-right">
                             <li><a href="{% url 'budget:edit-budget' budget.id %}">Edit</a></li>
                             <li><a href="#">View Transactions</a></li>

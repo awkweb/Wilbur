@@ -68,7 +68,7 @@
   minical = {
     offset: {
       x: 0,
-      y: 5
+      y: 2
     },
     inline: false,
     trigger: null,
