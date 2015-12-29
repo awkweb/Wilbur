@@ -10,7 +10,7 @@ from .models import Budget, Category
 class BudgetAddForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
-            queryset=Category.objects.all(),
+            queryset=None,
             empty_label='Select',
             required=True,
     )
@@ -29,6 +29,9 @@ class BudgetAddForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(BudgetAddForm, self).__init__(*args, **kwargs)
+        self.fields['category'].queryset = self.initial['categories']
+        self.fields['category'].to_field_name = 'id'
+
         self.helper = FormHelper()
         self.helper.form_id = 'form-grab'
         self.helper.form_class = 'form-crispy'
@@ -54,7 +57,7 @@ class BudgetAddForm(forms.Form):
 class BudgetEditForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
-            queryset=Category.objects.all(),
+            queryset=None,
             empty_label='Select',
             required=True,
     )
@@ -73,6 +76,9 @@ class BudgetEditForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(BudgetEditForm, self).__init__(*args, **kwargs)
+        self.fields['category'].queryset = self.initial['categories']
+        self.fields['category'].to_field_name = 'id'
+
         self.helper = FormHelper()
         self.helper.form_id = 'form-grab'
         self.helper.form_class = 'form-crispy'
@@ -119,7 +125,6 @@ class TransactionAddForm(forms.Form):
     )
     transaction_date = forms.DateField(
             label='Transaction Date',
-            widget=DateInput(attrs={'type': 'date'}),
             required=True,
     )
 
@@ -180,7 +185,6 @@ class TransactionEditForm(forms.Form):
     )
     transaction_date = forms.DateField(
             label='Transaction Date',
-            widget=DateInput(attrs={'type': 'date'}),
             required=True,
     )
 

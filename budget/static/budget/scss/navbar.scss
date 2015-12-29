@@ -35,6 +35,10 @@
     display: inline-block;
     font-family: $open-sans;
     margin-left: 2rem;
+
+    @media screen and (max-width: $small) {
+      margin-left: 1rem;
+    }
   }
 
   a {

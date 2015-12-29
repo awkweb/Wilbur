@@ -12,7 +12,7 @@ from django.core.context_processors import csrf
 from jsonview.decorators import json_view
 from crispy_forms.utils import render_crispy_form
 
-from .models import Budget, Transaction
+from .models import Category, Budget, Transaction
 from .forms import TransactionAddForm, TransactionEditForm, BudgetAddForm, BudgetEditForm
 
 
@@ -51,10 +51,13 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
 @login_required(login_url='/login/', redirect_field_name='next')
 @json_view
 def add_budget(request):
+    user = get_user_in_session(request.session)
+    categories = get_unused_categories_for_user(user)
+    data = {'categories': categories}
+
     if request.method == 'POST':
-        form = BudgetAddForm(request.POST)
+        form = BudgetAddForm(request.POST, initial=data)
         if form.is_valid():
-            user = get_user_in_session(request.session)
             category = form.cleaned_data['category']
             amount = form.cleaned_data['amount']
             description = form.cleaned_data['description']
@@ -71,7 +74,7 @@ def add_budget(request):
             'form_html': form_html,
         }
     else:
-        form = BudgetAddForm()
+        form = BudgetAddForm(initial=data)
         form.helper.form_action = reverse('budget:add-budget')
         return render(request, 'base_form.html', {
             'title': 'Add Budget',
@@ -83,11 +86,15 @@ def add_budget(request):
 @json_view
 def edit_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
+    user = get_user_in_session(request.session)
+    categories = get_unused_categories_for_user(user, budget.category)
     data = {
         'category': budget.category.id,
         'amount': budget.amount,
         'description': budget.description,
+        'categories': categories,
     }
+
     if request.method == 'POST':
         form = BudgetEditForm(request.POST, initial=data)
         if form.is_valid():
@@ -112,7 +119,7 @@ def edit_budget(request, budget_id):
             'budget_id': budget.id,
         }
     else:
-        form = BudgetEditForm(data)
+        form = BudgetEditForm(data, initial={'categories': categories})
         form.helper.form_action = reverse('budget:edit-budget', kwargs={'budget_id': budget.id})
         return render(request, 'base_form.html', {
             'title': 'Edit Budget',
@@ -259,6 +266,17 @@ def get_budgets_for_user(user):
             return None
         else:
             return budgets
+
+
+def get_unused_categories_for_user(user, current_budget=None):
+    budgets = get_budgets_for_user(user)
+    budget_categories = []
+    for budget in budgets:
+        budget_categories.append(budget.category.id)
+    if current_budget:
+        budget_categories.remove(current_budget.id)
+    categories = Category.objects.exclude(pk__in=budget_categories)
+    return categories
 
 
 def get_paginator_for_list(request, array_list, max_per_page):
