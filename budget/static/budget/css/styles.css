@@ -100,8 +100,7 @@ h1, h2, h3, h4, h5, h6, p {
   color: #666666;
   font-size: .9rem; }
   .button-toolbar.active:hover {
-    border-color: #ababab;
-    background-color: #F9F9F9; }
+    border-color: #ababab; }
   .button-toolbar.disabled {
     opacity: .65;
     cursor: not-allowed; }
@@ -193,8 +192,7 @@ h1, h2, h3, h4, h5, h6, p {
     font-size: .9rem;
     font-weight: 600; }
     .form-control.small:hover {
-      border-color: #ababab;
-      background-color: #F9F9F9; }
+      border-color: #ababab; }
 
 .help-block > strong {
   font-size: .8rem;
@@ -220,7 +218,7 @@ h1, h2, h3, h4, h5, h6, p {
   font-size: 2rem;
   color: #00b27f; }
 
-.current {
+.on {
   border-bottom: 1px solid #00b27f;
   padding-bottom: 15px; }
 
@@ -538,7 +536,6 @@ select {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     margin-top: 4px;
-    margin-left: -2px;
     max-height: 200px;
     opacity: 0;
     overflow: auto;

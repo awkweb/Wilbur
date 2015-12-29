@@ -7,8 +7,8 @@
                 </div>
                 <div class="navbar-right">
                     <ul class="nav-inline">
-                        <li {% if title == 'Budgets' %}class="current"{% endif %}><a href="{% url 'budget:budgets' %}">Budgets</a></li>
-                        <li {% if title == 'Transactions' %}class="current"{% endif %}><a href="{% url 'budget:transactions' %}">Transactions</a></li>
+                        <li {% if title == 'Budgets' %}class="on"{% endif %}><a href="{% url 'budget:budgets' %}">Budgets</a></li>
+                        <li {% if title == 'Transactions' %}class="on"{% endif %}><a href="{% url 'budget:transactions' %}">Transactions</a></li>
                         <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
                     </ul>
                 </div>
