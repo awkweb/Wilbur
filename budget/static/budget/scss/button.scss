@@ -31,24 +31,20 @@
   border: 1px solid $gray-lighter;
   height: inherit;
   padding: 6px 15px;
-  background-color: $gray-lightest;
   color: $gray-dark;
   font-size: .9rem;
-}
 
-.button-toolbar-active {
-  @extend .button-toolbar;
-
-  &:hover {
-    border-color: $gray-light;
-    background-color: $gray-lighter;
+  &.active {
+    &:hover {
+      border-color: $gray-light;
+      background-color: $gray-lightest;
+    }
   }
-}
 
-.button-toolbar-disabled {
-  @extend .button-toolbar;
-  opacity: .65;
-  cursor: not-allowed;
+  &.disabled {
+    opacity: .65;
+    cursor: not-allowed;
+  }
 }
 
 .button-submit {

@@ -5,6 +5,7 @@
 
 .form-group {
   margin-bottom: 1rem;
+  min-height: 63px;
 }
 
 .asteriskField {
@@ -35,6 +36,20 @@
 
   &:focus {
     border-color: $gray-dark;
+  }
+
+  &.small {
+    margin: 1rem 0;
+    height: 10%;
+    border-width: 1px;
+    width: auto;
+    font-size: .9rem;
+    font-weight: 600;
+
+    &:hover {
+      border-color: $gray-light;
+      background-color: $gray-lightest;
+    }
   }
 }
 

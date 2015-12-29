@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6, p {
   min-height: .01%;
   overflow-x: auto; }
 
-.button, .button-login, .button-toolbar, .button-toolbar-active, .button-toolbar-disabled, .button-submit, .button-cancel, .button-delete {
+.button, .button-login, .button-toolbar, .button-submit, .button-cancel, .button-delete {
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
   -ms-transition: 0.25s;
@@ -91,23 +91,20 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: #00b27f;
     border-color: #00b27f; }
 
-.button-toolbar, .button-toolbar-active, .button-toolbar-disabled {
+.button-toolbar {
   margin: 1rem 0;
   display: inline-block;
   border: 1px solid #E5E5EA;
   height: inherit;
   padding: 6px 15px;
-  background-color: #F9F9F9;
   color: #666666;
   font-size: .9rem; }
-
-.button-toolbar-active:hover {
-  border-color: #ababab;
-  background-color: #E5E5EA; }
-
-.button-toolbar-disabled {
-  opacity: .65;
-  cursor: not-allowed; }
+  .button-toolbar.active:hover {
+    border-color: #ababab;
+    background-color: #F9F9F9; }
+  .button-toolbar.disabled {
+    opacity: .65;
+    cursor: not-allowed; }
 
 .button-submit {
   border: 1px solid #00b27f;
@@ -145,7 +142,8 @@ h1, h2, h3, h4, h5, h6, p {
   color: #666666; }
 
 .form-group {
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  min-height: 63px; }
 
 .asteriskField {
   display: none; }
@@ -187,6 +185,16 @@ h1, h2, h3, h4, h5, h6, p {
   color: #666666; }
   .form-control:focus {
     border-color: #666666; }
+  .form-control.small {
+    margin: 1rem 0;
+    height: 10%;
+    border-width: 1px;
+    width: auto;
+    font-size: .9rem;
+    font-weight: 600; }
+    .form-control.small:hover {
+      border-color: #ababab;
+      background-color: #F9F9F9; }
 
 .help-block > strong {
   font-size: .8rem;
@@ -212,7 +220,7 @@ h1, h2, h3, h4, h5, h6, p {
   font-size: 2rem;
   color: #00b27f; }
 
-.active {
+.current {
   border-bottom: 1px solid #00b27f;
   padding-bottom: 15px; }
 
@@ -486,14 +494,13 @@ select {
   display: none; }
 
 .nice-select {
-  margin-bottom: 1rem;
   -webkit-tap-highlight-color: transparent;
   clear: both;
   cursor: pointer;
   display: block;
   float: left;
   outline: none;
-  padding-right: 22px;
+  padding-right: 28px;
   position: relative;
   text-align: left !important;
   user-select: none;
@@ -532,8 +539,9 @@ select {
     box-sizing: border-box;
     margin-top: 4px;
     margin-left: -2px;
+    max-height: 200px;
     opacity: 0;
-    overflow: hidden;
+    overflow: auto;
     padding: 0;
     pointer-events: none;
     position: absolute;
