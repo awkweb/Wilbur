@@ -9,7 +9,7 @@
 
     <section class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <a href="{% url 'budget:add-budget' %}" class="button-toolbar active">Add Budget</a>
+            <a href="{% url 'wilbur:add-budget' %}" class="button-toolbar active">Add Budget</a>
             <select class="form-control small pull-right">
                 <option value="12/15">December 2015</option>
                 <option value="11/15">November 2015</option>
@@ -49,7 +49,7 @@
                     <div class="progress-footer">
                         <p class="pull-left">${{ budget.amount_spent|floatformat:0|intcomma }} of ${{ budget.amount|floatformat:0|intcomma }}</p>
                         <ul class="pull-right">
-                            <li><a href="{% url 'budget:edit-budget' budget.id %}">Edit</a></li>
+                            <li><a href="{% url 'wilbur:edit-budget' budget.id %}">Edit</a></li>
                             {#<li><a href="#">View Transactions</a></li>#}
                         </ul>
                     </div>

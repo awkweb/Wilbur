@@ -75,7 +75,7 @@ def add_budget(request):
         }
     else:
         form = BudgetAddForm(initial=data)
-        form.helper.form_action = reverse('budget:add-budget')
+        form.helper.form_action = reverse('wilbur:add-budget')
         return render(request, 'base_form.html', {
             'title': 'Add Budget',
             'form': form,
@@ -120,7 +120,7 @@ def edit_budget(request, budget_id):
         }
     else:
         form = BudgetEditForm(data, initial={'categories': categories})
-        form.helper.form_action = reverse('budget:edit-budget', kwargs={'budget_id': budget.id})
+        form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget.id})
         return render(request, 'base_form.html', {
             'title': 'Edit Budget',
             'form': form,
@@ -132,7 +132,7 @@ def edit_budget(request, budget_id):
 def delete_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
     budget.delete()
-    return redirect('budget:budgets')
+    return redirect('wilbur:budgets')
 
 
 class TransactionsView(LoginRequiredMixin, TemplateView):
@@ -211,6 +211,7 @@ def edit_transaction(request, transaction_id):
     }
     if request.method == 'POST':
         form = TransactionEditForm(request.POST, initial=data)
+        print(form)
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
@@ -236,7 +237,7 @@ def edit_transaction(request, transaction_id):
         }
     else:
         form = TransactionEditForm(data, initial={'user': user})
-        form.helper.form_action = reverse('budget:edit-transaction', kwargs={'transaction_id': transaction.id})
+        form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction.id})
         return render(request, 'base_form.html', {
             'title': 'Edit Transaction',
             'form': form,
@@ -248,7 +249,7 @@ def edit_transaction(request, transaction_id):
 def delete_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     transaction.delete()
-    return redirect('budget:transactions')
+    return redirect('wilbur:transactions')
 
 
 def get_user_in_session(session):

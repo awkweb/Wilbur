@@ -23,34 +23,6 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: $open-sans;
 }
 
-.table {
-  border-spacing: 0;
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 100%;
-
-  td, th {
-    padding: .25rem .75rem;
-    line-height: 1.75;
-    text-align: left;
-    color: $gray-dark;
-  }
-
-  thead > tr > th {
-    vertical-align: bottom;
-    border-bottom: 2px solid $gray-lighter;
-  }
-
-  tbody > tr > td {
-    vertical-align: top;
-    border-top: 1px solid $gray-lighter;
-  }
-
-  tbody tr:nth-child(odd) {
-    background: $gray-lightest;
-  }
-}
-
 .row {
   clear: both;
 }
@@ -61,14 +33,4 @@ h1, h2, h3, h4, h5, h6, p {
 
 .pull-right {
   float: right !important;
-}
-
-.bordered {
-  @include vendor-prefix(border-radius, 4px);
-  border: 1px solid $gray-lighter;
-}
-
-.responsive {
-  min-height: .01%;
-  overflow-x: auto;
 }

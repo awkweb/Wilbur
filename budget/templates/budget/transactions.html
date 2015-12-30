@@ -8,7 +8,7 @@
 
     <section class="row">
         <div class="col-sm-10 col-sm-offset-1">
-            <a href="{% url 'budget:add-transaction' %}" class="button-toolbar active">Add Transaction</a>
+            <a href="{% url 'wilbur:add-transaction' %}" class="button-toolbar active">Add Transaction</a>
             <select class="form-control small pull-right">
                 <option value="12/15">December 2015</option>
                 <option value="11/15">November 2015</option>
@@ -41,7 +41,7 @@
                     {% for transaction in transactions %}
                         <tr>
                             <td>
-                                <a href="{% url 'budget:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }}</a>
+                                <a href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }}</a>
                             </td>
                             <td>{{ transaction.budget.category.name|capfirst }}</td>
                             <td>{{ transaction.amount|intcomma }}</td>

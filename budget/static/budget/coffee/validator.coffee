@@ -1,5 +1,5 @@
-$('#form-submit').click (event) ->
-  event.preventDefault()
+$('#form-submit').click (e) ->
+  e.preventDefault()
   form = $('#form-grab')
   $.ajax
     url: form.attr('action')
@@ -15,4 +15,4 @@ $('#form-submit').click (event) ->
     error: ->
       form.find('.error-message').show()
       return
-  return false
+  return

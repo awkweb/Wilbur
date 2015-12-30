@@ -38,9 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'budget',
-    'pytz',
     'django.contrib.humanize',
     'crispy_forms',
+    'mathfilters',
 )
 
 MIDDLEWARE_CLASSES = (

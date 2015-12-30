@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="navbar-left">
-                    <a class="brand" href="{% url 'budget:transactions' %}">Wilbur</a>
+                    <a class="brand" href="{% url 'wilbur:transactions' %}">Wilbur</a>
                 </div>
                 <div class="navbar-right">
                     <ul class="nav-inline">
-                        <li {% if title == 'Budgets' %}class="on"{% endif %}><a href="{% url 'budget:budgets' %}">Budgets</a></li>
-                        <li {% if title == 'Transactions' %}class="on"{% endif %}><a href="{% url 'budget:transactions' %}">Transactions</a></li>
-                        <li><a href="{% url 'budget:logout' %}">Log Out</a></li>
+                        <li {% if title == 'Budgets' %}class="on"{% endif %}><a href="{% url 'wilbur:budgets' %}">Budgets</a></li>
+                        <li {% if title == 'Transactions' %}class="on"{% endif %}><a href="{% url 'wilbur:transactions' %}">Transactions</a></li>
+                        <li><a href="{% url 'wilbur:logout' %}">Log Out</a></li>
                     </ul>
                 </div>
             </div>
