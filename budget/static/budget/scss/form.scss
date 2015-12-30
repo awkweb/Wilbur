@@ -34,6 +34,10 @@
   font: 1rem $open-sans;
   color: $gray-dark;
 
+  &:hover {
+    border-color: $gray-light;
+  }
+
   &:focus {
     border-color: $gray-dark;
   }
