@@ -11,6 +11,7 @@ from django.core.context_processors import csrf
 
 from jsonview.decorators import json_view
 from crispy_forms.utils import render_crispy_form
+from crispy_forms.layout import HTML
 
 from .models import Category, Budget, Transaction
 from .forms import TransactionAddForm, TransactionEditForm, BudgetAddForm, BudgetEditForm
@@ -67,8 +68,9 @@ def add_budget(request):
             return {
                 'success': True,
             }
-        request_context = RequestContext(request)
-        form_html = render_crispy_form(form, context=request_context)
+        context = {}
+        context.update(csrf(request))
+        form_html = render_crispy_form(form, context=context)
         return {
             'success': False,
             'form_html': form_html,
@@ -111,16 +113,19 @@ def edit_budget(request, budget_id):
             return {
                 'success': True,
             }
-        request_context = RequestContext(request)
-        form_html = render_crispy_form(form, context=request_context)
+        context = {
+            'budget_id': budget_id,
+        }
+        context.update(csrf(request))
+        form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
+        form_html = render_crispy_form(form, context=context)
         return {
             'success': False,
             'form_html': form_html,
-            'budget_id': budget.id,
         }
     else:
         form = BudgetEditForm(data, initial={'categories': categories})
-        form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget.id})
+        form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
         return render(request, 'base_form.html', {
             'title': 'Edit Budget',
             'form': form,
@@ -207,11 +212,10 @@ def edit_transaction(request, transaction_id):
         'description': transaction.description,
         'amount': transaction.amount,
         'transaction_date': transaction.transaction_date,
-        'user': user
+        'user': user,
     }
     if request.method == 'POST':
         form = TransactionEditForm(request.POST, initial=data)
-        print(form)
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
@@ -228,16 +232,20 @@ def edit_transaction(request, transaction_id):
             return {
                 'success': True,
             }
-        request_context = RequestContext(request)
-        form_html = render_crispy_form(form, context=request_context)
+        context = {
+            'transaction_id': transaction_id,
+        }
+        context.update(csrf(request))
+        form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
+        form_html = render_crispy_form(form, context=context)
         return {
             'success': False,
             'form_html': form_html,
             'transaction_id': transaction.id,
         }
     else:
-        form = TransactionEditForm(data, initial={'user': user})
-        form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction.id})
+        form = TransactionEditForm(data, initial={'user': user,})
+        form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
         return render(request, 'base_form.html', {
             'title': 'Edit Transaction',
             'form': form,

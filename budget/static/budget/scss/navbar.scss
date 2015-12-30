@@ -31,13 +31,18 @@
 .nav-inline {
   padding: 1.35rem 0;
 
+  li:first-child {
+    margin-left: 0;
+  }
+
   li {
     display: inline-block;
     font-family: $open-sans;
     margin-left: 2rem;
+    list-style-type: none;
 
     @media screen and (max-width: $small) {
-      margin-left: 1rem;
+      margin-left: .75rem;
     }
   }
 

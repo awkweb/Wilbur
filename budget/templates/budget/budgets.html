@@ -31,7 +31,7 @@
             {% for budget in budget_list %}
                 <div class="progress">
                     <div class="progress-title">
-                        <p class="pull-left">{{ budget.name|capfirst }} <span>{{ budget.description|lower }}</span></p>
+                        <p class="pull-left">{{ budget.name|capfirst }} <span class="description">{{ budget.description }}</span></p>
                         <p class="pull-right">${{ budget.amount_left|abs|floatformat:0|intcomma }}
                             {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</p>
                     </div>
