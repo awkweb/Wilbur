@@ -12,15 +12,14 @@
                 {% csrf_token %}
                 <div class="form-section">
                     <label for="inputUsername">Username</label>
-                    <input type="text" name="username" class="form-input" id="username" placeholder="username" autofocus>
+                    <input type="text" name="username" class="form-input" id="inputUsername"autofocus>
                 </div>
                 <div class="form-section">
                     <label for="inputPassword">Password</label>
-                    <input type="password" name="password" class="form-input" id="exampleInputPassword1" placeholder="password">
+                    <input type="password" name="password" class="form-input" id="inputPassword">
                 </div>
                 <input type="hidden" name="next" value="{{ next }}"/>
                 <button type="submit" class="button-login">Log In</button>
-                <a class="request" href="#">or Sign Up</a>
             </form>
         </div>
     </div>

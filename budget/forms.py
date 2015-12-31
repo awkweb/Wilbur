@@ -23,7 +23,7 @@ class BudgetAddForm(forms.Form):
     )
     description = forms.CharField(
             label='Description',
-            max_length=100,
+            max_length=50,
             required=False,
     )
 
@@ -75,7 +75,7 @@ class BudgetEditForm(forms.Form):
     )
     description = forms.CharField(
             label='Description',
-            max_length=100,
+            max_length=50,
             required=False,
     )
 
@@ -104,12 +104,14 @@ class BudgetEditForm(forms.Form):
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
-                <a href="{% url 'wilbur:delete-budget' budget_id %}" class="button-delete pull-right" role="button">Delete</a>
+                <a href="{% url 'wilbur:delete-budget' budget_id %}" id="confirm" class="button-delete pull-right"
+                 data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
                 """),
                 HTML("""
                 {% load staticfiles %}
                 <script src="{% static 'budget/js/niceselect.js' %}"></script>
                 <script src="{% static 'budget/js/validator.js' %}"></script>
+                <script src="{% static 'budget/js/confirm.js' %}"></script>
                 """)
         )
 
@@ -123,7 +125,7 @@ class TransactionAddForm(forms.Form):
     )
     description = forms.CharField(
             label='Description',
-            max_length=100,
+            max_length=75,
             required=False,
     )
     amount = forms.DecimalField(
@@ -188,7 +190,7 @@ class TransactionEditForm(forms.Form):
     )
     description = forms.CharField(
             label='Description',
-            max_length=100,
+            max_length=75,
             required=False,
     )
     amount = forms.DecimalField(
@@ -235,11 +237,13 @@ class TransactionEditForm(forms.Form):
                 HTML("""
                 <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
-                <a href="{% url 'wilbur:delete-transaction' transaction_id %}" class="button-delete pull-right" role="button">Delete</a>
+                <a href="{% url 'wilbur:delete-transaction' transaction_id %}" id="confirm" class="button-delete pull-right"
+                 data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
                 """),
                 HTML("""
                 {% load staticfiles %}
                 <script src="{% static 'budget/js/niceselect.js' %}"></script>
                 <script src="{% static 'budget/js/validator.js' %}"></script>
+                <script src="{% static 'budget/js/confirm.js' %}"></script>
                 """)
         )

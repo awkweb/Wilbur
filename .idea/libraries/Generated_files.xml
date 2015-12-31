@@ -5,15 +5,22 @@
         <item url="file://$PROJECT_DIR$/budget/static/budget/js/niceselect.js" />
         <item url="file://$PROJECT_DIR$/budget/static/budget/js/minical.js" />
         <item url="file://$PROJECT_DIR$/budget/static/budget/js/validator.js" />
+        <item url="file://$PROJECT_DIR$/budget/static/budget/js/delete.js" />
+        <item url="file://$PROJECT_DIR$/budget/static/budget/js/confirm.js" />
+        <item url="file://$PROJECT_DIR$/budget/static/budget/js/jquerywatch.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/budget/static/budget/coffee/validator.js" />
       <root url="file://$PROJECT_DIR$/budget/static/budget/coffee/minical.js" />
       <root url="file://$PROJECT_DIR$/budget/static/budget/coffee/minical.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/js/jquerywatch.js" />
       <root url="file://$PROJECT_DIR$/budget/static/budget/js/niceselect.js" />
       <root url="file://$PROJECT_DIR$/budget/static/budget/js/minical.js" />
       <root url="file://$PROJECT_DIR$/budget/static/budget/js/validator.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/js/delete.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/js/confirm.js" />
+      <root url="file://$PROJECT_DIR$/budget/static/budget/js/jquerywatch.js" />
     </CLASSES>
     <SOURCES />
   </library>

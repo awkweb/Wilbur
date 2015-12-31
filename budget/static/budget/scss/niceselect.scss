@@ -23,6 +23,8 @@ select {
 
   // Arrow
   &:after {
+    @include vendor-prefix(transition, all 0.15s ease-in-out);
+    @include vendor-prefix(transform, rotate(45deg));
     border-bottom: 2px solid $gray;
     border-right: 2px solid $gray;
     content: '';
@@ -34,14 +36,12 @@ select {
     right: 12px;
     top: 50%;
     transform-origin: 66% 66%;
-    transform: rotate(45deg);
-    transition: all 0.15s ease-in-out;
     width: 5px;
   }
 
   &.open {
     &:after {
-      transform: rotate(-135deg);
+      @include vendor-prefix(transform, rotate(-135deg));
     }
     .list {
       opacity: 1;

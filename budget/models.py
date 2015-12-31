@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=75)
+    name = models.CharField(max_length=25)
     creation_date = models.DateField()
 
     def __str__(self):
@@ -14,7 +14,7 @@ class Budget(models.Model):
     user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.CharField(max_length=100, blank=True)
+    description = models.CharField(max_length=50, blank=True)
     creation_date = models.DateField()
 
     def __str__(self):
@@ -37,7 +37,7 @@ class Budget(models.Model):
 class Transaction(models.Model):
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.CharField(max_length=100, blank=True)
+    description = models.CharField(max_length=75, blank=True)
     transaction_date = models.DateField()
     creation_date = models.DateField()
 
