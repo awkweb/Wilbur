@@ -5,13 +5,15 @@ from . import views
 
 urlpatterns = [
     url(r'^budgets/$', views.BudgetsView.as_view(), name='budgets'),
-    url(r'^budgets/add/$', views.add_budget, name='add-budget'),
-    url(r'^budgets/edit/(?P<budget_id>[0-9]+)/$', views.edit_budget, name='edit-budget'),
+    url(r'^budgets/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.BudgetsView.as_view(), name='budgets-date'),
+    url(r'^budgets/add/$', views.BudgetsAddView.as_view(), name='add-budget'),
+    url(r'^budgets/edit/(?P<budget_id>[0-9]+)/$', views.BudgetsEditView.as_view(), name='edit-budget'),
     url(r'^budgets/delete/(?P<budget_id>[0-9]+)/$', views.delete_budget, name='delete-budget'),
 
     url(r'^transactions/$', views.TransactionsView.as_view(), name='transactions'),
-    url(r'^transactions/add/$', views.add_transaction, name='add-transaction'),
-    url(r'^transactions/edit/(?P<transaction_id>[0-9]+)/$', views.edit_transaction, name='edit-transaction'),
+    url(r'^transactions/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.TransactionsView.as_view(), name='transactions-date'),
+    url(r'^transactions/add/$', views.TransactionsAddView.as_view(), name='add-transaction'),
+    url(r'^transactions/edit/(?P<transaction_id>[0-9]+)/$', views.TransactionsEditView.as_view(), name='edit-transaction'),
     url(r'^transactions/delete/(?P<transaction_id>[0-9]+)/$', views.delete_transaction, name='delete-transaction'),
 
     url('^login/$', auth_views.login, {

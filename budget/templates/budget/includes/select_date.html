@@ -1,0 +1,15 @@
+<form class="pull-right" action="{% url 'wilbur:transactions' %}" method="post">
+    <select class="form-control small">
+        <option data-year="2016" data-month="1">January 2016</option>
+        <option data-year="2015" data-month="12">December 2015</option>
+        <option data-year="2015" data-month="11">November 2015</option>
+    </select>
+</form>
+<script>
+    $(document).ready(function() {
+        $('select').niceSelect();
+    });
+</script>
+{% load staticfiles %}
+<script src="{% static 'budget/js/niceselect.js' %}"></script>
+<script src="{% static 'budget/js/selectdate.js' %}"></script>

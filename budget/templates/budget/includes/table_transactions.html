@@ -1,0 +1,53 @@
+{% load humanize %}
+
+<div id="table-transactions">
+    <section class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="bordered responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }}</a>
+                            </td>
+                            <td>{{ transaction.budget.category.name|capfirst }}</td>
+                            <td>{{ transaction.amount|intcomma }}</td>
+                            <td>{{ transaction.description }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <nav>
+                <ul class="pager">
+                    {% if transactions.has_other_pages %}
+                        <li class="previous">
+                            <a {% if transactions.has_previous %}href="?page={{ transactions.previous_page_number }}"{% endif %}
+                               class="button-toolbar {% if not transactions.has_previous %}disabled{% else %}active{% endif %}">
+                                <span aria-hidden="true">&lsaquo;</span> Newer</a>
+                        </li>
+                        <li class="next">
+                            <a {% if transactions.has_next %}href="?page={{ transactions.next_page_number }}"{% endif %}
+                               class="button-toolbar {% if not transactions.has_next %}disabled{% else %}active{% endif %}">
+                                Older <span aria-hidden="true">&rsaquo;</span></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

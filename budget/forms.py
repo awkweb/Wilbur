@@ -42,7 +42,6 @@ class BudgetAddForm(forms.Form):
                 HTML("""
                 {% load staticfiles %}
                 <script src="{% static 'budget/js/niceselect.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
                 """),
                 'category',
                 HTML("""
@@ -55,7 +54,11 @@ class BudgetAddForm(forms.Form):
                 'amount',
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
-                HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>""")
+                HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/validator.js' %}"></script>
+                """)
         )
 
 
@@ -94,8 +97,6 @@ class BudgetEditForm(forms.Form):
                 HTML("""
                 {% load staticfiles %}
                 <script src="{% static 'budget/js/niceselect.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
-                <script src="{% static 'budget/js/confirm.js' %}"></script>
                 """),
                 'category',
                 HTML("""
@@ -112,6 +113,11 @@ class BudgetEditForm(forms.Form):
                 HTML("""
                 <a href="{% url 'wilbur:delete-budget' budget_id %}" id="confirm" class="button-delete pull-right"
                  data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
+                """),
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/confirm.js' %}"></script>
+                <script src="{% static 'budget/js/validator.js' %}"></script>
                 """)
         )
 
@@ -156,7 +162,6 @@ class TransactionAddForm(forms.Form):
                 {% load staticfiles %}
                 <script src="{% static 'budget/js/niceselect.js' %}"></script>
                 <script src="{% static 'budget/js/minical.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
                 """),
                 'budget',
                 HTML("""
@@ -178,7 +183,11 @@ class TransactionAddForm(forms.Form):
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
-                <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>""")
+                <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/validator.js' %}"></script>
+                """)
         )
 
 
@@ -222,8 +231,6 @@ class TransactionEditForm(forms.Form):
                 {% load staticfiles %}
                 <script src="{% static 'budget/js/niceselect.js' %}"></script>
                 <script src="{% static 'budget/js/minical.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
-                <script src="{% static 'budget/js/confirm.js' %}"></script>
                 """),
                 'budget',
                 HTML("""
@@ -247,5 +254,10 @@ class TransactionEditForm(forms.Form):
                 HTML("""
                 <a href="{% url 'wilbur:delete-transaction' transaction_id %}" id="confirm" class="button-delete pull-right"
                  data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
+                """),
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/confirm.js' %}"></script>
+                <script src="{% static 'budget/js/validator.js' %}"></script>
                 """)
         )

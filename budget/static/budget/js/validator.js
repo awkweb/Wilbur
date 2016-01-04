@@ -4,6 +4,11 @@
     var form;
     e.preventDefault();
     form = $('#form-grab');
+    $.ajaxSetup({
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken')
+      }
+    });
     $.ajax({
       url: form.attr('action'),
       type: form.attr('method'),
