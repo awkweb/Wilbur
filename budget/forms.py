@@ -39,6 +39,11 @@ class BudgetAddForm(forms.Form):
         self.helper.form_action = 'wilbur:add-budget'
         self.helper.attrs = {'next': '/budgets/'}
         self.helper.layout = Layout(
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/niceselect.js' %}"></script>
+                <script src="{% static 'budget/js/validator.js' %}"></script>
+                """),
                 'category',
                 HTML("""
                 <script>
@@ -50,12 +55,7 @@ class BudgetAddForm(forms.Form):
                 'amount',
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
-                HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
-                HTML("""
-                {% load staticfiles %}
-                <script src="{% static 'budget/js/niceselect.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
-                """)
+                HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>""")
         )
 
 
@@ -91,6 +91,12 @@ class BudgetEditForm(forms.Form):
         self.helper.form_action = 'wilbur:edit-budget'
         self.helper.attrs = {'next': '/budgets/'}
         self.helper.layout = Layout(
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/niceselect.js' %}"></script>
+                <script src="{% static 'budget/js/validator.js' %}"></script>
+                <script src="{% static 'budget/js/confirm.js' %}"></script>
+                """),
                 'category',
                 HTML("""
                 <script>
@@ -106,12 +112,6 @@ class BudgetEditForm(forms.Form):
                 HTML("""
                 <a href="{% url 'wilbur:delete-budget' budget_id %}" id="confirm" class="button-delete pull-right"
                  data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
-                """),
-                HTML("""
-                {% load staticfiles %}
-                <script src="{% static 'budget/js/niceselect.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
-                <script src="{% static 'budget/js/confirm.js' %}"></script>
                 """)
         )
 
@@ -152,6 +152,12 @@ class TransactionAddForm(forms.Form):
         self.helper.form_action = 'wilbur:add-transaction'
         self.helper.attrs = {'next': '/transactions/'}
         self.helper.layout = Layout(
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/niceselect.js' %}"></script>
+                <script src="{% static 'budget/js/minical.js' %}"></script>
+                <script src="{% static 'budget/js/validator.js' %}"></script>
+                """),
                 'budget',
                 HTML("""
                 <script>
@@ -172,12 +178,7 @@ class TransactionAddForm(forms.Form):
                 'description',
                 StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
-                <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
-                HTML("""
-                {% load staticfiles %}
-                <script src="{% static 'budget/js/niceselect.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
-                """)
+                <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>""")
         )
 
 
@@ -217,6 +218,13 @@ class TransactionEditForm(forms.Form):
         self.helper.form_action = 'wilbur:edit-transaction'
         self.helper.attrs = {'next': '/transactions/'}
         self.helper.layout = Layout(
+                HTML("""
+                {% load staticfiles %}
+                <script src="{% static 'budget/js/niceselect.js' %}"></script>
+                <script src="{% static 'budget/js/minical.js' %}"></script>
+                <script src="{% static 'budget/js/validator.js' %}"></script>
+                <script src="{% static 'budget/js/confirm.js' %}"></script>
+                """),
                 'budget',
                 HTML("""
                 <script>
@@ -239,11 +247,5 @@ class TransactionEditForm(forms.Form):
                 HTML("""
                 <a href="{% url 'wilbur:delete-transaction' transaction_id %}" id="confirm" class="button-delete pull-right"
                  data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
-                """),
-                HTML("""
-                {% load staticfiles %}
-                <script src="{% static 'budget/js/niceselect.js' %}"></script>
-                <script src="{% static 'budget/js/validator.js' %}"></script>
-                <script src="{% static 'budget/js/confirm.js' %}"></script>
                 """)
         )

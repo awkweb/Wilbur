@@ -62,8 +62,7 @@ def add_budget(request):
             category = form.cleaned_data['category']
             amount = form.cleaned_data['amount']
             description = form.cleaned_data['description']
-            creation_date = now().date()
-            budget = Budget(user=user, category=category, amount=amount, description=description, creation_date=creation_date)
+            budget = Budget(user=user, category=category, amount=amount, description=description)
             budget.save()
             return {
                 'success': True,
@@ -148,6 +147,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
         today = now()
+        get_months_for_active_for_user(user, today)
         current_month = today.month
         current_year = today.year
         transaction_list = []
@@ -175,13 +175,11 @@ def add_transaction(request):
             description = form.cleaned_data['description']
             amount = form.cleaned_data['amount']
             transaction_date = form.cleaned_data['transaction_date']
-            creation_date = now().date()
             transaction = Transaction(
                     budget=budget,
                     description=description,
                     amount=amount,
-                    transaction_date=transaction_date,
-                    creation_date=creation_date
+                    transaction_date=transaction_date
             )
             transaction.save()
             return {
@@ -286,6 +284,14 @@ def get_unused_categories_for_user(user, current_budget=None):
         budget_categories.remove(current_budget.id)
     categories = Category.objects.exclude(pk__in=budget_categories)
     return categories
+
+
+def get_months_for_active_for_user(user, today):
+    date_joined = user.date_joined
+    month_joined = date_joined.month
+    year_joined = date_joined.year
+    month_current = today.month
+    year_current = today.year
 
 
 def get_paginator_for_list(request, array_list, max_per_page):

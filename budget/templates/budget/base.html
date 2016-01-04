@@ -6,12 +6,11 @@
     <title>{% block title %}{% endblock %} – Wilbur</title>
 
     {% load staticfiles %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,600">
     <link rel="stylesheet" href="{% static 'budget/css/grid.css' %}"/>
     <link rel="stylesheet" href="{% static 'budget/css/styles.css' %}"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,600">
 
     <script src="{% static 'budget/js/jquery.min.js' %}"></script>
-    <script src="{% static 'budget/js/minical.js' %}"></script>
 </head>
 <body>
     {% block section %}

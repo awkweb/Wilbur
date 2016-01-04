@@ -1,5 +1,5 @@
 .description {
-  @media screen and (max-width: $small) {
+  @media screen and (max-width: $small - 150) {
       display: none;
   }
 }

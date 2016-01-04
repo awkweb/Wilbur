@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5242a15e-1067-47ef-8bf1-cce6b3476c34" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/budget/static/budget/coffee/confirm.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/forms.py" afterPath="$PROJECT_DIR$/budget/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/models.py" afterPath="$PROJECT_DIR$/budget/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/static/budget/css/styles.css" afterPath="$PROJECT_DIR$/budget/static/budget/css/styles.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/static/budget/css/styles.css.map" afterPath="$PROJECT_DIR$/budget/static/budget/css/styles.css.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/static/budget/scss/niceselect.scss" afterPath="$PROJECT_DIR$/budget/static/budget/scss/niceselect.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/templates/budget/login.html" afterPath="$PROJECT_DIR$/budget/templates/budget/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/urls.py" afterPath="$PROJECT_DIR$/budget/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/static/budget/scss/shame.scss" afterPath="$PROJECT_DIR$/budget/static/budget/scss/shame.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/static/budget/scss/table.scss" afterPath="$PROJECT_DIR$/budget/static/budget/scss/table.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/static/budget/scss/variables.scss" afterPath="$PROJECT_DIR$/budget/static/budget/scss/variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/templates/budget/base.html" afterPath="$PROJECT_DIR$/budget/templates/budget/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budget/views.py" afterPath="$PROJECT_DIR$/budget/views.py" />
     </list>
     <ignored path="casper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,10 +26,10 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/wilbur$makemigrations.coverage" NAME="makemigrations Coverage Results" MODIFIED="1451529017691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wilbur$makemigrations.coverage" NAME="makemigrations Coverage Results" MODIFIED="1451862652003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/casper$models.coverage" NAME="manage.py Coverage Results" MODIFIED="1449967147665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Casper" />
-    <SUITE FILE_PATH="coverage/wilbur$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1451529035441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/wilbur$migrate.coverage" NAME="migrate Coverage Results" MODIFIED="1451529025899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wilbur$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1451862664496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wilbur$migrate.coverage" NAME="migrate Coverage Results" MODIFIED="1451862657010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/wilbur$manage_py.coverage" NAME="runserver Coverage Results" MODIFIED="1450411086116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -92,7 +92,30 @@
     <favorites_list name="casper" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/budget/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7120921">
+              <caret line="293" column="29" selection-start-line="293" selection-start-column="29" selection-end-line="293" selection-end-column="29" />
+              <folding>
+                <element signature="e#854#1887#0" expanded="false" />
+                <element signature="e#1995#3055#0" expanded="false" />
+                <element signature="e#3175#4863#0" expanded="false" />
+                <element signature="e#4974#5073#0" expanded="false" />
+                <element signature="e#6121#7261#0" expanded="false" />
+                <element signature="e#7391#9317#0" expanded="false" />
+                <element signature="e#9438#9562#0" expanded="false" />
+                <element signature="e#9603#9693#0" expanded="false" />
+                <element signature="e#9732#9912#0" expanded="false" />
+                <element signature="e#9982#10290#0" expanded="false" />
+                <element signature="e#10580#10863#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -109,7 +132,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/Downloads/bootstrap-3.3.6-dist/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/budget/static/budget/css/grid.min.css" />
         <option value="$PROJECT_DIR$/budget/templates/budget/base_no_navbar.html" />
         <option value="$PROJECT_DIR$/budget/static/budget/css/lemonade.css" />
@@ -126,9 +148,7 @@
         <option value="$PROJECT_DIR$/budget/static/budget/coffee/test.coffee" />
         <option value="$PROJECT_DIR$/budget/static/budget/coffee/tom.coffee" />
         <option value="$PROJECT_DIR$/budget/static/budget/scss/pagination.scss" />
-        <option value="$PROJECT_DIR$/budget/static/budget/scss/variables.scss" />
         <option value="$PROJECT_DIR$/budget/static/budget/scss/progress.scss" />
-        <option value="$PROJECT_DIR$/budget/templates/budget/base.html" />
         <option value="$PROJECT_DIR$/budget/static/budget/scss/nice-select.scss" />
         <option value="$PROJECT_DIR$/budget/static/budget/scss/login.scss" />
         <option value="$PROJECT_DIR$/budget/static/budget/scss/minical.scss" />
@@ -145,21 +165,24 @@
         <option value="$PROJECT_DIR$/wilbur/urls.py" />
         <option value="$PROJECT_DIR$/budget/templates/budget/transactions.html" />
         <option value="$PROJECT_DIR$/budget/templates/budget/budgets.html" />
-        <option value="$PROJECT_DIR$/budget/views.py" />
-        <option value="$PROJECT_DIR$/budget/static/budget/scss/table.scss" />
-        <option value="$PROJECT_DIR$/budget/templates/budget/base_form.html" />
         <option value="$PROJECT_DIR$/budget/templates/budget/login.html" />
-        <option value="$PROJECT_DIR$/budget/templates/budget/includes/navbar.html" />
         <option value="$PROJECT_DIR$/budget/templates/budget/index.html" />
         <option value="$PROJECT_DIR$/budget/urls.py" />
         <option value="$USER_HOME$/Downloads/sweetalert-master/dist/sweetalert.min.js" />
         <option value="$PROJECT_DIR$/budget/static/budget/coffee/jquerywatch.coffee" />
-        <option value="$PROJECT_DIR$/budget/static/budget/scss/niceselect.scss" />
         <option value="$PROJECT_DIR$/budget/static/budget/coffee/delete.coffee" />
         <option value="$PROJECT_DIR$/budget/static/budget/scss/button.scss" />
         <option value="$PROJECT_DIR$/budget/static/budget/coffee/confirm.coffee" />
+        <option value="$PROJECT_DIR$/budget/static/budget/scss/niceselect.scss" />
+        <option value="$PROJECT_DIR$/budget/static/budget/scss/table.scss" />
+        <option value="$PROJECT_DIR$/budget/static/budget/scss/variables.scss" />
+        <option value="$PROJECT_DIR$/budget/static/budget/scss/shame.scss" />
         <option value="$PROJECT_DIR$/budget/models.py" />
         <option value="$PROJECT_DIR$/budget/forms.py" />
+        <option value="$PROJECT_DIR$/budget/templates/budget/base_form.html" />
+        <option value="$PROJECT_DIR$/budget/templates/budget/base.html" />
+        <option value="$PROJECT_DIR$/budget/templates/budget/includes/navbar.html" />
+        <option value="$PROJECT_DIR$/budget/views.py" />
       </list>
     </option>
   </component>
@@ -220,7 +243,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Changed Files">
           <PATH>
@@ -471,6 +493,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -580,88 +603,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="budget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scss" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wilbur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Wilbur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="budget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="budget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wilbur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Wilbur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="budget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="budget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wilbur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Wilbur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="budget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="budget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="coffee" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -995,7 +936,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.221875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909784" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1003,7 +944,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2640625" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3362944" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994923" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24484181" sideWeight="0.4975" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24484181" sideWeight="0.4975" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24968314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43053645" sideWeight="0.49434572" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1122,14 +1063,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6">
           <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budget/templates/budget/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44820717">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1256,13 +1189,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wilbur/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/budget/templates/budget/transactions.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2848606">
@@ -1286,33 +1212,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/table.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.694165">
-          <caret line="34" column="3" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budget/templates/budget/includes/navbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15090543">
-          <caret line="5" column="82" selection-start-line="5" selection-start-column="82" selection-end-line="5" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/login.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14285715">
           <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budget/templates/budget/base_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27162978">
-          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1324,43 +1227,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/budget/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9424184">
-          <caret line="230" column="34" selection-start-line="230" selection-start-column="34" selection-end-line="230" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/variables.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4527163">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budget/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.057581574">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/budget/static/budget/coffee/niceselect.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3319838">
           <caret line="16" column="11" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/niceselect.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3319149">
-          <caret line="43" column="44" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1368,7 +1238,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17274472">
           <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1384,23 +1253,123 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4894434">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/budget/forms.py">
+    <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/niceselect.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57581574">
-          <caret line="107" column="45" selection-start-line="107" selection-start-column="45" selection-end-line="107" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.44444445">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/budget/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.40307102">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.2591171">
+          <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
+          <folding>
+            <element signature="e#109#260#0" expanded="false" />
+            <element signature="e#295#1202#0" expanded="false" />
+            <element signature="e#1242#1871#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/shame.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12072434">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30181086">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/static/budget/scss/table.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9356137">
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20153551">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding>
+            <element signature="e#288#2060#0" expanded="false" />
+            <element signature="e#2101#4213#0" expanded="false" />
+            <element signature="e#4258#6534#0" expanded="false" />
+            <element signature="e#6580#9130#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/templates/budget/base_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27162978">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/templates/budget/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0">
+          <caret line="8" column="101" selection-start-line="8" selection-start-column="101" selection-end-line="8" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.057581574">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wilbur/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5182342">
+          <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/templates/budget/includes/navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24144869">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7120921">
+          <caret line="293" column="29" selection-start-line="293" selection-start-column="29" selection-end-line="293" selection-end-column="29" />
+          <folding>
+            <element signature="e#854#1887#0" expanded="false" />
+            <element signature="e#1995#3055#0" expanded="false" />
+            <element signature="e#3175#4863#0" expanded="false" />
+            <element signature="e#4974#5073#0" expanded="false" />
+            <element signature="e#6121#7261#0" expanded="false" />
+            <element signature="e#7391#9317#0" expanded="false" />
+            <element signature="e#9438#9562#0" expanded="false" />
+            <element signature="e#9603#9693#0" expanded="false" />
+            <element signature="e#9732#9912#0" expanded="false" />
+            <element signature="e#9982#10290#0" expanded="false" />
+            <element signature="e#10580#10863#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
