@@ -153,11 +153,11 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
         today = now()
-        # year_active = kwargs.pop('year', today.year)
-        # month_active = kwargs.pop('month', today.month)
+        year_active = kwargs.pop('year', today.year)
+        month_active = kwargs.pop('month', today.month)
         transaction_list = []
         for budget in budgets:
-            t_list = budget.get_transactions_for_month_and_year(today.month, today.year)
+            t_list = budget.get_transactions_for_month_and_year(month_active, year_active)
             transaction_list.extend(t_list)
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
@@ -182,10 +182,10 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         html = render(request, 'budget/includes/table_transactions.html', {
             'transactions': transactions,
         })
-        print(html.content)
+        table = html.content.decode("utf-8")
         return {
             'success': True,
-            'html': 'Hello, World',
+            'html': table,
         }
 
 
@@ -221,7 +221,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
             transaction.save()
             return {'success': True}
         form_html = render_crispy_form(form)
-        print(form_html)
+        print(type(form_html))
         return {
             'success': False,
             'form_html': form_html,
