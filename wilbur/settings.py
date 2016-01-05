@@ -115,5 +115,5 @@ STATIC_URL = '/static/'
 
 # Other variables
 
-LOGIN_REDIRECT_URL = '/transactions/'
+LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

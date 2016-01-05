@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.http import Http404
 from django.shortcuts import render, redirect, render_to_response
 from django.utils.timezone import now
 from django.views.generic.base import TemplateView
@@ -13,7 +14,7 @@ from .forms import BudgetAddForm, BudgetEditForm, TransactionAddForm, Transactio
 from .utils import *
 
 
-class BudgetsView(LoginRequiredMixin, TemplateView):
+class OverviewView(LoginRequiredMixin, TemplateView):
     login_url = '/login/'
     redirect_field_name = 'next'
 
@@ -21,14 +22,48 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
         today = now()
-        year_active = kwargs.pop('year', today.year)
-        month_active = kwargs.pop('month', today.month)
+
         budget_list = []
         for budget in budgets:
-            amount_spent = budget.get_sum_transactions_for_month_and_year(month_active, year_active)
+            amount_spent = budget.get_sum_transactions_for_month_and_year(today.month, today.year)
             data = {
                 'id': budget.id,
-                'name': budget.category.name,
+                'name': budget.category.name.title(),
+                'amount': budget.amount,
+                'amount_spent': amount_spent,
+                'amount_left': budget.amount - amount_spent,
+                'description': budget.description,
+                'percent': amount_spent / budget.amount * 100
+            }
+            budget_list.append(data)
+
+
+        return render(request, 'budget/overview.html', {
+            'title': 'Overview',
+            'user': user,
+        })
+
+
+class BudgetsView(LoginRequiredMixin, TemplateView):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, *args, **kwargs):
+        user = get_user_in_session(request.session)
+        budgets = get_budgets_for_user(user)
+
+        select_value = request.session.get('select_value', 1)
+        today = now()
+        month = request.session.get('month', today.month)
+        year = request.session.get('year', today.year)
+        months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
+
+        budget_list = []
+        for budget in budgets:
+            amount_spent = budget.get_sum_transactions_for_month_and_year(month, year)
+            data = {
+                'id': budget.id,
+                'name': budget.category.name.title(),
                 'amount': budget.amount,
                 'amount_spent': amount_spent,
                 'amount_left': budget.amount - amount_spent,
@@ -41,7 +76,45 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             'title': 'Budgets',
             'budgets': budgets,
             'budget_list': budget_list,
+            'select_value': select_value,
+            'months': months,
         })
+
+    @json_view
+    def post(self, request, *args, **kwargs):
+        user = get_user_in_session(request.session)
+        budgets = get_budgets_for_user(user)
+
+        data = request.POST
+        select_value = data['select_value']
+        month = data['month']
+        year = data['year']
+        request.session['select_value'] = select_value
+        request.session['month'] = month
+        request.session['year'] = year
+
+        budget_list = []
+        for budget in budgets:
+            amount_spent = budget.get_sum_transactions_for_month_and_year(month, year)
+            data = {
+                'id': budget.id,
+                'name': budget.category.name,
+                'amount': budget.amount,
+                'amount_spent': amount_spent,
+                'amount_left': budget.amount - amount_spent,
+                'description': budget.description,
+                'percent': amount_spent / budget.amount * 100
+            }
+            budget_list.append(data)
+
+        html = render(request, 'budget/includes/budgets_progress.html', {
+            'budget_list': budget_list,
+        })
+        html = html.content.decode("utf-8")
+        return {
+            'success': True,
+            'html': html,
+        }
 
 
 class BudgetsAddView(LoginRequiredMixin, TemplateView):
@@ -51,6 +124,7 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         categories = get_unused_categories_for_user(user)
+        print(categories)
         data = {'categories': categories}
         form = BudgetAddForm(initial=data)
         form.helper.form_action = reverse('wilbur:add-budget')
@@ -89,20 +163,23 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
         budget_id = kwargs['budget_id']
         budget = Budget.objects.get(pk=budget_id)
         user = get_user_in_session(request.session)
-        categories = get_unused_categories_for_user(user, budget.category)
-        data = {
-            'category': budget.category.id,
-            'amount': budget.amount,
-            'description': budget.description,
-            'categories': categories,
-        }
-        form = BudgetEditForm(data, initial={'categories': categories})
-        form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
-        return render(request, 'base_form.html', {
-            'title': 'Edit Budget',
-            'form': form,
-            'budget_id': budget.id,
-        })
+        if budget.user == user:
+            categories = get_unused_categories_for_user(user, budget.category)
+            data = {
+                'category': budget.category.id,
+                'amount': budget.amount,
+                'description': budget.description,
+                'categories': categories,
+            }
+            form = BudgetEditForm(data, initial={'categories': categories})
+            form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
+            return render(request, 'base_form.html', {
+                'title': 'Edit Budget',
+                'form': form,
+                'budget_id': budget.id,
+            })
+        else:
+            raise Http404("Budget does not exist")
 
     @json_view
     def post(self, request, *args, **kwargs):
@@ -152,10 +229,13 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
-        today = now()
+
         select_value = request.session.get('select_value', 1)
+        today = now()
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
+        months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
+
         transaction_list = []
         for budget in budgets:
             t_list = budget.get_transactions_for_month_and_year(month, year)
@@ -166,33 +246,35 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             'title': 'Transactions',
             'transactions': transactions,
             'select_value': select_value,
+            'months': months,
         })
 
     @json_view
     def post(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
+
         data = request.POST
         select_value = data['select_value']
-        print(select_value)
         month = data['month']
         year = data['year']
         request.session['select_value'] = select_value
         request.session['month'] = month
         request.session['year'] = year
+
         transaction_list = []
         for budget in budgets:
             t_list = budget.get_transactions_for_month_and_year(month, year)
             transaction_list.extend(t_list)
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
-        html = render(request, 'budget/includes/table_transactions.html', {
+        html = render(request, 'budget/includes/transactions_table.html', {
             'transactions': transactions,
         })
-        table = html.content.decode("utf-8")
+        html = html.content.decode("utf-8")
         return {
             'success': True,
-            'html': table,
+            'html': html,
         }
 
 
@@ -243,20 +325,23 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
         transaction_id = kwargs['transaction_id']
         transaction = Transaction.objects.get(pk=transaction_id)
         user = get_user_in_session(request.session)
-        data = {
-            'budget': transaction.budget.id,
-            'description': transaction.description,
-            'amount': transaction.amount,
-            'transaction_date': transaction.transaction_date,
-            'user': user,
-        }
-        form = TransactionEditForm(data, initial={'user': user})
-        form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
-        return render(request, 'base_form.html', {
-            'title': 'Edit Transaction',
-            'form': form,
-            'transaction_id': transaction_id,
-        })
+        if transaction.budget.user == user:
+            data = {
+                'budget': transaction.budget.id,
+                'description': transaction.description,
+                'amount': transaction.amount,
+                'transaction_date': transaction.transaction_date,
+                'user': user,
+            }
+            form = TransactionEditForm(data, initial={'user': user})
+            form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
+            return render(request, 'base_form.html', {
+                'title': 'Edit Transaction',
+                'form': form,
+                'transaction_id': transaction_id,
+            })
+        else:
+            raise Http404("Transaction does not exist")
 
     @json_view
     def post(self, request, *args, **kwargs):

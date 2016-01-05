@@ -53,7 +53,7 @@ class BudgetAddForm(forms.Form):
                 """),
                 'amount',
                 'description',
-                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
                 {% load staticfiles %}
@@ -108,11 +108,11 @@ class BudgetEditForm(forms.Form):
                 """),
                 'amount',
                 'description',
-                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
                 <a href="{% url 'wilbur:delete-budget' budget_id %}" id="confirm" class="button-delete pull-right"
-                 data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
+                 data-alt-text="Yes, I am sure." data-original-text="Delete" role="button">Delete</a>
                 """),
                 HTML("""
                 {% load staticfiles %}
@@ -148,7 +148,7 @@ class TransactionAddForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(TransactionAddForm, self).__init__(*args, **kwargs)
-        self.fields['budget'].queryset = Budget.objects.filter(user=self.initial['user'])
+        self.fields['budget'].queryset = Budget.objects.filter(user=self.initial['user']).order_by('category__name')
         self.fields['budget'].to_field_name = 'id'
 
         self.helper = FormHelper()
@@ -181,7 +181,7 @@ class TransactionAddForm(forms.Form):
                 </script>
                 """),
                 'description',
-                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
                 <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
@@ -217,7 +217,7 @@ class TransactionEditForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(TransactionEditForm, self).__init__(*args, **kwargs)
-        self.fields['budget'].queryset = Budget.objects.filter(user=self.initial['user'])
+        self.fields['budget'].queryset = Budget.objects.filter(user=self.initial['user']).order_by('category__name')
         self.fields['budget'].to_field_name = 'id'
 
         self.helper = FormHelper()
@@ -248,12 +248,12 @@ class TransactionEditForm(forms.Form):
                 </script>
                 """),
                 'description',
-                StrictButton('Submit', type='submit', css_id='form-submit', css_class="button-submit"),
+                StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
                 <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
                 <a href="{% url 'wilbur:delete-transaction' transaction_id %}" id="confirm" class="button-delete pull-right"
-                 data-alt-text="Are you sure?" data-original-text="Delete" role="button">Delete</a>
+                 data-alt-text="Yes, I am sure." data-original-text="Delete" role="button">Delete</a>
                 """),
                 HTML("""
                 {% load staticfiles %}

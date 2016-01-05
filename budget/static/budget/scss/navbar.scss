@@ -2,6 +2,7 @@
   position: relative;
   height: 60px;
   margin: 0 0 20px;
+  background-color: $green;
   border-bottom: 1px solid $gray-lighter;
 
   &::after {
@@ -10,6 +11,7 @@
 }
 
 .navbar-left {
+  padding-top: .2rem;
   float: left;
 }
 
@@ -20,12 +22,12 @@
 .brand {
   font-family: $pacifico;
   font-size: 2rem;
-  color: $green;
+  color: $white;
 }
 
 .on {
-  border-bottom: 1px solid $green;
-  padding-bottom: 15px;
+  border-bottom: 4px solid $green-dark - 25;
+  padding-bottom: 11px;
 }
 
 .nav-inline {
@@ -47,11 +49,11 @@
   }
 
   a {
-    color: $gray-dark;
+    color: $white;
 
     &:hover {
-      border-bottom: 1px solid $green;
-      padding-bottom: 15px;
+      border-bottom: 4px solid $green-dark - 25;
+      padding-bottom: 11px;
     }
   }
 }

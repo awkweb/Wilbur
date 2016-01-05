@@ -1,5 +1,4 @@
 select = $('select')
-form = $('form')
 
 select.change ->
   option = $('select option:selected')
@@ -8,8 +7,8 @@ select.change ->
   month = option.data 'month'
   $.ajaxSetup headers: 'X-CSRFToken': Cookies.get('csrftoken')
   $.ajax
-    url: form.attr('action')
-    type: form.attr('method')
+    url: window.location.pathname
+    type: 'post'
     data: {
       'select_value': select_value,
       'year': year,
@@ -17,8 +16,8 @@ select.change ->
     }
     success: (data) ->
       if data['success']
-        table = $('#table-transactions')
-        table.replaceWith data['html']
+        html = $('#content-ajax')
+        html.replaceWith data['html']
       return
     error: ->
       form.find('.error-message').show()

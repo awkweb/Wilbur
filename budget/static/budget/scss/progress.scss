@@ -15,7 +15,7 @@
   }
 }
 
-.progress-background {
+.progress-container {
   clear: both;
   @include vendor-prefix(border-radius, 4px);
   height: 1.5rem;
@@ -25,6 +25,7 @@
 }
 
 .progress-bar {
+  @include vendor-prefix(transition, all 2s ease-out);
   float: left;
   width: 0;
   height: 100%;
@@ -32,6 +33,18 @@
   line-height: 20px;
   text-align: right;
   padding-right: .25rem;
+}
+
+.progress-green {
+  background-color: $green;
+}
+
+.progress-yellow {
+  background-color: $yellow;
+}
+
+.progress-red {
+  background-color: $red;
 }
 
 .progress-footer {
@@ -53,16 +66,4 @@
   p {
     color: $gray-light;
   }
-}
-
-.progress-green {
-  background-color: $green;
-}
-
-.progress-yellow {
-  background-color: $yellow;
-}
-
-.progress-red {
-  background-color: $red;
 }

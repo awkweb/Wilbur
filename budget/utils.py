@@ -13,7 +13,7 @@ def get_user_in_session(session):
 def get_budgets_for_user(user):
     budgets = None
     try:
-        budgets = Budget.objects.filter(user=user)
+        budgets = Budget.objects.filter(user=user).order_by('category__name')
     finally:
         if budgets is None:
             return None
@@ -28,7 +28,7 @@ def get_unused_categories_for_user(user, current_budget=None):
         budget_categories.append(budget.category.id)
     if current_budget:
         budget_categories.remove(current_budget.id)
-    categories = Category.objects.exclude(pk__in=budget_categories)
+    categories = Category.objects.exclude(pk__in=budget_categories).order_by('name')
     return categories
 
 
