@@ -153,29 +153,36 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
         today = now()
-        year_active = kwargs.pop('year', today.year)
-        month_active = kwargs.pop('month', today.month)
+        select_value = request.session.get('select_value', 1)
+        month = request.session.get('month', today.month)
+        year = request.session.get('year', today.year)
         transaction_list = []
         for budget in budgets:
-            t_list = budget.get_transactions_for_month_and_year(month_active, year_active)
+            t_list = budget.get_transactions_for_month_and_year(month, year)
             transaction_list.extend(t_list)
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
         return render(request, 'budget/transactions.html', {
             'title': 'Transactions',
             'transactions': transactions,
+            'select_value': select_value,
         })
 
     @json_view
     def post(self, request, *args, **kwargs):
-        data = request.POST
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
-        year_active = data['year']
-        month_active = data['month']
+        data = request.POST
+        select_value = data['select_value']
+        print(select_value)
+        month = data['month']
+        year = data['year']
+        request.session['select_value'] = select_value
+        request.session['month'] = month
+        request.session['year'] = year
         transaction_list = []
         for budget in budgets:
-            t_list = budget.get_transactions_for_month_and_year(month_active, year_active)
+            t_list = budget.get_transactions_for_month_and_year(month, year)
             transaction_list.extend(t_list)
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)

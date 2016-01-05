@@ -1,12 +1,13 @@
 <form class="pull-right" action="{% url 'wilbur:transactions' %}" method="post">
     <select class="form-control small">
-        <option data-year="2016" data-month="1">January 2016</option>
-        <option data-year="2015" data-month="12">December 2015</option>
-        <option data-year="2015" data-month="11">November 2015</option>
+        <option value="1" data-year="2016" data-month="1">January 2016</option>
+        <option value="2" data-year="2015" data-month="12">December 2015</option>
+        <option value="3" data-year="2015" data-month="11">November 2015</option>
     </select>
 </form>
 <script>
     $(document).ready(function() {
+        $('select').val({{ select_value }});
         $('select').niceSelect();
     });
 </script>

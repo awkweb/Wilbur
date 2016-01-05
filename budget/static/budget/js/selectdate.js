@@ -7,8 +7,9 @@
   form = $('form');
 
   select.change(function() {
-    var month, option, year;
+    var month, option, select_value, year;
     option = $('select option:selected');
+    select_value = option.val();
     year = option.data('year');
     month = option.data('month');
     $.ajaxSetup({
@@ -20,6 +21,7 @@
       url: form.attr('action'),
       type: form.attr('method'),
       data: {
+        'select_value': select_value,
         'year': year,
         'month': month
       },
