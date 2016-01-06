@@ -1,0 +1,44 @@
+.overview-callout {
+  margin: 1rem 0 2rem;
+  font-size: 1.85rem;
+  color: $gray;
+
+  &.small {
+    margin: 1rem 0 1.5rem;
+    border-left: 4px solid $gray-lighter;
+    padding-left: 15px;
+    font-size: 1.25rem;
+    color: $gray;
+
+    &:hover {
+      border-left-color: $gray-dark;
+      color: $gray-dark;
+    }
+  }
+
+  a {
+    color: $green;
+
+    &:hover {
+      color: $green-dark;
+    }
+  }
+}
+
+.overview-name {
+  font-family: $pacifico;
+  color: $gray;
+  font-size: 2.2rem;
+}
+
+.overview-stat {
+  @include vendor-prefix(border-radius, 4px);
+  padding: 4px 10px;
+  margin: 0 2px;
+  color: $white;
+  font-weight: 600;
+
+  &.small {
+    padding: 1px 6px;
+  }
+}

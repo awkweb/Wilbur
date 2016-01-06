@@ -19,7 +19,7 @@
                             <td>
                                 <a href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }}</a>
                             </td>
-                            <td>{{ transaction.budget.category.name|capfirst }}</td>
+                            <td>{{ transaction.budget.category.name.title }}</td>
                             <td>{{ transaction.amount|intcomma }}</td>
                             <td>{{ transaction.description }}</td>
                         </tr>

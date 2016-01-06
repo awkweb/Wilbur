@@ -1,5 +1,8 @@
 {% extends 'base_navbar.html' %}
 
+{% load humanize %}
+{% load mathfilters %}
+
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -8,7 +11,33 @@
         <div class="col-sm-10 col-sm-offset-1">
             <p class="overview-callout">
                 <span class="overview-name">Hey {{ user.first_name }}</span> , you have
-                <span class="overview-stat">$200</span> left in {% now "F" %}.</p>
+                <span class="overview-stat
+                    {% if remaining_percent < 85 and remaining_percent > 0 %}progress-green
+                    {% elif remaining_percent > 86 and remaining_percent < 95 %}progress-yellow
+                    {% else %}progress-red{% endif %}">${{ remaining|floatformat:0|intcomma }}</span>
+                left in {% now "F" %}.</p>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+            <h2>Fast Approaching Budgets</h2>
+            {% for budget in budget_list %}
+                <p class="overview-callout small">{{ budget.name }}
+                    <span class="overview-stat
+                        {% if budget.percent < 85 and budget.percent >= 0 %}progress-green
+                        {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
+                        {% else %}progress-red{% endif %} small">${{ budget.amount_left|abs|floatformat:0|intcomma }}</span>
+                    {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</p>
+            {% endfor %}
+        </div>
+        <div class="col-sm-5">
+            <h2>Recent Transactions</h2>
+            {% for transaction in transaction_list %}
+                <p class="overview-callout small">{{ transaction.transaction_date|naturalday|capfirst }},
+                    {{ transaction.budget.category.name.title }} ${{ transaction.amount|intcomma }}</p>
+            {% endfor %}
+                <p class="overview-callout small"><a href="{% url 'wilbur:add-transaction' %}">Add Transaction</a></p>
         </div>
     </section>
 
