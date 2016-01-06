@@ -2,7 +2,7 @@
     <form class="pull-right">
         <select class="form-control small">
             {% for month in months %}
-                <option value="{{ forloop.counter }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
+                <option value="{{ month.month }}{{ month.year }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
             {% endfor %}
         </select>
     </form>

@@ -21,44 +21,50 @@ class OverviewView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
-        today = now()
 
-        budget_list = []
-        transaction_list = []
-        remaining = 0
-        total = 0
-        for budget in budgets:
-            amount_spent = budget.get_sum_transactions_for_month_and_year(today.month, today.year)
-            amount_left = budget.amount - amount_spent
-            amount_percent = amount_spent / budget.amount * 100
-            data = {
-                'id': budget.id,
-                'name': budget.category.name.title(),
-                'amount': budget.amount,
-                'amount_spent': amount_spent,
-                'amount_left': amount_left,
-                'description': budget.description,
-                'percent': amount_percent
-            }
-            remaining += amount_left
-            total += budget.amount
-            if amount_percent != 100:
-                budget_list.append(data)
-            t_list = budget.get_transactions_for_month_and_year(today.month, today.year)
-            transaction_list.extend(t_list)
+        if budgets:
+            today = now()
+            budget_list = []
+            transaction_list = []
+            remaining = 0
+            total = 0
+            for budget in budgets:
+                amount_spent = budget.get_sum_transactions_for_month_and_year(today.month, today.year)
+                amount_left = budget.amount - amount_spent
+                amount_percent = amount_spent / budget.amount * 100
+                data = {
+                    'id': budget.id,
+                    'name': budget.category.name.title(),
+                    'amount': budget.amount,
+                    'amount_spent': amount_spent,
+                    'amount_left': amount_left,
+                    'description': budget.description,
+                    'percent': amount_percent
+                }
+                remaining += amount_left
+                total += budget.amount
+                if amount_percent != 100:
+                    budget_list.append(data)
+                t_list = budget.get_transactions_for_month_and_year(today.month, today.year)
+                transaction_list.extend(t_list)
 
-        budget_list = sorted(budget_list, key=lambda b: b['percent'], reverse=True)[:4]
-        transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:4]
-        remaining_percent = remaining / total * 100
+            budget_list = sorted(budget_list, key=lambda b: b['percent'], reverse=True)[:5]
+            transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5]
+            remaining_percent = remaining / total * 100
 
-        return render(request, 'budget/overview.html', {
-            'title': 'Overview',
-            'user': user,
-            'remaining': remaining,
-            'remaining_percent': remaining_percent,
-            'budget_list': budget_list,
-            'transaction_list': transaction_list,
-        })
+            return render(request, 'budget/overview.html', {
+                'title': 'Overview',
+                'user': user,
+                'remaining': remaining,
+                'remaining_percent': remaining_percent,
+                'budget_list': budget_list,
+                'transaction_list': transaction_list,
+            })
+        else:
+            return render(request, 'budget/overview.html', {
+                'title': 'Overview',
+                'user': user,
+            })
 
 
 class BudgetsView(LoginRequiredMixin, TemplateView):
@@ -69,10 +75,10 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
 
-        select_value = request.session.get('select_value', 1)
         today = now()
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
+        select_value = request.session.get('select_value', "%s%s" % (today.month, today.year))
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
 
         budget_list = []
@@ -247,10 +253,10 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
 
-        select_value = request.session.get('select_value', 1)
         today = now()
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
+        select_value = request.session.get('select_value', "%s%s" % (today.month, today.year))
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
 
         transaction_list = []
@@ -261,6 +267,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         transactions = get_paginator_for_list(request, transaction_list, 10)
         return render(request, 'budget/transactions.html', {
             'title': 'Transactions',
+            'hasBudget': budgets.count() == 0,
             'transactions': transactions,
             'select_value': select_value,
             'months': months,

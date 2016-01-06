@@ -1,5 +1,7 @@
 {% extends 'base_navbar.html' %}
 
+{% load budget_extras %}
+
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -13,8 +15,10 @@
         </section>
 
         {% include 'includes/transactions_table.html' %}
+    {% elif hasBudget %}
+        {% include 'includes/empty_state.html' with empty_title="No Budgets" button_title="Add Budget" button_link="wilbur:add-budget"|rev %}
     {% else %}
-        {% include 'includes/empty_state.html' with empty_title="No Transactions" button_title="Add Transaction" button_link="add" %}
+        {% include 'includes/empty_state.html' with empty_title="No Transactions" button_title="Add Transaction" button_link="wilbur:add-transaction"|rev %}
     {% endif %}
 
 {% endblock %}
