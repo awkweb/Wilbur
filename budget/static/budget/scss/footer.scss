@@ -1,12 +1,16 @@
 .footer {
+  background-color: $gray-lightest;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: $footer-height;
+  border-top: 1px solid $gray-lighter;
+
   &::after {
     clear: both;
   }
-}
-
-.footer-top {
-  margin-top: 1rem;
-  border-top: 1px solid $gray-lighter;
 }
 
 .footer-left {
