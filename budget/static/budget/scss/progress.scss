@@ -1,6 +1,6 @@
 .progress {
   clear: both;
-  margin: 0 0 2rem;
+  margin: 0 0 2.25rem;
 }
 
 .progress-title {
@@ -16,12 +16,11 @@
 }
 
 .progress-container {
-  clear: both;
   @include vendor-prefix(border-radius, 4px);
+  clear: both;
   height: 1.5rem;
   overflow: hidden;
   background-color: $gray-lightest;
-  border: 1px solid $gray-lighter;
 }
 
 .progress-bar {

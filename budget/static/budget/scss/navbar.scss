@@ -4,10 +4,6 @@
   margin: 0 0 20px;
   background-color: $green;
   border-bottom: 1px solid $gray-lighter;
-
-  &::after {
-    clear: both;
-  }
 }
 
 .navbar-left {
@@ -31,7 +27,7 @@
 }
 
 .nav-inline {
-  padding: 1.35rem 0;
+  padding: 1.35rem 0 0;
 
   li:first-child {
     margin-left: 0;

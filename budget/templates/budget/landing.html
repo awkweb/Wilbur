@@ -1,0 +1,10 @@
+{% extends 'base_no_navbar.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    <h1 class="welcome">Welcome to Wilbur.</h1>
+    <a href="{% url 'wilbur:login' %}">Log In</a>
+
+{% endblock %}

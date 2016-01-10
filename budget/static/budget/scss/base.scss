@@ -26,11 +26,11 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 body > .container {
+  @include clearfix();
   padding-bottom: 40px;
 }
 
 .row {
+  @include clearfix();
   clear: both;
 }
-
-// Check everything for floats, and clear them! That is the issue!

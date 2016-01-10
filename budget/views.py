@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
@@ -14,57 +15,61 @@ from .forms import BudgetAddForm, BudgetEditForm, TransactionAddForm, Transactio
 from .utils import *
 
 
-class OverviewView(LoginRequiredMixin, TemplateView):
-    login_url = '/login/'
-    redirect_field_name = 'next'
+class OverviewView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
-        budgets = get_budgets_for_user(user)
 
-        if budgets:
-            today = now()
-            budget_list = []
-            transaction_list = []
-            remaining = 0
-            total = 0
-            for budget in budgets:
-                amount_spent = budget.get_sum_transactions_for_month_and_year(today.month, today.year)
-                amount_left = budget.amount - amount_spent
-                amount_percent = amount_spent / budget.amount * 100
-                data = {
-                    'id': budget.id,
-                    'name': budget.category.name.title(),
-                    'amount': budget.amount,
-                    'amount_spent': amount_spent,
-                    'amount_left': amount_left,
-                    'description': budget.description,
-                    'percent': amount_percent
-                }
-                remaining += amount_left
-                total += budget.amount
-                if amount_percent != 100:
-                    budget_list.append(data)
-                t_list = budget.get_transactions_for_month_and_year(today.month, today.year)
-                transaction_list.extend(t_list)
-
-            budget_list = sorted(budget_list, key=lambda b: b['percent'], reverse=True)[:5]
-            transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5]
-            remaining_percent = remaining / total * 100
-
-            return render(request, 'budget/overview.html', {
-                'title': 'Overview',
-                'user': user,
-                'remaining': remaining,
-                'remaining_percent': remaining_percent,
-                'budget_list': budget_list,
-                'transaction_list': transaction_list,
-            })
+        if user is None:
+            return render(request, 'budget/landing.html', {
+                    'title': 'Track your monthly budgets',
+                })
         else:
-            return render(request, 'budget/overview.html', {
-                'title': 'Overview',
-                'user': user,
-            })
+            budgets = get_budgets_for_user(user)
+
+            if budgets:
+                today = now()
+                budget_list = []
+                transaction_list = []
+                remaining = 0
+                total = 0
+                for budget in budgets:
+                    amount_spent = budget.get_sum_transactions_for_month_and_year(today.month, today.year)
+                    amount_left = budget.amount - amount_spent
+                    amount_percent = amount_spent / budget.amount * 100
+                    data = {
+                        'id': budget.id,
+                        'name': budget.category.name.title(),
+                        'amount': budget.amount,
+                        'amount_spent': amount_spent,
+                        'amount_left': amount_left,
+                        'description': budget.description,
+                        'percent': amount_percent
+                    }
+                    remaining += amount_left
+                    total += budget.amount
+                    if amount_percent != 100:
+                        budget_list.append(data)
+                    t_list = budget.get_transactions_for_month_and_year(today.month, today.year)
+                    transaction_list.extend(t_list)
+
+                budget_list = sorted(budget_list, key=lambda b: b['percent'], reverse=True)[:5]
+                transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5]
+                remaining_percent = remaining / total * 100
+
+                return render(request, 'budget/overview.html', {
+                    'title': 'Overview',
+                    'user': user,
+                    'remaining': remaining,
+                    'remaining_percent': remaining_percent,
+                    'budget_list': budget_list,
+                    'transaction_list': transaction_list,
+                })
+            else:
+                return render(request, 'budget/overview.html', {
+                    'title': 'Overview',
+                    'user': user,
+                })
 
 
 class BudgetsView(LoginRequiredMixin, TemplateView):
@@ -147,7 +152,6 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         categories = get_unused_categories_for_user(user)
-        print(categories)
         data = {'categories': categories}
         form = BudgetAddForm(initial=data)
         form.helper.form_action = reverse('wilbur:add-budget')
@@ -409,3 +413,4 @@ def delete_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     transaction.delete()
     return redirect('wilbur:transactions')
+
