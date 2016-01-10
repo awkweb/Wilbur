@@ -10,7 +10,6 @@ def get_user_in_session(session):
         user_id = session['_auth_user_id']
         user = User.objects.get(pk=user_id)
     finally:
-        print(user)
         return user
 
 

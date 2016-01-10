@@ -4,6 +4,7 @@
   color: $gray;
 
   &.small {
+    display: block;
     margin: 1rem 0 1.5rem;
     border-left: 4px solid $gray-lighter;
     padding-left: 15px;
@@ -12,14 +13,6 @@
 
     &:hover {
       border-left-color: $gray-dark;
-      color: $gray-dark;
-    }
-  }
-
-  a {
-    color: $gray;
-
-    &:hover {
       color: $gray-dark;
     }
   }

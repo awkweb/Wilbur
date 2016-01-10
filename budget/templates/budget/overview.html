@@ -23,7 +23,7 @@
 
     <section class="row">
         <div class="col-sm-5 col-sm-offset-1">
-            <h2>Fast Approaching Budgets</h2>
+            <h2>Approaching Budgets</h2>
             {% for budget in budget_list %}
                 <p class="overview-callout small">{{ budget.name }}
                     <span class="overview-stat
@@ -36,10 +36,10 @@
         <div class="col-sm-5">
             <h2>Recent Transactions</h2>
             {% for transaction in transaction_list %}
-                <p class="overview-callout small"><a href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }},
-                    {{ transaction.budget.category.name.title }} ${{ transaction.amount|intcomma }}</a></p>
+                <a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }},
+                    {{ transaction.budget.category.name.title }} ${{ transaction.amount|intcomma }}</a>
             {% endfor %}
-                <p class="overview-callout small"><a href="{% url 'wilbur:add-transaction' %}">Add Transaction</a></p>
+                <a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add Transaction</a>
         </div>
     </section>
     {% else %}

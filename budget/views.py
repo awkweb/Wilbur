@@ -60,6 +60,7 @@ class OverviewView(TemplateView):
                 return render(request, 'budget/overview.html', {
                     'title': 'Overview',
                     'user': user,
+                    'total': total,
                     'remaining': remaining,
                     'remaining_percent': remaining_percent,
                     'budget_list': budget_list,
