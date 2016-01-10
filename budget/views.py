@@ -48,8 +48,7 @@ class OverviewView(TemplateView):
                     }
                     remaining += amount_left
                     total += budget.amount
-                    if amount_percent != 100:
-                        budget_list.append(data)
+                    budget_list.append(data)
                     t_list = budget.get_transactions_for_month_and_year(today.month, today.year)
                     transaction_list.extend(t_list)
 
@@ -156,7 +155,7 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
         data = {'categories': categories}
         form = BudgetAddForm(initial=data)
         form.helper.form_action = reverse('wilbur:add-budget')
-        return render(request, 'base_form.html', {
+        return render(request, '../templates/base/base_form.html', {
             'title': 'Add Budget',
             'form': form,
         })
@@ -201,7 +200,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
             }
             form = BudgetEditForm(data, initial={'categories': categories})
             form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
-            return render(request, 'base_form.html', {
+            return render(request, '../templates/base/base_form.html', {
                 'title': 'Edit Budget',
                 'form': form,
                 'budget_id': budget.id,
@@ -315,7 +314,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         data = {'user': user}
         form = TransactionAddForm(initial=data)
-        return render(request, 'base_form.html', {
+        return render(request, '../templates/base/base_form.html', {
             'title': 'Add Transaction',
             'form': form,
         })
@@ -364,7 +363,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
             }
             form = TransactionEditForm(data, initial={'user': user})
             form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
-            return render(request, 'base_form.html', {
+            return render(request, '../templates/base/base_form.html', {
                 'title': 'Edit Transaction',
                 'form': form,
                 'transaction_id': transaction_id,

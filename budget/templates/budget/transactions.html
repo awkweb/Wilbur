@@ -1,4 +1,4 @@
-{% extends 'base_navbar.html' %}
+{% extends '../templates/base/base_navbar.html' %}
 
 {% load budget_extras %}
 
@@ -16,9 +16,9 @@
 
         {% include 'includes/transactions_table.html' %}
     {% elif hasBudget %}
-        {% include 'includes/empty_state.html' with empty_title="No Budgets" button_title="Add Budget" button_link="wilbur:add-budget"|rev %}
+        {% include 'includes/empty_state.html' with empty_title="No budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
     {% else %}
-        {% include 'includes/empty_state.html' with empty_title="No Transactions" button_title="Add Transaction" button_link="wilbur:add-transaction"|rev %}
+        {% include 'includes/empty_state.html' with empty_title="No transactions" button_title="Add transaction" button_link="wilbur:add-transaction"|rev %}
     {% endif %}
 
 {% endblock %}

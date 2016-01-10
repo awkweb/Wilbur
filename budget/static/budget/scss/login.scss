@@ -1,5 +1,5 @@
 .welcome {
-  margin: 8.5rem 0 1rem;
+  margin: 5.5rem 0 1rem;
   text-align: center;
   font: 500 36px $pacifico;
   color: $green;
@@ -32,18 +32,6 @@
 
   &:focus {
     border-color: $gray-dark;
-  }
-}
-
-.request {
-  @include vendor-prefix(transition, 0.25s);
-  display: none;
-  margin-left: 1rem;
-  color: $gray-light;
-  font-weight: 600;
-
-  &:hover {
-    color: $green;
   }
 }
 

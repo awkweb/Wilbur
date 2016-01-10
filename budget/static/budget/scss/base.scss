@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 body > .container {
   @include clearfix();
-  padding-bottom: 40px;
+  padding-bottom: 30px;
 }
 
 .row {
