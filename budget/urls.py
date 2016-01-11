@@ -13,8 +13,11 @@ urlpatterns = [
 
     url(r'^transactions/$', views.TransactionsView.as_view(), name='transactions'),
     url(r'^transactions/add/$', views.TransactionsAddView.as_view(), name='add-transaction'),
-    url(r'^transactions/edit/(?P<transaction_id>[0-9]+)/$', views.TransactionsEditView.as_view(), name='edit-transaction'),
+    url(r'^transactions/edit/(?P<transaction_id>[0-9]+)/$', views.TransactionsEditView.as_view(),
+        name='edit-transaction'),
     url(r'^transactions/delete/(?P<transaction_id>[0-9]+)/$', views.delete_transaction, name='delete-transaction'),
+
+    url('^signup/$', views.SignUpView.as_view(), name="signup"),
 
     url('^login/$', auth_views.login, {
         'template_name': 'budget/login.html',

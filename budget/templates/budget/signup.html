@@ -1,6 +1,6 @@
 {% extends '../templates/base/base_no_navbar.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 
@@ -11,24 +11,21 @@
             <form method="post" action="{% url 'wilbur:login' %}">
                 {% csrf_token %}
                 <div class="form-section">
+                    <label for="inputEmail">Email</label>
+                    <input type="text" name="email" class="form-input" id="inputEmail" placeholder="charlotte@web.net" autofocus>
+                </div>
+                <div class="form-section">
                     <label for="inputUsername">Username</label>
-                    <input type="text" name="username" class="form-input" id="inputUsername" placeholder="Charlotte" autofocus>
+                    <input type="text" name="username" class="form-input" id="inputUsername" placeholder="Charlotte">
                 </div>
                 <div class="form-section">
                     <label for="inputPassword">Password</label>
-                    <a href="#" class="pull-right">I forgot</a>
                     <input type="password" name="password" class="form-input" id="inputPassword" placeholder="Super, secret">
                 </div>
                 <input type="hidden" name="next" value="{{ next }}"/>
-                <button type="submit" class="button-login">Log In</button>
+                <button type="submit" class="button-login">Sign Up</button>
             </form>
         </div>
     </div>
-
-    {% if form.errors %}
-        <div class="col-sm-4 col-sm-offset-4">
-            <p class="error"><strong>Oh snap!</strong> Invalid credentials.</p>
-        </div>
-    {% endif %}
 
 {% endblock %}

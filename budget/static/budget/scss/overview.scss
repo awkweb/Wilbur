@@ -26,8 +26,8 @@
 
 .overview-stat {
   @include vendor-prefix(border-radius, 4px);
-  padding: 4px 10px;
   margin: 0 2px;
+  padding: 4px 10px;
   color: $white;
   font-weight: 600;
 

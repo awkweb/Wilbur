@@ -338,7 +338,6 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
             transaction.save()
             return {'success': True}
         form_html = render_crispy_form(form)
-        print(type(form_html))
         return {
             'success': False,
             'form_html': form_html,
@@ -414,3 +413,16 @@ def delete_transaction(request, transaction_id):
     transaction.delete()
     return redirect('wilbur:transactions')
 
+
+class SignUpView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'budget/signup.html', {
+            'title': 'Sign Up',
+        })
+
+    @json_view
+    def post(self, request, *args, **kwargs):
+        return {
+            'success': False,
+        }

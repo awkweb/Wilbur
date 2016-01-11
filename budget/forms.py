@@ -1,10 +1,9 @@
 from django import forms
-from django.forms.widgets import DateInput
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML, Field
 from crispy_forms.bootstrap import StrictButton
 
-from .models import Budget, Category
+from .models import Budget
 
 
 class BudgetAddForm(forms.Form):
@@ -51,8 +50,8 @@ class BudgetAddForm(forms.Form):
                     });
                 </script>
                 """),
-                'amount',
-                'description',
+                Field('amount', placeholder='100.00'),
+                Field('description', placeholder='A short, clever description'),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
@@ -106,8 +105,8 @@ class BudgetEditForm(forms.Form):
                     });
                 </script>
                 """),
-                'amount',
-                'description',
+                Field('amount', placeholder='100.00'),
+                Field('description', placeholder='A short, clever description'),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
@@ -171,8 +170,8 @@ class TransactionAddForm(forms.Form):
                     });
                 </script>
                 """),
-                'amount',
-                'transaction_date',
+                Field('amount', placeholder='7.99'),
+                Field('transaction_date', placeholder='1/1/2016'),
                 HTML("""
                 <script>
                     $("#id_transaction_date").minical({
@@ -180,7 +179,7 @@ class TransactionAddForm(forms.Form):
                     });
                 </script>
                 """),
-                'description',
+                Field('description', placeholder='Netflix – and chill?'),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
                 <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
@@ -240,14 +239,14 @@ class TransactionEditForm(forms.Form):
                     });
                 </script>
                 """),
-                'amount',
-                'transaction_date',
+                Field('amount', placeholder='7.99'),
+                Field('transaction_date', placeholder='1/1/2016'),
                 HTML("""
                 <script>
                     $("#id_transaction_date").minical();
                 </script>
                 """),
-                'description',
+                Field('description', placeholder='Netflix – and chill?'),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
                 <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
