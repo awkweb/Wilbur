@@ -1,0 +1,27 @@
+{% load humanize %}
+{% load mathfilters %}
+
+<div class="progress">
+    <div class="progress-title">
+        <p class="pull-left">{{ budget.name.title }} <span class="description">{{ budget.description }}</span></p>
+        <p class="pull-right">${{ budget.amount_left|abs|floatformat:0|intcomma }}
+            {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</p>
+    </div>
+    <div class="progress-container">
+        {% if budget.percent > 0 %}
+            <div class="progress-bar
+                        {% if budget.percent < 85 and budget.percent > 0 %}progress-green
+                        {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
+                        {% else %}progress-red{% endif %}"
+                 role="progressbar" data-width="{{ budget.percent }}%" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100">
+            </div>
+        {% endif %}
+    </div>
+    <div class="progress-footer">
+        <p class="pull-left">${{ budget.amount_spent|floatformat:0|intcomma }} of ${{ budget.amount|floatformat:0|intcomma }}</p>
+        <ul class="pull-right">
+            <li><a href="{% url 'wilbur:edit-budget' budget.id %}">Edit</a></li>
+            {#<li><a href="#">View Transactions</a></li>#}
+        </ul>
+    </div>
+</div>

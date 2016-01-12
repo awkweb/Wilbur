@@ -1,4 +1,4 @@
-from django.contrib.auth import logout
+from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
@@ -87,22 +87,35 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
 
         budget_list = []
+        remaining = 0
+        total = 0
         for budget in budgets:
             amount_spent = budget.get_sum_transactions_for_month_and_year(month, year)
+            amount_left = budget.amount - amount_spent
+            amount_percent = amount_spent / budget.amount * 100
             data = {
                 'id': budget.id,
                 'name': budget.category.name.title(),
                 'amount': budget.amount,
                 'amount_spent': amount_spent,
-                'amount_left': budget.amount - amount_spent,
+                'amount_left': amount_left,
                 'description': budget.description,
-                'percent': amount_spent / budget.amount * 100
+                'percent': amount_percent
             }
+            remaining += amount_left
+            total += budget.amount
             budget_list.append(data)
+        budget_overall = {
+            'name': date(int(year), month=int(month), day=1),
+            'amount': total,
+            'amount_spent': total - remaining,
+            'amount_left': remaining,
+            'percent': (total - remaining) / total * 100
+        }
 
         return render(request, 'budget/budgets.html', {
             'title': 'Budgets',
-            'budgets': budgets,
+            'budget': budget_overall,
             'budget_list': budget_list,
             'select_value': select_value,
             'months': months,
@@ -122,20 +135,34 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         request.session['year'] = year
 
         budget_list = []
+        remaining = 0
+        total = 0
         for budget in budgets:
             amount_spent = budget.get_sum_transactions_for_month_and_year(month, year)
+            amount_left = budget.amount - amount_spent
+            amount_percent = amount_spent / budget.amount * 100
             data = {
                 'id': budget.id,
                 'name': budget.category.name,
                 'amount': budget.amount,
                 'amount_spent': amount_spent,
-                'amount_left': budget.amount - amount_spent,
+                'amount_left': amount_left,
                 'description': budget.description,
-                'percent': amount_spent / budget.amount * 100
+                'percent': amount_percent
             }
+            remaining += amount_left
+            total += budget.amount
             budget_list.append(data)
 
+        budget_overall = {
+            'name': date(int(year), month=int(month), day=1),
+            'amount': total,
+            'amount_spent': total - remaining,
+            'amount_left': remaining,
+            'percent': (total - remaining) / total * 100
+        }
         html = render(request, 'budget/includes/budgets_progress.html', {
+            'budget': budget_overall,
             'budget_list': budget_list,
         })
         html = html.content.decode("utf-8")
