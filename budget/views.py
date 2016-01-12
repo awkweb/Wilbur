@@ -444,12 +444,14 @@ def delete_transaction(request, transaction_id):
 class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
+        print("Fired get")
         return render(request, 'budget/signup.html', {
             'title': 'Sign Up',
         })
 
     @json_view
     def post(self, request, *args, **kwargs):
+        print("Fired post")
         return {
             'success': False,
         }

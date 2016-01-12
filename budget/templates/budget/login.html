@@ -4,15 +4,15 @@
 
 {% block content %}
 
-    <h1 class="welcome">Welcome to Wilbur.</h1>
+    <h1 class="welcome">Wilbur.</h1>
 
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
             <form method="post" action="{% url 'wilbur:login' %}">
                 {% csrf_token %}
                 <div class="form-section">
-                    <label for="inputUsername">Username</label>
-                    <input type="text" name="username" class="form-input" id="inputUsername" placeholder="Charlotte" autofocus>
+                    <label for="inputUsername">Email</label>
+                    <input type="text" name="username" class="form-input" id="inputUsername" placeholder="charlotte@web.net" autofocus>
                 </div>
                 <div class="form-section">
                     <label for="inputPassword">Password</label>
