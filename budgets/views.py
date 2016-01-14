@@ -21,7 +21,7 @@ class OverviewView(TemplateView):
         user = get_user_in_session(request.session)
 
         if user is None:
-            return render(request, 'budget/landing.html', {
+            return render(request, 'budget/../wilbur/templates/overview/landing.html', {
                     'title': 'Track your monthly budgets',
                 })
         else:
@@ -56,7 +56,7 @@ class OverviewView(TemplateView):
                 transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5]
                 remaining_percent = remaining / total * 100
 
-                return render(request, 'budget/overview.html', {
+                return render(request, 'budget/../wilbur/templates/overview/overview.html', {
                     'title': 'Overview',
                     'user': user,
                     'total': total,
@@ -66,7 +66,7 @@ class OverviewView(TemplateView):
                     'transaction_list': transaction_list,
                 })
             else:
-                return render(request, 'budget/overview.html', {
+                return render(request, 'budget/../wilbur/templates/overview/overview.html', {
                     'title': 'Overview',
                     'user': user,
                 })
@@ -113,7 +113,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             'percent': (total - remaining) / total * 100
         }
 
-        return render(request, 'budget/budgets.html', {
+        return render(request, 'budget/../wilbur/templates/budgets/budgets.html', {
             'title': 'Budgets',
             'budget': budget_overall,
             'budget_list': budget_list,
@@ -161,7 +161,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             'amount_left': remaining,
             'percent': (total - remaining) / total * 100
         }
-        html = render(request, 'budget/includes/budgets_progress.html', {
+        html = render(request, 'budget/../wilbur/templates/includes/budgets_progress.html', {
             'budget': budget_overall,
             'budget_list': budget_list,
         })
@@ -182,7 +182,7 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
         data = {'categories': categories}
         form = BudgetAddForm(initial=data)
         form.helper.form_action = reverse('wilbur:add-budget')
-        return render(request, '../templates/base/base_form.html', {
+        return render(request, '../templates/base/../wilbur/templates/base_form.html', {
             'title': 'Add Budget',
             'form': form,
         })
@@ -227,7 +227,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
             }
             form = BudgetEditForm(data, initial={'categories': categories})
             form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
-            return render(request, '../templates/base/base_form.html', {
+            return render(request, '../templates/base/../wilbur/templates/base_form.html', {
                 'title': 'Edit Budget',
                 'form': form,
                 'budget_id': budget.id,
@@ -296,7 +296,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             transaction_list.extend(t_list)
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
-        return render(request, 'budget/transactions.html', {
+        return render(request, 'budget/../wilbur/templates/transactions/transactions.html', {
             'title': 'Transactions',
             'hasBudget': budgets.count() == 0,
             'transactions': transactions,
@@ -323,7 +323,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             transaction_list.extend(t_list)
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
-        html = render(request, 'budget/includes/transactions_table.html', {
+        html = render(request, 'budget/../wilbur/templates/includes/transactions_table.html', {
             'transactions': transactions,
         })
         html = html.content.decode("utf-8")
@@ -341,7 +341,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         data = {'user': user}
         form = TransactionAddForm(initial=data)
-        return render(request, '../templates/base/base_form.html', {
+        return render(request, '../templates/base/../wilbur/templates/base_form.html', {
             'title': 'Add Transaction',
             'form': form,
         })
@@ -389,7 +389,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
             }
             form = TransactionEditForm(data, initial={'user': user})
             form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
-            return render(request, '../templates/base/base_form.html', {
+            return render(request, '../templates/base/../wilbur/templates/base_form.html', {
                 'title': 'Edit Transaction',
                 'form': form,
                 'transaction_id': transaction_id,
@@ -445,7 +445,7 @@ class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         print("Fired get")
-        return render(request, 'budget/signup.html', {
+        return render(request, 'budget/../wilbur/templates/registration/signup.html', {
             'title': 'Sign Up',
         })
 

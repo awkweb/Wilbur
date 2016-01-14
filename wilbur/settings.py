@@ -60,7 +60,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'wilbur/templates'),
             os.path.join(BASE_DIR, 'budget/templates/budget')
             ],
         'APP_DIRS': True,
