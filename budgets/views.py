@@ -33,7 +33,7 @@ class OverviewView(TemplateView):
                 remaining = 0
                 total = 0
                 for budget in budgets:
-                    amount_spent = get_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
+                    amount_spent = get_sum_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
                     amount_left = budget.amount - amount_spent
                     amount_percent = amount_spent / budget.amount * 100
                     data = {
@@ -109,7 +109,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             'amount': total,
             'amount_spent': total - remaining,
             'amount_left': remaining,
-            'percent': (total - remaining) / total * 100
+            'percent': (total - remaining) / total * 100 if total > 0 else 0
         }
 
         return render(request, 'budgets/budgets.html', {

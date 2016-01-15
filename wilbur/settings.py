@@ -110,16 +110,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/wilbur/static/',
-]
+SETTINGS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+
+STATIC_PATH = os.path.join(PROJECT_PATH, 'wilbur/static')
 
 STATIC_URL = '/s/'
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+STATICFILES_DIRS = (
+    STATIC_PATH,
 )
 
 # Other variables

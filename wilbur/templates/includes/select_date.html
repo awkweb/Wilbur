@@ -1,18 +1,17 @@
-{% if months|length > 0 %}
-    <form class="pull-right">
-        <select class="form-control small">
-            {% for month in months %}
-                <option value="{{ month.month }}{{ month.year }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
-            {% endfor %}
-        </select>
-    </form>
-    <script>
-        $(document).ready(function() {
-            $('select').val({{ select_value }});
-            $('select').niceSelect();
-        });
-    </script>
-    {% load staticfiles %}
-    <script src="{% static 'budget/js/niceselect.js' %}"></script>
-    <script src="{% static 'budget/js/selectdate.js' %}"></script>
-{% endif %}
+<form class="pull-right">
+    <select class="form-control small">
+        {% for month in months %}
+            <option value="{{ month.month }}{{ month.year }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
+        {% endfor %}
+    </select>
+</form>
+<script>
+    $(document).ready(function() {
+        var select = $('select')
+        select.val({{ select_value }});
+        select.niceSelect();
+    });
+</script>
+{% load staticfiles %}
+<script src="{% static 'js/niceselect.js' %}"></script>
+<script src="{% static 'js/niceselectdate.js' %}"></script>

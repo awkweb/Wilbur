@@ -1,6 +1,6 @@
 {% extends 'base_navbar.html' %}
 
-{% load budget_extras %}
+{% load budgets %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -14,9 +14,9 @@
             </div>
         </section>
 
-        {% include 'includes/budgets_progress.html' %}
+        {% include 'budgets/budgets_progress.html' %}
     {% else %}
-        {% include 'includes/empty_state.html' with empty_title="No budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
+        {% include 'includes/empty_state.html' with empty_title="No Budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
     {% endif %}
 
 {% endblock %}
