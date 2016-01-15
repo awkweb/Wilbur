@@ -20,7 +20,7 @@ urlpatterns = [
     url('^signup/$', views.SignUpView.as_view(), name="signup"),
 
     url('^login/$', auth_views.login, {
-        'template_name': 'budget/login.html',
+        'template_name': 'registration/login.html',
         'redirect_field_name': 'next'}, name="login"),
     url('^logout/$', auth_views.logout, {'next_page': '/'}, name="logout"),
 ]

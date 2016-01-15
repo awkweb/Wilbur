@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .models import Budget, Category
+from .models import Budget, Category, Transaction
 
 
 def get_user_in_session(session):
@@ -16,9 +16,22 @@ def get_user_in_session(session):
 def get_budgets_for_user(user):
     budgets = None
     try:
-        budgets = Budget.objects.filter(user=user).order_by('category__name')
+        budgets = Budget.objects.filter(user=user).order_by('category__name') # ToDo should be able to remove this b/c order was setup in Models.py
     finally:
         return budgets
+
+
+def get_transactions_for_budget_with_month_and_year(budget, month, year):
+    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year).filter(transaction_date__month=month)
+    return transactions
+
+
+def get_sum_transactions_for_budget_with_month_and_year(budget, month, year):
+    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year).filter(transaction_date__month=month)
+    total = 0
+    for transaction in transactions:
+        total += transaction.amount
+    return total
 
 
 def get_unused_categories_for_user(user, current_budget=None):
