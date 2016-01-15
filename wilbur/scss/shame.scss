@@ -1,0 +1,22 @@
+.description {
+  @media screen and (max-width: $small - 150) {
+      display: none;
+  }
+}
+
+.empty {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.empty-title {
+  font-family: $pacifico;
+  color: $green;
+  font-size: 2rem;
+}
+
+.empty-info {
+  font-family: $open-sans;
+  color: $gray;
+  font-size: 1rem;
+}

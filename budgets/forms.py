@@ -41,6 +41,7 @@ class BudgetAddForm(forms.Form):
                 HTML("""
                 {% load staticfiles %}
                 <script src="{% static 'js/niceselect.js' %}"></script>
+                <script src="{% static 'js/coffeecounter.js' %}"></script>
                 """),
                 'category',
                 HTML("""
@@ -52,6 +53,11 @@ class BudgetAddForm(forms.Form):
                 """),
                 Field('amount', placeholder='100.00'),
                 Field('description', placeholder='A short, clever description'),
+                HTML("""
+                <script>
+                    $("#id_description").coffeeCounter();
+                </script>
+                """),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
@@ -96,6 +102,7 @@ class BudgetEditForm(forms.Form):
                 HTML("""
                 {% load staticfiles %}
                 <script src="{% static 'js/niceselect.js' %}"></script>
+                <script src="{% static 'js/coffeecounter.js' %}"></script>
                 """),
                 'category',
                 HTML("""
@@ -107,6 +114,11 @@ class BudgetEditForm(forms.Form):
                 """),
                 Field('amount', placeholder='100.00'),
                 Field('description', placeholder='A short, clever description'),
+                HTML("""
+                <script>
+                    $("#id_description").coffeeCounter();
+                </script>
+                """),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""<a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>"""),
                 HTML("""
@@ -161,6 +173,7 @@ class TransactionAddForm(forms.Form):
                 {% load staticfiles %}
                 <script src="{% static 'js/niceselect.js' %}"></script>
                 <script src="{% static 'js/minical.js' %}"></script>
+                <script src="{% static 'js/coffeecounter.js' %}"></script>
                 """),
                 'budget',
                 HTML("""
@@ -180,6 +193,11 @@ class TransactionAddForm(forms.Form):
                 </script>
                 """),
                 Field('description', placeholder='Netflix – and chill?'),
+                HTML("""
+                <script>
+                    $("#id_description").coffeeCounter();
+                </script>
+                """),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
                 <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),
@@ -230,6 +248,7 @@ class TransactionEditForm(forms.Form):
                 {% load staticfiles %}
                 <script src="{% static 'js/niceselect.js' %}"></script>
                 <script src="{% static 'js/minical.js' %}"></script>
+                <script src="{% static 'js/coffeecounter.js' %}"></script>
                 """),
                 'budget',
                 HTML("""
@@ -246,7 +265,12 @@ class TransactionEditForm(forms.Form):
                     $("#id_transaction_date").minical();
                 </script>
                 """),
-                Field('description', placeholder='Netflix – and chill?'),
+                Field('description', placeholder='Netflix – and chill?', data_coffee="description"),
+                HTML("""
+                <script>
+                    $("#id_description").coffeeCounter();
+                </script>
+                """),
                 StrictButton('Save', type='submit', css_id='form-submit', css_class="button-submit"),
                 HTML("""
                 <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>"""),

@@ -137,7 +137,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         remaining = 0
         total = 0
         for budget in budgets:
-            amount_spent = get_sum_transactions_for_budget_with_month_and_year(budgets, month, year)
+            amount_spent = get_sum_transactions_for_budget_with_month_and_year(budget, month, year)
             amount_left = budget.amount - amount_spent
             amount_percent = amount_spent / budget.amount * 100
             data = {

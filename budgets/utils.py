@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Budget, Category, Transaction
@@ -8,7 +8,7 @@ def get_user_in_session(session):
     user = None
     try:
         user_id = session['_auth_user_id']
-        user = User.objects.get(pk=user_id)
+        user = get_user_model().objects.get(pk=user_id)
     finally:
         return user
 
@@ -16,7 +16,7 @@ def get_user_in_session(session):
 def get_budgets_for_user(user):
     budgets = None
     try:
-        budgets = Budget.objects.filter(user=user).order_by('category__name') # ToDo should be able to remove this b/c order was setup in Models.py
+        budgets = Budget.objects.filter(user=user).order_by('category__name')
     finally:
         return budgets
 
