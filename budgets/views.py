@@ -1,4 +1,5 @@
 from datetime import date
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
@@ -21,7 +22,7 @@ class OverviewView(TemplateView):
 
         if user is None:
             return render(request, 'overview/landing.html', {
-                    'title': 'Track your monthly budgets',
+                    'title': 'Track your budgets better',
                 })
         else:
             budgets = get_budgets_for_user(user)
@@ -198,6 +199,7 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
             description = form.cleaned_data['description']
             budget = Budget(user=user, category=category, amount=amount, description=description)
             budget.save()
+            messages.success(request, 'Budget added')
             return {
                 'success': True,
             }
@@ -258,6 +260,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                     elif field == 'description':
                         budget.description = cleaned_data
                 budget.save()
+            messages.success(request, 'Budget updated')
             return {'success': True}
         context = {'budget_id': budget_id}
         form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
@@ -272,6 +275,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
 def delete_budget(request, budget_id):
     budget = Budget.objects.get(pk=budget_id)
     budget.delete()
+    messages.success(request, 'Budget deleted')
     return redirect('wilbur:budgets')
 
 
@@ -290,9 +294,11 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
 
         transaction_list = []
+        budget_names = []
         for budget in budgets:
             t_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
             transaction_list.extend(t_list)
+            budget_names.append(budget.category.id)
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
         return render(request, 'transactions/transactions.html', {
@@ -309,17 +315,25 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         budgets = get_budgets_for_user(user)
 
         data = request.POST
-        select_value = data['select_value']
+        action = data['action']
         month = data['month']
         year = data['year']
-        request.session['select_value'] = select_value
-        request.session['month'] = month
-        request.session['year'] = year
 
         transaction_list = []
-        for budget in budgets:
-            t_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
-            transaction_list.extend(t_list)
+        if action == 'selectdate':
+            select_value = data['select_value']
+            request.session['select_value'] = select_value
+            request.session['month'] = month
+            request.session['year'] = year
+            for budget in budgets:
+                t_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
+                transaction_list.extend(t_list)
+        elif action == 'filter':
+            category = data['category']
+            for budget in budgets:
+                t_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
+                transaction_list.extend(t_list)
+
         transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
         html = render(request, 'transactions/transactions_table.html', {
@@ -362,6 +376,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
                     transaction_date=transaction_date
             )
             transaction.save()
+            messages.success(request, 'Transaction added')
             return {'success': True}
         form_html = render_crispy_form(form)
         return {
@@ -422,6 +437,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                     elif field == 'transaction_date':
                         transaction.transaction_date = cleaned_data
                 transaction.save()
+            messages.success(request, 'Transaction updated')
             return {'success': True}
         context = {'transaction_id': transaction_id}
         form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
@@ -437,6 +453,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
 def delete_transaction(request, transaction_id):
     transaction = Transaction.objects.get(pk=transaction_id)
     transaction.delete()
+    messages.success(request, 'Transaction deleted')
     return redirect('wilbur:transactions')
 
 

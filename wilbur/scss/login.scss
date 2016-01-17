@@ -1,7 +1,7 @@
 .welcome {
   margin: 5.5rem 0 1rem;
   text-align: center;
-  font: 500 36px $pacifico;
+  font: 500 36px $cursive;
   color: $green;
 }
 
@@ -12,13 +12,13 @@
     display: inline-block;
     max-width: 100%;
     margin-bottom: 5px;
-    font: 600 .9rem $open-sans;
+    font: 600 .9rem $sans;
     color: $gray-dark;
   }
 
   a {
     padding-top: 2px;
-    font: .9rem $open-sans;
+    font: .9rem $sans;
     color: $gray;
 
     &:hover {
@@ -37,7 +37,7 @@
   padding: 6px 14px;
   border: 2px solid $gray-lighter;
   outline: 0;
-  font: 1rem $open-sans;
+  font: 1rem $sans;
   color: $gray-dark;
 
   &:focus {

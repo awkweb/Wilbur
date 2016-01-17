@@ -3,6 +3,7 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/wilbur/static/js/coffeecounter.js" />
+        <item url="file://$PROJECT_DIR$/wilbur/static/js/filter.js" />
         <item url="file://$PROJECT_DIR$/wilbur/static/js/niceselectdate.js" />
       </sourceFilesUrls>
     </properties>
@@ -19,6 +20,7 @@
       <root url="file://$PROJECT_DIR$/budget/static/budget/js/selectdate.js" />
       <root url="file://$PROJECT_DIR$/budget/static/budget/js/confirm.js" />
       <root url="file://$PROJECT_DIR$/wilbur/static/js/coffeecounter.js" />
+      <root url="file://$PROJECT_DIR$/wilbur/static/js/filter.js" />
       <root url="file://$PROJECT_DIR$/wilbur/static/js/niceselectdate.js" />
     </CLASSES>
     <SOURCES />

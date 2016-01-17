@@ -1,6 +1,6 @@
 .description {
   @media screen and (max-width: $small - 150) {
-      display: none;
+    display: none;
   }
 }
 
@@ -10,13 +10,13 @@
 }
 
 .empty-title {
-  font-family: $pacifico;
+  font-family: $cursive;
   color: $green;
   font-size: 2rem;
 }
 
 .empty-info {
-  font-family: $open-sans;
+  font-family: $sans;
   color: $gray;
   font-size: 1rem;
 }

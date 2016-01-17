@@ -10,7 +10,7 @@ class BudgetAddForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
             queryset=None,
-            empty_label='Select',
+            empty_label='Select a category',
             required=True,
     )
     amount = forms.DecimalField(
@@ -71,7 +71,7 @@ class BudgetEditForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
             queryset=None,
-            empty_label='Select',
+            empty_label='Select a category',
             required=True,
     )
     amount = forms.DecimalField(
@@ -137,7 +137,7 @@ class TransactionAddForm(forms.Form):
     budget = forms.ModelChoiceField(
             label='Budget',
             queryset=None,
-            empty_label='Select',
+            empty_label='Select a budget',
             required=True,
     )
     description = forms.CharField(
@@ -212,7 +212,7 @@ class TransactionEditForm(forms.Form):
     budget = forms.ModelChoiceField(
             label='Budget',
             queryset=None,
-            empty_label='Select',
+            empty_label='Select a budget',
             required=True,
     )
     description = forms.CharField(

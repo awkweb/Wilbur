@@ -7,9 +7,12 @@
 {% block content %}
 
     {% if transactions|length > 0 %}
+        {% include 'includes/message.html' %}
+
         <section class="row">
             <div class="col-sm-10 col-sm-offset-1">
-                <a href="{% url 'wilbur:add-transaction' %}" class="button-toolbar active">Add transaction</a>
+                <a href="{% url 'wilbur:add-transaction' %}" class="button-toolbar active pull-left">Add transaction</a>
+                {% include 'includes/filter_budget.html' %}
                 {% include 'includes/select_date.html' %}
             </div>
         </section>

@@ -14,14 +14,14 @@
 
 .control-label {
   margin-bottom: 5px;
-  font: .9rem $open-sans;
+  font: .9rem $sans;
 }
 
 .control-counter {
   padding-top: 2px;
   float: right;
   color: $gray-light;
-  font: .9rem $open-sans;
+  font: .9rem $sans;
 }
 
 .requiredField {
@@ -38,7 +38,7 @@
   padding: 6px 14px;
   border: 2px solid $gray-lighter;
   outline: 0;
-  font: 1rem $open-sans;
+  font: 1rem $sans;
   color: $gray-dark;
 
   &:hover {
@@ -52,8 +52,8 @@
   &.small {
     margin: 1rem 0;
     height: 10%;
+    width: 150px;
     border-width: 1px;
-    width: auto;
     font-size: .9rem;
     font-weight: 600;
 

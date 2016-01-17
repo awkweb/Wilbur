@@ -2,11 +2,11 @@
 (function() {
   var select;
 
-  select = $('#selectdate');
+  select = $('#filter');
 
   select.change(function() {
     var month, option, select_value, year;
-    option = $('#selectdate option:selected');
+    option = $('#filter option:selected');
     select_value = option.val();
     year = option.data('year');
     month = option.data('month');
@@ -39,4 +39,4 @@
 
 }).call(this);
 
-//# sourceMappingURL=niceselectdate.js.map
+//# sourceMappingURL=filter.js.map

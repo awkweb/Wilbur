@@ -1,7 +1,7 @@
-select = $('#selectdate')
+select = $('#filter')
 
 select.change ->
-  option = $('#selectdate option:selected')
+  option = $('#filter option:selected')
   select_value = option.val()
   year = option.data 'year'
   month = option.data 'month'

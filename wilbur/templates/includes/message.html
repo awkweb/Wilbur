@@ -1,0 +1,19 @@
+{% if messages %}
+    <section class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            {% for message in messages %}
+                <div class="message message-{% if message.tags %}{{ message.tags }}{% endif %} message-dismissible" role="alert">
+                    <strong>{{ message.tags|capfirst }} </strong> {{ message }}
+                </div>
+            {% endfor %}
+            <script>
+                $(document).ready(function() {
+                    $('.message-dismissible').append('<a class="message-close">&times;</a>');
+                    $('.message-close').on('click',function(){
+                        $(this).closest('.message').hide();
+                    });
+                });
+            </script>
+        </div>
+    </section>
+{% endif %}

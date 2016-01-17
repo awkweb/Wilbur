@@ -34,6 +34,10 @@
     border-top: 1px solid $gray-lighter;
   }
 
+  tbody tr:nth-child(even) {
+    background: $white;
+  }
+
   tbody tr:nth-child(odd) {
     background: $gray-lightest;
   }

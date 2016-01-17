@@ -1,5 +1,5 @@
 <form class="pull-right">
-    <select class="form-control small">
+    <select id="selectdate" class="form-control small">
         {% for month in months %}
             <option value="{{ month.month }}{{ month.year }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
         {% endfor %}
@@ -7,7 +7,7 @@
 </form>
 <script>
     $(document).ready(function() {
-        var select = $('select')
+        var select = $('#selectdate');
         select.val({{ select_value }});
         select.niceSelect();
     });

@@ -10,8 +10,8 @@
     <div class="progress-container">
         {% if budget.percent > 0 %}
             <div class="progress-bar
-                        {% if budget.percent < 85 and budget.percent > 0 %}progress-green
-                        {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
+                        {% if budget.percent <= 85 and budget.percent > 0 %}progress-green
+                        {% elif budget.percent > 85 and budget.percent < 95 %}progress-yellow
                         {% else %}progress-red{% endif %}"
                  role="progressbar" data-width="{{ budget.percent }}%" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100">
             </div>
@@ -21,7 +21,7 @@
         <p class="pull-left">${{ budget.amount_spent|floatformat:0|intcomma }} of ${{ budget.amount|floatformat:0|intcomma }}</p>
         <ul class="pull-right">
             <li><a href="{% url 'wilbur:edit-budget' budget.id %}">Edit</a></li>
-            {#<li><a href="#">View Transactions</a></li>#}
+            <li><a href="#">View Transactions</a></li>
         </ul>
     </div>
 </div>

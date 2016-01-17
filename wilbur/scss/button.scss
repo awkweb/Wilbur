@@ -5,7 +5,7 @@
   text-align: center;
   cursor: pointer;
   font-weight: 600;
-  font-family: $open-sans;
+  font-family: $sans;
   height: 40px;
   text-decoration: none;
 }
@@ -31,6 +31,7 @@
   border: 1px solid $gray-lighter;
   height: inherit;
   padding: 6px 15px;
+  background-color: $white;
   color: $gray-dark;
   font-size: .9rem;
 

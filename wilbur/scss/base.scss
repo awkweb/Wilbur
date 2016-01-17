@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  font-family: $open-sans;
+  font-family: $sans;
   margin-bottom: $footer-height;
 }
 
@@ -21,7 +21,7 @@ a {
 
 h1, h2, h3, h4, h5, h6, p {
   color: $gray-dark;
-  font-family: $open-sans;
+  font-family: $sans;
 }
 
 hr {

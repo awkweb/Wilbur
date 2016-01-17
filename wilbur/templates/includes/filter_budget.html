@@ -1,0 +1,18 @@
+<form class="pull-left">
+    <select id="filter" class="form-control small filter">
+        <option value="default" selected>Filter budgets</option>
+        <option value="2">All</option>
+        <option value="3">Groceries</option>
+        <option value="3">Transportation</option>
+        <option value="4">Rent</option>
+        <option value="5">Utilities</option>
+    </select>
+</form>
+<script>
+    $(document).ready(function() {
+        var select = $('#filter');
+        select.niceSelect();
+    });
+</script>
+{% load staticfiles %}
+<script src="{% static 'js/niceselect.js' %}"></script>
