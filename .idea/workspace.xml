@@ -2,43 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5242a15e-1067-47ef-8bf1-cce6b3476c34" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wilbur/coffee/filter.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wilbur/scss/message.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wilbur/templates/includes/filter_budget.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wilbur/templates/includes/message.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budgets/forms.py" afterPath="$PROJECT_DIR$/budgets/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budgets/utils.py" afterPath="$PROJECT_DIR$/budgets/utils.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/budgets/views.py" afterPath="$PROJECT_DIR$/budgets/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/coffee/filter.coffee" afterPath="$PROJECT_DIR$/wilbur/coffee/filter.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/coffee/niceselectdate.coffee" afterPath="$PROJECT_DIR$/wilbur/coffee/niceselectdate.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/base.scss" afterPath="$PROJECT_DIR$/wilbur/scss/base.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/button.scss" afterPath="$PROJECT_DIR$/wilbur/scss/button.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/footer.scss" afterPath="$PROJECT_DIR$/wilbur/scss/footer.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/form.scss" afterPath="$PROJECT_DIR$/wilbur/scss/form.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/login.scss" afterPath="$PROJECT_DIR$/wilbur/scss/login.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/minical.scss" afterPath="$PROJECT_DIR$/wilbur/scss/minical.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/navbar.scss" afterPath="$PROJECT_DIR$/wilbur/scss/navbar.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/niceselect.scss" afterPath="$PROJECT_DIR$/wilbur/scss/niceselect.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/overview.scss" afterPath="$PROJECT_DIR$/wilbur/scss/overview.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/pagination.scss" afterPath="$PROJECT_DIR$/wilbur/scss/pagination.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/shame.scss" afterPath="$PROJECT_DIR$/wilbur/scss/shame.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/styles.scss" afterPath="$PROJECT_DIR$/wilbur/scss/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/table.scss" afterPath="$PROJECT_DIR$/wilbur/scss/table.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/scss/variables.scss" afterPath="$PROJECT_DIR$/wilbur/scss/variables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/static/css/styles.css" afterPath="$PROJECT_DIR$/wilbur/static/css/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/static/css/styles.css.map" afterPath="$PROJECT_DIR$/wilbur/static/css/styles.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/static/js/filter.js" afterPath="$PROJECT_DIR$/wilbur/static/js/filter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/static/js/filter.js.map" afterPath="$PROJECT_DIR$/wilbur/static/js/filter.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/static/js/niceselectdate.js" afterPath="$PROJECT_DIR$/wilbur/static/js/niceselectdate.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/static/js/niceselectdate.js.map" afterPath="$PROJECT_DIR$/wilbur/static/js/niceselectdate.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/budgets/budgets.html" afterPath="$PROJECT_DIR$/wilbur/templates/budgets/budgets.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/budgets/budgets_progress_bar.html" afterPath="$PROJECT_DIR$/wilbur/templates/budgets/budgets_progress_bar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/includes/navbar.html" afterPath="$PROJECT_DIR$/wilbur/templates/includes/navbar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/includes/navbar_no_user.html" afterPath="$PROJECT_DIR$/wilbur/templates/includes/navbar_no_user.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/includes/filter_budget.html" afterPath="$PROJECT_DIR$/wilbur/templates/includes/filter_budget.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/includes/select_date.html" afterPath="$PROJECT_DIR$/wilbur/templates/includes/select_date.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/overview/landing.html" afterPath="$PROJECT_DIR$/wilbur/templates/overview/landing.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/registration/login.html" afterPath="$PROJECT_DIR$/wilbur/templates/registration/login.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/transactions/transactions.html" afterPath="$PROJECT_DIR$/wilbur/templates/transactions/transactions.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wilbur/templates/transactions/transactions_table.html" afterPath="$PROJECT_DIR$/wilbur/templates/transactions/transactions_table.html" />
     </list>
     <ignored path="casper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,7 +29,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/wilbur$makemigrations.coverage" NAME="makemigrations Coverage Results" MODIFIED="1452871951167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/casper$models.coverage" NAME="manage.py Coverage Results" MODIFIED="1449967147665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Casper" />
-    <SUITE FILE_PATH="coverage/wilbur$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1452980552174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/wilbur$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1452999121944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/wilbur$shell.coverage" NAME="runserver Coverage Results" MODIFIED="1452874679991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/wilbur$migrate.coverage" NAME="migrate Coverage Results" MODIFIED="1452872036119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/wilbur$manage_py.coverage" NAME="runserver Coverage Results" MODIFIED="1450411086116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -131,26 +106,26 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/budgets/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44464946">
-              <caret line="289" column="20" selection-start-line="289" selection-start-column="20" selection-end-line="289" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.52401745">
+              <caret line="298" column="0" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <element signature="e#636#3028#0" expanded="false" />
-                <element signature="e#3088#6674#0" expanded="false" />
-                <element signature="e#6737#8062#0" expanded="false" />
-                <element signature="e#8126#10540#0" expanded="false" />
-                <element signature="e#10651#10798#0" expanded="false" />
-                <element signature="e#13588#14893#0" expanded="false" />
-                <element signature="e#14962#17667#0" expanded="false" />
-                <element signature="e#17788#17965#0" expanded="false" />
-                <element signature="e#18005#18323#0" expanded="false" />
+                <element signature="e#636#3020#0" expanded="false" />
+                <element signature="e#3080#6687#0" expanded="false" />
+                <element signature="e#6750#8075#0" expanded="false" />
+                <element signature="e#8139#10553#0" expanded="false" />
+                <element signature="e#10664#10811#0" expanded="false" />
+                <element signature="e#13643#14948#0" expanded="false" />
+                <element signature="e#15017#17722#0" expanded="false" />
+                <element signature="e#17843#18020#0" expanded="false" />
+                <element signature="e#18060#18378#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filter.coffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wilbur/coffee/filter.coffee">
+      <file leaf-file-name="niceselectdate.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wilbur/coffee/niceselectdate.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
@@ -159,11 +134,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="filter.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wilbur/coffee/filter.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="filter_budget.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wilbur/templates/includes/filter_budget.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.625">
-              <caret line="1" column="22" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="22" />
+            <state vertical-scroll-proportion="-1.25">
+              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -206,7 +191,6 @@
         <option value="$PROJECT_DIR$/budgets/templatetags/budgets.py" />
         <option value="$PROJECT_DIR$/wilbur/templates/overview/overview.html" />
         <option value="$PROJECT_DIR$/wilbur/templates/budgets/budgets_progress.html" />
-        <option value="$PROJECT_DIR$/budgets/utils.py" />
         <option value="$PROJECT_DIR$/budgets/models.py" />
         <option value="$PROJECT_DIR$/wilbur/scss/base.scss" />
         <option value="$PROJECT_DIR$/wilbur/scss/_base.scss" />
@@ -227,16 +211,17 @@
         <option value="$PROJECT_DIR$/budgets/forms.py" />
         <option value="$PROJECT_DIR$/wilbur/scss/table.scss" />
         <option value="$PROJECT_DIR$/wilbur/templates/transactions/transactions_table.html" />
-        <option value="$PROJECT_DIR$/wilbur/templates/transactions/transactions.html" />
         <option value="$PROJECT_DIR$/wilbur/static/js/niceselectdate.js" />
         <option value="$PROJECT_DIR$/wilbur/scss/shame.scss" />
         <option value="$PROJECT_DIR$/wilbur/scss/button.scss" />
         <option value="$PROJECT_DIR$/wilbur/scss/niceselect.scss" />
         <option value="$PROJECT_DIR$/wilbur/scss/form.scss" />
-        <option value="$PROJECT_DIR$/wilbur/templates/includes/select_date.html" />
+        <option value="$PROJECT_DIR$/wilbur/coffee/filter.coffee" />
+        <option value="$PROJECT_DIR$/budgets/utils.py" />
+        <option value="$PROJECT_DIR$/wilbur/templates/transactions/transactions.html" />
         <option value="$PROJECT_DIR$/wilbur/templates/includes/filter_budget.html" />
         <option value="$PROJECT_DIR$/wilbur/coffee/niceselectdate.coffee" />
-        <option value="$PROJECT_DIR$/wilbur/coffee/filter.coffee" />
+        <option value="$PROJECT_DIR$/wilbur/templates/includes/select_date.html" />
         <option value="$PROJECT_DIR$/budgets/views.py" />
       </list>
     </option>
@@ -577,6 +562,86 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transactions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="includes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wilbur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coffee" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -975,7 +1040,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16484375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909784" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -983,9 +1048,9 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2640625" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3362944" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994923" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21595599" sideWeight="0.48515624" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21595599" sideWeight="0.48515624" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24968314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3314993" sideWeight="0.49434572" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3314993" sideWeight="0.49434572" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36726272" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1072,13 +1137,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/budgets/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43186182">
-          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/budgets/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6909789">
@@ -1153,21 +1211,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wilbur/templates/budgets/budgets_progress_bar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31853282">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wilbur/templates/budgets/budgets_progress.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.507722">
-          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wilbur/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2027027">
@@ -1196,6 +1239,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,6 +1279,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11111111">
           <caret line="5" column="66" selection-start-line="5" selection-start-column="66" selection-end-line="5" selection-end-column="66" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1369,34 +1414,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wilbur/coffee/niceselectdate.coffee">
+    <entry file="file://$PROJECT_DIR$/wilbur/templates/budgets/budgets_progress_bar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52583027">
-          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+        <state vertical-scroll-proportion="-6.875">
+          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wilbur/templates/includes/select_date.html">
+    <entry file="file://$PROJECT_DIR$/wilbur/templates/budgets/budgets_progress.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43436295">
-          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wilbur/templates/transactions/transactions.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31853282">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wilbur/templates/includes/filter_budget.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625">
-          <caret line="1" column="22" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="22" />
+        <state vertical-scroll-proportion="-0.12934363">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1404,26 +1433,66 @@
     <entry file="file://$PROJECT_DIR$/wilbur/coffee/filter.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budgets/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="52" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wilbur/templates/transactions/transactions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34749034">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wilbur/templates/includes/select_date.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28957528">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wilbur/coffee/niceselectdate.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wilbur/templates/includes/filter_budget.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.25">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/budgets/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44464946">
-          <caret line="289" column="20" selection-start-line="289" selection-start-column="20" selection-end-line="289" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.52401745">
+          <caret line="298" column="0" selection-start-line="298" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-            <element signature="e#636#3028#0" expanded="false" />
-            <element signature="e#3088#6674#0" expanded="false" />
-            <element signature="e#6737#8062#0" expanded="false" />
-            <element signature="e#8126#10540#0" expanded="false" />
-            <element signature="e#10651#10798#0" expanded="false" />
-            <element signature="e#13588#14893#0" expanded="false" />
-            <element signature="e#14962#17667#0" expanded="false" />
-            <element signature="e#17788#17965#0" expanded="false" />
-            <element signature="e#18005#18323#0" expanded="false" />
+            <element signature="e#636#3020#0" expanded="false" />
+            <element signature="e#3080#6687#0" expanded="false" />
+            <element signature="e#6750#8075#0" expanded="false" />
+            <element signature="e#8139#10553#0" expanded="false" />
+            <element signature="e#10664#10811#0" expanded="false" />
+            <element signature="e#13643#14948#0" expanded="false" />
+            <element signature="e#15017#17722#0" expanded="false" />
+            <element signature="e#17843#18020#0" expanded="false" />
+            <element signature="e#18060#18378#0" expanded="false" />
           </folding>
         </state>
       </provider>

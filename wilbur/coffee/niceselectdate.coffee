@@ -2,7 +2,7 @@ select = $('#selectdate')
 
 select.change ->
   option = $('#selectdate option:selected')
-  select_value = option.val()
+  value = option.val()
   year = option.data 'year'
   month = option.data 'month'
   $.ajaxSetup headers: 'X-CSRFToken': Cookies.get('csrftoken')
@@ -11,7 +11,7 @@ select.change ->
     type: 'post'
     data: {
       'action': 'selectdate',
-      'select_value': select_value,
+      'value': value,
       'year': year,
       'month': month
     }

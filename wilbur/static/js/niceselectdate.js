@@ -5,9 +5,9 @@
   select = $('#selectdate');
 
   select.change(function() {
-    var month, option, select_value, year;
+    var month, option, value, year;
     option = $('#selectdate option:selected');
-    select_value = option.val();
+    value = option.val();
     year = option.data('year');
     month = option.data('month');
     $.ajaxSetup({
@@ -20,7 +20,7 @@
       type: 'post',
       data: {
         'action': 'selectdate',
-        'select_value': select_value,
+        'value': value,
         'year': year,
         'month': month
       },

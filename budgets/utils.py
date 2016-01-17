@@ -21,6 +21,12 @@ def get_budgets_for_user(user):
         return budgets
 
 
+def get_transactions_with_month_and_year(user, month, year):
+    transactions = Transaction.objects.filter(budget__user=user).filter(transaction_date__year=year)\
+        .filter(transaction_date__month=month).order_by('-transaction_date')
+    return transactions
+
+
 def get_transactions_for_budget_with_month_and_year(budget, month, year):
     transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year).filter(transaction_date__month=month)
     return transactions

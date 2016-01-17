@@ -5,11 +5,9 @@
   select = $('#filter');
 
   select.change(function() {
-    var month, option, select_value, year;
+    var budget, option;
     option = $('#filter option:selected');
-    select_value = option.val();
-    year = option.data('year');
-    month = option.data('month');
+    budget = option.val();
     $.ajaxSetup({
       headers: {
         'X-CSRFToken': Cookies.get('csrftoken')
@@ -19,10 +17,8 @@
       url: window.location.pathname,
       type: 'post',
       data: {
-        'action': 'selectdate',
-        'select_value': select_value,
-        'year': year,
-        'month': month
+        'action': 'filter',
+        'budget': budget
       },
       success: function(data) {
         var html;

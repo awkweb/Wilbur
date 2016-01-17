@@ -22,8 +22,8 @@ class OverviewView(TemplateView):
 
         if user is None:
             return render(request, 'overview/landing.html', {
-                    'title': 'Track your budgets better',
-                })
+                'title': 'Track your budgets better',
+            })
         else:
             budgets = get_budgets_for_user(user)
 
@@ -83,7 +83,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         today = now()
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
-        select_value = request.session.get('select_value', "%s%s" % (today.month, today.year))
+        selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
 
         budget_list = []
@@ -117,7 +117,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             'title': 'Budgets',
             'budget': budget_overall,
             'budget_list': budget_list,
-            'select_value': select_value,
+            'selectdate_value': selectdate_value,
             'months': months,
         })
 
@@ -127,10 +127,10 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         budgets = get_budgets_for_user(user)
 
         data = request.POST
-        select_value = data['select_value']
+        selectdate_value = data['value']
         month = data['month']
         year = data['year']
-        request.session['select_value'] = select_value
+        request.session['selectdate_value'] = selectdate_value
         request.session['month'] = month
         request.session['year'] = year
 
@@ -285,56 +285,60 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
-        budgets = get_budgets_for_user(user)
 
         today = now()
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
-        select_value = request.session.get('select_value', "%s%s" % (today.month, today.year))
+        selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
+        filter = request.session.get('filter_value', '-1')
+        filter_value = request.session.get('filter_value', filter)  # ToDo store filter in session
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
 
-        transaction_list = []
-        budget_names = []
-        for budget in budgets:
-            t_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
-            transaction_list.extend(t_list)
-            budget_names.append(budget.category.id)
-        transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
+        transaction_list = get_transactions_with_month_and_year(user, month, year)
         transactions = get_paginator_for_list(request, transaction_list, 10)
+
+        budget_list = []
+        budgets = get_budgets_for_user(user)
+        for budget in budgets:
+            b = {
+                'id': budget.category.id,
+                'name': budget.category.name,
+            }
+            budget_list.append(b)
         return render(request, 'transactions/transactions.html', {
             'title': 'Transactions',
             'hasBudget': budgets.count() == 0,
             'transactions': transactions,
-            'select_value': select_value,
+            'selectdate_value': selectdate_value,
             'months': months,
+            'budget_list': budget_list,
         })
 
     @json_view
     def post(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
-        budgets = get_budgets_for_user(user)
 
         data = request.POST
         action = data['action']
-        month = data['month']
-        year = data['year']
 
         transaction_list = []
         if action == 'selectdate':
-            select_value = data['select_value']
-            request.session['select_value'] = select_value
+            value = data['value']
+            request.session['selectdate_value'] = value
+            month = data['month']
+            year = data['year']
             request.session['month'] = month
             request.session['year'] = year
-            for budget in budgets:
-                t_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
-                transaction_list.extend(t_list)
+            transaction_list = get_transactions_with_month_and_year(user, month, year)
         elif action == 'filter':
-            category = data['category']
-            for budget in budgets:
-                t_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
-                transaction_list.extend(t_list)
+            budget = data['budget']
+            month = request.session['month']
+            year = request.session['year']
+            if budget == '-1':
+                transaction_list = get_transactions_with_month_and_year(user, month, year)
+            else:
+                transaction_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
 
-        transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)
         transactions = get_paginator_for_list(request, transaction_list, 10)
         html = render(request, 'transactions/transactions_table.html', {
             'transactions': transactions,
