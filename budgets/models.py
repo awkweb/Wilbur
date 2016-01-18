@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from cuser.models import CUser
 
 
 class Category(models.Model):
@@ -15,7 +15,7 @@ class Category(models.Model):
 
 
 class Budget(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(CUser)
     category = models.ForeignKey(Category)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=35, blank=True)
