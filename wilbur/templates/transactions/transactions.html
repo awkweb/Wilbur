@@ -6,7 +6,9 @@
 
 {% block content %}
 
-    {% if transactions|length > 0 %}
+    {% if hasBudget %}
+        {% include 'includes/empty_state.html' with empty_title="No Budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
+    {% else %}
         {% include 'includes/message.html' %}
 
         <section class="row">
@@ -18,10 +20,6 @@
         </section>
 
         {% include 'transactions/transactions_table.html' %}
-    {% elif hasBudget %}
-        {% include 'includes/empty_state.html' with empty_title="No Budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
-    {% else %}
-        {% include 'includes/empty_state.html' with empty_title="No Transactions" button_title="Add transaction" button_link="wilbur:add-transaction"|rev %}
     {% endif %}
 
 {% endblock %}

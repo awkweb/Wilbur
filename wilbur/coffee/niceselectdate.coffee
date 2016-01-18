@@ -10,8 +10,7 @@ select.change ->
     url: window.location.pathname
     type: 'post'
     data: {
-      'action': 'selectdate',
-      'value': value,
+      'selectdate_value': value,
       'year': year,
       'month': month
     }

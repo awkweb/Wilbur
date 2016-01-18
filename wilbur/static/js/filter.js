@@ -5,32 +5,11 @@
   select = $('#filter');
 
   select.change(function() {
-    var budget, option;
+    var link, option, value;
     option = $('#filter option:selected');
-    budget = option.val();
-    $.ajaxSetup({
-      headers: {
-        'X-CSRFToken': Cookies.get('csrftoken')
-      }
-    });
-    $.ajax({
-      url: window.location.pathname,
-      type: 'post',
-      data: {
-        'action': 'filter',
-        'budget': budget
-      },
-      success: function(data) {
-        var html;
-        if (data['success']) {
-          html = $('#content-ajax');
-          html.replaceWith(data['html']);
-        }
-      },
-      error: function() {
-        form.find('.error-message').show();
-      }
-    });
+    value = option.val();
+    link = value !== '-1' ? "/transactions/budget/" + value + "/" : '/transactions/';
+    return window.location.replace(link);
   });
 
 }).call(this);

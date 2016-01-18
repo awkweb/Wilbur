@@ -10,7 +10,7 @@ class BudgetAddForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
             queryset=None,
-            empty_label='Select a category',
+            empty_label='Select category',
             required=True,
     )
     amount = forms.DecimalField(
@@ -71,7 +71,7 @@ class BudgetEditForm(forms.Form):
     category = forms.ModelChoiceField(
             label='Category',
             queryset=None,
-            empty_label='Select a category',
+            empty_label='Select category',
             required=True,
     )
     amount = forms.DecimalField(
@@ -137,7 +137,7 @@ class TransactionAddForm(forms.Form):
     budget = forms.ModelChoiceField(
             label='Budget',
             queryset=None,
-            empty_label='Select a budget',
+            empty_label='Select budget',
             required=True,
     )
     description = forms.CharField(
@@ -184,7 +184,7 @@ class TransactionAddForm(forms.Form):
                 </script>
                 """),
                 Field('amount', placeholder='7.99'),
-                Field('transaction_date', placeholder='1/1/2016'),
+                Field('transaction_date', placeholder='10/15/1952'),
                 HTML("""
                 <script>
                     $("#id_transaction_date").minical({
@@ -212,7 +212,7 @@ class TransactionEditForm(forms.Form):
     budget = forms.ModelChoiceField(
             label='Budget',
             queryset=None,
-            empty_label='Select a budget',
+            empty_label='Select budget',
             required=True,
     )
     description = forms.CharField(
@@ -259,7 +259,7 @@ class TransactionEditForm(forms.Form):
                 </script>
                 """),
                 Field('amount', placeholder='7.99'),
-                Field('transaction_date', placeholder='1/1/2016'),
+                Field('transaction_date', placeholder='10/15/1952'),
                 HTML("""
                 <script>
                     $("#id_transaction_date").minical();

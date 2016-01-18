@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Sum
 
 from .models import Budget, Category, Transaction
 
@@ -28,15 +29,16 @@ def get_transactions_with_month_and_year(user, month, year):
 
 
 def get_transactions_for_budget_with_month_and_year(budget, month, year):
-    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year).filter(transaction_date__month=month)
+    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year)\
+        .filter(transaction_date__month=month)
     return transactions
 
 
 def get_sum_transactions_for_budget_with_month_and_year(budget, month, year):
-    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year).filter(transaction_date__month=month)
-    total = 0
-    for transaction in transactions:
-        total += transaction.amount
+    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year)\
+        .filter(transaction_date__month=month)
+    total = transactions.aggregate(Sum('amount'))['amount__sum']
+    total = int(total) if total is not None else 0
     return total
 
 

@@ -14,10 +14,10 @@
             <p class="overview-callout">
                 <span class="overview-name">Hey {{ user.first_name }}</span> , you have
                 <span class="overview-stat
-                    {% if remaining_percent < 85 and remaining_percent > 0 %}progress-green
-                    {% elif remaining_percent > 86 and remaining_percent < 95 %}progress-yellow
+                    {% if remaining_percent <= 100 and remaining_percent >= 15 %}progress-green
+                    {% elif remaining_percent > 5 and remaining_percent < 16 %}progress-yellow
                     {% else %}progress-red{% endif %}">${{ remaining|floatformat:0|intcomma }}</span>
-                left in {% now "F" %}.</p>
+                left in {% now "F Y" %}.</p>
         </div>
     </section>
 
@@ -25,18 +25,18 @@
         <div class="col-sm-5 col-sm-offset-1">
             <h2>Approaching Budgets</h2>
             {% for budget in budget_list %}
-                <p class="overview-callout small">{{ budget.name }}
+                <a class="overview-callout small" href="{% url 'wilbur:transactions-filter' budget.id %}">{{ budget.name }}
                     <span class="overview-stat
-                        {% if budget.percent < 85 and budget.percent >= 0 %}progress-green
+                        {% if budget.percent <= 85 and budget.percent >= 0 %}progress-green
                         {% elif budget.percent > 86 and budget.percent < 95 %}progress-yellow
                         {% else %}progress-red{% endif %} small">${{ budget.amount_left|abs|floatformat:0|intcomma }}</span>
-                    {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</p>
+                    {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</a>
             {% endfor %}
         </div>
         <div class="col-sm-5">
             <h2>Recent Transactions</h2>
             {% for transaction in transaction_list %}
-                <a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }},
+                <a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|date:"N j" }},
                     {{ transaction.budget.category.name.title }} ${{ transaction.amount|intcomma }}</a>
             {% endfor %}
                 <a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add Transaction</a>

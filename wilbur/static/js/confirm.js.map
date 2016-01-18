@@ -1,7 +1,7 @@
 {
   "version": 3,
   "file": "confirm.js",
-  "sourceRoot": "../coffee",
+  "sourceRoot": "../../coffee",
   "sources": [
     "confirm.coffee"
   ],

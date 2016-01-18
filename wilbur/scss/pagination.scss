@@ -17,24 +17,20 @@
   float: right;
 
   li {
+    float: left;
     display: inline;
-    margin-left: -5px;
-
-    &:first-child {
-      margin-left: 0;
-    }
   }
 }
 
 .button-pagination {
   @include vendor-prefix(transition, 0.25s);
-  position: relative;
   text-align: center;
   cursor: pointer;
   font-weight: 600;
   font-family: $sans;
   text-decoration: none;
   border: 1px solid $gray-lighter;
+  border-left: none;
   padding: 6px 15px;
   color: $gray-dark;
   font-size: .9rem;
@@ -52,8 +48,6 @@
   }
 
   &.current {
-    z-index: 200;
-    border-color: $green;
     background-color: $green;
     color: $white;
   }
@@ -61,6 +55,7 @@
   &.previous {
     @include vendor-prefix(border-top-left-radius, 4px);
     @include vendor-prefix(border-bottom-left-radius, 4px);
+    border-left: 1px solid $gray-lighter;
   }
 
   &.next {

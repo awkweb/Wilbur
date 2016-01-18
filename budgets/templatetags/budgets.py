@@ -7,3 +7,5 @@ register = template.Library()
 @register.filter()
 def rev(value):
     return reverse(value)
+
+

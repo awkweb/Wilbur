@@ -21,3 +21,49 @@
     }
   }
 }
+
+.preview {
+  width: 75%;
+  max-width: 800px;
+  margin: 3.5rem auto 0;
+
+  @media screen and (max-width: $small) {
+    width: 95%;
+  }
+}
+
+.preview-image {
+  max-width: 100%;
+}
+
+.animated {
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}

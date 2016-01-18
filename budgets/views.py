@@ -29,6 +29,11 @@ class OverviewView(TemplateView):
 
             if budgets:
                 today = now()
+
+                request.session['selectdate_value'] = "%s%s" % (today.month, today.year)
+                request.session['month'] = today.month
+                request.session['year'] = today.year
+
                 budget_list = []
                 transaction_list = []
                 remaining = 0
@@ -85,6 +90,15 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         year = request.session.get('year', today.year)
         selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
+        if months.count() == 0:
+            month = today.month
+            year = today.year
+            selectdate_value = "%s%s" % (today.month, today.year)
+        elif months.count() == 1:
+            selectdate = months.first()
+            month = selectdate.month
+            year = selectdate.year
+            selectdate_value = "%s%s" % (selectdate.month, selectdate.year)
 
         budget_list = []
         remaining = 0
@@ -127,7 +141,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         budgets = get_budgets_for_user(user)
 
         data = request.POST
-        selectdate_value = data['value']
+        selectdate_value = data['selectdate_value']
         month = data['month']
         year = data['year']
         request.session['selectdate_value'] = selectdate_value
@@ -290,18 +304,32 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
         selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
-        filter = request.session.get('filter_value', '-1')
-        filter_value = request.session.get('filter_value', filter)  # ToDo store filter in session
         months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
+        if months.count() == 0:
+            month = today.month
+            year = today.year
+            selectdate_value = "%s%s" % (today.month, today.year)
+        elif months.count() == 1:
+            selectdate = months.first()
+            month = selectdate.month
+            year = selectdate.year
+            selectdate_value = "%s%s" % (selectdate.month, selectdate.year)
+        filter_value = kwargs.get('budget_id', '-1')
 
-        transaction_list = get_transactions_with_month_and_year(user, month, year)
+        if filter_value == '-1':
+            transaction_list = get_transactions_with_month_and_year(user, month, year)
+        else:
+            budget = Budget.objects.get(pk=filter_value)
+            if budget.user != user:
+                raise Http404("Budget does not exist")
+            transaction_list = get_transactions_for_budget_with_month_and_year(filter_value, month, year)
         transactions = get_paginator_for_list(request, transaction_list, 10)
 
         budget_list = []
         budgets = get_budgets_for_user(user)
         for budget in budgets:
             b = {
-                'id': budget.category.id,
+                'id': budget.id,
                 'name': budget.category.name,
             }
             budget_list.append(b)
@@ -311,6 +339,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             'transactions': transactions,
             'selectdate_value': selectdate_value,
             'months': months,
+            'filter_value': filter_value,
             'budget_list': budget_list,
         })
 
@@ -319,27 +348,23 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
 
         data = request.POST
-        action = data['action']
+        selectdate_value = data['selectdate_value']
+        request.session['selectdate_value'] = selectdate_value
+        month = data['month']
+        year = data['year']
+        request.session['month'] = month
+        request.session['year'] = year
+        filter_value = kwargs.get('budget_id', '-1')
 
-        transaction_list = []
-        if action == 'selectdate':
-            value = data['value']
-            request.session['selectdate_value'] = value
-            month = data['month']
-            year = data['year']
-            request.session['month'] = month
-            request.session['year'] = year
+        if filter_value == '-1':
             transaction_list = get_transactions_with_month_and_year(user, month, year)
-        elif action == 'filter':
-            budget = data['budget']
-            month = request.session['month']
-            year = request.session['year']
-            if budget == '-1':
-                transaction_list = get_transactions_with_month_and_year(user, month, year)
-            else:
-                transaction_list = get_transactions_for_budget_with_month_and_year(budget, month, year)
-
+        else:
+            budget = Budget.objects.get(pk=filter_value)
+            if budget.user != user:
+                raise Http404("Budget does not exist")
+            transaction_list = get_transactions_for_budget_with_month_and_year(filter_value, month, year)
         transactions = get_paginator_for_list(request, transaction_list, 10)
+
         html = render(request, 'transactions/transactions_table.html', {
             'transactions': transactions,
         })

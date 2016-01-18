@@ -116,12 +116,12 @@ ul.minical {
                   text-decoration: none;
                 }
                 &.minical_highlighted a {
-                  border-color: $green;
-                  color: $gray-dark;
+                  border-color: $gray-lighter;
+                  background-color: $gray-lighter;
                 }
                 &.minical_selected a {
                   border-color: $green;
-                  color: $gray-dark;
+                  background-color: $white;
                 }
                 &.minical_past_month a,
                 &.minical_future_month a {
