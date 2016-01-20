@@ -7,6 +7,7 @@
       <default-schemas>postgres.*</default-schemas>
     </data-source>
     <data-source name="Django default" uuid="d77d69d7-0954-4402-967b-421b97a67bd9">
+      <user-name>thomasmeagher</user-name>
       <user-password>dfd8dfc5dfc5dfde</user-password>
       <schema-pattern>postgres.*</schema-pattern>
       <default-schemas>postgres.*</default-schemas>

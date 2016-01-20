@@ -12,17 +12,16 @@
                 {% csrf_token %}
                 <div class="form-section">
                     <label for="inputEmail">Email</label>
-                    <input type="email" name="email" class="form-input" id="inputEmail" placeholder="charlotte@web.net" autofocus>
+                    <input type="email" name="email" class="form-input" id="inputEmail" placeholder="charlotte@web.net" maxlength="255" autofocus required>
                 </div>
                 <div class="form-section">
                     <label for="inputPassword">Password</label>
-                    <input type="password" name="password" class="form-input" id="inputPassword" placeholder="Super, secret">
+                    <input type="password" name="password1" class="form-input" id="inputPassword" placeholder="Super, secret" required>
                 </div>
                 <div class="form-section">
                     <label for="inputConfirm">Confirm Password</label>
-                    <input type="password" name="password" class="form-input" id="inputConfirm" placeholder="You know the drill.">
+                    <input type="password" name="password2" class="form-input" id="inputConfirm" placeholder="You know the drill." required>
                 </div>
-                <input type="hidden" name="next" value="{{ next }}"/>
                 <button type="submit" class="button-login">Sign Up</button>
             </form>
         </div>

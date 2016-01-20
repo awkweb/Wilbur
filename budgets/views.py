@@ -11,6 +11,7 @@ from django.views.generic.base import TemplateView
 from jsonview.decorators import json_view
 from crispy_forms.utils import render_crispy_form
 
+from cuser.forms import UserCreationForm
 from .forms import BudgetAddForm, BudgetEditForm, TransactionAddForm, TransactionEditForm
 from .utils import *
 
@@ -489,14 +490,22 @@ def delete_transaction(request, transaction_id):
 class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        print("Fired get")
         return render(request, 'registration/signup.html', {
             'title': 'Sign Up',
         })
 
     @json_view
     def post(self, request, *args, **kwargs):
-        print("Fired post")
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
+            form.clean_password2()
+            form.save()
+            return {'success': True}
+        form_html = render_crispy_form(form)
         return {
             'success': False,
+            'form_html': form_html,
         }

@@ -11,12 +11,12 @@
                 {% csrf_token %}
                 <div class="form-section">
                     <label for="inputUsername">Email</label>
-                    <input type="email" name="username" class="form-input" id="inputUsername" placeholder="charlotte@web.net" autofocus>
+                    <input type="email" name="username" class="form-input" id="inputUsername" placeholder="charlotte@web.net" autofocus required>
                 </div>
                 <div class="form-section">
                     <label for="inputPassword">Password</label>
 {#                    <a href="#" class="pull-right">I forgot</a>#}
-                    <input type="password" name="password" class="form-input" id="inputPassword" placeholder="Super, secret">
+                    <input type="password" name="password" class="form-input" id="inputPassword" placeholder="Super, secret" required>
                 </div>
                 <input type="hidden" name="next" value="{{ next }}"/>
                 <button type="submit" class="button-login">Log In</button>
