@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
 
-from .models import Budget, Category, Transaction
+from budgets.models import Budget, Category, Transaction
 
 
 def get_user_in_session(session):

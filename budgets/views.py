@@ -12,8 +12,8 @@ from jsonview.decorators import json_view
 from crispy_forms.utils import render_crispy_form
 
 from cuser.forms import UserCreationForm
-from .forms import BudgetAddForm, BudgetEditForm, TransactionAddForm, TransactionEditForm
-from .utils import *
+from budgets.forms import BudgetAddForm, BudgetEditForm, TransactionAddForm, TransactionEditForm
+from budgets.utils import *
 
 
 class OverviewView(TemplateView):
@@ -288,7 +288,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
 
 @login_required(login_url='/login/', redirect_field_name='next')
 def delete_budget(request, budget_id):
-    budget = Budget.objects.get(pk=budget_id)
+    budget = Budget.objects.get(pk=budget_id) # ToDo check if budget belongs to user
     budget.delete()
     messages.success(request, 'Budget deleted')
     return redirect('wilbur:budgets')
@@ -431,7 +431,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                 'transaction_date': transaction.transaction_date,
                 'user': user,
             }
-            form = TransactionEditForm(data, initial={'user': user})
+            form = TransactionEditForm(data, initial={'user': user}, label_suffix='')
             form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
             return render(request, 'base_form.html', {
                 'title': 'Edit Transaction',
@@ -505,7 +505,14 @@ class SignUpView(TemplateView):
             form.save()
             return {'success': True}
         form_html = render_crispy_form(form)
+        errors = form.error_messages
+        print(errors)
+        if errors:
+            for field in form:
+                for error in field.errors:
+                    print(error)
         return {
             'success': False,
             'form_html': form_html,
+            'errors': errors,
         }

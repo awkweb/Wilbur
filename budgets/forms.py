@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, HTML, Field
 from crispy_forms.bootstrap import StrictButton
 
-from .models import Budget
+from budgets.models import Budget
 
 
 class BudgetAddForm(forms.Form):
@@ -140,11 +140,6 @@ class TransactionAddForm(forms.Form):
             empty_label='Select budget',
             required=True,
     )
-    description = forms.CharField(
-            label='Description',
-            max_length=75,
-            required=False,
-    )
     amount = forms.DecimalField(
             label='Amount',
             min_value=0,
@@ -155,6 +150,11 @@ class TransactionAddForm(forms.Form):
     transaction_date = forms.DateField(
             label='Transaction Date',
             required=True,
+    )
+    description = forms.CharField(
+            label='Description',
+            max_length=75,
+            required=False,
     )
 
     def __init__(self, *args, **kwargs):
@@ -215,11 +215,6 @@ class TransactionEditForm(forms.Form):
             empty_label='Select budget',
             required=True,
     )
-    description = forms.CharField(
-            label='Description',
-            max_length=75,
-            required=False,
-    )
     amount = forms.DecimalField(
             label='Amount',
             min_value=0,
@@ -230,6 +225,11 @@ class TransactionEditForm(forms.Form):
     transaction_date = forms.DateField(
             label='Transaction Date',
             required=True,
+    )
+    description = forms.CharField(
+            label='Description',
+            max_length=75,
+            required=False,
     )
 
     def __init__(self, *args, **kwargs):
