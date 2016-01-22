@@ -1,11 +1,15 @@
-{% for field in form %}
-    <div>
-        {{ field.label_tag }}
-        <div>
-            {{ field }}
-            {% if field.errors %}
-                {{ field.errors }}
-            {% endif %}
+<form method="post" action="{% url 'wilbur:signup' %}">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-section">
+            {{ field.label_tag }}
+            <div>
+                {{ field }}
+                {% if field.errors %}
+                    {{ field.errors }}
+                {% endif %}
+            </div>
         </div>
-    </div>
-{% endfor %}
+    {% endfor %}
+    <button type="submit" class="button-login">Sign Up</button>
+</form>

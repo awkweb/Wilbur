@@ -490,8 +490,10 @@ def delete_transaction(request, transaction_id):
 class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'registration/signup.html', {
+        form = UserCreationForm(label_suffix='')
+        return render(request, 'base_form.html', {
             'title': 'Sign Up',
+            'form': form,
         })
 
     @json_view
@@ -504,15 +506,22 @@ class SignUpView(TemplateView):
             form.clean_password2()
             form.save()
             return {'success': True}
-        form_html = render_crispy_form(form)
+        form_html = render(request, 'base_form.html', {
+            'form': form,
+        })
+        print(form_html)
         errors = form.error_messages
         print(errors)
         if errors:
             for field in form:
                 for error in field.errors:
                     print(error)
-        return {
-            'success': False,
-            'form_html': form_html,
-            'errors': errors,
-        }
+        # return {
+        #     'success': False,
+        #     'form_html': form_html,
+        #     'errors': errors,
+        # }
+        return render(request, 'base_form.html', {
+            'title': 'Sign Up',
+            'form': form,
+        })
