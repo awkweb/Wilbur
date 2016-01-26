@@ -3,12 +3,12 @@
     {% for field in form %}
         <div class="form-section">
             {{ field.label_tag }}
-            <div>
-                {{ field }}
-                {% if field.errors %}
-                    {{ field.errors }}
-                {% endif %}
-            </div>
+            {{ field }}
+            {% if field.errors %}
+                <span class="help-block">
+                <strong>{{ field.errors }}</strong>
+                </span>
+            {% endif %}
         </div>
     {% endfor %}
     <button type="submit" class="button-login">Sign Up</button>

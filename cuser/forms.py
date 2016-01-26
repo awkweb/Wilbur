@@ -13,13 +13,21 @@ class UserCreationForm(forms.ModelForm):
     error_messages = {
         'password_mismatch': "The two password fields didn't match.",
     }
+    email = forms.EmailField(
+        max_length=255,
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'charlotte@web.net',
+            'class': 'form-input', 'required': 'required', 'autofocus': 'autofocus'})
+    )
     password1 = forms.CharField(
             label="Password",
-            widget=forms.PasswordInput,
+            widget=forms.PasswordInput(attrs={'placeholder': 'Super, secret',
+                                              'class': 'form-input', 'required': 'required'}),
     )
     password2 = forms.CharField(
             label="Confirm Password",
-            widget=forms.PasswordInput,
+            widget=forms.PasswordInput(attrs={'placeholder': 'You know the drill',
+                                              'class': 'form-input','required': 'required'}),
             help_text="Enter the same password as before, for verification.",
     )
 

@@ -491,14 +491,14 @@ class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = UserCreationForm(label_suffix='')
-        return render(request, 'base_form.html', {
+        return render(request, 'registration/signup.html', {
             'title': 'Sign Up',
             'form': form,
         })
 
     @json_view
     def post(self, request, *args, **kwargs):
-        form = UserCreationForm(request.POST)
+        form = UserCreationForm(request.POST, label_suffix='')
         if form.is_valid():
             email = form.cleaned_data['email']
             password1 = form.cleaned_data['password1']
@@ -506,7 +506,7 @@ class SignUpView(TemplateView):
             form.clean_password2()
             form.save()
             return {'success': True}
-        form_html = render(request, 'base_form.html', {
+        form_html = render(request, 'registration/signup_form.html', {
             'form': form,
         })
         print(form_html)
@@ -521,7 +521,7 @@ class SignUpView(TemplateView):
         #     'form_html': form_html,
         #     'errors': errors,
         # }
-        return render(request, 'base_form.html', {
+        return render(request, 'registration/signup.html', {
             'title': 'Sign Up',
             'form': form,
         })
