@@ -498,30 +498,17 @@ class SignUpView(TemplateView):
 
     @json_view
     def post(self, request, *args, **kwargs):
+        print(request.POST)
         form = UserCreationForm(request.POST, label_suffix='')
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password1 = form.cleaned_data['password1']
-            password2 = form.cleaned_data['password2']
-            form.clean_password2()
-            form.save()
+            user = form.save()
+            # ToDo - login user before return success
             return {'success': True}
         form_html = render(request, 'registration/signup_form.html', {
             'form': form,
         })
-        print(form_html)
-        errors = form.error_messages
-        print(errors)
-        if errors:
-            for field in form:
-                for error in field.errors:
-                    print(error)
-        # return {
-        #     'success': False,
-        #     'form_html': form_html,
-        #     'errors': errors,
-        # }
-        return render(request, 'registration/signup.html', {
-            'title': 'Sign Up',
-            'form': form,
-        })
+        form_html = form_html.content.decode('utf-8')
+        return {
+            'success': False,
+            'form_html': form_html,
+        }

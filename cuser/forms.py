@@ -27,7 +27,7 @@ class UserCreationForm(forms.ModelForm):
     password2 = forms.CharField(
             label="Confirm Password",
             widget=forms.PasswordInput(attrs={'placeholder': 'You know the drill',
-                                              'class': 'form-input','required': 'required'}),
+                                              'class': 'form-input', 'required': 'required'}),
             help_text="Enter the same password as before, for verification.",
     )
 

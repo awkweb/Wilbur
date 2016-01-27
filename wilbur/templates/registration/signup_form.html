@@ -1,4 +1,4 @@
-<form method="post" action="{% url 'wilbur:signup' %}">
+<form id="form-grab" method="post" action="{% url 'wilbur:signup' %}" next="{% url 'wilbur:overview' %}">
     {% csrf_token %}
     {% for field in form %}
         <div class="form-section">
@@ -11,5 +11,8 @@
             {% endif %}
         </div>
     {% endfor %}
-    <button type="submit" class="button-login">Sign Up</button>
+    <button id="form-submit" type="submit" class="button-login">Sign Up</button>
+
+    {% load staticfiles %}
+    <script src="{% static 'js/validator.js' %}"></script>
 </form>
