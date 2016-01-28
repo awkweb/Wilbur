@@ -1,5 +1,4 @@
 Django==1.9.1
-django-crispy-forms==1.5.2
 django-jsonview==0.5.0
 django-mathfilters==0.3.0
 psycopg2==2.6.1

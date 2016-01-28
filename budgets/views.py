@@ -9,7 +9,6 @@ from django.utils.timezone import now
 from django.views.generic.base import TemplateView
 
 from jsonview.decorators import json_view
-from crispy_forms.utils import render_crispy_form
 
 from cuser.forms import UserCreationForm
 from budgets.forms import BudgetAddForm, BudgetEditForm, TransactionAddForm, TransactionEditForm
@@ -384,7 +383,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         data = {'user': user}
         form = TransactionAddForm(initial=data)
-        return render(request, 'base_form.html', {
+        return render(request, 'transactions/add.html', {
             'title': 'Add Transaction',
             'form': form,
         })
@@ -408,7 +407,10 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
             transaction.save()
             messages.success(request, 'Transaction added')
             return {'success': True}
-        form_html = render_crispy_form(form)
+        form_html = render(request, 'transactions/add_form.html', {
+            'form': form,
+        })
+        form_html = form_html.content.decode('utf-8')
         return {
             'success': False,
             'form_html': form_html,
@@ -432,8 +434,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                 'user': user,
             }
             form = TransactionEditForm(data, initial={'user': user}, label_suffix='')
-            form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
-            return render(request, 'base_form.html', {
+            return render(request, 'transactions/edit.html', {
                 'title': 'Edit Transaction',
                 'form': form,
                 'transaction_id': transaction_id,
@@ -453,7 +454,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
             'transaction_date': transaction.transaction_date,
             'user': user,
         }
-        form = TransactionEditForm(request.POST, initial=data)
+        form = TransactionEditForm(request.POST, initial=data, label_suffix='')
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
@@ -469,9 +470,11 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                 transaction.save()
             messages.success(request, 'Transaction updated')
             return {'success': True}
-        context = {'transaction_id': transaction_id}
-        form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
-        form_html = render_crispy_form(form, context=context)
+        form_html = render(request, 'transactions/edit_form.html', {
+            'form': form,
+            'transaction_id': transaction_id,
+        })
+        form_html = form_html.content.decode('utf-8')
         return {
             'success': False,
             'form_html': form_html,

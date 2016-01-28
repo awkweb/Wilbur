@@ -1,0 +1,32 @@
+<form id="form-grab" class="form-crispy" method="post" action="{% url 'wilbur:add-transaction' %}" next="{% url 'wilbur:transactions' %}">
+    {% load staticfiles %}
+    <script src="{% static 'js/niceselect.js' %}"></script>
+    <script src="{% static 'js/minical.js' %}"></script>
+    <script src="{% static 'js/coffeecounter.js' %}"></script>
+
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-section">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <span class="help-block">
+                <strong>{{ field.errors }}</strong>
+                </span>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button id="form-submit" type="submit" class="button-submit">Save</button>
+    <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>
+
+    <script>
+        $('select').niceSelect();
+        $("#id_transaction_date").minical({
+            initialize_with_date: false,
+        });
+        $("#id_description").coffeeCounter();
+    </script>
+
+    {% load staticfiles %}
+    <script src="{% static 'js/validator.js' %}"></script>
+</form>
