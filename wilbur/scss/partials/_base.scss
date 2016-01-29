@@ -31,10 +31,9 @@ hr {
 
 body > .container {
   @include clearfix();
-  padding-bottom: 30px;
+  padding-bottom: $footer-height - 20px;
 }
 
 .row {
   @include clearfix();
-  clear: both;
 }

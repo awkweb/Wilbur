@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'cuser',
     'budgets',
     'django.contrib.humanize',
-    'crispy_forms',
     'mathfilters',
 )
 
@@ -127,4 +126,3 @@ STATICFILES_DIRS = (
 
 AUTH_USER_MODEL = 'cuser.CUser'
 LOGIN_REDIRECT_URL = '/'
-CRISPY_TEMPLATE_PACK = 'bootstrap3'

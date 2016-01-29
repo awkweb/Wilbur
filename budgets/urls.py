@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
+from cuser.forms import UserAuthenticationForm
 
-from . import views
+from budgets import views
 
 urlpatterns = [
     url(r'^$', views.OverviewView.as_view(), name='overview'),
@@ -22,6 +23,8 @@ urlpatterns = [
 
     url('^login/$', auth_views.login, {
         'template_name': 'registration/login.html',
-        'redirect_field_name': 'next'}, name="login"),
+        'redirect_field_name': 'next',
+        'authentication_form': UserAuthenticationForm,
+    }, name="login"),
     url('^logout/$', auth_views.logout, {'next_page': '/'}, name="logout"),
 ]

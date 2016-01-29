@@ -6,25 +6,14 @@
 
     <h1 class="welcome">Welcome to Wilbur.</h1>
 
-    <div class="row">
+    <section class="row">
         <div class="col-sm-4 col-sm-offset-4">
-            <form method="post" action="{% url 'wilbur:signup' %}">
-                {% csrf_token %}
-                <div class="form-section">
-                    <label for="inputEmail">Email</label>
-                    <input type="email" name="email" class="form-input" id="inputEmail" placeholder="charlotte@web.net" maxlength="255" autofocus required>
-                </div>
-                <div class="form-section">
-                    <label for="inputPassword">Password</label>
-                    <input type="password" name="password1" class="form-input" id="inputPassword" placeholder="Super, secret" required>
-                </div>
-                <div class="form-section">
-                    <label for="inputConfirm">Confirm Password</label>
-                    <input type="password" name="password2" class="form-input" id="inputConfirm" placeholder="You know the drill." required>
-                </div>
-                <button type="submit" class="button-login">Sign Up</button>
-            </form>
+            {% include 'registration/signup_form.html' %}
         </div>
-    </div>
+    </section>
+
+    <section>
+        <p class="registration-link">Have an account? <a href="{% url 'wilbur:login' %}">Login</a></p>
+    </section>
 
 {% endblock %}

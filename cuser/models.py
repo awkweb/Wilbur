@@ -81,6 +81,9 @@ class AbstractCUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'users'
         abstract = True
 
+    def __str__(self):
+        return self.email
+
     def get_full_name(self):
         """
         Returns the first_name plus the last_name, with a space in between.

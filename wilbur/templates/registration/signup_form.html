@@ -1,0 +1,8 @@
+<form id="form-grab" method="post" action="{% url 'wilbur:signup' %}" next="{% url 'wilbur:overview' %}">
+    {% csrf_token %}
+    {% include 'includes/form_fields.html' %}
+    <button id="form-submit" type="submit" class="button-login">Sign Up</button>
+
+    {% load staticfiles %}
+    <script src="{% static 'js/validator.js' %}"></script>
+</form>

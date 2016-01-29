@@ -22,6 +22,7 @@
             display = $(this).data('display');
             dropdown.find('ul').append('<li class="option ' + ($(this).is(':selected') ? 'selected' : '') + '" data-value="' + $(this).val() + (display ? '" data-display="' + display : '') + '">' + $(this).text() + '</li>');
           });
+          select.hide();
         }
       });
 

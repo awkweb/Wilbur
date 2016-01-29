@@ -1,0 +1,5 @@
+<form id="form-grab" method="post" action="{% url 'wilbur:login' %}" next="{% url 'wilbur:overview' %}">
+    {% csrf_token %}
+    {% include 'includes/form_fields.html' %}
+    <button id="form-submit" type="submit" class="button-login">Log In</button>
+</form>

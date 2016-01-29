@@ -1,0 +1,20 @@
+<form id="form-grab" class="form" method="post" action="{% url 'wilbur:edit-budget' budget_id %}" next="{% url 'wilbur:budgets' %}">
+    {% csrf_token %}
+    {% load staticfiles %}
+    <script src="{% static 'js/coffeecounter.js' %}"></script>
+
+    {% include 'includes/form_fields.html' %}
+
+    <button id="form-submit" type="submit" class="button-submit">Save</button>
+    <a href="{% url 'wilbur:budgets' %}" class="button-cancel" role="button">Cancel</a>
+    <a href="{% url 'wilbur:delete-budget' budget_id %}" id="confirm" class="button-delete pull-right"
+       data-alt-text="Yes, I am sure." data-original-text="Delete" role="button">Delete</a>
+
+    <script>
+        $("#id_description").coffeeCounter();
+    </script>
+
+    {% load staticfiles %}
+    <script src="{% static 'js/confirm.js' %}"></script>
+    <script src="{% static 'js/validator.js' %}"></script>
+</form>

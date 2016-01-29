@@ -2,11 +2,6 @@
 $input_height: 42px !default;
 $dropdown_padding: 10px !default;
 
-// Hide the native select element
-select {
-  display: none;
-}
-
 // Style the dropdown
 .nice-select {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

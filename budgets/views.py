@@ -1,19 +1,18 @@
 from datetime import date
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
 from django.views.generic.base import TemplateView
 
 from jsonview.decorators import json_view
-from crispy_forms.utils import render_crispy_form
 
 from cuser.forms import UserCreationForm
-from .forms import BudgetAddForm, BudgetEditForm, TransactionAddForm, TransactionEditForm
-from .utils import *
+from budgets.forms import BudgetForm, TransactionForm
+from budgets.utils import *
 
 
 class OverviewView(TemplateView):
@@ -195,9 +194,8 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         categories = get_unused_categories_for_user(user)
         data = {'categories': categories}
-        form = BudgetAddForm(initial=data)
-        form.helper.form_action = reverse('wilbur:add-budget')
-        return render(request, 'base_form.html', {
+        form = BudgetForm(initial=data)
+        return render(request, 'budgets/add.html', {
             'title': 'Add Budget',
             'form': form,
         })
@@ -207,7 +205,7 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
         categories = get_unused_categories_for_user(user)
         data = {'categories': categories}
-        form = BudgetAddForm(request.POST, initial=data)
+        form = BudgetForm(request.POST, initial=data)
         if form.is_valid():
             category = form.cleaned_data['category']
             amount = form.cleaned_data['amount']
@@ -218,7 +216,10 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
             return {
                 'success': True,
             }
-        form_html = render_crispy_form(form)
+        form_html = render(request, 'budgets/add_form.html', {
+            'form': form,
+        })
+        form_html = form_html.content.decode('utf-8')
         return {
             'success': False,
             'form_html': form_html,
@@ -241,9 +242,8 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                 'description': budget.description,
                 'categories': categories,
             }
-            form = BudgetEditForm(data, initial={'categories': categories})
-            form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
-            return render(request, 'base_form.html', {
+            form = BudgetForm(data, initial={'categories': categories})
+            return render(request, 'budgets/edit.html', {
                 'title': 'Edit Budget',
                 'form': form,
                 'budget_id': budget.id,
@@ -263,7 +263,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
             'description': budget.description,
             'categories': categories,
         }
-        form = BudgetEditForm(request.POST, initial=data)
+        form = BudgetForm(request.POST, initial=data)
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
@@ -277,9 +277,11 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                 budget.save()
             messages.success(request, 'Budget updated')
             return {'success': True}
-        context = {'budget_id': budget_id}
-        form.helper.form_action = reverse('wilbur:edit-budget', kwargs={'budget_id': budget_id})
-        form_html = render_crispy_form(form, context=context)
+        form_html = render(request, 'budgets/edit_form.html', {
+            'form': form,
+            'budget_id': budget_id,
+        })
+        form_html = form_html.content.decode('utf-8')
         return {
             'success': False,
             'form_html': form_html,
@@ -288,10 +290,14 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
 
 @login_required(login_url='/login/', redirect_field_name='next')
 def delete_budget(request, budget_id):
+    user = get_user_in_session(request.session)
     budget = Budget.objects.get(pk=budget_id)
-    budget.delete()
-    messages.success(request, 'Budget deleted')
-    return redirect('wilbur:budgets')
+    if budget.user == user:
+        budget.delete()
+        messages.success(request, 'Budget deleted')
+        return redirect('wilbur:budgets')
+    else:
+        raise Http404("Budget does not exist")
 
 
 class TransactionsView(LoginRequiredMixin, TemplateView):
@@ -383,8 +389,8 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         data = {'user': user}
-        form = TransactionAddForm(initial=data)
-        return render(request, 'base_form.html', {
+        form = TransactionForm(initial=data)
+        return render(request, 'transactions/add.html', {
             'title': 'Add Transaction',
             'form': form,
         })
@@ -393,7 +399,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         data = {'user': user}
-        form = TransactionAddForm(request.POST, initial=data)
+        form = TransactionForm(request.POST, initial=data)
         if form.is_valid():
             budget = form.cleaned_data['budget']
             description = form.cleaned_data['description']
@@ -408,7 +414,10 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
             transaction.save()
             messages.success(request, 'Transaction added')
             return {'success': True}
-        form_html = render_crispy_form(form)
+        form_html = render(request, 'transactions/add_form.html', {
+            'form': form,
+        })
+        form_html = form_html.content.decode('utf-8')
         return {
             'success': False,
             'form_html': form_html,
@@ -431,9 +440,8 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                 'transaction_date': transaction.transaction_date,
                 'user': user,
             }
-            form = TransactionEditForm(data, initial={'user': user})
-            form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
-            return render(request, 'base_form.html', {
+            form = TransactionForm(data, initial={'user': user})
+            return render(request, 'transactions/edit.html', {
                 'title': 'Edit Transaction',
                 'form': form,
                 'transaction_id': transaction_id,
@@ -453,7 +461,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
             'transaction_date': transaction.transaction_date,
             'user': user,
         }
-        form = TransactionEditForm(request.POST, initial=data)
+        form = TransactionForm(request.POST, initial=data)
         if form.is_valid():
             if form.has_changed():
                 for field in form.changed_data:
@@ -469,9 +477,11 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                 transaction.save()
             messages.success(request, 'Transaction updated')
             return {'success': True}
-        context = {'transaction_id': transaction_id}
-        form.helper.form_action = reverse('wilbur:edit-transaction', kwargs={'transaction_id': transaction_id})
-        form_html = render_crispy_form(form, context=context)
+        form_html = render(request, 'transactions/edit_form.html', {
+            'form': form,
+            'transaction_id': transaction_id,
+        })
+        form_html = form_html.content.decode('utf-8')
         return {
             'success': False,
             'form_html': form_html,
@@ -481,30 +491,37 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
 
 @login_required(login_url='/login/', redirect_field_name='next')
 def delete_transaction(request, transaction_id):
+    user = get_user_in_session(request.session)
     transaction = Transaction.objects.get(pk=transaction_id)
-    transaction.delete()
-    messages.success(request, 'Transaction deleted')
-    return redirect('wilbur:transactions')
+    if transaction.budget.user == user:
+        transaction.delete()
+        messages.success(request, 'Transaction deleted')
+        return redirect('wilbur:transactions')
+    else:
+        raise Http404("Transactions does not exist")
 
 
 class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
+        form = UserCreationForm(label_suffix='')
         return render(request, 'registration/signup.html', {
             'title': 'Sign Up',
+            'form': form,
         })
 
     @json_view
     def post(self, request, *args, **kwargs):
-        form = UserCreationForm(request.POST)
+        form = UserCreationForm(request.POST, label_suffix='')
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password1 = form.cleaned_data['password1']
-            password2 = form.cleaned_data['password2']
-            form.clean_password2()
             form.save()
+            user = authenticate(username=request.POST['email'], password=request.POST['password1'])
+            login(request, user)
             return {'success': True}
-        form_html = render_crispy_form(form)
+        form_html = render(request, 'registration/signup_form.html', {
+            'form': form,
+        })
+        form_html = form_html.content.decode('utf-8')
         return {
             'success': False,
             'form_html': form_html,
