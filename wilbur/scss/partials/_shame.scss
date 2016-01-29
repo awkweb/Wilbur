@@ -4,19 +4,24 @@
   }
 }
 
-.empty {
-  margin-top: 5rem;
+.welcome {
+  margin: 5.5rem 0 1rem;
   text-align: center;
-}
-
-.empty-title {
-  font-family: $cursive;
+  font: 500 36px $cursive;
   color: $green;
-  font-size: 2rem;
 }
 
-.empty-info {
-  font-family: $sans;
-  color: $gray;
-  font-size: 1rem;
+.registration-link {
+  font-size: .95rem;
+  margin-top: 3rem;
+  text-align: center;
+  color: $gray-light;
+
+  & a {
+    color: $green;
+
+    &:hover {
+      color: $green-dark;
+    }
+  }
 }

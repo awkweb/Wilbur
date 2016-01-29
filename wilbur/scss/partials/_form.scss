@@ -7,7 +7,7 @@ form {
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.15rem;
   min-height: 63px;
 }
 
@@ -18,13 +18,17 @@ form {
   &.required {
     font-weight: 600;
   }
-}
 
-.form-label-accessory {
-  padding-top: 2px;
-  float: right;
-  color: $gray-light;
-  font: .9rem $sans;
+  &.accessory {
+    padding-top: 2px;
+    float: right;
+    color: $gray-light;
+    font: .9rem $sans;
+
+    &a:hover {
+      color: $green;
+    }
+  }
 }
 
 .form-control {
@@ -46,6 +50,10 @@ form {
 
   &:focus {
     border-color: $gray-dark;
+  }
+
+  &.large {
+    height: 40px;
   }
 
   &.small {

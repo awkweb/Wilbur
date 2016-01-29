@@ -4,7 +4,7 @@ $.fn.coffeeCounter = ->
   text_length = input.val().length
   text_remaining = text_max - text_length
   counter = $("<span></span>").text text_remaining
-  counter.addClass 'form-label-accessory'
+  counter.addClass 'form-label accessory'
   counter.attr 'id', 'control_counter'
 
   input_id = input.attr 'id'

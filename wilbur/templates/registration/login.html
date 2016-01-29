@@ -3,12 +3,17 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+
     <h1 class="welcome">Wilbur.</h1>
 
-    <div class="row">
+    <section class="row">
         <div class="col-sm-4 col-sm-offset-4">
             {% include 'registration/login_form.html' %}
         </div>
-    </div>
+    </section>
+
+    <section>
+        <p class="registration-link">New to Wilbur? <a href="{% url 'wilbur:signup' %}">Sign Up</a></p>
+    </section>
 
 {% endblock %}

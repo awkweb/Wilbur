@@ -17,17 +17,17 @@ class UserCreationForm(forms.ModelForm):
         max_length=255,
         widget=forms.EmailInput(attrs={
             'placeholder': 'charlotte@web.net',
-            'class': 'form-input', 'required': 'required', 'autofocus': 'autofocus'})
+            'class': 'form-control large', 'required': 'required', 'autofocus': 'autofocus'})
     )
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(attrs={'placeholder': 'Super, secret',
-                                          'class': 'form-input', 'required': 'required'}),
+                                          'class': 'form-control large', 'required': 'required'}),
     )
     password2 = forms.CharField(
         label="Confirm Password",
         widget=forms.PasswordInput(attrs={'placeholder': 'You know the drill',
-                                          'class': 'form-input', 'required': 'required'}),
+                                          'class': 'form-control large', 'required': 'required'}),
         help_text="Enter the same password as before, for verification.",
     )
 
@@ -89,10 +89,10 @@ class UserAuthenticationForm(AuthenticationForm):
         super(UserAuthenticationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget = forms.TextInput(attrs={
             'placeholder': 'charlotte@web.net',
-            'class': 'form-control',
+            'class': 'form-control large',
             'autofocus': ''
         })
         self.fields['password'].widget = forms.PasswordInput(attrs={
             'placeholder': 'Super, secret',
-            'class': 'form-input'
+            'class': 'form-control large'
         })
