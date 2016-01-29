@@ -7,27 +7,8 @@
 
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
-            <form method="post" action="{% url 'wilbur:login' %}">
-                {% csrf_token %}
-                <div class="form-section">
-                    <label for="inputUsername">Email</label>
-                    <input type="email" name="username" class="form-input" id="inputUsername" placeholder="charlotte@web.net" autofocus required>
-                </div>
-                <div class="form-section">
-                    <label for="inputPassword">Password</label>
-{#                    <a href="#" class="pull-right">I forgot</a>#}
-                    <input type="password" name="password" class="form-input" id="inputPassword" placeholder="Super, secret" required>
-                </div>
-                <input type="hidden" name="next" value="{{ next }}"/>
-                <button type="submit" class="button-login">Log In</button>
-            </form>
+            {% include 'registration/login_form.html' %}
         </div>
     </div>
-
-    {% if form.errors %}
-        <div class="col-sm-4 col-sm-offset-4">
-            <p class="error"><strong>Oh snap!</strong> Invalid credentials.</p>
-        </div>
-    {% endif %}
 
 {% endblock %}

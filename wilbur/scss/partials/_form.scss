@@ -1,6 +1,9 @@
-.form-crispy {
-  margin: 1rem 0;
+form {
   color: $gray-dark;
+}
+
+.form {
+  margin: 1rem 0;
 }
 
 .form-group {
@@ -8,24 +11,20 @@
   min-height: 63px;
 }
 
-.asteriskField {
-  display: none;
-}
-
-.control-label {
+.form-label {
   margin-bottom: 5px;
   font: .9rem $sans;
+
+  &.required {
+    font-weight: 600;
+  }
 }
 
-.control-counter {
+.form-label-accessory {
   padding-top: 2px;
   float: right;
   color: $gray-light;
   font: .9rem $sans;
-}
-
-.requiredField {
-  font-weight: 600;
 }
 
 .form-control {
@@ -63,8 +62,13 @@
   }
 }
 
-.help-block > strong {
-  font-size: .8rem;
-  font-weight: normal;
-  color: $red;
+.form-errors {
+  margin-top: .25rem;
+
+  & li {
+    list-style-type: none;
+    font-size: .8rem;
+    font-weight: normal;
+    color: $red;
+  }
 }

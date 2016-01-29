@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm
 from django.contrib.auth import password_validation
 
 from cuser.models import CUser
@@ -20,15 +20,15 @@ class UserCreationForm(forms.ModelForm):
             'class': 'form-input', 'required': 'required', 'autofocus': 'autofocus'})
     )
     password1 = forms.CharField(
-            label="Password",
-            widget=forms.PasswordInput(attrs={'placeholder': 'Super, secret',
-                                              'class': 'form-input', 'required': 'required'}),
+        label="Password",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Super, secret',
+                                          'class': 'form-input', 'required': 'required'}),
     )
     password2 = forms.CharField(
-            label="Confirm Password",
-            widget=forms.PasswordInput(attrs={'placeholder': 'You know the drill',
-                                              'class': 'form-input', 'required': 'required'}),
-            help_text="Enter the same password as before, for verification.",
+        label="Confirm Password",
+        widget=forms.PasswordInput(attrs={'placeholder': 'You know the drill',
+                                          'class': 'form-input', 'required': 'required'}),
+        help_text="Enter the same password as before, for verification.",
     )
 
     class Meta:
@@ -61,9 +61,9 @@ class UserCreationForm(forms.ModelForm):
 
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField(label="Password",
-        help_text="Raw passwords are not stored, so there is no way to see "
-                    "this user's password, but you can change the password "
-                    "using <a href=\"../password/\">this form</a>.")
+                                         help_text="Raw passwords are not stored, so there is no way to see "
+                                                   "this user's password, but you can change the password "
+                                                   "using <a href=\"../password/\">this form</a>.")
 
     class Meta:
         model = CUser
@@ -80,3 +80,19 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class UserAuthenticationForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(UserAuthenticationForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget = forms.TextInput(attrs={
+            'placeholder': 'charlotte@web.net',
+            'class': 'form-control',
+            'autofocus': ''
+        })
+        self.fields['password'].widget = forms.PasswordInput(attrs={
+            'placeholder': 'Super, secret',
+            'class': 'form-input'
+        })

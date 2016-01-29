@@ -10,7 +10,7 @@
     @each ->
       select = $(this)
       if !select.next().hasClass('nice-select')
-        select.after '<div class="nice-select ' + (select.attr('class') or '') + (if select.attr('disabled') then 'disabled' else '" tabindex="0') + '"><span class="selected"></span><ul class="list"></ul></div>'
+        select.after '<div class="nice-select ' + (select.attr('class') or '') + (if select.attr('disabled') then 'disabled' else '" tabindex="0') + '"><span class="current"></span><ul class="list"></ul></div>'
         dropdown = select.next()
         options = select.find('option')
         selected = select.find('option:selected')
@@ -19,6 +19,7 @@
           display = $(this).data('display')
           dropdown.find('ul').append '<li class="option ' + (if $(this).is(':selected') then 'selected' else '') + '" data-value="' + $(this).val() + (if display then '" data-display="' + display else '') + '">' + $(this).text() + '</li>'
           return
+        select.hide()
       return
 
     ### Event listeners ###

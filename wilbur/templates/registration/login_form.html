@@ -1,0 +1,15 @@
+<form id="form-grab" method="post" action="{% url 'wilbur:login' %}" next="{% url 'wilbur:overview' %}">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-section">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <span class="help-block">
+                <strong>{{ field.errors }}</strong>
+                </span>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button id="form-submit" type="submit" class="button-login">Log In</button>
+</form>

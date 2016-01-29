@@ -7,7 +7,7 @@
     text_length = input.val().length;
     text_remaining = text_max - text_length;
     counter = $("<span></span>").text(text_remaining);
-    counter.addClass('control-counter');
+    counter.addClass('form-label-accessory');
     counter.attr('id', 'control_counter');
     input_id = input.attr('id');
     label = $("label[for='" + input_id + "']");
