@@ -52,6 +52,8 @@
         dropdown = option.closest('.nice-select');
         dropdown.find('.selected').removeClass('selected');
         option.addClass('selected');
+        dropdown.find('.focus').removeClass('focus');
+        dropdown.find('.selected').addClass('focus');
         text = option.data('display') || option.text();
         dropdown.find('.current').text(text);
         dropdown.prev('select').val(option.data('value')).trigger('change');

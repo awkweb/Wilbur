@@ -5,12 +5,13 @@
                 <div class="navbar-left">
                     <a class="brand" href="{% url 'wilbur:overview' %}">Wilbur</a>
                 </div>
+
                 <div class="navbar-right">
                     <ul class="nav-inline">
                         <li {% if title == 'Overview' %}class="on"{% endif %}><a href="{% url 'wilbur:overview' %}">Overview</a></li>
                         <li {% if title == 'Budgets' %}class="on"{% endif %}><a href="{% url 'wilbur:budgets' %}">Budgets</a></li>
                         <li {% if title == 'Transactions' %}class="on"{% endif %}><a href="{% url 'wilbur:transactions' %}">Transactions</a></li>
-                        <li><a href="{% url 'wilbur:logout' %}">Log Out</a></li>
+                        <li {% if title == 'Profile' %}class="on"{% endif %}><a href="{% url 'wilbur:profile' %}">Profile</a></li>
                     </ul>
                 </div>
             </div>

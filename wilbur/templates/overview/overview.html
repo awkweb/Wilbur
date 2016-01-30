@@ -22,7 +22,7 @@
     </section>
 
     <section class="row">
-        <div class="col-sm-5 col-sm-offset-1">
+        <div class="col-sm-5 col-sm-offset-1 overview-spacer">
             <h2>Approaching Budgets</h2>
             {% for budget in budget_list %}
                 <a class="overview-callout small" href="{% url 'wilbur:transactions-filter' budget.id %}">{{ budget.name }}
@@ -32,6 +32,7 @@
                         {% else %}progress-red{% endif %} small">${{ budget.amount_left|abs|floatformat:0|intcomma }}</span>
                     {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</a>
             {% endfor %}
+            <a class="overview-callout small" href="{% url 'wilbur:add-budget' %}">Add budget</a>
         </div>
         <div class="col-sm-5">
             <h2>Recent Transactions</h2>
@@ -39,7 +40,7 @@
                 <a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|date:"N j" }},
                     {{ transaction.budget.category.name.title }} ${{ transaction.amount|intcomma }}</a>
             {% endfor %}
-                <a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add Transaction</a>
+                <a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add transaction</a>
         </div>
     </section>
     {% else %}

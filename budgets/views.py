@@ -501,6 +501,21 @@ def delete_transaction(request, transaction_id):
         raise Http404("Transactions does not exist")
 
 
+class ProfileView(LoginRequiredMixin, TemplateView):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, *args, **kwargs):
+        user = get_user_in_session(request.session)
+
+        if not user.first_name and not user.last_name:
+            messages.info(request, 'Update your profile information – and watch what happens!')
+
+        return render(request, 'profile/profile.html', {
+            'title': 'Profile',
+        })
+
+
 class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
