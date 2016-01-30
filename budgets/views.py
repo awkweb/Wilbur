@@ -10,7 +10,7 @@ from django.views.generic.base import TemplateView
 
 from jsonview.decorators import json_view
 
-from cuser.forms import UserCreationForm, UserProfileForm
+from cuser.forms import UserCreationForm, UserProfileForm, EditPasswordForm
 from budgets.forms import BudgetForm, TransactionForm
 from budgets.utils import *
 
@@ -558,6 +558,39 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         }
 
 
+class PasswordEditView(LoginRequiredMixin, TemplateView):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+
+    def get(self, request, *args, **kwargs):
+        user = get_user_in_session(request.session)
+        form = EditPasswordForm(user=user)
+        return render(request, 'profile/edit_password.html', {
+            'title': 'Edit Password',
+            'form': form,
+        })
+
+    @json_view
+    def post(self, request, *args, **kwargs):
+        user = get_user_in_session(request.session)
+        form = EditPasswordForm(user, request.POST)
+        if form.is_valid():
+            form.clean_new_password2()
+            user = form.save()
+            user = authenticate(username=user.email, password=request.POST['new_password1'])
+            login(request, user)
+            messages.success(request, 'Password changed')
+            return {'success': True}
+        form_html = render(request, 'profile/edit_password_form.html', {
+            'form': form,
+        })
+        form_html = form_html.content.decode('utf-8')
+        return {
+            'success': False,
+            'form_html': form_html,
+        }
+
+
 class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -571,6 +604,7 @@ class SignUpView(TemplateView):
     def post(self, request, *args, **kwargs):
         form = UserCreationForm(request.POST, label_suffix='')
         if form.is_valid():
+            form.clean_password2()
             form.save()
             user = authenticate(username=request.POST['email'], password=request.POST['password1'])
             login(request, user)

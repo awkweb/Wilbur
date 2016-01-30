@@ -54,7 +54,8 @@
 
 .button-cancel {
   @include button-form($gray-light, $white, $gray);
-  padding: 9.5px 15px;
+  display: inline-block;
+  padding: 9.25px 15px;
   margin-right: 1rem;
 }
 
@@ -62,3 +63,5 @@
   @include button-form($red, $white, $red-dark);
   padding: 9.5px 15px;
 }
+
+// a, button button styles

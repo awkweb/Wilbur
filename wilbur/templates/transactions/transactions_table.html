@@ -3,7 +3,7 @@
 
 <section id="content-ajax" class="row">
     {% if transactions|length > 0 %}
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <div class="table-bordered table-responsive">
                 <table class="table">
                     <thead>
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <nav class="pagination">
                 <p class="pager-total"><span>{{ transactions.start_index }}</span> – <span>{{ transactions.end_index }}</span>
                     of <span>{{ transactions.paginator.count }}</span></p>

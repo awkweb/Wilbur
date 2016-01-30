@@ -10,7 +10,7 @@
 
     {% if budget_list|length > 0 %}
     <section class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <p class="overview-callout">
                 <span class="overview-name">Hey {% if user.first_name %}{{ user.first_name }}{% else %}friend{% endif %}</span> , you have
                 <span class="overview-stat
@@ -22,7 +22,7 @@
     </section>
 
     <section class="row">
-        <div class="col-sm-5 col-sm-offset-1 overview-spacer">
+        <div class="col-md-5 col-md-offset-1 col-sm-6 overview-spacer">
             <h2>Approaching Budgets</h2>
             {% for budget in budget_list %}
                 <a class="overview-callout small" href="{% url 'wilbur:transactions-filter' budget.id %}">{{ budget.name }}
@@ -34,11 +34,11 @@
             {% endfor %}
             <a class="overview-callout small" href="{% url 'wilbur:add-budget' %}">Add budget</a>
         </div>
-        <div class="col-sm-5">
+        <div class="col-md-5 col-sm-6">
             <h2>Recent Transactions</h2>
             {% for transaction in transaction_list %}
                 <a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|date:"N j" }},
-                    {{ transaction.budget.category.name.title }} ${{ transaction.amount|intcomma }}</a>
+                    {{ transaction.budget.category.name.title }} <span class="overview-span">${{ transaction.amount|intcomma }}</span></a>
             {% endfor %}
                 <a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add transaction</a>
         </div>

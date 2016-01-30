@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm, SetPasswordForm
 from django.contrib.auth import password_validation
 
 from cuser.models import CUser
@@ -123,4 +123,17 @@ class UserAuthenticationForm(AuthenticationForm):
         self.fields['password'].widget = forms.PasswordInput(attrs={
             'placeholder': 'Super, secret',
             'class': 'form-control large'
+        })
+
+
+class EditPasswordForm(SetPasswordForm):
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(EditPasswordForm, self).__init__(*args, **kwargs)
+        self.fields['new_password1'].widget = forms.PasswordInput(attrs={
+            'placeholder': 'Super, secret', 'class': 'form-control', 'autofocus': ''
+        })
+        self.fields['new_password2'].widget = forms.PasswordInput(attrs={
+            'placeholder': 'You know the drill.', 'class': 'form-control'
         })

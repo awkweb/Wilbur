@@ -7,7 +7,7 @@
     {% include 'includes/message.html' %}
 
     <section class="row">
-        <div class="col-sm-5 col-sm-offset-1">
+        <div class="col-md-5 col-md-offset-1 col-sm-6">
             <div class="profile">
                 <div class="profile">
                     <p class="profile-name">{% if user.first_name or user.last_name %}{{ user.first_name }} {{ user.last_name }}
@@ -19,16 +19,17 @@
                     <p class="profile-info">Transactions <span>{{ transaction_count }}</span></p>
 
                     <ul class="profile-nav">
-                        <li><a class="profile-link" href="{% url 'wilbur:logout' %}">Log Out</a></li>
-                        <li>{% if user.is_staff %}<a class="profile-link" href="/admin/">Admin</a>{% endif %}</li>
+                        <li class="profile-link">{% if user.is_staff %}<a href="/admin/">Admin</a>{% endif %}</li>
+                        <li class="profile-link"><a href="{% url 'wilbur:edit-password' %}">Edit Password</a></li>
+                        <li class="profile-link"><a href="{% url 'wilbur:logout' %}">Log Out</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-5">
+        <div class="col-md-5 col-sm-6">
             <div class="profile-form">
-                <h2>Edit Profile</h2>
+                <h2>Update Profile</h2>
                 {% include 'profile/edit_form.html' %}
             </div>
         </div>

@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^transactions/delete/(?P<transaction_id>[0-9]+)/$', views.delete_transaction, name='delete-transaction'),
 
     url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
+    url(r'^profile/edit/password/$', views.PasswordEditView.as_view(), name='edit-password'),
 
     url('^signup/$', views.SignUpView.as_view(), name="signup"),
     url('^login/$', auth_views.login, {

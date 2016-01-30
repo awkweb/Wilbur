@@ -56,8 +56,12 @@
 }
 
 .profile-link {
-  @include button-form($gray-lighter, $gray, $gray-lighter);
-  margin-right: .75rem;
+  margin-bottom: 1.75rem;
+
+  a {
+    @include button-form($gray-lighter, $gray, $gray-lighter);
+    margin-right: .75rem;
+  }
 }
 
 .profile-form {
