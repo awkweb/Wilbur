@@ -82,6 +82,34 @@ class UserChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
+class UserProfileForm(forms.Form):
+    email = forms.EmailField(
+        label='Email',
+        max_length=255,
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'charlotte@web.net',
+            'class': 'form-control large', 'required': 'required'})
+    )
+    first_name = forms.CharField(
+        label='First Name',
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'E.B.', 'class': 'form-control large'})
+    )
+    last_name = forms.CharField(
+        label='Last Name',
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'White', 'class': 'form-control large'})
+    )
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+
+
 class UserAuthenticationForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):

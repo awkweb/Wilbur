@@ -47,11 +47,19 @@
   }
 }
 
-.profile-link {
-  margin: 1.5rem 0;
-  font: normal 1.25rem $sans;
+.profile-nav {
+  margin-top: 1.5rem;
 
-  & a {
-    @include button-form($gray-light, $white, $gray);
+  li {
+    display: inline-block;
   }
+}
+
+.profile-link {
+  @include button-form($gray-lighter, $gray, $gray-lighter);
+  margin-right: .75rem;
+}
+
+.profile-form {
+  margin-top: 2.25rem;
 }

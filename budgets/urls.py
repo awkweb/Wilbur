@@ -18,10 +18,10 @@ urlpatterns = [
     url(r'^transactions/edit/(?P<transaction_id>[0-9]+)/$', views.TransactionsEditView.as_view(),
         name='edit-transaction'),
     url(r'^transactions/delete/(?P<transaction_id>[0-9]+)/$', views.delete_transaction, name='delete-transaction'),
+
     url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
 
     url('^signup/$', views.SignUpView.as_view(), name="signup"),
-
     url('^login/$', auth_views.login, {
         'template_name': 'registration/login.html',
         'redirect_field_name': 'next',

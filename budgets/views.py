@@ -10,7 +10,7 @@ from django.views.generic.base import TemplateView
 
 from jsonview.decorators import json_view
 
-from cuser.forms import UserCreationForm
+from cuser.forms import UserCreationForm, UserProfileForm
 from budgets.forms import BudgetForm, TransactionForm
 from budgets.utils import *
 
@@ -406,10 +406,10 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
             amount = form.cleaned_data['amount']
             transaction_date = form.cleaned_data['transaction_date']
             transaction = Transaction(
-                    budget=budget,
-                    description=description,
-                    amount=amount,
-                    transaction_date=transaction_date
+                budget=budget,
+                description=description,
+                amount=amount,
+                transaction_date=transaction_date
             )
             transaction.save()
             messages.success(request, 'Transaction added')
@@ -507,13 +507,55 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
+        data = {
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+        }
+        form = UserProfileForm(initial=data)
+        budget_count = Budget.objects.filter(user=user).count()
+        transaction_count = Transaction.objects.filter(budget__user=user).count()
 
         if not user.first_name and not user.last_name:
             messages.info(request, 'Update your profile information – and watch what happens!')
 
         return render(request, 'profile/profile.html', {
             'title': 'Profile',
+            'form': form,
+            'budget_count': budget_count,
+            'transaction_count': transaction_count,
         })
+
+    @json_view
+    def post(self, request, *args, **kwargs):
+        user = get_user_in_session(request.session)
+        data = {
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+        }
+        form = UserProfileForm(request.POST, initial=data)
+        if form.is_valid():
+            if form.has_changed():
+                for field in form.changed_data:
+                    cleaned_data = form.cleaned_data[field]
+                    if field == 'email':
+                        user.email = cleaned_data
+                    elif field == 'first_name':
+                        user.first_name = cleaned_data
+                    elif field == 'last_name':
+                        user.last_name = cleaned_data
+                user.save()
+            messages.success(request, 'Profile updated')
+            return {'success': True}
+        form_html = render(request, 'profile/edit_form.html', {
+            'form': form,
+        })
+        form_html = form_html.content.decode('utf-8')
+        return {
+            'success': False,
+            'form_html': form_html,
+        }
 
 
 class SignUpView(TemplateView):
