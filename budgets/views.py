@@ -10,7 +10,7 @@ from django.views.generic.base import TemplateView
 
 from jsonview.decorators import json_view
 
-from cuser.forms import UserCreationForm, UserProfileForm, EditPasswordForm
+from cuser.forms import UserBetaCreationForm, UserProfileForm, EditPasswordForm
 from budgets.forms import BudgetForm, TransactionForm
 from budgets.utils import *
 
@@ -594,7 +594,7 @@ class PasswordEditView(LoginRequiredMixin, TemplateView):
 class SignUpView(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        form = UserCreationForm(label_suffix='')
+        form = UserBetaCreationForm()
         return render(request, 'registration/signup.html', {
             'title': 'Sign Up',
             'form': form,
@@ -602,13 +602,15 @@ class SignUpView(TemplateView):
 
     @json_view
     def post(self, request, *args, **kwargs):
-        form = UserCreationForm(request.POST, label_suffix='')
+        form = UserBetaCreationForm(request.POST)
         if form.is_valid():
-            form.clean_password2()
-            form.save()
-            user = authenticate(username=request.POST['email'], password=request.POST['password1'])
-            login(request, user)
-            return {'success': True}
+            code = request.POST['code']
+            if code == 'ebwhite':
+                form.clean_code()
+                form.save()
+                user = authenticate(username=request.POST['email'], password=request.POST['password1'])
+                login(request, user)
+                return {'success': True}
         form_html = render(request, 'registration/signup_form.html', {
             'form': form,
         })

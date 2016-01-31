@@ -5,6 +5,70 @@ from django.contrib.auth import password_validation
 from cuser.models import CUser
 
 
+class UserAuthenticationForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(UserAuthenticationForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget = forms.TextInput(attrs={
+            'placeholder': 'charlotte@web.net',
+            'class': 'form-control large',
+            'autofocus': ''
+        })
+        self.fields['password'].widget = forms.PasswordInput(attrs={
+            'placeholder': 'Super, secret',
+            'class': 'form-control large'
+        })
+
+
+class UserBetaCreationForm(forms.ModelForm):
+    error_messages = {
+        'code_mismatch': "The code didn't match.",
+    }
+    email = forms.EmailField(
+        max_length=255,
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'charlotte@web.net',
+            'class': 'form-control large', 'required': 'required', 'autofocus': 'autofocus'})
+    )
+    password1 = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Super, secret',
+                                          'class': 'form-control large', 'required': 'required'}),
+    )
+    code = forms.CharField(
+        label="Code",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Your ticket to the party',
+                                          'class': 'form-control large', 'required': 'required'}),
+    )
+
+    class Meta:
+        model = CUser
+        fields = ("email",)
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(UserBetaCreationForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'autofocus': ''})
+
+    def clean_code(self):
+        code = self.cleaned_data.get("code")
+        if code != 'ebwhite':
+            raise forms.ValidationError(
+                self.error_messages['code_mismatch'],
+                code='code_mismatch',
+            )
+        self.instance.email = self.cleaned_data.get('email')
+        return code
+
+    def save(self, commit=True):
+        user = super(UserBetaCreationForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
+
+
 class UserCreationForm(forms.ModelForm):
     """
     A form that creates a user, with no privileges, from the given username and
@@ -36,6 +100,7 @@ class UserCreationForm(forms.ModelForm):
         fields = ("email",)
 
     def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['email'].widget.attrs.update({'autofocus': ''})
 
@@ -110,30 +175,16 @@ class UserProfileForm(forms.Form):
         super(UserProfileForm, self).__init__(*args, **kwargs)
 
 
-class UserAuthenticationForm(AuthenticationForm):
-
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')
-        super(UserAuthenticationForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget = forms.TextInput(attrs={
-            'placeholder': 'charlotte@web.net',
-            'class': 'form-control large',
-            'autofocus': ''
-        })
-        self.fields['password'].widget = forms.PasswordInput(attrs={
-            'placeholder': 'Super, secret',
-            'class': 'form-control large'
-        })
-
-
 class EditPasswordForm(SetPasswordForm):
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super(EditPasswordForm, self).__init__(*args, **kwargs)
+        self.fields['new_password1'].label = 'New Password'
         self.fields['new_password1'].widget = forms.PasswordInput(attrs={
             'placeholder': 'Super, secret', 'class': 'form-control', 'autofocus': ''
         })
+        self.fields['new_password2'].label = 'Confirm New Password'
         self.fields['new_password2'].widget = forms.PasswordInput(attrs={
             'placeholder': 'You know the drill.', 'class': 'form-control'
         })

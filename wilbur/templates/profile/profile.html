@@ -1,5 +1,7 @@
 {% extends 'base_navbar.html' %}
 
+{% load humanize %}
+
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -13,7 +15,7 @@
                     <p class="profile-name">{% if user.first_name or user.last_name %}{{ user.first_name }} {{ user.last_name }}
                     {% else %}E.B. White{% endif %}</p>
                     <p class="profile-info">Email <span>{{ user.email }}</span></p>
-                    <p class="profile-info">Joined <span>{{ user.date_joined }}</span></p>
+                    <p class="profile-info">Joined <span>{{ user.date_joined|date:"F Y" }}</span></p>
                     <p class="profile-info">User <span>{{ user.id }}</span></p>
                     <p class="profile-info">Budgets <span>{{ budget_count }}</span></p>
                     <p class="profile-info">Transactions <span>{{ transaction_count }}</span></p>
