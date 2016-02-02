@@ -37,7 +37,7 @@
         <div class="col-md-5 col-sm-6">
             <h2>Recent Transactions</h2>
             {% for transaction in transaction_list %}
-                <a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|date:"N j" }},
+                <a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|date:"n/j" }}
                     {{ transaction.budget.category.name.title }} <span class="overview-span">${{ transaction.amount|intcomma }}</span></a>
             {% endfor %}
                 <a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add transaction</a>

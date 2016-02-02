@@ -1,13 +1,8 @@
 <form class="pull-right">
     <select id="selectdate" class="form-control small">
-        {% if months|length > 0 %}
-            {% for month in months %}
-                <option value="{{ month.month }}{{ month.year }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
-            {% endfor %}
-        {% else %}
-            {% now "nY" as value %} {% now "Y" as year %} {% now "n" as month %} {% now "F Y" as today %}
-            <option value="{{ value }}" data-year="{{ year }}" data-month="{{ month }}">{{ today }}</option>
-        {% endif %}
+        {% for month in months %}
+            <option value="{{ month.month }}{{ month.year }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
+        {% endfor %}
     </select>
 </form>
 <script>

@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Sum
+from django.utils.timezone import now
+from datetime import date
 
 from budgets.models import Budget, Category, Transaction
 
@@ -20,6 +22,21 @@ def get_budgets_for_user(user):
         budgets = Budget.objects.filter(user=user).order_by('category__name')
     finally:
         return budgets
+
+
+def get_months_for_select_date_with_user(user):
+    months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
+    month_list = []
+    today = now()
+    current_month = date(today.year, today.month, 1)
+    if months.count() == 0:
+        month_list.append(current_month)
+    else:
+        month_list.append(current_month)
+        for m in months:
+            if m != current_month:
+                month_list.append(m)
+    return month_list
 
 
 def get_transactions_with_month_and_year(user, month, year):

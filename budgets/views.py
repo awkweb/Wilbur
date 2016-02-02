@@ -84,18 +84,19 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
         budgets = get_budgets_for_user(user)
+        months = get_months_for_select_date_with_user(user)
 
         today = now()
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
         selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
-        months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
-        if months.count() == 0:
+
+        if len(months) == 0:
             month = today.month
             year = today.year
             selectdate_value = "%s%s" % (today.month, today.year)
-        elif months.count() == 1:
-            selectdate = months.first()
+        elif len(months) == 1:
+            selectdate = months[0]
             month = selectdate.month
             year = selectdate.year
             selectdate_value = "%s%s" % (selectdate.month, selectdate.year)
@@ -306,23 +307,24 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
+        months = get_months_for_select_date_with_user(user)
 
         today = now()
         month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
         selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
-        months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
-        if months.count() == 0:
+
+        if len(months) == 0:
             month = today.month
             year = today.year
             selectdate_value = "%s%s" % (today.month, today.year)
-        elif months.count() == 1:
-            selectdate = months.first()
+        elif len(months) == 1:
+            selectdate = months[0]
             month = selectdate.month
             year = selectdate.year
             selectdate_value = "%s%s" % (selectdate.month, selectdate.year)
-        filter_value = kwargs.get('budget_id', '-1')
 
+        filter_value = kwargs.get('budget_id', '-1')
         if filter_value == '-1':
             transaction_list = get_transactions_with_month_and_year(user, month, year)
         else:
