@@ -234,6 +234,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         budget_id = kwargs['budget_id']
         budget = Budget.objects.get(pk=budget_id)
+        budget_transaction_count = Transaction.objects.filter(budget_id=budget_id).count()
         user = get_user_in_session(request.session)
         if budget.user == user:
             categories = get_unused_categories_for_user(user, budget.category)
@@ -247,7 +248,8 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
             return render(request, 'budgets/edit.html', {
                 'title': 'Edit Budget',
                 'form': form,
-                'budget_id': budget.id,
+                'budget': budget,
+                'budget_transaction_count': budget_transaction_count
             })
         else:
             raise Http404("Budget does not exist")
@@ -276,11 +278,11 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                     elif field == 'description':
                         budget.description = cleaned_data
                 budget.save()
-            messages.success(request, 'Budget updated')
+            messages.success(request, 'Budget edited')
             return {'success': True}
         form_html = render(request, 'budgets/edit_form.html', {
             'form': form,
-            'budget_id': budget_id,
+            'budget': budget,
         })
         form_html = form_html.content.decode('utf-8')
         return {
@@ -477,7 +479,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                     elif field == 'transaction_date':
                         transaction.transaction_date = cleaned_data
                 transaction.save()
-            messages.success(request, 'Transaction updated')
+            messages.success(request, 'Transaction edited')
             return {'success': True}
         form_html = render(request, 'transactions/edit_form.html', {
             'form': form,

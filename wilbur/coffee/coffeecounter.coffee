@@ -13,7 +13,8 @@ $.fn.coffeeCounter = ->
   label.after counter
   control_counter = $('#control_counter')
 
-  input.keyup ->
+  # copy and paste case
+  input.keydown ->
     text_length = input.val().length
     text_remaining = text_max - text_length
     control_counter.html text_remaining

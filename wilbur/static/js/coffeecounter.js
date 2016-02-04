@@ -13,7 +13,7 @@
     label = $("label[for='" + input_id + "']");
     label.after(counter);
     control_counter = $('#control_counter');
-    input.keyup(function() {
+    input.keydown(function() {
       text_length = input.val().length;
       text_remaining = text_max - text_length;
       control_counter.html(text_remaining);

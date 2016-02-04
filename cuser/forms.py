@@ -13,6 +13,7 @@ class UserAuthenticationForm(AuthenticationForm):
         self.fields['username'].widget = forms.TextInput(attrs={
             'placeholder': 'charlotte@web.net',
             'class': 'form-control large',
+            'spellcheck': 'false',
             'autofocus': ''
         })
         self.fields['password'].widget = forms.PasswordInput(attrs={
@@ -29,7 +30,7 @@ class UserBetaCreationForm(forms.ModelForm):
         max_length=255,
         widget=forms.EmailInput(attrs={
             'placeholder': 'charlotte@web.net',
-            'class': 'form-control large', 'required': 'required', 'autofocus': 'autofocus'})
+            'class': 'form-control large', 'required': 'required', 'spellcheck': 'false', 'autofocus': ''})
     )
     password1 = forms.CharField(
         label="Password",
