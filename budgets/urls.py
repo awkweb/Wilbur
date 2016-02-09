@@ -29,4 +29,6 @@ urlpatterns = [
         'authentication_form': UserAuthenticationForm,
     }, name="login"),
     url('^logout/$', auth_views.logout, {'next_page': '/'}, name="logout"),
+
+    url(r'^style-guide/$', views.StyleGuideView.as_view(), name='style-guide'),
 ]

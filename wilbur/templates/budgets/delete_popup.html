@@ -3,10 +3,8 @@
         <p>Are you sure you want to delete {{ budget.category.name.title }}?</p>
         <p>Delete will <strong>permanently</strong> remove the {{ budget.category.name.title }} budget and
             its {{ budget_transaction_count }} transactions.</p>
-        <ul class="cd-buttons">
-            <li><a href="{% url 'wilbur:delete-budget' budget.id %}">Delete</a></li>
-            <li><a class="popup-close">Cancel</a></li>
-        </ul>
+        <a href="{% url 'wilbur:delete-budget' budget.id %}" class="button-delete" role="button">Yes, delete.</a>
+        <a class="button-cancel popup-close" role="button">No, cancel.</a>
     </div>
 </div>
 

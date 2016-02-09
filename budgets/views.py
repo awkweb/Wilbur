@@ -1,11 +1,9 @@
-from datetime import date
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.utils.timezone import now
 from django.views.generic.base import TemplateView
 
 from jsonview.decorators import json_view
@@ -623,3 +621,11 @@ class SignUpView(TemplateView):
             'success': False,
             'form_html': form_html,
         }
+
+
+class StyleGuideView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'style_guide/index.html', {
+            'title': 'Style Guide & Pattern Library',
+        })
