@@ -21,19 +21,32 @@ hr {
 // Typography
 // --------------------------------------------------
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
   font-family: $sans;
-  font-weight: 700;
   color: $gray-dark;
 }
 
-h1, .h1 { font-size: 2rem; }
-h2, .h2 { font-size: 1.5rem; }
-h3, .h3 { font-size: 1.17rem; }
-h4, .h4 { font-size: 1rem; }
-h5, .h5 { font-size: .83rem; }
-h6, .h6 { font-size: .67rem; }
+h2, h3, h4,
+.h2, .h3, .h4 {
+  font-weight: 600;
+}
+
+h1, .h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2, .h2 {
+  font-size: 1.5rem;
+}
+
+h3, .h3 {
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+h4, .h4 { font-size: 1.15rem; }
 
 p {
   font-family: $sans;
@@ -43,8 +56,94 @@ p {
   line-height: $line-height;
 }
 
+b, .bold {
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  color: $green;
+
+  &:hover {
+    color: $green-dark;
+  }
+}
+
+// Lists, Wilbur, links
+
+//
+// Tables
+// --------------------------------------------------
+
+table, .table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  font-family: $sans;
+}
+
+tr {
+  //border-top: 1px solid $gray-lighter;
+
+  &:last-child {
+    //border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+th, td {
+  //border-top: 1px solid $gray-lighter;
+  line-height: 2.5;
+  padding: 0 1.25rem;
+  color: $gray-dark;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  background-color: $gray-lightest;
+}
+
+td {
+  background-color: $white;
+}
+
+.table-bordered {
+  @include vendor-prefix(border-radius, 4px);
+  border: 1px solid $gray-lighter;
+}
+
+.table-responsive {
+  min-height: .01%;
+  overflow-x: auto;
+}
+
+//
+// Forms
+// --------------------------------------------------
+
+label {
+  font-family: $sans;
+  font-size: 1rem;
+  color: $gray-dark;
+
+  &.required {
+    font-weight: 600;
+  }
+}
+
+.help-text {
+  font-family: $sans;
+  font-size: .9rem;
+  font-weight: normal;
+  color: $gray-dark;
+}
+
+//
+// Utilities
+// --------------------------------------------------
+
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
-
-// Lists, Wilbur, links
+.wilbur { font-family: $cursive; }
