@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,600,700">
     <link rel="stylesheet" href="{% static 'css/grid.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/styles2.css' %}"/>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
 </head>
 <body>
 
@@ -34,43 +36,25 @@
 
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
+        <h1>Buttons</h1>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h1>Forms</h1>
+        <hr>
+        <label>Form label</label>
+        <label class="required">label required</label>
+        <p class="help-text">Help text</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
         <h1>Tables</h1>
         <hr>
-        <table>
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Budget</th>
-                <th>Amount</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <a href="#">table link</a>
-                </td>
-                <td>One</td>
-                <td>Two</td>
-                <td>Three</td>
-            </tr>
-            <tr>
-                <td>0</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>quick</td>
-                <td>brown</td>
-                <td>fox</td>
-                <td>jumped</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <br>
-
         <div class="table-bordered">
             <table>
                 <thead>
@@ -110,17 +94,7 @@
 
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-        <h1>Forms</h1>
-        <hr>
-        <label>Form label</label>
-        <label class="required">label required</label>
-        <p class="help-text">Help text</p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-        <h1>Buttons</h1>
+        <h1>Pagination</h1>
         <hr>
     </div>
 </div>
@@ -129,26 +103,37 @@
     <div class="col-sm-10 col-sm-offset-1">
         <h1>Messages</h1>
         <hr>
+        <div class="message message-info message-dismissible" role="alert">
+            <strong>Info</strong> Here goes your info message.
+            <a class="message-button">Undo</a>
+        </div>
+
+        <div class="message message-success message-dismissible" role="alert">
+            <strong>Success</strong> Here goes your success message.
+        </div>
+
+        <div class="message message-warning message-dismissible" role="alert">
+            <strong>Warning</strong> Here goes your warning message.
+        </div>
+
+        <div class="message message-error message-dismissible" role="alert">
+            <strong>Error</strong> Here goes your error message.
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.message-dismissible').append('<a class="message-close">&times;</a>');
+                $('.message-close').on('click',function(){
+                    $(this).closest('.message').hide();
+                });
+            });
+        </script>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-        <h1>Progress Bars</h1>
-        <hr>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-        <h1>Pagination</h1>
-        <hr>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-        <h1>Colors</h1>
+        <h1>Bars</h1>
         <hr>
     </div>
 </div>
