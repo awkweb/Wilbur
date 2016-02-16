@@ -15,7 +15,7 @@
   font-size: .95rem;
   margin-top: 3rem;
   text-align: center;
-  color: $gray-light;
+  color: $gray;
 
   & a {
     color: $green;
@@ -39,7 +39,7 @@
 .profile-info {
   margin: .65rem 0;
   font: normal 1.25rem $sans;
-  color: $gray-light;
+  color: $gray;
 
   & span {
     font-weight: 600;
@@ -58,7 +58,7 @@
   margin-bottom: 1.75rem;
 
   a {
-    @include button-form($gray-lighter, $gray, $gray-lighter);
+    @include button-form($gray-light, $gray-dark, $gray-light);
     margin-right: .75rem;
   }
 }

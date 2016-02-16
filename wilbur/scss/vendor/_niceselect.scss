@@ -20,8 +20,8 @@ $dropdown_padding: 10px !default;
   &:after {
     @include vendor-prefix(transition, all 0.15s ease-in-out);
     @include vendor-prefix(transform, rotate(45deg));
-    border-bottom: 2px solid $gray;
-    border-right: 2px solid $gray;
+    border-bottom: 2px solid $gray-dark;
+    border-right: 2px solid $gray-dark;
     content: '';
     display: block;
     height: 5px;
@@ -78,7 +78,7 @@ $dropdown_padding: 10px !default;
     text-align: left;
     transition: all 0.2s;
     &:hover, &.focus, &.selected.focus {
-      background-color: $gray-lighter;
+      background-color: $gray-light;
     }
     &.selected {
       font-weight: 600;

@@ -4,7 +4,7 @@ ul.minical {
   @include vendor-prefix(border-radius, 4px);
   position: absolute;
   display: none;
-  color: $gray-dark;
+  color: $gray-darkest;
   background: $white;
   margin: 0;
   padding: 0;
@@ -35,7 +35,7 @@ ul.minical {
       width: 100%;
       header {
         background: $gray-lightest;
-        color: $gray-dark;
+        color: $gray-darkest;
         padding: 2px 0;
         position: relative;
         margin: 0 -9px;
@@ -53,7 +53,7 @@ ul.minical {
           position: absolute;
           top: 35%;
           margin-top: -0.6em;
-          color: $gray;
+          color: $gray-dark;
           font-size: 1.75rem;
           &:hover {
             color: $green;
@@ -80,7 +80,7 @@ ul.minical {
           margin: 0 10px 10px;
           a {
             text-decoration: none;
-            color: $gray;
+            color: $gray-dark;
             &:hover {
               color: $green;
             }
@@ -98,7 +98,7 @@ ul.minical {
                 text-align: center;
                 font-size: 0.7em;
                 font-weight: bold;
-                color: $gray-dark;
+                color: $gray-darkest;
               }
             }
           }
@@ -110,14 +110,14 @@ ul.minical {
                 font-size: 0.9em;
                 a {
                   display: block;
-                  border: 1px solid transparentize($gray-lighter, 0.5);
-                  color: $gray-dark;
+                  border: 1px solid transparentize($gray-light, 0.5);
+                  color: $gray-darkest;
                   padding: 0.1em 0.3em;
                   text-decoration: none;
                 }
                 &.minical_highlighted a {
-                  border-color: $gray-lighter;
-                  background-color: $gray-lighter;
+                  border-color: $gray-light;
+                  background-color: $gray-light;
                 }
                 &.minical_selected a {
                   border-color: $green;
@@ -125,7 +125,7 @@ ul.minical {
                 }
                 &.minical_past_month a,
                 &.minical_future_month a {
-                  color: transparentize($gray-dark, 0.5);
+                  color: transparentize($gray-darkest, 0.5);
                 }
                 &.minical_today_date a {
                   border-color: $green;
@@ -133,9 +133,9 @@ ul.minical {
                   color: $white;
                 }
                 &.minical_disabled a {
-                  color: transparentize($gray-dark, 0.5);
-                  background: transparentize($gray-lighter, 0.8);
-                  border-color: transparentize($gray-lighter, 0.8);
+                  color: transparentize($gray-darkest, 0.5);
+                  background: transparentize($gray-light, 0.8);
+                  border-color: transparentize($gray-light, 0.8);
                 }
               }
             }

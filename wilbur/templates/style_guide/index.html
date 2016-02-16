@@ -28,9 +28,24 @@
         <h2>Sub page title</h2>
         <h3>Section header</h3>
         <h4>Sub section heading</h4>
+        <p class="lead">Lead content / copy</p>
         <p>Body content / copy</p>
         <p><b>Bold text</b></p>
+        <p class="semi-bold">Semi-bold text</p>
         <p><a href="#">Link text</a></p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h2>Colors</h2>
+        <hr>
+        <h3>Main colors</h3>
+        <div class="background-default color-disc"></div>
+        <div class="background-info color-disc"></div>
+        <div class="background-success color-disc"></div>
+        <div class="background-warning color-disc"></div>
+        <div class="background-error color-disc"></div>
     </div>
 </div>
 
@@ -72,19 +87,51 @@
         </div>
         <h3>Small</h3>
         <div>
+            <a href="#" class="button-default small">Default</a>
+            <a href="#" class="button-info small">Info</a>
+            <a href="#" class="button-success small">Success</a>
+            <a href="#" class="button-warning small">Warning</a>
+            <a href="#" class="button-error small">Delete</a>
+        </div>
+        <br>
+        <div>
             <a href="#" class="button-default-outline small">Default</a>
             <a href="#" class="button-info-outline small">Info</a>
             <a href="#" class="button-success-outline small">Success</a>
             <a href="#" class="button-warning-outline small">Warning</a>
             <a href="#" class="button-error-outline small">Delete</a>
         </div>
+        <h3>Large</h3>
+        <div>
+            <a href="#" class="button-default large">Default</a>
+            <a href="#" class="button-info large">Info</a>
+            <a href="#" class="button-success large">Success</a>
+            <a href="#" class="button-warning large">Warning</a>
+            <a href="#" class="button-error large">Delete</a>
+        </div>
         <br>
         <div>
-            <button class="button-default-outline small">Default</button>
-            <button class="button-info-outline small">Info</button>
-            <button class="button-success-outline small">Success</button>
-            <button class="button-warning-outline small">Warning</button>
-            <button class="button-error-outline small">Delete</button>
+            <a href="#" class="button-default-outline large">Default</a>
+            <a href="#" class="button-info-outline large">Info</a>
+            <a href="#" class="button-success-outline large">Success</a>
+            <a href="#" class="button-warning-outline large">Warning</a>
+            <a href="#" class="button-error-outline large">Delete</a>
+        </div>
+        <h3>Disabled</h3>
+        <div>
+            <a href="#" class="button-default disabled">Default</a>
+            <a href="#" class="button-info disabled">Info</a>
+            <a href="#" class="button-success disabled">Success</a>
+            <a href="#" class="button-warning disabled">Warning</a>
+            <a href="#" class="button-error disabled">Delete</a>
+        </div>
+        <br>
+        <div>
+            <a href="#" class="button-default-outline disabled">Default</a>
+            <a href="#" class="button-info-outline disabled">Info</a>
+            <a href="#" class="button-success-outline disabled">Success</a>
+            <a href="#" class="button-warning-outline disabled">Warning</a>
+            <a href="#" class="button-error-outline disabled">Delete</a>
         </div>
     </div>
 </div>
@@ -92,14 +139,69 @@
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
         <h2>Forms</h2>
+
         <hr>
-        <div>
-            <label>Form label</label>
-        </div>
-        <div>
-            <label class="required">Form label required</label>
-        </div>
-        <p class="help-text">Help text</p>
+
+        <h3>Input types</h3>
+        <form>
+            <div class="form-group">
+                <div class="form-label">
+                    <label>Text</label>
+                </div>
+                <input class="form-control" placeholder="Text" type="text">
+            </div>
+            <div class="form-group">
+                <div class="form-label">
+                    <label>Number</label>
+                </div>
+                <input class="form-control" min="0" placeholder="7.99" step="0.01" type="number">
+            </div>
+            <div class="form-group">
+                <div class="form-label">
+                    <label>Select</label>
+                </div>
+                <select class="form-control">
+                    <option value="" selected="selected">Select option</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </form>
+
+        <h3>Text</h3>
+        <form>
+            <div class="form-group">
+                <div class="form-label">
+                    <label>Default input label</label>
+                </div>
+                <input class="form-control" placeholder="Default input label" type="text">
+            </div>
+            <div class="form-group">
+                <div class="form-label">
+                    <label class="required">Required input label</label>
+                    <span class="accessory">Accessory label</span>
+                </div>
+                <input class="form-control" placeholder="Required input label" type="text" required>
+            </div>
+            <div class="form-group">
+                <div class="form-label">
+                    <label>Validation error</label>
+                </div>
+                <input class="form-control error" placeholder="Validation error" type="text">
+                <div class="form-errors">
+                    <ul class="errorlist"><li>This field is required.</li></ul>
+                </div>
+            </div>
+        </form>
+
+        <h3>Small select</h3>
+        <select class="form-control small">
+                    <option value="" selected="selected">Select option</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
     </div>
 </div>
 
@@ -160,6 +262,20 @@
     <div class="col-sm-10 col-sm-offset-1">
         <h2>Pagination</h2>
         <hr>
+        <h3>Pager</h3>
+        <ul class="pager">
+            <li><a class="previous disabled">Newer</a>
+            <li><a href="#" class="current">1</a>
+            <li><a href="#">2</a>
+            <li><a href="#">3</a>
+            <li><a href="#">4</a>
+            <li><a class="disabled">...</a>
+            <li><a href="#">8</a>
+            <li><a href="#" class="next">Older</a>
+        </ul>
+        <h3>Item count</h3>
+        <p class="pager-total"><b>11</b> – <b>75</b>
+                of <b>100</b></p>
     </div>
 </div>
 
@@ -168,8 +284,12 @@
         <h2>Messages</h2>
         <hr>
         <h3>With or without buttons</h3>
+        <div class="message message-default" role="alert">
+            <strong>Hey</strong> A default message.
+        </div>
+
         <div class="message message-info" role="alert">
-            <strong>Info</strong> A general information message.
+            <strong>Info</strong> An information message.
             <a class="message-button">Button</a>
         </div>
 
@@ -190,7 +310,8 @@
             $(document).ready(function() {
                 $('.message').append('<span class="message-close">&times;</span>');
                 $('.message-close').on('click',function(){
-                    $(this).closest('.message').hide();
+{#                    $(this).closest('.message').hide();#}
+                    $(this).closest('.message').fadeOut();
                 });
             });
         </script>
@@ -203,17 +324,42 @@
         <hr>
 
         <div class="meter">
+            <div class="meter-container">
+                <div class="meter-animate meter-default" role="progressbar" data-width="0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <br>
+            <div class="meter-container">
+                <div class="meter-animate meter-info" role="progressbar" data-width="50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <br>
+            <div class="meter-container">
+                <div class="meter-animate meter-success" role="progressbar" data-width="50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <br>
+            <div class="meter-container">
+                <div class="meter-animate meter-warning" role="progressbar" data-width="50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <br>
+            <div class="meter-container">
+                <div class="meter-animate meter-error" role="progressbar" data-width="50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <h3>With title and footer</h3>
             <div class="meter-title">
-                <p class="pull-left">Utilities <span class="description">Gas, electricity, and Internet</span></p>
-                <p class="pull-right">$100 left</p>
+                <p class="pull-left lead">Utilities <span class="description">Gas, electricity, and Internet</span></p>
+                <p class="pull-right lead">$100 left</p>
             </div>
             <div class="meter-container">
                 <div class="meter-animate meter-success" role="progressbar" data-width="50%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                 </div>
             </div>
             <div class="meter-footer">
-                <p class="pull-left">$100 of $200</p>
-                <ul class="pull-right">
+                <p class="pull-left small">$100 of $200</p>
+                <ul class="pull-right small">
                     <li><a href="#">Edit</a></li>
                     <li><a href="#">View Transactions</a></li>
                 </ul>
@@ -234,11 +380,20 @@
 
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-        <h2>Utilities</h2>
+        <h2>Dialogs</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h2>Helpers</h2>
         <hr>
         <p class="text-left">Left</p>
         <p class="text-center">Center</p>
         <p class="text-right">Right</p>
+
+        <h3>Vertical rhythm</h3>
     </div>
 </div>
 

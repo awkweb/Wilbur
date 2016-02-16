@@ -1,5 +1,5 @@
 form {
-  color: $gray-dark;
+  color: $gray-darkest;
 }
 
 .form {
@@ -22,7 +22,7 @@ form {
   &.accessory {
     padding-top: 2px;
     float: right;
-    color: $gray-light;
+    color: $gray;
     font: .9rem $sans;
 
     &a:hover {
@@ -39,17 +39,17 @@ form {
   margin-top: 3px;
   width: 100%;
   padding: 6px 14px;
-  border: 2px solid $gray-lighter;
+  border: 2px solid $gray-light;
   outline: 0;
   font: 1rem $sans;
-  color: $gray-dark;
+  color: $gray-darkest;
 
   &:hover {
-    border-color: $gray-light;
+    border-color: $gray;
   }
 
   &:focus {
-    border-color: $gray-dark;
+    border-color: $gray-darkest;
   }
 
   &.large {
@@ -65,7 +65,7 @@ form {
     font-weight: 600;
 
     &:hover {
-      border-color: $gray-light;
+      border-color: $gray;
     }
   }
 }

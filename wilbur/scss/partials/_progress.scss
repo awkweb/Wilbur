@@ -11,7 +11,7 @@
   }
 
   & span {
-    color: $gray-light;
+    color: $gray;
   }
 }
 
@@ -55,14 +55,14 @@
   }
 
   a {
-    color: $gray-light;
+    color: $gray;
 
     &:hover {
-      color: $gray;
+      color: $gray-dark;
     }
   }
 
   p {
-    color: $gray-light;
+    color: $gray;
   }
 }
