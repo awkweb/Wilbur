@@ -169,7 +169,15 @@
             </div>
         </form>
 
-        <h3>Text</h3>
+        <h3>Small</h3>
+        <select class="form-control small">
+            <option value="" selected="selected">Select option</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+
+        <h3>Labels</h3>
         <form>
             <div class="form-group">
                 <div class="form-label">
@@ -180,7 +188,6 @@
             <div class="form-group">
                 <div class="form-label">
                     <label class="required">Required input label</label>
-                    <span class="accessory">Accessory label</span>
                 </div>
                 <input class="form-control" placeholder="Required input label" type="text" required>
             </div>
@@ -193,15 +200,14 @@
                     <ul class="errorlist"><li>This field is required.</li></ul>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="form-label">
+                    <label>Input accessory</label>
+                    <span class="accessory">Input accessory</span>
+                </div>
+                <input class="form-control" placeholder="Input accessory" type="text" required>
+            </div>
         </form>
-
-        <h3>Small select</h3>
-        <select class="form-control small">
-                    <option value="" selected="selected">Select option</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
     </div>
 </div>
 
@@ -310,7 +316,6 @@
             $(document).ready(function() {
                 $('.message').append('<span class="message-close">&times;</span>');
                 $('.message-close').on('click',function(){
-{#                    $(this).closest('.message').hide();#}
                     $(this).closest('.message').fadeOut();
                 });
             });
@@ -382,6 +387,48 @@
     <div class="col-sm-10 col-sm-offset-1">
         <h2>Dialogs</h2>
         <hr>
+
+        <a class="button-info dialog-trigger" role="button">Open dialog</a>
+
+        <div class="dialog" role="alert">
+            <div class="dialog-container">
+                <div class="dialog-title">
+                    <strong>Dialog title</strong>
+                    <span class="dialog-close">&times;</span>
+                </div>
+                <div class="dialog-body">
+                    <p>This is where a short, clear message goes. This <b>must</b> be two sentences or less.</p>
+                    <div class="dialog-buttons">
+                        <a href="#" class="button-error" role="button">Yes, delete.</a>
+                        <a class="button-default dialog-close" role="button">No, cancel.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            jQuery(document).ready(function($){
+                //open popup
+                $('.dialog-trigger').on('click', function(event){
+                    event.preventDefault();
+                    $('.dialog').addClass('is-visible');
+                });
+
+                //close popup
+                $('.dialog').on('click', function(event){
+                    if( $(event.target).is('.dialog-close') || $(event.target).is('.cd-popup') || $(event.target).is('.popup-close') ) {
+                        event.preventDefault();
+                        $(this).removeClass('is-visible');
+                    }
+                });
+                //close popup when clicking the esc keyboard button
+                $(document).keyup(function(event){
+                    if(event.which=='27'){
+                        $('.dialog').removeClass('is-visible');
+                    }
+                });
+            });
+        </script>
     </div>
 </div>
 
