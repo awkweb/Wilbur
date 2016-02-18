@@ -32,7 +32,9 @@
         <p>Body content / copy</p>
         <p><b>Bold text</b></p>
         <p class="semi-bold">Semi-bold text</p>
+        <p class="text-small">Small text</p>
         <p><a href="#">Link text</a></p>
+        <p class="wilbur large color-success">Main Wilbur text</p>
     </div>
 </div>
 
@@ -55,11 +57,11 @@
         <hr>
         <h3>With a or button elements</h3>
         <div>
-            <a href="#" class="button-default">Default</a>
-            <a href="#" class="button-info">Info</a>
-            <a href="#" class="button-success">Success</a>
-            <a href="#" class="button-warning">Warning</a>
-            <a href="#" class="button-error">Delete</a>
+            <a href="#" class="button-default" role="button">Default</a>
+            <a href="#" class="button-info" role="button">Info</a>
+            <a href="#" class="button-success" role="button">Success</a>
+            <a href="#" class="button-warning" role="button">Warning</a>
+            <a href="#" class="button-error" role="button">Delete</a>
         </div>
         <br>
         <div>
@@ -71,67 +73,35 @@
         </div>
         <h3>Outlined</h3>
         <div>
-            <a href="#" class="button-default-outline">Default</a>
-            <a href="#" class="button-info-outline">Info</a>
-            <a href="#" class="button-success-outline">Success</a>
-            <a href="#" class="button-warning-outline">Warning</a>
-            <a href="#" class="button-error-outline">Delete</a>
-        </div>
-        <br>
-        <div>
-            <button class="button-default-outline">Default</button>
-            <button class="button-info-outline">Info</button>
-            <button class="button-success-outline">Success</button>
-            <button class="button-warning-outline">Warning</button>
-            <button class="button-error-outline">Delete</button>
+            <a href="#" class="button-outline-default" role="button">Default</a>
+            <a href="#" class="button-outline-info" role="button">Info</a>
+            <a href="#" class="button-outline-success" role="button">Success</a>
+            <a href="#" class="button-outline-warning" role="button">Warning</a>
+            <a href="#" class="button-outline-error" role="button">Delete</a>
         </div>
         <h3>Small</h3>
         <div>
-            <a href="#" class="button-default small">Default</a>
-            <a href="#" class="button-info small">Info</a>
-            <a href="#" class="button-success small">Success</a>
-            <a href="#" class="button-warning small">Warning</a>
-            <a href="#" class="button-error small">Delete</a>
-        </div>
-        <br>
-        <div>
-            <a href="#" class="button-default-outline small">Default</a>
-            <a href="#" class="button-info-outline small">Info</a>
-            <a href="#" class="button-success-outline small">Success</a>
-            <a href="#" class="button-warning-outline small">Warning</a>
-            <a href="#" class="button-error-outline small">Delete</a>
+            <a href="#" class="button-default small" role="button">Default</a>
+            <a href="#" class="button-info small" role="button">Info</a>
+            <a href="#" class="button-success small" role="button">Success</a>
+            <a href="#" class="button-warning small" role="button">Warning</a>
+            <a href="#" class="button-error small" role="button">Delete</a>
         </div>
         <h3>Large</h3>
         <div>
-            <a href="#" class="button-default large">Default</a>
-            <a href="#" class="button-info large">Info</a>
-            <a href="#" class="button-success large">Success</a>
-            <a href="#" class="button-warning large">Warning</a>
-            <a href="#" class="button-error large">Delete</a>
-        </div>
-        <br>
-        <div>
-            <a href="#" class="button-default-outline large">Default</a>
-            <a href="#" class="button-info-outline large">Info</a>
-            <a href="#" class="button-success-outline large">Success</a>
-            <a href="#" class="button-warning-outline large">Warning</a>
-            <a href="#" class="button-error-outline large">Delete</a>
+            <a href="#" class="button-default large" role="button">Default</a>
+            <a href="#" class="button-info large" role="button">Info</a>
+            <a href="#" class="button-success large" role="button">Success</a>
+            <a href="#" class="button-warning large" role="button">Warning</a>
+            <a href="#" class="button-error large" role="button">Delete</a>
         </div>
         <h3>Disabled</h3>
         <div>
-            <a href="#" class="button-default disabled">Default</a>
-            <a href="#" class="button-info disabled">Info</a>
-            <a href="#" class="button-success disabled">Success</a>
-            <a href="#" class="button-warning disabled">Warning</a>
-            <a href="#" class="button-error disabled">Delete</a>
-        </div>
-        <br>
-        <div>
-            <a href="#" class="button-default-outline disabled">Default</a>
-            <a href="#" class="button-info-outline disabled">Info</a>
-            <a href="#" class="button-success-outline disabled">Success</a>
-            <a href="#" class="button-warning-outline disabled">Warning</a>
-            <a href="#" class="button-error-outline disabled">Delete</a>
+            <a href="#" class="button-default disabled" role="button">Default</a>
+            <a href="#" class="button-info disabled" role="button">Info</a>
+            <a href="#" class="button-success disabled" role="button">Success</a>
+            <a href="#" class="button-warning disabled" role="button">Warning</a>
+            <a href="#" class="button-error disabled" role="button">Delete</a>
         </div>
     </div>
 </div>
@@ -177,7 +147,7 @@
             <option>3</option>
         </select>
 
-        <h3>Labels</h3>
+        <h3>Labels & more</h3>
         <form>
             <div class="form-group">
                 <div class="form-label">
@@ -399,8 +369,8 @@
                 <div class="dialog-body">
                     <p>This is where a short, clear message goes. This <b>must</b> be two sentences or less.</p>
                     <div class="dialog-buttons">
-                        <a href="#" class="button-error" role="button">Yes, delete.</a>
-                        <a class="button-default dialog-close" role="button">No, cancel.</a>
+                        <a href="#" class="button-error pull-left" role="button">Yes, do it.</a>
+                        <a class="button-default dialog-close pull-right" role="button">No, cancel.</a>
                     </div>
                 </div>
             </div>
@@ -430,6 +400,10 @@
             });
         </script>
     </div>
+</div><div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h2>Tokens</h2>
+        <hr>
 </div>
 
 <div class="row">

@@ -34,6 +34,7 @@ hr {
 a {
   @include link($green, $green-dark);
   font-family: $sans;
+  text-decoration: none;
 }
 
 //
@@ -47,18 +48,14 @@ h1, h2, h3, h4,
 }
 
 h2, h3, h4,
-.h2, .h3, .h4 {
-  font-weight: 600;
-}
+.h2, .h3, .h4 { font-weight: 600; }
 
 h1, .h1 {
   font-size: 2.15rem;
   font-weight: 700;
 }
 
-h2, .h2 {
-  font-size: 1.65rem;
-}
+h2, .h2 { font-size: 1.65rem; }
 
 h3, .h3 {
   font-size: 1.35rem;
@@ -81,15 +78,19 @@ p {
   &.small { font-size: .9rem}
 }
 
-b, strong, .bold {
-  font-weight: 700;
-}
+b, strong, .bold { font-weight: 700; }
 
 .semi-bold { font-weight: 600; }
 
-a {
-  text-decoration: none; // define global link
+.text-small { font-size: .9rem }
+
+.wilbur {
+  font-family: $cursive;
+  font-weight: 400;
+
+  &.large { font-size: 2.5rem }
 }
+
 
 // Lists, Wilbur, links
 
@@ -153,16 +154,23 @@ a {
   }
 }
 
-@each $name, $background, $background2 in (default, $gray, $gray-dark), (error, $red, $red-dark),
-        (warning, $yellow, $yellow-dark), (success, $green, $green-dark), (info, $blue, $blue-dark) {
+@each $name, $background, $background2 in
+                (default, $gray, $gray-dark),
+                (error, $red, $red-dark),
+                (warning, $yellow, $yellow-dark),
+                (success, $green, $green-dark),
+                (info, $blue, $blue-dark) {
   .button-#{$name} { @include button-fill($background, $background2) }
 }
 
-.button-default-outline { @include button-outline($gray-darkest, $gray-light, $gray-dark) }
-.button-error-outline { @include button-outline($red, $red-dark, $red-dark) }
-.button-warning-outline { @include button-outline($yellow, $yellow-dark, $yellow-dark) }
-.button-success-outline { @include button-outline($green, $green-dark, $green-dark) }
-.button-info-outline { @include button-outline($blue, $blue-dark, $blue-dark) }
+@each $name, $color-text, $color-border, $color-border2 in
+                (default, $gray-darkest, $gray-light, $gray-dark),
+                (error, $red, $red-dark, $red-dark),
+                (warning, $yellow, $yellow-dark, $yellow-dark),
+                (success, $green, $green-dark, $green-dark),
+                (info, $blue, $blue-dark, $blue-dark) {
+  .button-outline-#{$name} { @include button-outline($color-text, $color-border, $color-border2) }
+}
 
 //
 // Forms
@@ -532,13 +540,32 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
   }
 }
 
-.dialog-body { padding: 1rem 1rem; }
+.dialog-body { padding: .5rem 1.5rem 1.5rem; }
 
-.dialog-buttons { padding: .5rem 0 }
+.dialog-buttons {
+  @include clearfix();
+  margin-top: 2rem;
+}
 
 //
 // Helpers
 // --------------------------------------------------
+
+/*
+MARGIN
+m0, m1, m2, m3, m4
+mt0, mt1, mt2, mt3, mt4
+mr0, mr1, mr2, mr3, mr4
+mb0, mb1, mb2, mb3, mb4
+ml0, ml1, ml2, ml3, ml4
+
+PADDING
+p0, p1, p2, p3, p4
+pt0, pt1, pt2, pt3, pt4
+pr0, pr1, pr2, pr3, pr4
+pb0, pb1, pb2, pb3, pb4
+pl0, pl1, pl2, pl3, pl4
+*/
 
 //@each $name, $direction in (t, top), (r, right), (l, left), (b, bottom) {
 //  @for $i from 0 through 6 {
@@ -554,7 +581,6 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
-.wilbur { font-family: $cursive; }
 
 .color-default { color: $gray; }
 .color-error { color: $red; }
