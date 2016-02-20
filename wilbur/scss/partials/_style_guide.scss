@@ -7,15 +7,48 @@
 }
 
 //
+// Sass authoring rules
+// -------------------------------------------------
+// .block {
+// // 1. Layout Properties
+// // display, width, padding, margin, vertical-align, box-sizing, etc.
+// // Note: Bracketed expression values (such as calc() or linear-gradient()) must have spaces [e.g. calc( 100% + 2rem )] for Grunt tasks to run properly
+//
+// // 2. Typography Properties
+// // font[-size, -weight, etc], line-height, text-align, letter-spacing, white-space, etc.
+//
+// // 3. Appearance Properties
+// // color, box-shadow, background, border, text-shadow, opacity, etc.
+//
+// // 4. UI Properties
+// // appearance, cursor, pointer-events, etc.
+//
+// // Child elements are not always (and shouldn't be) nested in the parent block
+// .blockchild {
+//
+// // Modifiers are almost always nested in their parent element
+// &.blockchild--modifier {
+//
+// }
+//
+// &:after {
+// // content counts as a layout property
+// }
+//
+// }
+// }
+//
+
+//
 // Base
 // --------------------------------------------------
 
-//body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td {
-//	margin:0;
-//	padding:0;
-//}
+// normalize.css
 
-body { font-size: $font-size }
+body {
+  @extend .mar-2;
+  font-size: $font-size
+}
 
 hr {
   margin: 1rem 0;
@@ -51,20 +84,20 @@ h2, h3, h4,
 .h2, .h3, .h4 { font-weight: 600; }
 
 h1, .h1 {
-  font-size: 2.15rem;
+  font-size: $font-size-h1;
   font-weight: 700;
 }
 
-h2, .h2 { font-size: 1.65rem; }
+h2, .h2 { font-size: $font-size-h2; }
 
 h3, .h3 {
-  font-size: 1.35rem;
+  font-size: $font-size-h3;
   font-style: italic;
 }
 
 h4, .h4 {
   color: $gray-dark;
-  font-size: 1.25rem;
+  font-size: $font-size-h4;
 }
 
 p {
@@ -90,9 +123,6 @@ b, strong, .bold { font-weight: 700; }
 
   &.large { font-size: 2.5rem }
 }
-
-
-// Lists, Wilbur, links
 
 //
 // Buttons
@@ -225,10 +255,10 @@ form {
   &.large { height: 40px; }
 
   &.small {
+    @extend .text-small;
     height: 10%;
     width: 150px;
     border-width: 1px;
-    font-size: .9rem;
     font-weight: 600;
 
     &:hover {
@@ -337,7 +367,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
     border-left: none;
     padding: 6px 15px;
     color: $gray-darkest;
-    font-size: .9rem;
+    @extend .text-small;
 
     &:hover { background-color: $gray-light; }
 
@@ -441,9 +471,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
   background-color: $color;
 }
 
-.meter {
-  @include clearfix();
-}
+.meter { @include clearfix(); }
 
 .meter-title {
   .description {
@@ -551,30 +579,6 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 // Helpers
 // --------------------------------------------------
 
-/*
-MARGIN
-m0, m1, m2, m3, m4
-mt0, mt1, mt2, mt3, mt4
-mr0, mr1, mr2, mr3, mr4
-mb0, mb1, mb2, mb3, mb4
-ml0, ml1, ml2, ml3, ml4
-
-PADDING
-p0, p1, p2, p3, p4
-pt0, pt1, pt2, pt3, pt4
-pr0, pr1, pr2, pr3, pr4
-pb0, pb1, pb2, pb3, pb4
-pl0, pl1, pl2, pl3, pl4
-*/
-
-//@each $name, $direction in (t, top), (r, right), (l, left), (b, bottom) {
-//  @for $i from 0 through 6 {
-//    .margin-#{$name}#{$i} {
-//      margin-#{$direction}: #{$i}rem;
-//    }
-//  }
-//}
-
 .pull-left { float: left !important; }
 .pull-right { float: right !important; }
 
@@ -594,9 +598,39 @@ pl0, pl1, pl2, pl3, pl4
 .background-success { background-color: $green; }
 .background-info { background-color: $blue; }
 
+@each $level, $size in (0, 0), (1, 6px), (2, 12px), (3, 18px), (4, 24px), (5, 30px), (6, 36px) {
+  .mar-#{$level} { margin: #{$size}; }
+  .mar-t#{$level} { margin-top: #{$size}; }
+  .mar-r#{$level} { margin-right: #{$size}; }
+  .mar-b#{$level} { margin-bottom: #{$size}; }
+  .mar-l#{$level} { margin-left: #{$size}; }
+  .mar-tb#{$level} { margin: #{$size} inherit; }
+}
+
+@each $level, $size in (0, 0), (1, 6px), (2, 12px), (3, 18px), (4, 24px), (5, 30px), (6, 36px) {
+  .pad-#{$level} { padding: #{$size}; }
+  .pad-t#{$level} { padding-top: #{$size}; }
+  .pad-r#{$level} { padding-right: #{$size}; }
+  .pad-b#{$level} { padding-bottom: #{$size}; }
+  .pad-l#{$level} { padding-left: #{$size}; }
+  .pad-tb#{$level} { padding: #{$size} inherit; }
+}
+
+// Style attributes
+
+code {
+  font-size: 14px;
+  line-height: 18px;
+  font-family: "Source Code Pro", Consolas, "Lucida Console", Courier, monospace;
+  color: #a11;
+  word-spacing: normal;
+  word-wrap: break-word
+}
+
 .color-disc {
   @include vendor-prefix(border-radius, 50px);
   display: inline-block;
   height: 100px;
   width: 100px;
 }
+

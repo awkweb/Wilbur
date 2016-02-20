@@ -7,6 +7,7 @@
 
     {% load staticfiles %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,600,700">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/grid.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/styles2.css' %}"/>
 
@@ -69,7 +70,7 @@
             <button class="button-info">Info</button>
             <button class="button-success">Success</button>
             <button class="button-warning">Warning</button>
-            <button class="button-error">Delete</button>
+            <button class="button-error">Error</button>
         </div>
         <h3>Outlined</h3>
         <div>
@@ -77,7 +78,7 @@
             <a href="#" class="button-outline-info" role="button">Info</a>
             <a href="#" class="button-outline-success" role="button">Success</a>
             <a href="#" class="button-outline-warning" role="button">Warning</a>
-            <a href="#" class="button-outline-error" role="button">Delete</a>
+            <a href="#" class="button-outline-error" role="button">Error</a>
         </div>
         <h3>Small</h3>
         <div>
@@ -85,7 +86,7 @@
             <a href="#" class="button-info small" role="button">Info</a>
             <a href="#" class="button-success small" role="button">Success</a>
             <a href="#" class="button-warning small" role="button">Warning</a>
-            <a href="#" class="button-error small" role="button">Delete</a>
+            <a href="#" class="button-error small" role="button">Error</a>
         </div>
         <h3>Large</h3>
         <div>
@@ -93,7 +94,7 @@
             <a href="#" class="button-info large" role="button">Info</a>
             <a href="#" class="button-success large" role="button">Success</a>
             <a href="#" class="button-warning large" role="button">Warning</a>
-            <a href="#" class="button-error large" role="button">Delete</a>
+            <a href="#" class="button-error large" role="button">Error</a>
         </div>
         <h3>Disabled</h3>
         <div>
@@ -101,7 +102,7 @@
             <a href="#" class="button-info disabled" role="button">Info</a>
             <a href="#" class="button-success disabled" role="button">Success</a>
             <a href="#" class="button-warning disabled" role="button">Warning</a>
-            <a href="#" class="button-error disabled" role="button">Delete</a>
+            <a href="#" class="button-error disabled" role="button">Error</a>
         </div>
     </div>
 </div>
@@ -369,8 +370,8 @@
                 <div class="dialog-body">
                     <p>This is where a short, clear message goes. This <b>must</b> be two sentences or less.</p>
                     <div class="dialog-buttons">
-                        <a href="#" class="button-error pull-left" role="button">Yes, do it.</a>
-                        <a class="button-default dialog-close pull-right" role="button">No, cancel.</a>
+                        <a href="#" class="button-error pull-left" role="button">Yes, do it</a>
+                        <a class="button-default dialog-close pull-right" role="button">No, cancel</a>
                     </div>
                 </div>
             </div>
@@ -404,17 +405,21 @@
     <div class="col-sm-10 col-sm-offset-1">
         <h2>Tokens</h2>
         <hr>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
         <h2>Helpers</h2>
         <hr>
+
+        <h3>Text</h3>
         <p class="text-left">Left</p>
         <p class="text-center">Center</p>
         <p class="text-right">Right</p>
 
         <h3>Vertical rhythm</h3>
+        <p class="mar-b6">Margin and padding classes for all, top, right, bottom, and left with levels 1-6.</p>
     </div>
 </div>
 
