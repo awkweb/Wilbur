@@ -7,39 +7,6 @@
 }
 
 //
-// Sass authoring rules
-// -------------------------------------------------
-// .block {
-// // 1. Layout Properties
-// // display, width, padding, margin, vertical-align, box-sizing, etc.
-// // Note: Bracketed expression values (such as calc() or linear-gradient()) must have spaces [e.g. calc( 100% + 2rem )] for Grunt tasks to run properly
-//
-// // 2. Typography Properties
-// // font[-size, -weight, etc], line-height, text-align, letter-spacing, white-space, etc.
-//
-// // 3. Appearance Properties
-// // color, box-shadow, background, border, text-shadow, opacity, etc.
-//
-// // 4. UI Properties
-// // appearance, cursor, pointer-events, etc.
-//
-// // Child elements are not always (and shouldn't be) nested in the parent block
-// .blockchild {
-//
-// // Modifiers are almost always nested in their parent element
-// &.blockchild--modifier {
-//
-// }
-//
-// &:after {
-// // content counts as a layout property
-// }
-//
-// }
-// }
-//
-
-//
 // Base
 // --------------------------------------------------
 
@@ -56,7 +23,7 @@ hr {
 }
 
 @mixin link($color, $color2) {
-  @include vendor-prefix(transition, 0.25s);
+  transition: 0.25s;
   color: $color;
 
   &:hover {
@@ -129,8 +96,8 @@ b, strong, .bold { font-weight: 700; }
 // --------------------------------------------------
 
 .button {
-  @include vendor-prefix(transition, 0.25s);
-  @include vendor-prefix(border-radius, 4px);
+  transition: 0.25s;
+  border-radius: 4px;
   display: inline-block;
   text-align: center;
   cursor: pointer;
@@ -236,10 +203,10 @@ form {
 }
 
 .form-control {
-  @include vendor-prefix(box-sizing, border-box);
-  @include vendor-prefix(transition, 0.25s);
-  @include vendor-prefix(appearance, none);
-  @include vendor-prefix(border-radius, 4px);
+  box-sizing: border-box;
+  transition: 0.25s;
+  appearance: none;
+  border-radius: 4px;
   width: 100%;
   padding: 6px 14px;
   border: 2px solid $gray-light;
@@ -325,16 +292,16 @@ tbody tr:nth-child(even) {
   background-color: $gray-lightest;
 }
 
-th:first-child { @include vendor-prefix(border-top-left-radius, 4px); }
+th:first-child { border-top-left-radius: 4px; }
 
-th:last-child { @include vendor-prefix(border-top-right-radius, 4px); }
+th:last-child { border-top-right-radius: 4px; }
 
-td:first-child { @include vendor-prefix(border-bottom-left-radius, 4px); }
+td:first-child { border-bottom-left-radius: 4px; }
 
-td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
+td:last-child { border-bottom-right-radius: 4px; }
 
 .table-bordered {
-  @include vendor-prefix(border-radius, 4px);
+  border-radius: 4px;
   border: 1px solid $gray-light;
 }
 
@@ -357,7 +324,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
   }
 
   a {
-    @include vendor-prefix(transition, 0.25s);
+    transition: 0.25s;
     text-align: center;
     cursor: pointer;
     font-weight: 600;
@@ -383,14 +350,14 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
     }
 
     &.previous {
-      @include vendor-prefix(border-top-left-radius, 4px);
-      @include vendor-prefix(border-bottom-left-radius, 4px);
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
       border-left: 1px solid $gray-light;
     }
 
     &.next {
-      @include vendor-prefix(border-top-right-radius, 4px);
-      @include vendor-prefix(border-bottom-right-radius, 4px);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
     }
   }
 }
@@ -406,7 +373,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 // --------------------------------------------------
 
 @mixin message($color) {
-  @include vendor-prefix(border-radius, 4px);
+  border-radius: 4px;
   position: relative;
   display: block;
   padding: 1rem;
@@ -460,7 +427,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 }
 
 @mixin meter-bar($color) {
-  @include vendor-prefix(transition, width 3s);
+  transition: width 3s;
   float: left;
   width: 0;
   height: 100%;
@@ -474,6 +441,10 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 .meter { @include clearfix(); }
 
 .meter-title {
+  p {
+    @extend .mar-t0;
+    @extend .mar-b1;
+  }
   .description {
     color: $gray;
     @media screen and (max-width: $small - 150) {
@@ -483,7 +454,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 }
 
 .meter-container {
-  @include vendor-prefix(border-radius, 4px);
+  border-radius: 4px;
   clear: both;
   height: 1.5rem;
   overflow: hidden;
@@ -499,13 +470,19 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 .meter-footer {
   font-size: 0.9rem;
 
+  p, ul {
+    @extend .mar-t1;
+    @extend .mar-b0;
+  }
+
+  p { color: $gray; }
+
   ul > li {
     display: inline-block;
     margin-left: 1rem;
   }
 
   a { @include link($gray, $gray-dark); }
-  p { color: $gray; }
 }
 
 //
@@ -513,7 +490,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 // --------------------------------------------------
 
 .dialog {
-  @include vendor-prefix(transition, all 0.3s);
+  transition: all 0.3s;
   z-index: 10000;
   position: fixed;
   left: 0;
@@ -530,11 +507,11 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 }
 
 .dialog-container {
-  @include vendor-prefix(transform, translateY(-40px));
-  @include vendor-prefix(transition-property, transform);
-  @include vendor-prefix(transition-duration, 0.3s);
-  @include vendor-prefix(border-radius, 4px);
-  @include vendor-prefix(backface-visibility, hidden);
+  transform: translateY(-40px);
+  transition-property: transform;
+  transition-duration: 0.3s;
+  border-radius: 4px;
+  backface-visibility: hidden;
   position: relative;
   width: 90%;
   max-width: 400px;
@@ -549,7 +526,7 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
   }
 }
 
-.is-visible .dialog-container { @include vendor-prefix(transform, translateY(0)); }
+.is-visible .dialog-container { transform: translateY(0); }
 
 .dialog-title {
   padding: .5rem 1rem;
@@ -573,6 +550,28 @@ td:last-child { @include vendor-prefix(border-bottom-right-radius, 4px); }
 .dialog-buttons {
   @include clearfix();
   margin-top: 2rem;
+}
+
+//
+// Token
+// --------------------------------------------------
+
+@mixin token($background) {
+  border-radius: 4px;
+  padding: 4px 10px;
+  color: $white;
+  font-weight: 600;
+  background-color: $background;
+
+  &.small { padding: 1px 6px; }
+}
+
+@each $name, $background in
+                (error, $red),
+                (warning, $yellow),
+                (success, $green),
+                (info, $blue) {
+  .token-#{$name} { @include token($background) }
 }
 
 //
@@ -628,7 +627,7 @@ code {
 }
 
 .color-disc {
-  @include vendor-prefix(border-radius, 50px);
+  border-radius: 50px;
   display: inline-block;
   height: 100px;
   width: 100px;
