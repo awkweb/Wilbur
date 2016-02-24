@@ -1,0 +1,43 @@
+module.exports = function(grunt) {
+
+    grunt.initConfig({
+          pkg: grunt.file.readJSON('package.json'),
+
+    // compile scss
+    sass: {
+      build: {
+        files: {
+            'css/styles.min.css': 'scss/styles.scss'
+        },
+      },
+    },
+
+    // compile coffee
+    coffee : {},
+
+    // watch for changes
+    watch: {
+      css: {
+        files: ['scss/modules/*.scss'],
+        tasks: ['sass'],
+        options: {
+          interrupt: true,
+          spawn: false,
+        },
+      },
+    },
+
+    // autoprefix css
+    autoprefixer: {},
+
+    });
+
+    // loads
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-autoprefixer');
+
+    // tasks
+    grunt.registerTask('default', ['sass', 'coffee', 'watch', 'autoprefixer']);
+};
