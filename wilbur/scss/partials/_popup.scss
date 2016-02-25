@@ -1,5 +1,5 @@
 .cd-popup {
-  @include vendor-prefix(transition, all 0.3s);
+  transition: all 0.3s;
   z-index: 10000;
   position: fixed;
   left: 0;
@@ -16,10 +16,10 @@
 }
 
 .cd-popup-container {
-  @include vendor-prefix(transform, translateY(-40px));
-  @include vendor-prefix(transition-property, transform);
-  @include vendor-prefix(transition-duration, 0.3s);
-  @include vendor-prefix(border-radius, 4px);
+  transform: translateY(-40px);
+  transition-property: transform;
+  transition-duration: 0.3s;
+  border-radius: 4px;
   position: relative;
   width: 90%;
   max-width: 400px;
@@ -61,7 +61,7 @@ li {
 }
 
 .cd-popup-container .cd-buttons li:first-child a {
-  @include vendor-prefix(transition, 0.25s);
+  transition: 0.25s;
   background: $red;
   border-radius: 0 0 0 .25em;
 
@@ -71,7 +71,7 @@ li {
 }
 
 .cd-popup-container .cd-buttons li:last-child a {
-  @include vendor-prefix(transition, 0.25s);
+  transition: 0.25s;
   background: $gray;
   border-radius: 0 0 .25em 0;
 
@@ -103,17 +103,17 @@ li {
     background-color: #8f9cb5;
   }
   &::before {
-    @include vendor-prefix(transform, rotate(45deg));
+    transform: rotate(45deg);
     left: 8px;
   }
   &::after {
-    @include vendor-prefix(transform, rotate(-45deg));
+    transform: rotate(-45deg);
     right: 8px;
   }
 }
 
 .is-visible .cd-popup-container {
-  @include vendor-prefix(transform, translateY(0));
+  transform: translateY(0);
 }
 
 @media only screen and (min-width: 1170px) {

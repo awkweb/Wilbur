@@ -1,6 +1,6 @@
 .button {
-  @include vendor-prefix(transition, 0.25s);
-  @include vendor-prefix(border-radius, 4px);
+  transition: 0.25s;
+  border-radius: 4px;
   margin-top: .5rem;
   text-align: center;
   cursor: pointer;
@@ -48,19 +48,16 @@
 }
 
 .button-submit {
-  @include button-form($green, $white, $green-dark);
   margin-right: 1rem;
 }
 
 .button-cancel {
-  @include button-form($gray, $white, $gray-dark);
   display: inline-block;
   padding: 9.25px 15px;
   margin-right: 1rem;
 }
 
 .button-delete {
-  @include button-form($red, $white, $red-dark);
   padding: 9.5px 15px;
 }
 

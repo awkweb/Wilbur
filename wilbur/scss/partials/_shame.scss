@@ -58,7 +58,6 @@
   margin-bottom: 1.75rem;
 
   a {
-    @include button-form($gray-light, $gray-dark, $gray-light);
     margin-right: .75rem;
   }
 }
