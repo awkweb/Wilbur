@@ -1,17 +1,18 @@
+@import "variables";
+@import "helpers";
+
 .navbar {
   position: relative;
-  height: 59px;
+  height: $navbar-height;
   margin: 0 0 20px;
   background-color: $green;
 
   .navbar-left {
-    padding-top: .2rem;
+    @extend .pad-t0;
     float: left;
   }
 
-  .navbar-right {
-    float: right;
-  }
+  .navbar-right { float: right; }
 
   .brand {
     font-family: $cursive;
@@ -19,23 +20,21 @@
     color: $white;
   }
 
-  .on {
-    border-bottom: 4px solid $green-dark - 25;
-    padding-bottom: 11px;
-  }
-
   .nav-inline {
-    padding: 1.35rem 0 0;
+    @extend .pad-t1;
 
-    li:first-child {
-      margin-left: 0;
-    }
+    li:first-child { @extend .mar-l0 }
 
     li {
+      @extend .mar-l6;
       display: inline-block;
       font-family: $sans;
-      margin-left: 2rem;
       list-style-type: none;
+
+      &.current {
+        border-bottom: 4px solid $green-dark - 25;
+        padding-bottom: 9px;
+      }
 
       @media screen and (max-width: $small) {
         margin-left: .75rem;
@@ -47,7 +46,7 @@
 
       &:hover {
         border-bottom: 4px solid $green-dark - 25;
-        padding-bottom: 11px;
+        padding-bottom: 9px;
       }
     }
   }

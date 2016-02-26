@@ -1,0 +1,62 @@
+.dialog {
+  transition: all 0.3s;
+  z-index: 10000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(249, 249, 249, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.dialog-container {
+  transform: translateY(-40px);
+  transition-property: transform;
+  transition-duration: 0.3s;
+  border-radius: 4px;
+  backface-visibility: hidden;
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  margin: 4em auto;
+  background-color: $white;
+  text-align: center;
+  font-family: $sans;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+  @media only screen and (min-width: 1170px) {
+    margin: 8em auto;
+  }
+}
+
+.is-visible .dialog-container { transform: translateY(0); }
+
+.dialog-title {
+  padding: .5rem 1rem;
+  color: $gray-dark;
+  border-bottom: 1px solid $gray-light;
+
+  .dialog-close {
+    position: absolute;
+    right: 0;
+    top: .075rem;
+    display: block;
+    text-align: center;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.dialog-body { padding: .5rem 1.5rem 1.5rem; }
+
+.dialog-buttons {
+  @include clearfix();
+  margin-top: 2rem;
+}

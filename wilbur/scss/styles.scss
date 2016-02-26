@@ -1,18 +1,24 @@
 @import "partials/variables";
 @import "partials/mixins";
+
 @import "partials/base";
-@import "partials/button";
-@import "partials/form";
-@import "partials/landing";
+@import "partials/helpers";
+@import "partials/typography";
+@import "partials/buttons";
+@import "partials/forms";
+@import "partials/tables";
+@import "partials/pagination";
+@import "partials/messages";
+@import "partials/meters";
+@import "partials/dialogs";
+@import "partials/tokens";
+
+
 @import "partials/navbar";
 @import "partials/footer";
-@import "partials/progress";
-@import "partials/table";
-@import "partials/pagination";
-@import "partials/overview";
-@import "partials/message";
-@import "partials/utils";
-@import "partials/popup";
+
+@import "partials/landing";
+
 @import "partials/error_pages";
 @import "partials/empty_state";
 @import "partials/shame";

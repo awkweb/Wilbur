@@ -10,12 +10,9 @@
 }
 
 @mixin link($color, $color2) {
-  transition: 0.25s;
   color: $color;
 
-  &:hover {
-    color: $color2;
-  }
+  &:hover { color: $color2; }
 }
 
 @mixin button-fill($background, $background2) {

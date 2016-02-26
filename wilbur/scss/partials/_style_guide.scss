@@ -7,7 +7,7 @@
 }
 
 //
-// Base
+// Base - Good
 // --------------------------------------------------
 
 body {
@@ -27,7 +27,7 @@ a {
 }
 
 //
-// Typography
+// Typography - Done
 // --------------------------------------------------
 
 h1, h2, h3, h4,
@@ -81,7 +81,7 @@ b, strong, .bold { font-weight: 700; }
 }
 
 //
-// Buttons
+// Buttons - Done
 // --------------------------------------------------
 
 .button {
@@ -134,7 +134,7 @@ b, strong, .bold { font-weight: 700; }
 }
 
 //
-// Forms
+// Forms - Done
 // --------------------------------------------------
 
 form {
@@ -217,7 +217,7 @@ form {
 }
 
 //
-// Tables
+// Tables - Done
 // --------------------------------------------------
 
 table {
@@ -275,7 +275,7 @@ td:last-child { border-bottom-right-radius: 4px; }
 }
 
 //
-// Pagination
+// Pagination - Done
 // --------------------------------------------------
 
 .pager {
@@ -333,7 +333,7 @@ td:last-child { border-bottom-right-radius: 4px; }
 }
 
 //
-// Messages
+// Messages - Done
 // --------------------------------------------------
 
 .message-error { @include message($red); }
@@ -343,7 +343,7 @@ td:last-child { border-bottom-right-radius: 4px; }
 .message-default { @include message($gray); }
 
 //
-// Meters
+// Meters - Done
 // --------------------------------------------------
 
 .meter { @include clearfix(); }
@@ -394,7 +394,7 @@ td:last-child { border-bottom-right-radius: 4px; }
 }
 
 //
-// Dialogs
+// Dialogs - Done
 // --------------------------------------------------
 
 .dialog {
@@ -461,7 +461,7 @@ td:last-child { border-bottom-right-radius: 4px; }
 }
 
 //
-// Token
+// Token - Done
 // --------------------------------------------------
 
 @each $name, $background in

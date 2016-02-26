@@ -1,0 +1,5 @@
+.message-error { @include message($red); }
+.message-warning { @include message($yellow); }
+.message-success { @include message($green); }
+.message-info { @include message($blue); }
+.message-default { @include message($gray); }

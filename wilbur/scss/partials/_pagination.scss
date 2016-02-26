@@ -1,65 +1,53 @@
-.pagination {
-  @include clearfix();
-  margin: 1.25rem 0 0;
-}
-
-.pager-total {
-  float: left;
-  color: $gray;
-  padding-left: .15rem;
-
-  span {
-    font-weight: 600;
-  }
-}
-
 .pager {
-  float: right;
+  @include clearfix();
+  padding: 0;
 
   li {
     float: left;
     display: inline;
   }
-}
 
-.button-pagination {
-  transition: 0.25s;
-  text-align: center;
-  cursor: pointer;
-  font-weight: 600;
-  font-family: $sans;
-  text-decoration: none;
-  border: 1px solid $gray-light;
-  border-left: none;
-  padding: 6px 15px;
-  color: $gray-darkest;
-  font-size: .9rem;
+  a {
+    transition: 0.25s;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: $sans;
+    text-decoration: none;
+    border: 1px solid $gray-light;
+    border-left: none;
+    padding: 6px 15px;
+    color: $gray-darkest;
+    @extend .text-small;
 
-  &.active {
-    &:hover {
-      background-color: $gray-light;
+    &:hover { background-color: $gray-light; }
+
+    &.disabled {
+      color: $gray-dark + 15;
+      background-color: $gray-lightest;
+      cursor: not-allowed;
+    }
+
+    &.current {
+      background-color: $green;
+      color: $white;
+    }
+
+    &.previous {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      border-left: 1px solid $gray-light;
+    }
+
+    &.next {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
     }
   }
+}
 
-  &.disabled {
-    color: $gray-dark + 15;
-    background-color: $gray-lightest;
-    cursor: not-allowed;
-  }
+.pager-total {
+  @extend .color-default;
 
-  &.current {
-    background-color: $green;
-    color: $white;
-  }
-
-  &.previous {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-left: 1px solid $gray-light;
-  }
-
-  &.next {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
+  span { @extend .semi-bold; }
 }

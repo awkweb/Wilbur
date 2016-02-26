@@ -1,0 +1,36 @@
+.pull-left { float: left !important; }
+.pull-right { float: right !important; }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.color-default { color: $gray; }
+.color-error { color: $red; }
+.color-warning { color: $yellow; }
+.color-success { color: $green; }
+.color-info { color: $blue; }
+
+.background-default { background-color: $gray; }
+.background-error { background-color: $red; }
+.background-warning { background-color: $yellow; }
+.background-success { background-color: $green; }
+.background-info { background-color: $blue; }
+
+@each $level, $size in (0, 0), (1, 6px), (2, 12px), (3, 18px), (4, 24px), (5, 30px), (6, 36px) {
+  .mar-#{$level} { margin: #{$size}; }
+  .mar-t#{$level} { margin-top: #{$size}; }
+  .mar-r#{$level} { margin-right: #{$size}; }
+  .mar-b#{$level} { margin-bottom: #{$size}; }
+  .mar-l#{$level} { margin-left: #{$size}; }
+  .mar-tb#{$level} { margin: #{$size} inherit; }
+}
+
+@each $level, $size in (0, 0), (1, 6px), (2, 12px), (3, 18px), (4, 24px), (5, 30px), (6, 36px) {
+  .pad-#{$level} { padding: #{$size}; }
+  .pad-t#{$level} { padding-top: #{$size}; }
+  .pad-r#{$level} { padding-right: #{$size}; }
+  .pad-b#{$level} { padding-bottom: #{$size}; }
+  .pad-l#{$level} { padding-left: #{$size}; }
+  .pad-tb#{$level} { padding: #{$size} inherit; }
+}

@@ -27,26 +27,38 @@ module.exports = function(grunt) {
         },
 
         // compile coffee
-        //coffee : {
-        //    compile: {
-        //        files: {
-        //            'path/to/result.js': 'path/to/source.coffee', // 1:1 compile
-        //            'path/to/another.js': ['path/to/sources/*.coffee', 'path/to/more/*.coffee'] // compile and concat into single file
-        //        }
-        //    }
-        //},
+        coffee : {
+            compile: {
+                files: {
+                    'wilbur/static/js/coffeecounter.js': 'wilbur/coffee/coffeecounter.coffee',
+                    'wilbur/static/js/confirm.js': 'wilbur/coffee/confirm.coffee',
+                    'wilbur/static/js/filter.js': 'wilbur/coffee/filter.coffee',
+                    'wilbur/static/js/minical.js': 'wilbur/coffee/minical.coffee',
+                    'wilbur/static/js/niceselect.js': 'wilbur/coffee/niceselect.coffee',
+                    'wilbur/static/js/niceselectdate.js': 'wilbur/coffee/niceselectdate.coffee',
+                    'wilbur/static/js/validator.js': 'wilbur/coffee/validator.coffee'
+                }
+            }
+        },
 
         // watch for changes
         watch: {
             css: {
-                files: ['wilbur/scss/*.scss', 'wilbur/scss/partials/*.scss'], // scss files
+                files: ['wilbur/scss/**/*.scss'],
                 tasks: ['sass', 'autoprefixer'],
                 options: {
                     interrupt: true,
                     spawn: false
                 }
+            },
+            js: {
+                files: ['wilbur/coffee/*.coffee'],
+                tasks: ['coffee'],
+                options: {
+                    interrupt: true,
+                    spawn: false
+                }
             }
-            //js: {}
         }
 
     });
@@ -58,5 +70,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // tasks
-    grunt.registerTask('default', ['sass', 'autoprefixer']); // add coffee
+    grunt.registerTask('default', ['sass', 'autoprefixer', 'coffee']);
 };

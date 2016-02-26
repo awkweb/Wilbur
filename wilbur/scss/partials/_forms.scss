@@ -1,33 +1,29 @@
 form {
   color: $gray-darkest;
-}
-
-.form {
-  margin: 1rem 0;
+  font-family: $sans;
 }
 
 .form-group {
   margin-bottom: 1.15rem;
-  min-height: 63px;
 }
 
 .form-label {
+  @include clearfix();
+  font-size: .9rem;
   margin-bottom: 5px;
-  font: .9rem $sans;
 
-  &.required {
-    font-weight: 600;
+  label {
+    float: left;
+    color: $gray-darkest;
+
+    &.required { font-weight: 600; }
   }
 
-  &.accessory {
-    padding-top: 2px;
+  .accessory {
     float: right;
     color: $gray;
-    font: .9rem $sans;
 
-    &a:hover {
-      color: $green;
-    }
+    & a:hover { color: $green; }
   }
 }
 
@@ -36,42 +32,42 @@ form {
   transition: 0.25s;
   appearance: none;
   border-radius: 4px;
-  margin-top: 3px;
   width: 100%;
   padding: 6px 14px;
   border: 2px solid $gray-light;
   outline: 0;
-  font: 1rem $sans;
+  font-size: 1rem;
+  font-family: $sans;
   color: $gray-darkest;
 
-  &:hover {
-    border-color: $gray;
-  }
+  &:hover { border-color: $gray; }
 
-  &:focus {
-    border-color: $gray-darkest;
-  }
+  &:focus { border-color: $gray-darkest; }
 
-  &.large {
-    height: 40px;
-  }
+  &.large { height: 40px; }
 
   &.small {
-    margin: 1rem 0;
+    @extend .text-small;
     height: 10%;
     width: 150px;
     border-width: 1px;
-    font-size: .9rem;
     font-weight: 600;
 
     &:hover {
       border-color: $gray;
     }
   }
+
+  &.error { border-color: $red; }
 }
 
 .form-errors {
-  margin-top: .25rem;
+  margin-top: 2px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 
   & li {
     list-style-type: none;

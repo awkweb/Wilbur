@@ -1,0 +1,7 @@
+@each $name, $background in
+                (error, $red),
+                (warning, $yellow),
+                (success, $green),
+                (info, $blue) {
+  .token-#{$name} { @include token($background) }
+}

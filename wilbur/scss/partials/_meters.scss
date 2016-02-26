@@ -1,0 +1,46 @@
+.meter { @include clearfix(); }
+
+.meter-title {
+  p {
+    @extend .mar-t0;
+    @extend .mar-b1;
+  }
+  .description {
+    color: $gray;
+    @media screen and (max-width: $small - 150) {
+      display: none;
+    }
+  }
+}
+
+.meter-container {
+  border-radius: 4px;
+  clear: both;
+  height: 1.5rem;
+  overflow: hidden;
+  background-color: $gray-lightest;
+}
+
+.meter-default { @include meter-bar(none); }
+.meter-info { @include meter-bar($blue); }
+.meter-success { @include meter-bar($green); }
+.meter-warning { @include meter-bar($yellow); }
+.meter-error { @include meter-bar($red); }
+
+.meter-footer {
+  font-size: 0.9rem;
+
+  p, ul {
+    @extend .mar-t1;
+    @extend .mar-b0;
+  }
+
+  p { color: $gray; }
+
+  ul > li {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+
+  a { @include link($gray, $gray-dark); }
+}

@@ -1,27 +1,17 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html {
-  font-size: 16px;
   min-height: 100%;
   position: relative;
 }
 
 body {
-  font-family: $sans;
+  font-size: $font-size;
   margin-bottom: $footer-height;
 }
 
 a {
-  text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6, p {
-  color: $gray-darkest;
+  @include link($green, $green-dark);
   font-family: $sans;
+  text-decoration: none;
 }
 
 hr {
@@ -34,6 +24,4 @@ body > .container {
   padding-bottom: $footer-height - 20px;
 }
 
-.row {
-  @include clearfix();
-}
+.row { @include clearfix(); }

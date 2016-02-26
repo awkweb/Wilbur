@@ -1,0 +1,48 @@
+.button {
+  transition: 0.25s;
+  border-radius: 4px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: $sans;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: .9rem;
+  color: $white;
+  border: 1px solid;
+  margin: 0;
+
+  &.small {
+    padding: 6px 15px;
+  }
+
+  &.large {
+    font-size: .95rem;
+    padding: 11px 25px;
+  }
+
+  &.disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+@each $name, $background, $background2 in
+                (default, $gray, $gray-dark),
+                (error, $red, $red-dark),
+                (warning, $yellow, $yellow-dark),
+                (success, $green, $green-dark),
+                (info, $blue, $blue-dark) {
+  .button-#{$name} { @include button-fill($background, $background2) }
+}
+
+@each $name, $color-text, $color-border, $color-border2 in
+                (default, $gray-darkest, $gray-light, $gray-dark),
+                (error, $red, $red-dark, $red-dark),
+                (warning, $yellow, $yellow-dark, $yellow-dark),
+                (success, $green, $green-dark, $green-dark),
+                (info, $blue, $blue-dark, $blue-dark) {
+  .button-outline-#{$name} { @include button-outline($color-text, $color-border, $color-border2) }
+}
