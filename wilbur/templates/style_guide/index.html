@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,600,700">
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/grid.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/styles2.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
 </head>
@@ -32,6 +32,7 @@
         <p>Body content / copy</p>
         <p><b>Bold text</b></p>
         <p class="semi-bold">Semi-bold text</p>
+        <p class="text-large">Large text</p>
         <p class="text-small">Small text</p>
         <p><a href="#">Link text</a></p>
         <p class="wilbur large color-success">Main Wilbur text</p>
@@ -152,8 +153,8 @@
                 <input class="form-control" placeholder="Default input label" type="text">
             </div>
             <div class="form-group">
-                <div class="form-label">
-                    <label class="required">Required input label</label>
+                <div class="form-label required">
+                    <label>Required input label</label>
                 </div>
                 <input class="form-control" placeholder="Required input label" type="text" required>
             </div>

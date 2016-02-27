@@ -1,5 +1,6 @@
 .pager {
   @include clearfix();
+  float: right;
   padding: 0;
 
   li {
@@ -48,6 +49,7 @@
 
 .pager-total {
   @extend .color-default;
+  float: left;
 
   span { @extend .semi-bold; }
 }

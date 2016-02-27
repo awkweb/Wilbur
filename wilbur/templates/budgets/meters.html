@@ -1,0 +1,34 @@
+{% load humanize %}
+{% load mathfilters %}
+
+<section id="content-ajax" class="row">
+    <div class="col-md-10 col-md-offset-1 col-sm-12">
+        <section class="meter mar-b-3">
+            <div class="meter-title">
+                <p class="pull-left lead">{{ budget.name|date:"F Y" }}</p>
+                <p class="pull-right lead">${{ budget.amount_left|abs|floatformat:0|intcomma }}
+                    {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</p>
+            </div>
+            <div class="meter-container">
+                <div class="meter-animate meter-{% if budget.percent <= 85 and budget.percent > 0 %}success
+                        {% elif budget.percent > 85 and budget.percent < 95 %}warning
+                        {% elif budget.percent > 95 %}error
+                        {% else %}default{% endif %}"
+                     role="progressbar" data-width="{{ budget.percent }}%" aria-valuenow="{{ budget.percent }}" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+        </section>
+
+        {% for budget in budget_list %}
+            {% include 'budgets/meter.html' %}
+        {% endfor %}
+        <script>
+            $('.meter-animate').each(function() {
+                var width = $(this).data('width');
+                $(this).animate({
+                    width: width
+                });
+            });
+        </script>
+    </div>
+</section>

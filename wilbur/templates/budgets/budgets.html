@@ -9,14 +9,14 @@
     {% if budget_list|length > 0 %}
         {% include 'includes/message.html' %}
 
-        <section class="row">
+        <section class="row mar-b-3">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
-                <a href="{% url 'wilbur:add-budget' %}" class="button-toolbar active">Add budget</a>
+                <a href="{% url 'wilbur:add-budget' %}" class="button-outline-default small">Add budget</a>
                 {% include 'includes/select_date.html' %}
             </div>
         </section>
 
-        {% include 'budgets/budgets_progress.html' %}
+        {% include 'budgets/meters.html' %}
     {% else %}
         {% include 'includes/empty_state.html' with empty_title="No Budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
     {% endif %}

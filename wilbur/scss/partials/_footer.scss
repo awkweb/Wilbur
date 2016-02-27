@@ -21,10 +21,10 @@
   padding: 1.5rem 0;
   font-size: .9rem;
 
-  li:first-child { @extend .mar-l0; }
+  li:first-child { @extend .mar-l-0; }
 
   li {
-    @extend .mar-l3;
+    @extend .mar-l-3;
     display: inline-block;
     font-family: $sans;
     list-style-type: none;

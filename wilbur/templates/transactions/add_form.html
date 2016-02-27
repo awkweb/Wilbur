@@ -6,8 +6,8 @@
 
     {% include 'includes/form_fields.html' %}
 
-    <button id="form-submit" type="submit" class="button-submit">Save</button>
-    <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>
+    <button id="form-submit" type="submit" class="button-success">Save</button>
+    <a href="{% url 'wilbur:transactions' %}" class="button-default mar-l-2" role="button">Cancel</a>
 
     <script>
         $("#id_transaction_date").minical({

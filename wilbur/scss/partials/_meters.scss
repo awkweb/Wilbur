@@ -2,8 +2,7 @@
 
 .meter-title {
   p {
-    @extend .mar-t0;
-    @extend .mar-b1;
+    @extend .mar-tb-0;
   }
   .description {
     color: $gray;
@@ -31,8 +30,7 @@
   font-size: 0.9rem;
 
   p, ul {
-    @extend .mar-t1;
-    @extend .mar-b0;
+    @extend .mar-tb-0;
   }
 
   p { color: $gray; }

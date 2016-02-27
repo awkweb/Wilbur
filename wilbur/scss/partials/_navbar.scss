@@ -2,13 +2,13 @@
 @import "helpers";
 
 .navbar {
+  @extend .mar-0;
   position: relative;
   height: $navbar-height;
-  margin: 0 0 20px;
   background-color: $green;
 
   .navbar-left {
-    @extend .pad-t0;
+    @extend .pad-t-0;
     float: left;
   }
 
@@ -21,12 +21,12 @@
   }
 
   .nav-inline {
-    @extend .pad-t1;
+    @extend .pad-t-1;
 
-    li:first-child { @extend .mar-l0 }
+    li:first-child { @extend .mar-l-0 }
 
     li {
-      @extend .mar-l6;
+      @extend .mar-l-6;
       display: inline-block;
       font-family: $sans;
       list-style-type: none;
@@ -36,9 +36,7 @@
         padding-bottom: 9px;
       }
 
-      @media screen and (max-width: $small) {
-        margin-left: .75rem;
-      }
+      @media screen and (max-width: $small) { margin-left: .75rem; }
     }
 
     a {

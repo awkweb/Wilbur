@@ -12,11 +12,11 @@ form {
   font-size: .9rem;
   margin-bottom: 5px;
 
+  &.required { font-weight: 600; }
+
   label {
     float: left;
     color: $gray-darkest;
-
-    &.required { font-weight: 600; }
   }
 
   .accessory {

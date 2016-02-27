@@ -174,7 +174,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             'amount_left': remaining,
             'percent': (total - remaining) / total * 100
         }
-        html = render(request, 'budgets/budgets_progress.html', {
+        html = render(request, 'budgets/meters.html', {
             'budget': budget_overall,
             'budget_list': budget_list,
         })
@@ -374,7 +374,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             transaction_list = get_transactions_for_budget_with_month_and_year(filter_value, month, year)
         transactions = get_paginator_for_list(request, transaction_list, 10)
 
-        html = render(request, 'transactions/transactions_table.html', {
+        html = render(request, 'transactions/table.html', {
             'transactions': transactions,
         })
         html = html.content.decode("utf-8")

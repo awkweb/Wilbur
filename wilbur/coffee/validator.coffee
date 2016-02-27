@@ -8,7 +8,6 @@ $('#form-submit').click (e) ->
     data: form.serialize()
     success: (data) ->
       if !data['success']
-        alert data['form_html']
         form.replaceWith data['form_html']
       else
         next = form.attr 'next'
