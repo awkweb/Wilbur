@@ -2,15 +2,15 @@
     <section class="row">
         <div class="col-md-10 col-md-offset-1 col-sm-12">
             {% for message in messages %}
-                <div class="message message-{% if message.tags %}{{ message.tags }}{% endif %} message-dismissible" role="alert">
+                <div class="message message-{% if message.tags %}{{ message.tags }}{% endif %} mar-t-0 mar-b-3" role="alert">
                     <strong>{{ message.tags|capfirst }} </strong> {{ message }}
                 </div>
             {% endfor %}
             <script>
                 $(document).ready(function() {
-                    $('.message-dismissible').append('<a class="message-close">&times;</a>');
+                    $('.message').append('<span class="message-close">&times;</span>');
                     $('.message-close').on('click',function(){
-                        $(this).closest('.message').hide();
+                        $(this).closest('.message').fadeOut();
                     });
                 });
             </script>
