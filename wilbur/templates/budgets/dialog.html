@@ -1,0 +1,39 @@
+<div class="dialog" role="alert">
+    <div class="dialog-container">
+        <div class="dialog-title">
+            <strong>{{ dialog_title }}</strong>
+            <span class="dialog-close">&times;</span>
+        </div>
+        <div class="dialog-body">
+            <p>{{ dialog_text }}</p>
+            <div class="dialog-buttons">
+                <a href="{% url 'wilbur:delete-budget' budget.id %}" class="button-error pull-left" role="button">Yes, do it</a>
+                <a class="button-default dialog-close pull-right" role="button">No, cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function($){
+        //open popup
+        $('.dialog-trigger').on('click', function(event){
+            event.preventDefault();
+            $('.dialog').addClass('is-visible');
+        });
+
+        //close popup
+        $('.dialog').on('click', function(event){
+            if( $(event.target).is('.dialog-close') || $(event.target).is('.cd-popup') || $(event.target).is('.popup-close') ) {
+                event.preventDefault();
+                $(this).removeClass('is-visible');
+            }
+        });
+        //close popup when clicking the esc keyboard button
+        $(document).keyup(function(event){
+            if(event.which=='27'){
+                $('.dialog').removeClass('is-visible');
+            }
+        });
+    });
+</script>

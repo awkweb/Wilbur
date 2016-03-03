@@ -6,9 +6,9 @@
 
     {% include 'includes/form_fields.html' %}
 
-    <button id="form-submit" type="submit" class="button-submit">Save</button>
-    <a href="{% url 'wilbur:transactions' %}" class="button-cancel" role="button">Cancel</a>
-    <a href="{% url 'wilbur:delete-transaction' transaction_id %}" id="confirm" class="button-delete pull-right"
+    <button id="form-submit" type="submit" class="button-success">Save</button>
+    <a href="{% url 'wilbur:transactions' %}" class="button-default mar-l-2" role="button">Cancel</a>
+    <a href="{% url 'wilbur:delete-transaction' transaction_id %}" id="confirm" class="button-error pull-right"
        data-alt-text="Yes, I am sure." data-original-text="Delete" role="button">Delete</a>
 
     <script>

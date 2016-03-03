@@ -3,7 +3,9 @@
         <div class="form-label {% if field.field.required %}required{% endif %}">
             {{ field.label_tag }}
         </div>
+
         {{ field }}
+
         {% if field.errors %}
             <div class="form-errors">
                 <ul class="errorlist">

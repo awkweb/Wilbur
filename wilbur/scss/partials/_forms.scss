@@ -3,9 +3,7 @@ form {
   font-family: $sans;
 }
 
-.form-group {
-  margin-bottom: 1.15rem;
-}
+.form-group { @extend .mar-b-3; }
 
 .form-label {
   @include clearfix();
