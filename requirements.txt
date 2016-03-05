@@ -1,4 +1,10 @@
 Django==1.9.2
 django-jsonview==0.5.0
 django-mathfilters==0.3.0
+pbr==1.8.1
 psycopg2==2.6.1
+stevedore==1.10.0
+virtualenv==13.1.2
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.6.0
+wheel==0.29.0
