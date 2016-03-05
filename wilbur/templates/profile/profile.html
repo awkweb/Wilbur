@@ -10,30 +10,22 @@
 
     <section class="row">
         <div class="col-md-5 col-md-offset-1 col-sm-6">
-            <div class="profile">
-                <div class="profile">
-                    <p class="profile-name">{% if user.first_name or user.last_name %}{{ user.first_name }} {{ user.last_name }}
-                    {% else %}E.B. White{% endif %}</p>
-                    <p class="profile-info">Email <span>{{ user.email }}</span></p>
-                    <p class="profile-info">Joined <span>{{ user.date_joined|date:"F Y" }}</span></p>
-                    <p class="profile-info">User <span>{{ user.id }}</span></p>
-                    <p class="profile-info">Budgets <span>{{ budget_count }}</span></p>
-                    <p class="profile-info">Transactions <span>{{ transaction_count }}</span></p>
+            <p class="wilbur large color-success mar-t-0 mar-b-2">{% if user.first_name or user.last_name %}{{ user.first_name }} {{ user.last_name }}
+            {% else %}E.B. White{% endif %}</p>
+            <p class="lead color-default mar-tb-2">Email <span class="semi-bold">{{ user.email }}</span></p>
+            <p class="lead color-default mar-tb-2">Joined <span class="semi-bold">{{ user.date_joined|date:"F Y" }}</span></p>
+            <p class="lead color-default mar-tb-2">User <span class="semi-bold">{{ user.id }}</span></p>
+            <p class="lead color-default mar-tb-2">Budgets <span class="semi-bold">{{ budget_count }}</span></p>
+            <p class="lead color-default mar-tb-2">Transactions <span class="semi-bold">{{ transaction_count }}</span></p>
 
-                    <ul class="profile-nav">
-                        <li class="profile-link">{% if user.is_staff %}<a href="/admin/">Admin</a>{% endif %}</li>
-                        <li class="profile-link"><a href="{% url 'wilbur:edit-password' %}">Edit Password</a></li>
-                        <li class="profile-link"><a href="{% url 'wilbur:logout' %}">Log Out</a></li>
-                    </ul>
-                </div>
-            </div>
+            {% if user.is_staff %}<a class="button-outline-default small" href="/admin/" role="button">Admin</a>{% endif %}
+            <a class="button-outline-default small mar-l-1"  href="{% url 'wilbur:edit-password' %}" role="button">Edit Password</a>
+            <a  class="button-outline-default small mar-l-1" href="{% url 'wilbur:logout' %}" role="button">Log Out</a>
         </div>
 
-        <div class="col-md-5 col-sm-6">
-            <div class="profile-form">
-                <h2>Update Profile</h2>
-                {% include 'profile/edit_form.html' %}
-            </div>
+        <div class="col-md-4 col-sm-6">
+            <h2 class="mar-tb-3">Update Profile</h2>
+            {% include 'profile/edit_form.html' %}
         </div>
     </section>
 

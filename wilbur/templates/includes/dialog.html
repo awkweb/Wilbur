@@ -7,7 +7,7 @@
         <div class="dialog-body">
             <p>{{ dialog_text }}</p>
             <div class="dialog-buttons">
-                <a href="{% url 'wilbur:delete-budget' budget.id %}" class="button-error pull-left" role="button">Yes, do it</a>
+                <a href="{{ dialog_action }}" class="button-error pull-left" role="button">Yes, do it</a>
                 <a class="button-default dialog-close pull-right" role="button">No, cancel</a>
             </div>
         </div>

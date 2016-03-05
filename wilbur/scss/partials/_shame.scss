@@ -1,10 +1,4 @@
-.description {
-  @media screen and (max-width: $small - 150) {
-    display: none;
-  }
-}
-
-.welcome {
+.registration-welcome {
   margin: 5.5rem 0 1rem;
   text-align: center;
   font: 500 36px $cursive;
@@ -24,44 +18,4 @@
       color: $green-dark;
     }
   }
-}
-
-.profile {
-  margin: 1rem 0;
-}
-
-.profile-name {
-  margin-bottom: .65rem;
-  font: normal 2.5rem $cursive;
-  color: $green;
-}
-
-.profile-info {
-  margin: .65rem 0;
-  font: normal 1.25rem $sans;
-  color: $gray;
-
-  & span {
-    font-weight: 600;
-  }
-}
-
-.profile-nav {
-  margin-top: 1.5rem;
-
-  li {
-    display: inline-block;
-  }
-}
-
-.profile-link {
-  margin-bottom: 1.75rem;
-
-  a {
-    margin-right: .75rem;
-  }
-}
-
-.profile-form {
-  margin-top: 2.25rem;
 }

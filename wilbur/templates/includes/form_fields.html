@@ -1,14 +1,20 @@
+{% load budgets %}
+
 {% for field in form %}
     <div class="form-group">
         <div class="form-label {% if field.field.required %}required{% endif %}">
             {{ field.label_tag }}
         </div>
 
-        {{ field }}
+        {% if field.errors %}
+            {{ field|add_class:"error" }}
+        {% else %}
+            {{ field }}
+        {% endif %}
 
         {% if field.errors %}
             <div class="form-errors">
-                <ul class="errorlist">
+                <ul>
                     {{ field.errors }}
                 </ul>
             </div>

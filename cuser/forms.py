@@ -154,21 +154,21 @@ class UserProfileForm(forms.Form):
         max_length=255,
         widget=forms.EmailInput(attrs={
             'placeholder': 'charlotte@web.net',
-            'class': 'form-control large', 'required': 'required'})
+            'class': 'form-control', 'required': 'required'})
     )
     first_name = forms.CharField(
         label='First Name',
         max_length=255,
         required=False,
         widget=forms.TextInput(attrs={
-            'placeholder': 'E.B.', 'class': 'form-control large'})
+            'placeholder': 'E.B.', 'class': 'form-control'})
     )
     last_name = forms.CharField(
         label='Last Name',
         max_length=255,
         required=False,
         widget=forms.TextInput(attrs={
-            'placeholder': 'White', 'class': 'form-control large'})
+            'placeholder': 'White', 'class': 'form-control'})
     )
 
     def __init__(self, *args, **kwargs):

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
@@ -247,7 +248,10 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                 'title': 'Edit Budget',
                 'form': form,
                 'budget': budget,
-                'budget_transaction_count': budget_transaction_count
+                'budget_transaction_count': budget_transaction_count,
+                'dialog_title': 'Delete Budget',
+                'dialog_text': 'Are you sure you want to delete %s?' % budget.category.name.title(),
+                'dialog_action': reverse(viewname='wilbur:delete-budget', kwargs={'budget_id': budget.id}),
             })
         else:
             raise Http404("Budget does not exist")
@@ -281,6 +285,9 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
         form_html = render(request, 'budgets/edit_form.html', {
             'form': form,
             'budget': budget,
+            'dialog_title': 'Delete Budget',
+            'dialog_text': 'Are you sure you want to delete %s?' % budget.category.name.title(),
+            'dialog_action': reverse(viewname='wilbur:delete-budget', kwargs={'budget_id': budget.id}),
         })
         form_html = form_html.content.decode('utf-8')
         return {
