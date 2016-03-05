@@ -7,6 +7,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 
+
 from jsonview.decorators import json_view
 
 from cuser.forms import UserBetaCreationForm, UserProfileForm, EditPasswordForm
@@ -20,9 +21,10 @@ class OverviewView(TemplateView):
         user = get_user_in_session(request.session)
 
         if user is None:
-            return render(request, 'overview/landing.html', {
-                'title': 'Track your budgets better',
-            })
+            return redirect('wilbur:signup')
+            # return render(request, 'overview/landing.html', {
+            #     'title': 'Track your budgets better',
+            # })
         else:
             budgets = get_budgets_for_user(user)
 

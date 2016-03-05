@@ -25,7 +25,7 @@ SECRET_KEY = 'xu&_p(76zbejxqidpu8o1wsmr1w+z4bhxsrv&@&8zu=-6onkr!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gowilbur.com']
+ALLOWED_HOSTS = ['gowilbur.com', '*']
 
 
 # Application definition
