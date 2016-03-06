@@ -1,6 +1,6 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from wilbur.secret_keys import *
+from wilbur.keys import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,16 +42,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-CSRF_COOKIE_SECURE = True
-
 ROOT_URLCONF = 'wilbur.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, '../wilbur/templates'),
-            os.path.join(BASE_DIR, '../budget/templates/budget')
+            os.path.join(BASE_DIR, "templates/"),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -91,12 +88,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-SETTINGS_DIR = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
-PROJECT_PATH = os.path.abspath(PROJECT_PATH)
-
-STATIC_PATH = os.path.join(PROJECT_PATH, '../wilbur/static')
-
+STATIC_ROOT = 'static/'
+STATIC_PATH = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/s/'
 
 STATICFILES_DIRS = (

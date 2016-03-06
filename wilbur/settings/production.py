@@ -1,16 +1,14 @@
 from .common import *
 
-ALLOWED_HOSTS = [
-    'www.gowilbur.com',
-    'gowilbur.com'
-]
+ALLOWED_HOSTS = ['gowilbur.com']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'wilbur',
-        'USER': 'wilbur',
+        'USER': 'postgres',
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }

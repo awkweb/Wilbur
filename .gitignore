@@ -3,4 +3,5 @@
 .idea
 __pycache__
 node_modules
-wilbur/secret_keys.py
+static
+wilbur/keys.py
