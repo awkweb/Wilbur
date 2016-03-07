@@ -21,7 +21,7 @@ class OverviewView(TemplateView):
         user = get_user_in_session(request.session)
 
         if user is None:
-            return redirect('wilbur:signup')
+            return redirect('wilbur:login')
             # return render(request, 'overview/landing.html', {
             #     'title': 'Track your budgets better',
             # })
@@ -423,6 +423,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
                 transaction_date=transaction_date
             )
             transaction.save()
+            request.budget_id = budget.id
             messages.success(request, 'Transaction added')
             return {'success': True}
         form_html = render(request, 'transactions/add_form.html', {

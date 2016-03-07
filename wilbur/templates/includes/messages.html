@@ -2,18 +2,10 @@
     <section class="row">
         <div class="col-md-10 col-md-offset-1 col-sm-12">
             {% for message in messages %}
-                <div class="message message-{% if message.tags %}{{ message.tags }}{% endif %} mar-t-0 mar-b-3" role="alert">
-                    <strong>{{ message.tags|capfirst }} </strong> {{ message }}
-                </div>
+                {% include 'includes/message.html' with message_type=message.tags message_title=message.tags|capfirst message_text=message %}
             {% endfor %}
-            <script>
-                $(document).ready(function() {
-                    $('.message').append('<span class="message-close">&times;</span>');
-                    $('.message-close').on('click',function(){
-                        $(this).closest('.message').fadeOut();
-                    });
-                });
-            </script>
+            {% load staticfiles %}
+            <script src="{% static 'js/message.js' %}"></script>
         </div>
     </section>
 {% endif %}

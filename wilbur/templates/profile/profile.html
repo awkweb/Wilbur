@@ -18,9 +18,9 @@
             <p class="lead color-default mar-tb-2">Budgets <span class="semi-bold">{{ budget_count }}</span></p>
             <p class="lead color-default mar-tb-2">Transactions <span class="semi-bold">{{ transaction_count }}</span></p>
 
-            {% if user.is_staff %}<a class="button-outline-default small" href="/admin/" role="button">Admin</a>{% endif %}
-            <a class="button-outline-default small mar-l-1"  href="{% url 'wilbur:edit-password' %}" role="button">Edit Password</a>
-            <a  class="button-outline-default small mar-l-1" href="{% url 'wilbur:logout' %}" role="button">Log Out</a>
+            {% if user.is_staff %}<a class="button-outline-default small mar-r-1" href="/admin/" role="button">Admin</a>{% endif %}
+            <a class="button-outline-default small mar-r-1"  href="{% url 'wilbur:edit-password' %}" role="button">Edit Password</a>
+            <a  class="button-outline-default small" href="{% url 'wilbur:logout' %}" role="button">Log Out</a>
         </div>
 
         <div class="col-md-4 col-sm-6">

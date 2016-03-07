@@ -36,7 +36,8 @@ module.exports = function(grunt) {
                     'wilbur/static/js/minical.js': 'wilbur/coffee/minical.coffee',
                     'wilbur/static/js/niceselect.js': 'wilbur/coffee/niceselect.coffee',
                     'wilbur/static/js/niceselectdate.js': 'wilbur/coffee/niceselectdate.coffee',
-                    'wilbur/static/js/validator.js': 'wilbur/coffee/validator.coffee'
+                    'wilbur/static/js/validator.js': 'wilbur/coffee/validator.coffee',
+                    'wilbur/static/js/message.js': 'wilbur/coffee/message.coffee'
                 }
             }
         },
