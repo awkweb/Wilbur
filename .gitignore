@@ -1,7 +1,0 @@
-*.pyc
-*.db
-.idea
-__pycache__
-node_modules
-s
-wilbur/keys.py
