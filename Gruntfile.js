@@ -29,16 +29,11 @@ module.exports = function(grunt) {
         // compile coffee
         coffee : {
             compile: {
-                files: {
-                    'wilbur/static/js/coffeecounter.js': 'wilbur/coffee/coffeecounter.coffee',
-                    'wilbur/static/js/confirm.js': 'wilbur/coffee/confirm.coffee',
-                    'wilbur/static/js/filter.js': 'wilbur/coffee/filter.coffee',
-                    'wilbur/static/js/minical.js': 'wilbur/coffee/minical.coffee',
-                    'wilbur/static/js/niceselect.js': 'wilbur/coffee/niceselect.coffee',
-                    'wilbur/static/js/niceselectdate.js': 'wilbur/coffee/niceselectdate.coffee',
-                    'wilbur/static/js/validator.js': 'wilbur/coffee/validator.coffee',
-                    'wilbur/static/js/message.js': 'wilbur/coffee/message.coffee'
-                }
+                expand: true,
+                cwd: 'wilbur/coffee',
+                src: ['*.coffee'],
+                dest: 'wilbur/static/js/',
+                ext: '.js'
             }
         },
 

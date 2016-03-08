@@ -45,11 +45,11 @@ form {
   &.large { height: 40px; }
 
   &.small {
-    @extend .text-small;
     height: 10%;
     width: 150px;
     border-width: 1px;
     font-weight: 600;
+    font-size: 0.9rem;
 
     &:hover {
       border-color: $gray;

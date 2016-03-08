@@ -6,7 +6,7 @@
   }
   .description {
     color: $gray;
-    @media screen and (max-width: $small - 150) {
+    @media screen and (max-width: $sm - 150) {
       display: none;
     }
   }

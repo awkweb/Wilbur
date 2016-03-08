@@ -23,7 +23,10 @@
   .mar-r-#{$level} { margin-right: #{$size}; }
   .mar-b-#{$level} { margin-bottom: #{$size}; }
   .mar-l-#{$level} { margin-left: #{$size}; }
-  .mar-tb-#{$level} { margin: #{$size} initial; }
+  .mar-tb-#{$level} {
+    margin-top: #{$size};
+    margin-bottom: #{$size};
+  }
 }
 
 @each $level, $size in (0, 0), (1, 6px), (2, 12px), (3, 18px), (4, 24px), (5, 30px), (6, 36px) {
@@ -32,5 +35,8 @@
   .pad-r-#{$level} { padding-right: #{$size}; }
   .pad-b-#{$level} { padding-bottom: #{$size}; }
   .pad-l-#{$level} { padding-left: #{$size}; }
-  .pad-tb-#{$level} { padding: #{$size} initial; }
+  .pad-tb-#{$level} {
+    padding-top: #{$size};
+    padding-bottom: #{$size};
+  }
 }

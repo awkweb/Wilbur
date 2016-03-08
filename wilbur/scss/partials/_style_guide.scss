@@ -234,7 +234,7 @@ th, td {
   color: $gray-darkest;
   text-align: left;
 
-  @media screen and (max-width: $small - 150) {
+  @media screen and (max-width: $sm - 150) {
     padding: 0 0.75rem;
   }
 }
@@ -355,7 +355,7 @@ td:last-child { border-bottom-right-radius: 4px; }
   }
   .description {
     color: $gray;
-    @media screen and (max-width: $small - 150) {
+    @media screen and (max-width: $sm - 150) {
       display: none;
     }
   }
