@@ -1,38 +1,16 @@
-/* --------------------------------
-
-Modules - reusable parts of our design
-
--------------------------------- */
-
-.cd-container {
-  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
-  width: 90%;
-  max-width: 1170px;
-  margin: 0 auto;
-  &::after {
-    /* clearfix */
-    content: '';
-    display: table;
-    clear: both;
-  }
-}
-
-/* --------------------------------
-
-Main components
-
--------------------------------- */
-
 #cd-nav {
   ul {
     /* mobile first */
+    list-style-type: none;
     position: fixed;
     width: 90%;
     max-width: 400px;
     right: 5%;
     bottom: 20px;
     border-radius: 4px;
-    border: 1px solid $gray-light; // TODO
+    padding-left: 0;
+    margin: 0;
+    border: 1px solid $gray-light;
     background: white;
     visibility: hidden;
     /* remove overflow:hidden if you want to create a drop-down menu - but then remember to fix/eliminate the list items animation */
@@ -51,24 +29,6 @@ Main components
       visibility: visible;
       transform: scale(1);
       transition: transform 0.3s, visibility 0s 0s;
-      li {
-        &:nth-child(1) {
-          /* list items animation */
-          animation: cd-slide-in 0.2s;
-        }
-        &:nth-child(2) {
-          animation: cd-slide-in 0.3s;
-        }
-        &:nth-child(3) {
-          animation: cd-slide-in 0.4s;
-        }
-        &:nth-child(4) {
-          animation: cd-slide-in 0.5s;
-        }
-        &:nth-child(5) {
-          animation: cd-slide-in 0.6s;
-        }
-      }
     }
   }
   li {
@@ -83,14 +43,16 @@ Main components
   }
 }
 
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: $md) {
   #cd-nav {
+    display: none;
     ul {
       /* the navigation moves to the top */
       position: absolute;
       width: auto;
       max-width: none;
       bottom: auto;
+      border: 0;
       top: 36px;
       background: transparent;
       visibility: visible;
@@ -101,13 +63,11 @@ Main components
     li {
       display: inline-block;
       a {
+        color: $white;
         opacity: 1;
         padding: .4em;
         margin-left: 1.6em;
         border-bottom: none;
-        &:hover {
-          color: $green;
-        }
       }
     }
     &.is-fixed ul {
@@ -198,7 +158,8 @@ Main components
     }
   }
   &.menu-is-open {
-    box-shadow: none;
+    border: 0;
+    background-color: transparent;
     span {
       background: rgba(232, 74, 100, 0);
       &::before, &::after {
@@ -216,7 +177,7 @@ Main components
   }
 }
 
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: $md) {
   .cd-nav-trigger {
     /* the the menu triger is hidden by default on desktop devices */
     visibility: hidden;
@@ -239,33 +200,6 @@ Main components
     width: 100%;
     display: block;
     border-radius: 0.25em;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  #cd-gallery-items li {
-    width: 48%;
-    float: left;
-    margin-bottom: 2em;
-    margin-right: 4%;
-    &:nth-child(2n) {
-      margin-right: 0;
-    }
-  }
-}
-
-@media only screen and (min-width: 1170px) {
-  #cd-gallery-items li {
-    width: 31%;
-    float: left;
-    margin-bottom: 2.5em;
-    margin-right: 3.5%;
-    &:nth-child(2n) {
-      margin-right: 3.5%;
-    }
-    &:nth-child(3n) {
-      margin-right: 0;
-    }
   }
 }
 

@@ -19,7 +19,28 @@
                         {% endif %}
                     </ul>
                 </div>
+
+                <div id="cd-nav">
+                    <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
+                    <nav id="cd-main-nav">
+                        <ul>
+                            {% if user.is_authenticated %}
+                                <li {% if title == 'Overview' %}class="current"{% endif %}><a href="{% url 'wilbur:overview' %}">Overview</a></li>
+                                <li {% if title == 'Budgets' %}class="current"{% endif %}><a href="{% url 'wilbur:budgets' %}">Budgets</a></li>
+                                <li {% if title == 'Transactions' %}class="current"{% endif %}><a href="{% url 'wilbur:transactions' %}">Transactions</a></li>
+                                <li {% if title == 'Profile' %}class="current"{% endif %}><a href="{% url 'wilbur:profile' %}">Profile</a></li>
+                            {% else %}
+                                <li><a href="{% url 'wilbur:signup' %}">Sign Up</a></li>
+                                <li><a href="{% url 'wilbur:login' %}">Log In</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+
             </div>
         </div>
     </div>
 </nav>
+
+{% load staticfiles %}
+<script src="{% static 'js/navbar.js' %}"></script>

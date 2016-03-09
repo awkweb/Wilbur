@@ -12,7 +12,12 @@
     float: left;
   }
 
-  .navbar-right { float: right; }
+  .navbar-right {
+    float: right;
+    @media only screen and (max-width: $md) { // Consildate navbar and navbar2 to do this
+      display: none;
+    }
+  }
 
   .brand {
     font-family: $cursive;
