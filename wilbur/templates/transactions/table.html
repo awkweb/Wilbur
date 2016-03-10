@@ -31,22 +31,7 @@
         </div>
 
         <div class="col-md-10 col-md-offset-1 col-sm-12">
-            <nav>
-                <p class="pager-total"><span>{{ transactions.start_index }}</span> – <span>{{ transactions.end_index }}</span>
-                    of <span>{{ transactions.paginator.count }}</span></p>
-
-                <ul class="pager pull-right">
-                    {% if transactions.has_other_pages %}
-                        <li><a {% if transactions.has_previous %}href="?page={{ transactions.previous_page_number }}"{% endif %}
-                               class="previous {% if not transactions.has_previous %}disabled{% endif %}">Newer</a>
-                            {% for page in transactions.paginator.page_range %}
-                                <li><a href="?page={{ page }}" class="button-pagination {% if transactions.number == page %}current{% else %}active{% endif %}">{{ page }}</a>
-                            {% endfor %}
-                        <li><a {% if transactions.has_next %}href="?page={{ transactions.next_page_number }}"{% endif %}
-                               class="next {% if not transactions.has_next %}disabled{% endif %}">Older</a>
-                    {% endif %}
-                </ul>
-            </nav>
+            {% include 'includes/pagination.html' with pagination=transactions %}
         </div>
     {% else %}
         {% include 'includes/empty_state.html' with empty_title="No Transactions" button_title="Add transaction" button_link="wilbur:add-transaction"|rev %}

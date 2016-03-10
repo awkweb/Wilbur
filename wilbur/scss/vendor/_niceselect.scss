@@ -51,7 +51,7 @@ $dropdown_padding: 10px !default;
   .list {
     border-radius: 4px;
     background-color: $white;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid $gray-light;
     box-sizing: border-box;
     margin-top: 4px;
     max-height: 200px;

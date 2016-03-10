@@ -3,20 +3,18 @@
 
 .navbar {
   @extend .mar-0;
-  position: relative;
   height: $navbar-height;
   background-color: $green;
 
   .navbar-left {
     @extend .pad-t-0;
     float: left;
+    @media screen and (max-width: $sm) { display: none; }
   }
 
   .navbar-right {
     float: right;
-    @media only screen and (max-width: $md) { // Consildate navbar and navbar2 to do this
-      display: none;
-    }
+    @media screen and (max-width: $sm) { float: none; }
   }
 
   .brand {
@@ -27,21 +25,25 @@
 
   .nav-inline {
     @extend .pad-t-1;
+    padding-left: 0;
+    text-align: center;
 
     li:first-child { @extend .mar-l-0 }
 
     li {
-      @extend .mar-l-6;
+      margin-left: 36px;
       display: inline-block;
       font-family: $sans;
       list-style-type: none;
 
       &.current {
-        border-bottom: 4px solid $green-dark - 25;
+        border-bottom: 4px solid $green-dark - 20;
         padding-bottom: 9px;
       }
 
-      @media screen and (max-width: $md) { margin-left: .75rem; }
+      @media screen and (max-width: $sm) {
+        margin-left: 1rem;
+      }
     }
 
     a {

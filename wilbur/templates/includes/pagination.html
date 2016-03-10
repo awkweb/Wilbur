@@ -1,0 +1,14 @@
+<p class="pager-total"><span>{{ pagination.start_index }}</span> – <span>{{ pagination.end_index }}</span>
+    of <span>{{ pagination.paginator.count }}</span></p>
+
+<ul class="pager pull-right">
+    {% if pagination.has_other_pages %}
+        <li><a {% if pagination.has_previous %}href="?page={{ pagination.previous_page_number }}"{% endif %}
+               class="previous {% if not pagination.has_previous %}disabled{% endif %}">Newer</a>
+            {% for page in pagination.paginator.page_range %}
+                <li><a href="?page={{ page }}" class="button-pagination {% if pagination.number == page %}current{% else %}active{% endif %}">{{ page }}</a>
+            {% endfor %}
+        <li><a {% if pagination.has_next %}href="?page={{ pagination.next_page_number }}"{% endif %}
+               class="next {% if not pagination.has_next %}disabled{% endif %}">Older</a>
+    {% endif %}
+</ul>
