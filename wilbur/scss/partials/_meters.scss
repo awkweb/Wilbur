@@ -1,4 +1,22 @@
+@mixin meter-bar($color) {
+  transition: width 3s;
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: .95rem;
+  line-height: 20px;
+  text-align: right;
+  padding-right: .25rem;
+  background-color: $color;
+}
+
 .meter { @include clearfix(); }
+
+.meter-default { @include meter-bar(none); }
+.meter-info { @include meter-bar($blue); }
+.meter-success { @include meter-bar($green); }
+.meter-warning { @include meter-bar($yellow); }
+.meter-error { @include meter-bar($red); }
 
 .meter-title {
   p {
@@ -13,18 +31,12 @@
 }
 
 .meter-container {
-  border-radius: 4px;
+  border-radius: $border-radius;
   clear: both;
   height: 1.5rem;
   overflow: hidden;
   background-color: $gray-lightest;
 }
-
-.meter-default { @include meter-bar(none); }
-.meter-info { @include meter-bar($blue); }
-.meter-success { @include meter-bar($green); }
-.meter-warning { @include meter-bar($yellow); }
-.meter-error { @include meter-bar($red); }
 
 .meter-footer {
   font-size: 0.9rem;

@@ -1,3 +1,13 @@
+@mixin token($background) {
+  border-radius: $border-radius;
+  padding: $border-radius 10px;
+  color: $white;
+  font-weight: 600;
+  background-color: $background;
+
+  &.small { padding: 1px 6px; }
+}
+
 @each $name, $background in
                 (error, $red),
                 (warning, $yellow),

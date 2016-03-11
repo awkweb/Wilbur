@@ -7,19 +7,19 @@ $gray-lightest: #F9F9F9;
 
 $white: #fff;
 
-$dark: 3%;
+$darken: 3%;
 
 $blue: #5898f1;
-$blue-dark: darken($blue, $dark);
+$blue-dark: darken($blue, $darken);
 
 $green: #00b27f;
-$green-dark: darken($green, $dark);
+$green-dark: darken($green, $darken);
 
 $yellow: #ec971f;
-$yellow-dark: darken($yellow, $dark);
+$yellow-dark: darken($yellow, $darken);
 
 $red: #FA5744;
-$red-dark: darken($red, $dark);
+$red-dark: darken($red, $darken);
 
 // fonts
 $sans: 'Open Sans', sans-serif;
@@ -36,7 +36,6 @@ $line-height: 1.5;
 $navbar-height: 57px;
 $footer-height: 70px;
 
-
 // widths
 // Extra small screen / phone
 $xs: 0;
@@ -48,3 +47,5 @@ $md: 768px;
 $lg: 992px;
 // Extra large screen / wide desktop
 $xl: 1200px;
+
+$border-radius: 4px;

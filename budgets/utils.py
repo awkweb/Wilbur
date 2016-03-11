@@ -40,20 +40,19 @@ def get_months_for_select_date_with_user(user):
 
 
 def get_transactions_with_month_and_year(user, month, year):
-    transactions = Transaction.objects.filter(budget__user=user).filter(transaction_date__year=year)\
-        .filter(transaction_date__month=month).order_by('-transaction_date')
+    transactions = Transaction.objects.filter(budget__user=user, transaction_date__year=year, transaction_date__month=month)\
+        .order_by('-transaction_date', '-amount')
     return transactions
 
 
 def get_transactions_for_budget_with_month_and_year(budget, month, year):
-    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year)\
-        .filter(transaction_date__month=month)
+    transactions = Transaction.objects.filter(budget=budget, transaction_date__year=year, transaction_date__month=month)\
+        .order_by('-transaction_date', '-amount')
     return transactions
 
 
 def get_sum_transactions_for_budget_with_month_and_year(budget, month, year):
-    transactions = Transaction.objects.filter(budget=budget).filter(transaction_date__year=year)\
-        .filter(transaction_date__month=month)
+    transactions = Transaction.objects.filter(budget=budget, transaction_date__year=year, transaction_date__month=month)
     total = transactions.aggregate(Sum('amount'))['amount__sum']
     total = int(total) if total is not None else 0
     return total

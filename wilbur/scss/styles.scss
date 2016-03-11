@@ -1,6 +1,7 @@
 @import "partials/variables";
 @import "partials/mixins";
 
+// components
 @import "partials/base";
 @import "partials/helpers";
 @import "partials/typography";
@@ -12,18 +13,16 @@
 @import "partials/meters";
 @import "partials/dialogs";
 @import "partials/tokens";
-
-// Add to Style Guide
 @import "partials/navbar";
 @import "partials/footer";
 
-// Re-design
+// vendor
+@import "vendor/niceselect";
+@import "vendor/minical";
+
+// Pages (Re-design)
 @import "partials/landing";
 
 // Refactor & Remove
 @import "partials/error_pages";
 @import "partials/shame";
-
-// Refactor
-@import "vendor/niceselect";
-@import "vendor/minical";

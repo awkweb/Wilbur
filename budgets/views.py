@@ -35,31 +35,31 @@ class OverviewView(TemplateView):
                 request.session['month'] = today.month
                 request.session['year'] = today.year
 
-                budget_list = []
-                transaction_list = []
+                # budget_list = []
+                # transaction_list = []
                 remaining = 0
                 total = 0
                 for budget in budgets:
                     amount_spent = get_sum_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
                     amount_left = budget.amount - amount_spent
                     amount_percent = amount_spent / budget.amount * 100
-                    data = {
-                        'id': budget.id,
-                        'name': budget.category.name.title(),
-                        'amount': budget.amount,
-                        'amount_spent': amount_spent,
-                        'amount_left': amount_left,
-                        'description': budget.description,
-                        'percent': amount_percent
-                    }
+                    # data = {
+                    #     'id': budget.id,
+                    #     'name': budget.category.name.title(),
+                    #     'amount': budget.amount,
+                    #     'amount_spent': amount_spent,
+                    #     'amount_left': amount_left,
+                    #     'description': budget.description,
+                    #     'percent': amount_percent
+                    # }
                     remaining += amount_left
                     total += budget.amount
-                    budget_list.append(data)
-                    t_list = get_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
-                    transaction_list.extend(t_list)
+                    # budget_list.append(data)
+                    # t_list = get_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
+                    # transaction_list.extend(t_list)
 
-                budget_list = sorted(budget_list, key=lambda b: b['percent'], reverse=True)[:5]
-                transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5] # ToDo model level sorting
+                # budget_list = sorted(budget_list, key=lambda b: b['percent'], reverse=True)[:5]
+                # transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5]
                 remaining_percent = remaining / total * 100
 
                 return render(request, 'overview/overview.html', {
@@ -68,8 +68,7 @@ class OverviewView(TemplateView):
                     'total': total,
                     'remaining': remaining,
                     'remaining_percent': remaining_percent,
-                    'budget_list': budget_list,
-                    'transaction_list': transaction_list,
+                    'budget_list': len(budgets) > 0,
                 })
             else:
                 return render(request, 'overview/overview.html', {
