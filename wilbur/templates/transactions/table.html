@@ -34,6 +34,6 @@
             {% include 'includes/pagination.html' with pagination=transactions %}
         </div>
     {% else %}
-        {% include 'includes/empty_state.html' with empty_title="No Transactions" button_title="Add transaction" button_link="wilbur:add-transaction"|rev %}
+        {% include 'includes/empty.html' with empty_title="No Transactions" button_title="Add transaction" button_link="wilbur:add-transaction"|rev %}
     {% endif %}
 </section>
