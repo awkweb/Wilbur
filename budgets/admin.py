@@ -14,7 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,
-            {'fields': ['budget', 'type', 'description', 'amount', 'transaction_date',]}),
+            {'fields': ['budget', 'type', 'description', 'amount', 'transaction_date']}),
     ]
     list_display = ('budget', 'description', 'amount', 'transaction_date', 'type',)
     list_filter = ['type', 'amount', 'transaction_date']

@@ -20,18 +20,18 @@ $dropdown_padding: 10px !default;
   &:after {
     transition: all 0.15s ease-in-out;
     transform: rotate(45deg);
-    border-bottom: 2px solid $gray-dark;
-    border-right: 2px solid $gray-dark;
+    border-bottom: 1px solid $gray-dark;
+    border-right: 1px solid $gray-dark;
     content: '';
     display: block;
-    height: 5px;
-    margin-top: -4px;
+    height: 6px;
+    margin-top: -3px;
     pointer-events: none;
     position: absolute;
     right: 12px;
     top: 50%;
     transform-origin: 66% 66%;
-    width: 5px;
+    width: 6px;
   }
 
   &.open {

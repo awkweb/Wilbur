@@ -1,3 +1,4 @@
+// Login
 .registration-welcome {
   margin: 5.5rem 0 1rem;
   text-align: center;
@@ -5,17 +6,75 @@
   color: $green;
 }
 
-.registration-link {
+.registration-text {
   font-size: .95rem;
   margin-top: 3rem;
   text-align: center;
   color: $gray;
 
-  & a {
-    color: $green;
+  a { @include link($green, $green-dark); }
+}
 
-    &:hover {
-      color: $green-dark;
-    }
+// Home
+.overview-list {
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    font-size: 1.25rem;
+    padding-left: 1rem;
+    border-left: 4px solid $gray-lightest;
+
+    &:hover { border-color: $gray-light }
+  }
+
+  a { @include link($gray, $gray-dark); }
+}
+
+// Style Guide
+.code {
+  margin: 1rem 0;
+  padding: 1rem 0.5rem;
+  border-radius: 4px;
+  background-color: $gray-darkest;
+}
+
+code {
+  font-size: 14px;
+  line-height: 18px;
+  font-family: "Source Code Pro", Consolas, "Lucida Console", Courier, monospace;
+  color: $white;
+  word-spacing: normal;
+  word-wrap: break-word;
+}
+
+.color-disc {
+  border-radius: 50px;
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+}
+
+// Error Pages
+.error-main {
+  margin-top: 13rem;
+  text-align: center;
+}
+
+.error-message {
+  color: $green;
+  font-size: 2rem;
+}
+
+.error-link {
+  max-width: 103px;
+  display: block;
+  margin: 1.5rem auto 0;
+  font-size: 1rem;
+  color: $gray;
+  border-bottom: 1px solid $gray-light;
+
+  &:hover {
+    color: $gray-dark;
   }
 }

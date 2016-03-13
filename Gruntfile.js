@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    style: 'compressed',
+                    //style: 'compressed',
                     noCache: true
                 },
                 files: {
@@ -23,6 +23,16 @@ module.exports = function(grunt) {
                 files: {
                     'wilbur/static/css/styles.css': 'wilbur/static/css/styles.css'
                 }
+            }
+        },
+
+        // comb css
+        csscomb: {
+            options: {
+                config: '.csscomb.json'
+            },
+            files: {
+                'wilbur/static/css/styles.css': 'wilbur/static/css/styles.css'
             }
         },
 
@@ -41,7 +51,7 @@ module.exports = function(grunt) {
         watch: {
             css: {
                 files: ['wilbur/scss/**/*.scss'],
-                tasks: ['sass', 'autoprefixer'],
+                tasks: ['sass', 'autoprefixer', 'csscomb'],
                 options: {
                     interrupt: true,
                     spawn: false
@@ -62,9 +72,10 @@ module.exports = function(grunt) {
     // loads
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-csscomb');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // tasks
-    grunt.registerTask('default', ['sass', 'autoprefixer', 'coffee']);
+    grunt.registerTask('default', ['sass', 'autoprefixer', 'csscomb', 'coffee']);
 };

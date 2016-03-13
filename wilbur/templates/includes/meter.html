@@ -12,7 +12,7 @@
                         {% elif meter_percent > 85 and meter_percent < 95 %}warning
                         {% elif meter_percent > 95 %}error
                         {% else %}default{% endif %}"
-             role="progressbar" data-width="{{ meter_percent }}%" aria-valuenow="{{ meter_percent }}" aria-valuemin="0" aria-valuemax="100">
+             role="progressbar" data-width="{{ meter_percent }}" aria-valuenow="{{ meter_percent }}" aria-valuemin="0" aria-valuemax="100">
         </div>
     </div>
     {% if meter_id %}

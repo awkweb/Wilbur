@@ -11,13 +11,41 @@
     {% if budget_list %}
         <section class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
-                <p class="text-large mar-t-0 mar-b-1">
+                <p class="text-large mar-t-0 mar-b-1 color-default">
                     <span class="wilbur large color-success">Hey {{ user.first_name|default:"friend" }}</span> , you have
                     <span class="token-{% if remaining_percent <= 100 and remaining_percent >= 15 %}success
                         {% elif remaining_percent > 5 and remaining_percent < 16 %}warning
                         {% else %}error{% endif %}">${{ remaining|floatformat:0|intcomma }}</span>
                     left in {% now "F Y" %}.
                 </p>
+            </div>
+        </section>
+
+        <section class="row">
+            <div class="col-md-5 col-md-offset-1 col-sm-5 overview-spacer">
+                <h2>Approaching Budgets</h2>
+                <ul class="overview-list">
+                    {% for budget in budget_list %}
+                        <li class="mar-b-3">
+                            <a class="lead" href="{% url 'wilbur:transactions-filter' budget.id %}">{{ budget.name }}
+                            <span class="token-{% if budget.percent <= 85 and budget.percent >= 0 %}success
+                            {% elif budget.percent > 86 and budget.percent < 95 %}warning
+                            {% else %}error{% endif %} small">${{ budget.amount_left|abs|floatformat:0|intcomma }}</span>
+                                {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</a>
+                        </li>
+                    {% endfor %}
+                    <li><a class="overview-callout small" href="{% url 'wilbur:add-budget' %}">Add budget</a></li>
+                </ul>
+            </div>
+            <div class="col-md-5 col-sm-5">
+                <h2>Recent Transactions</h2>
+                <ul class="overview-list">
+                    {% for transaction in transaction_list %}
+                        <li class="mar-b-3"><a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|date:"F j" }}
+                            {{ transaction.budget.category.name.title }} <span class="overview-span">${{ transaction.amount|intcomma }}</span></a></li>
+                    {% endfor %}
+                    <li><a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add transaction</a></li>
+                </ul>
             </div>
         </section>
     {% else %}
