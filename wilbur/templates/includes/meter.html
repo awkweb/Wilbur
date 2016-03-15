@@ -8,7 +8,7 @@
             {% if meter_amount_left >= 0 %}left{% else %}over{% endif %}</p>
     </div>
     <div class="meter-container">
-        <div class="meter-animate meter-{% if meter_percent <= 85 and meter_percent > 0 %}success
+        <div class="meter-animate meter-{% if meter_percent <= 85 and meter_percent > 0 or type == 1 and meter_percent > 0 %}success
                         {% elif meter_percent > 85 and meter_percent < 95 %}warning
                         {% elif meter_percent > 95 %}error
                         {% else %}default{% endif %}"

@@ -26,6 +26,12 @@ class BudgetForm(WilburForm):
             required=True,
             widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '99.50'}),
     )
+    type = forms.ChoiceField(
+            label='Type',
+            choices=Budget.TYPE_CHOICES,
+            required=False,
+            widget=forms.Select(attrs={'class': 'form-control'}),
+    )
     description = forms.CharField(
             label='Description',
             max_length=50,

@@ -54,7 +54,7 @@ def get_transactions_for_budget_with_month_and_year(budget, month, year):
 def get_sum_transactions_for_budget_with_month_and_year(budget, month, year):
     transactions = Transaction.objects.filter(budget=budget, transaction_date__year=year, transaction_date__month=month)
     total = transactions.aggregate(Sum('amount'))['amount__sum']
-    total = int(total) if total is not None else 0
+    total = int(total or 0)
     return total
 
 

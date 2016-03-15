@@ -3,11 +3,24 @@
 
 <section id="content-ajax" class="row">
     <div class="col-md-10 col-md-offset-1 col-sm-12">
-        {% include 'includes/meter.html' with meter_title=budget.name|date:"F Y" meter_amount_left=budget.amount_left meter_percent=budget.percent %}
+        <div class="mar-b-6">
+            <h4 class="mar-tb-2">INCOME</h4>
+            <p>Revenue {{ revenue_total }} - Savings 0 - Expenses {{ expenses_total }} = Income {{ income }}</p>
+        </div>
 
-        {% for budget in budget_list %}
-            {% include 'includes/meter.html' with meter_id=budget.id meter_title=budget.name.title meter_description=budget.description meter_amount=budget.amount meter_amount_left=budget.amount_left meter_amount_spent=budget.amount_spent meter_percent=budget.percent %}
-        {% endfor %}
+        <div class="mar-b-6">
+            <h4 class="mar-tb-2">REVENUES</h4>
+            {% for budget in revenues %}
+                {% include 'includes/meter.html' with meter_id=budget.id meter_title=budget.name.title meter_description=budget.description meter_amount=budget.amount meter_amount_left=budget.amount_left meter_amount_spent=budget.amount_spent meter_percent=budget.percent type=budget.type %}
+            {% endfor %}
+        </div>
+
+        <div>
+            <h4 class="mar-tb-2">EXPENSES</h4>
+            {% for budget in expenses %}
+                {% include 'includes/meter.html' with meter_id=budget.id meter_title=budget.name.title meter_description=budget.description meter_amount=budget.amount meter_amount_left=budget.amount_left meter_amount_spent=budget.amount_spent meter_percent=budget.percent %}
+            {% endfor %}
+        </div>
 
         {% load staticfiles %}
         <script src="{% static 'js/meter.js' %}"></script>

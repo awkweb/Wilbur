@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    {% if budget_list|length > 0 %}
+    {% if revenues|length > 0 or expenses|length > 0 %}
         {% include 'includes/messages.html' %}
 
         <section class="row mar-b-3">
