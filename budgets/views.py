@@ -32,37 +32,37 @@ class OverviewView(TemplateView):
                 request.session['month'] = today.month
                 request.session['year'] = today.year
 
-                expenses = []
-                transaction_list = []
-                remaining = 0
-                total = 0
+                expenses, transaction_list = [], []
                 for budget in budgets:
                     amount_spent = get_sum_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
                     amount_left = budget.amount - amount_spent
                     amount_percent = amount_spent / budget.amount * 100
-                    data = {
-                        'id': budget.id,
-                        'name': budget.category.name.title(),
-                        'amount': budget.amount,
-                        'amount_spent': amount_spent,
-                        'amount_left': amount_left,
-                        'description': budget.description,
-                        'percent': amount_percent
-                    }
-                    remaining += amount_left
-                    total += budget.amount
-                    expenses.append(data)
+                    if budget.type != 1:
+                        data = {
+                            'id': budget.id,
+                            'name': budget.category.name.title(),
+                            'amount': budget.amount,
+                            'amount_spent': amount_spent,
+                            'amount_left': amount_left,
+                            'description': budget.description,
+                            'percent': amount_percent
+                        }
+                        expenses.append(data)
                     t_list = get_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
                     transaction_list.extend(t_list)
 
                 expenses = sorted(expenses, key=lambda b: b['percent'], reverse=True)[:5]
                 transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5]
-                remaining_percent = remaining / total * 100
+
+                expenses_max = budgets.filter(user=user).aggregate(Sum('amount'))['amount__sum']
+                expenses_actual = budgets.filter(user=user, transaction__transaction_date__year=today.year, transaction__transaction_date__month=today.month).aggregate(Sum('amount'))['amount__sum']
+                remaining = int(expenses_max or 0) - int(expenses_actual or 0)
+                remaining_percent = remaining / expenses_max * 100
 
                 return render(request, 'overview/overview.html', {
                     'title': 'Overview',
                     'user': user,
-                    'total': total,
+                    'total': expenses_max,
                     'remaining': remaining,
                     'remaining_percent': remaining_percent,
                     'expenses': expenses,
@@ -99,7 +99,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             year = selectdate.year
             selectdate_value = "%s%s" % (selectdate.month, selectdate.year)
 
-        revenues, expenses = [], []
+        expenses = []
         for budget in budgets:
             amount_spent = get_sum_transactions_for_budget_with_month_and_year(budget, month, year)
             amount_left = budget.amount - amount_spent
@@ -114,21 +114,13 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
                 'percent': amount_percent,
                 'type': budget.type,
             }
-            if budget.type == 1:
-                revenues.append(data)
-            elif budget.type == -1:
-                expenses.append(data)
+            expenses.append(data)
 
-        revenues_total = budgets.filter(type=1, transaction__transaction_date__year=year, transaction__transaction_date__month=month).aggregate(Sum('amount'))['amount__sum']
         expenses_total = budgets.filter(type=-1, transaction__transaction_date__year=year, transaction__transaction_date__month=month).aggregate(Sum('amount'))['amount__sum']
-        income = int(revenues_total or 0) - int(expenses_total or 0)
 
         return render(request, 'budgets/budgets.html', {
             'title': 'Budgets',
-            'revenue_total': revenues_total,
             'expenses_total': expenses_total,
-            'income': income,
-            'revenues': revenues,
             'expenses': expenses,
             'selectdate_value': selectdate_value,
             'months': months,
@@ -208,9 +200,8 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
         if form.is_valid():
             category = form.cleaned_data['category']
             amount = form.cleaned_data['amount']
-            budget_type = form.cleaned_data['type']
             description = form.cleaned_data['description']
-            budget = Budget(user=user, category=category, type=budget_type, amount=amount, description=description)
+            budget = Budget(user=user, category=category, amount=amount, description=description)
             budget.save()
             messages.success(request, 'Budget added')
             return {
@@ -240,7 +231,6 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
             data = {
                 'category': budget.category.id,
                 'amount': budget.amount,
-                'type': budget.type,
                 'description': budget.description,
                 'categories': categories,
             }
@@ -266,7 +256,6 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
         data = {
             'category': budget.category.id,
             'amount': budget.amount,
-            'type': budget.type,
             'description': budget.description,
             'categories': categories,
         }
@@ -279,8 +268,6 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                         budget.category = cleaned_data
                     elif field == 'amount':
                         budget.amount = cleaned_data
-                    elif field == 'type':
-                        budget.type = cleaned_data
                     elif field == 'description':
                         budget.description = cleaned_data
                 budget.save()
