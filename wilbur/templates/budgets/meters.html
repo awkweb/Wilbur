@@ -3,19 +3,12 @@
 
 <section id="content-ajax" class="row">
     <div class="col-md-10 col-md-offset-1 col-sm-12">
-        <div class="mar-b-6">
-            <h4 class="mar-tb-2">Overall</h4>
-            {% include 'includes/meter.html' with meter_title=budget.name.title meter_amount=budget.amount meter_amount_left=budget.amount_left meter_amount_spent=budget.amount_spent meter_percent=budget.percent %}
-        </div>
+        {% include 'includes/meter.html' with meter_title=budget.name|date:"F Y" meter_amount=budget.amount meter_amount_left=budget.amount_left meter_amount_spent=budget.amount_spent meter_percent=budget.percent %}
 
-        {% if expenses %}
-        <div>
-            <h4 class="mar-tb-2">Expenses</h4>
-            {% for budget in expenses %}
-                {% include 'includes/meter.html' with meter_id=budget.id meter_title=budget.name.title meter_description=budget.description meter_amount=budget.amount meter_amount_left=budget.amount_left meter_amount_spent=budget.amount_spent meter_percent=budget.percent %}
-            {% endfor %}
-        </div>
-        {% endif %}
+
+        {% for budget in budget_list %}
+            {% include 'includes/meter.html' with meter_id=budget.id meter_title=budget.name.title meter_description=budget.description meter_amount=budget.amount meter_amount_left=budget.amount_left meter_amount_spent=budget.amount_spent meter_percent=budget.percent %}
+        {% endfor %}
 
         {% load staticfiles %}
         <script src="{% static 'js/meter.js' %}"></script>

@@ -21,15 +21,6 @@ class Budget(models.Model):
     description = models.CharField(max_length=35, blank=True)
     creation_date = models.DateField(auto_now_add=True)
 
-    EXPENSE = -1
-    REVENUE = 1
-    TYPE_CHOICES = (
-        (EXPENSE, 'Expense'),
-        (REVENUE, 'Revenue'),
-    )
-    type = models.IntegerField(choices=TYPE_CHOICES,
-                               default=EXPENSE)
-
     class Meta:
         order_with_respect_to = 'category'
 

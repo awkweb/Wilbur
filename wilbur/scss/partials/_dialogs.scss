@@ -9,6 +9,7 @@
   background-color: rgba(249, 249, 249, 0.9);
   opacity: 0;
   visibility: hidden;
+
   &.is-visible {
     opacity: 1;
     visibility: visible;
@@ -48,7 +49,7 @@
     top: .075rem;
     display: block;
     text-align: center;
-    padding: 0 1rem;
+    margin: 0 1rem;
     font-size: 1.5rem;
     cursor: pointer;
   }

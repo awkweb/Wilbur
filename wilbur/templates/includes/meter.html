@@ -7,6 +7,7 @@
         <p class="pull-right lead">${{ meter_amount_left|abs|floatformat:0|intcomma }}
             {% if meter_amount_left >= 0 %}left{% else %}over{% endif %}</p>
     </div>
+
     <div class="meter-container">
         <div class="meter-animate meter-{% if meter_percent <= 85 and meter_percent > 0 or type == 1 and meter_percent > 0 %}success
                         {% elif meter_percent > 85 and meter_percent < 95 %}warning
@@ -15,13 +16,14 @@
              role="progressbar" data-width="{{ meter_percent }}" aria-valuenow="{{ meter_percent }}" aria-valuemin="0" aria-valuemax="100">
         </div>
     </div>
-    {% if meter_id %}
-        <div class="meter-footer">
-            <p class="pull-left small">${{ meter_amount_spent|floatformat:0|intcomma }} of ${{ meter_amount|floatformat:0|intcomma }}</p>
+
+    <div class="meter-footer">
+        <p class="pull-left small">${{ meter_amount_spent|floatformat:0|intcomma }} of ${{ meter_amount|floatformat:0|intcomma }}</p>
+        {% if meter_id %}
             <ul class="pull-right small">
                 <li><a href="{% url 'wilbur:edit-budget' meter_id %}">Edit</a></li>
                 <li><a href="{% url 'wilbur:transactions-filter' meter_id %}">View Transactions</a></li>
             </ul>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 </section>
