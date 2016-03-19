@@ -10,7 +10,7 @@ $('#form-submit').click (e) ->
       if !data['success']
         form.replaceWith data['form_html']
       else
-        next = form.attr 'next'
+        next = form.data('next')
         window.location.replace next
       return
     error: ->

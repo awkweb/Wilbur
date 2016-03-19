@@ -112,7 +112,6 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
                 'amount_left': amount_left,
                 'description': budget.description,
                 'percent': amount_percent,
-                'type': budget.type,
             }
             remaining += amount_left
             total += budget.amount
@@ -126,12 +125,15 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
             'percent': (total - remaining) / total * 100 if total > 0 else 0
         }
 
+        message_url = request.session.get('message_url', None)
+        request.session['message_url'] = None
         return render(request, 'budgets/budgets.html', {
             'title': 'Budgets',
             'budget': budget_overall,
             'budget_list': budget_list,
             'selectdate_value': selectdate_value,
             'months': months,
+            'message_url': message_url,
         })
 
     @json_view
@@ -161,7 +163,6 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
                 'amount_left': amount_left,
                 'description': budget.description,
                 'percent': amount_percent,
-                'type': budget.type,
             }
             remaining += amount_left
             total += budget.amount
@@ -212,6 +213,9 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
             description = form.cleaned_data['description']
             budget = Budget(user=user, category=category, amount=amount, description=description)
             budget.save()
+
+            message_url = reverse(viewname='wilbur:edit-budget', kwargs={'budget_id': budget.id})
+            request.session['message_url'] = message_url
             messages.success(request, 'Budget added')
             return {
                 'success': True,
@@ -280,6 +284,9 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                     elif field == 'description':
                         budget.description = cleaned_data
                 budget.save()
+
+            message_url = reverse(viewname='wilbur:edit-budget', kwargs={'budget_id': budget.id})
+            request.session['message_url'] = message_url
             messages.success(request, 'Budget edited')
             return {'success': True}
         form_html = render(request, 'budgets/edit_form.html', {
@@ -349,6 +356,9 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
                 'name': budget.category.name,
             }
             budget_list.append(b)
+
+        message_url = request.session.get('message_url', None)
+        request.session['message_url'] = None
         return render(request, 'transactions/transactions.html', {
             'title': 'Transactions',
             'hasBudget': budgets.count() == 0,
@@ -357,6 +367,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             'months': months,
             'filter_value': filter_value,
             'budget_list': budget_list,
+            'message_url': message_url,
         })
 
     @json_view
@@ -421,7 +432,9 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
                 transaction_date=transaction_date
             )
             transaction.save()
-            request.budget_id = budget.id
+
+            message_url = reverse(viewname='wilbur:edit-transaction', kwargs={'transaction_id': transaction.id})
+            request.session['message_url'] = message_url
             messages.success(request, 'Transaction added')
             return {'success': True}
         form_html = render(request, 'transactions/add_form.html', {
@@ -485,6 +498,9 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                     elif field == 'transaction_date':
                         transaction.transaction_date = cleaned_data
                 transaction.save()
+
+            message_url = reverse(viewname='wilbur:edit-transaction', kwargs={'transaction_id': transaction.id})
+            request.session['message_url'] = message_url
             messages.success(request, 'Transaction edited')
             return {'success': True}
         form_html = render(request, 'transactions/edit_form.html', {

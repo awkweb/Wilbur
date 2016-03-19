@@ -1,4 +1,4 @@
-<form id="form-grab" class="form" method="post" action="{% url 'wilbur:profile' %}" next="{% url 'wilbur:profile' %}">
+<form id="form-grab" class="form" method="post" action="{% url 'wilbur:profile' %}" data-next="{% url 'wilbur:profile' %}">
     {% csrf_token %}
 
     {% include 'includes/form_fields.html' %}

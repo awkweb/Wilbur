@@ -301,6 +301,7 @@ minical =
     today: ->
       mc = @data('minical')
       today = new Date
+      alert today
       @trigger('hide.minical')
       mc.selectDay(today, true)
   init: ->
