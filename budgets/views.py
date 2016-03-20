@@ -4,22 +4,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.http import Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views.generic.base import TemplateView
-
-
 from jsonview.decorators import json_view
 
-from cuser.forms import UserBetaCreationForm, UserProfileForm, EditPasswordForm
 from budgets.forms import BudgetForm, TransactionForm
 from budgets.utils import *
+from cuser.forms import EditPasswordForm, UserBetaCreationForm, UserProfileForm
 
 
 class OverviewView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
-
         if user is None:
             return redirect('wilbur:login')
         else:
@@ -27,8 +24,6 @@ class OverviewView(TemplateView):
 
             if budgets:
                 today = now()
-
-                request.session['selectdate_value'] = "%s%s" % (today.month, today.year)
                 request.session['month'] = today.month
                 request.session['year'] = today.year
 
@@ -50,12 +45,11 @@ class OverviewView(TemplateView):
                     remaining += amount_left
                     total += budget.amount
                     budget_list.append(data)
-                    t_list = get_transactions_for_budget_with_month_and_year(budget, today.month, today.year)
+                    t_list = get_transactions_for_user_with_month_and_year(user, today.year, today.month, budget)
                     transaction_list.extend(t_list)
 
                 budget_list = sorted(budget_list, key=lambda b: b['percent'], reverse=True)[:5]
                 transaction_list = sorted(transaction_list, reverse=True, key=lambda t: t.transaction_date)[:5]
-
                 remaining_percent = remaining / total * 100
 
                 return render(request, 'overview/overview.html', {
@@ -80,24 +74,12 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
-        budgets = get_budgets_for_user(user)
-        months = get_months_for_select_date_with_user(user)
-
         today = now()
-        month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
-        selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
+        month = request.session.get('month', today.month)
 
-        if len(months) == 0:
-            month = today.month
-            year = today.year
-            selectdate_value = "%s%s" % (today.month, today.year)
-        elif len(months) == 1:
-            selectdate = months[0]
-            month = selectdate.month
-            year = selectdate.year
-            selectdate_value = "%s%s" % (selectdate.month, selectdate.year)
-
+        month_list = get_months_for_user(user)
+        budgets = get_budgets_for_user(user)
         remaining, total = 0, 0
         budget_list = []
         for budget in budgets:
@@ -130,9 +112,9 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         return render(request, 'budgets/budgets.html', {
             'title': 'Budgets',
             'budget': budget_overall,
+            'select_date_value': "%s%s" % (year, month),
             'budget_list': budget_list,
-            'selectdate_value': selectdate_value,
-            'months': months,
+            'month_list': month_list,
             'message_url': message_url,
         })
 
@@ -142,12 +124,12 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         budgets = get_budgets_for_user(user)
 
         data = request.POST
-        selectdate_value = data['selectdate_value']
-        month = data['month']
         year = data['year']
-        request.session['selectdate_value'] = selectdate_value
+        month = data['month']
         request.session['month'] = month
         request.session['year'] = year
+        select_date_value = "%s%s" % (year, month)
+        request.session['select_date_value'] = select_date_value
 
         remaining, total = 0, 0
         budget_list = []
@@ -214,7 +196,7 @@ class BudgetsAddView(LoginRequiredMixin, TemplateView):
             budget = Budget(user=user, category=category, amount=amount, description=description)
             budget.save()
 
-            message_url = reverse(viewname='wilbur:edit-budget', kwargs={'budget_id': budget.id})
+            message_url = reverse(viewname='wilbur:budgets-edit', kwargs={'budget_id': budget.id})
             request.session['message_url'] = message_url
             messages.success(request, 'Budget added')
             return {
@@ -255,7 +237,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                 'budget_transaction_count': budget_transaction_count,
                 'dialog_title': 'Delete Budget',
                 'dialog_text': 'Are you sure you want to delete %s?' % budget.category.name.title(),
-                'dialog_action': reverse(viewname='wilbur:delete-budget', kwargs={'budget_id': budget.id}),
+                'dialog_action': reverse(viewname='wilbur:budgets-delete', kwargs={'budget_id': budget.id}),
             })
         else:
             raise Http404("Budget does not exist")
@@ -285,7 +267,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                         budget.description = cleaned_data
                 budget.save()
 
-            message_url = reverse(viewname='wilbur:edit-budget', kwargs={'budget_id': budget.id})
+            message_url = reverse(viewname='wilbur:budgets-edit', kwargs={'budget_id': budget.id})
             request.session['message_url'] = message_url
             messages.success(request, 'Budget edited')
             return {'success': True}
@@ -294,7 +276,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
             'budget': budget,
             'dialog_title': 'Delete Budget',
             'dialog_text': 'Are you sure you want to delete %s?' % budget.category.name.title(),
-            'dialog_action': reverse(viewname='wilbur:delete-budget', kwargs={'budget_id': budget.id}),
+            'dialog_action': reverse(viewname='wilbur:budgets-delete', kwargs={'budget_id': budget.id}),
         })
         form_html = form_html.content.decode('utf-8')
         return {
@@ -321,32 +303,25 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         user = get_user_in_session(request.session)
-        months = get_months_for_select_date_with_user(user)
-
         today = now()
-        month = request.session.get('month', today.month)
         year = request.session.get('year', today.year)
-        selectdate_value = request.session.get('selectdate_value', "%s%s" % (today.month, today.year))
+        month = request.session.get('month', today.month)
+        budget_filter_value = kwargs.get('budget_id', 0)
 
-        if len(months) == 0:
-            month = today.month
-            year = today.year
-            selectdate_value = "%s%s" % (today.month, today.year)
-        elif len(months) == 1:
-            selectdate = months[0]
-            month = selectdate.month
-            year = selectdate.year
-            selectdate_value = "%s%s" % (selectdate.month, selectdate.year)
+        month_list = get_months_for_user(user)
+        months = ["%s%s" % (m['year'], m['month']) for m in month_list]
+        if "%s%s" % (year, month) not in months:
+            if len(months) == 1:
+                year, month = month_list[0]['year'], month_list[0]['month']
+            else:
+                year, month = today.year, today.month
 
-        filter_value = kwargs.get('budget_id', '-1')
-        if filter_value == '-1':
-            transaction_list = get_transactions_with_month_and_year(user, month, year)
-        else:
-            budget = Budget.objects.get(pk=filter_value)
+        if budget_filter_value != 0:
+            budget = Budget.objects.get(pk=budget_filter_value)
             if budget.user != user:
                 raise Http404("Budget does not exist")
-            transaction_list = get_transactions_for_budget_with_month_and_year(filter_value, month, year)
-        transactions = get_paginator_for_list(request, transaction_list, 10)
+        transaction_list = get_transactions_for_user_with_month_and_year(user, year, month, budget_filter_value)
+        transaction_list = get_paginator_for_list(request, transaction_list, 10)
 
         budget_list = []
         budgets = get_budgets_for_user(user)
@@ -354,6 +329,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             b = {
                 'id': budget.id,
                 'name': budget.category.name,
+                'link': reverse(viewname='wilbur:transactions-budget', kwargs={'budget_id': budget.id})
             }
             budget_list.append(b)
 
@@ -362,10 +338,10 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         return render(request, 'transactions/transactions.html', {
             'title': 'Transactions',
             'hasBudget': budgets.count() == 0,
-            'transactions': transactions,
-            'selectdate_value': selectdate_value,
-            'months': months,
-            'filter_value': filter_value,
+            'budget_filter_value': budget_filter_value,
+            'select_date_value': "%s%s" % (year, month),
+            'transaction_list': transaction_list,
+            'month_list': month_list,
             'budget_list': budget_list,
             'message_url': message_url,
         })
@@ -375,25 +351,23 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         user = get_user_in_session(request.session)
 
         data = request.POST
-        selectdate_value = data['selectdate_value']
-        request.session['selectdate_value'] = selectdate_value
-        month = data['month']
         year = data['year']
+        month = data['month']
         request.session['month'] = month
         request.session['year'] = year
-        filter_value = kwargs.get('budget_id', '-1')
+        select_date_value = "%s%s" % (year, month)
+        request.session['select_date_value'] = select_date_value
+        budget_filter_value = kwargs.get('budget_id', 0)
 
-        if filter_value == '-1':
-            transaction_list = get_transactions_with_month_and_year(user, month, year)
-        else:
-            budget = Budget.objects.get(pk=filter_value)
+        if budget_filter_value != 0:
+            budget = Budget.objects.get(pk=budget_filter_value)
             if budget.user != user:
                 raise Http404("Budget does not exist")
-            transaction_list = get_transactions_for_budget_with_month_and_year(filter_value, month, year)
-        transactions = get_paginator_for_list(request, transaction_list, 10)
+        transaction_list = get_transactions_for_user_with_month_and_year(user, year, month, budget_filter_value)
+        transaction_list = get_paginator_for_list(request, transaction_list, 10)
 
         html = render(request, 'transactions/table.html', {
-            'transactions': transactions,
+            'transaction_list': transaction_list,
         })
         html = html.content.decode("utf-8")
         return {
@@ -433,7 +407,7 @@ class TransactionsAddView(LoginRequiredMixin, TemplateView):
             )
             transaction.save()
 
-            message_url = reverse(viewname='wilbur:edit-transaction', kwargs={'transaction_id': transaction.id})
+            message_url = reverse(viewname='wilbur:transactions-edit', kwargs={'transaction_id': transaction.id})
             request.session['message_url'] = message_url
             messages.success(request, 'Transaction added')
             return {'success': True}
@@ -468,6 +442,9 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                 'title': 'Edit Transaction',
                 'form': form,
                 'transaction_id': transaction_id,
+                'dialog_title': 'Delete Transaction',
+                'dialog_text': 'Are you sure you want to delete %s %s?' % (transaction.budget.category.name.title(), transaction.amount),
+                'dialog_action': reverse(viewname='wilbur:transactions-delete', kwargs={'transaction_id': transaction.id}),
             })
         else:
             raise Http404("Transaction does not exist")
@@ -499,13 +476,16 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                         transaction.transaction_date = cleaned_data
                 transaction.save()
 
-            message_url = reverse(viewname='wilbur:edit-transaction', kwargs={'transaction_id': transaction.id})
+            message_url = reverse(viewname='wilbur:transactions-edit', kwargs={'transaction_id': transaction.id})
             request.session['message_url'] = message_url
             messages.success(request, 'Transaction edited')
             return {'success': True}
         form_html = render(request, 'transactions/edit_form.html', {
             'form': form,
             'transaction_id': transaction_id,
+            'dialog_title': 'Delete Transaction',
+            'dialog_text': 'Are you sure you want to delete %s %s?' % (transaction.budget.category.name.title(), transaction.amount),
+            'dialog_action': reverse(viewname='wilbur:transaction-delete', kwargs={'transaction_id': transaction.id}),
         })
         form_html = form_html.content.decode('utf-8')
         return {

@@ -1,8 +1,7 @@
-<form id="form-grab" class="form" method="post" action="{% url 'wilbur:add-transaction' %}" data-next="{% url 'wilbur:transactions' %}">
+<form id="form-grab" class="form" method="post" action="{% url 'wilbur:transactions-add' %}" data-next="{% url 'wilbur:transactions' %}">
     {% csrf_token %}
     {% load staticfiles %}
     <script src="{% static 'js/minical.js' %}"></script>
-    <script src="{% static 'js/coffeecounter.js' %}"></script>
 
     {% include 'includes/form_fields.html' %}
 
@@ -10,10 +9,7 @@
     <a href="{% url 'wilbur:transactions' %}" class="button-default mar-l-2" role="button">Cancel</a>
 
     <script>
-        $("#id_transaction_date").minical({
-            initialize_with_date: false
-        });
-        $("#id_description").coffeeCounter();
+        $("#id_transaction_date").minical();
     </script>
 
     {% load staticfiles %}

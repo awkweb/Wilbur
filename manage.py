@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
+
 from wilbur.keys import SETTINGS
 
 if __name__ == "__main__":

@@ -1,22 +1,20 @@
-<form id="form-grab" class="form" method="post" action="{% url 'wilbur:edit-transaction' transaction_id %}" data-next="{% url 'wilbur:transactions' %}">
+<form id="form-grab" class="form" method="post" action="{% url 'wilbur:transactions-edit' transaction_id %}" data-next="{% url 'wilbur:transactions' %}">
     {% csrf_token %}
     {% load staticfiles %}
     <script src="{% static 'js/minical.js' %}"></script>
-    <script src="{% static 'js/coffeecounter.js' %}"></script>
 
     {% include 'includes/form_fields.html' %}
 
     <button id="form-submit" type="submit" class="button-success">Save</button>
     <a href="{% url 'wilbur:transactions' %}" class="button-default mar-l-2" role="button">Cancel</a>
-    <a href="{% url 'wilbur:delete-transaction' transaction_id %}" id="confirm" class="button-error pull-right"
-       data-alt-text="Yes, I am sure." data-original-text="Delete" role="button">Delete</a>
+    <a class="button-error pull-right dialog-trigger" role="button">Delete</a>
 
     <script>
         $("#id_transaction_date").minical();
-        $("#id_description").coffeeCounter();
     </script>
 
     {% load staticfiles %}
-    <script src="{% static 'js/confirm.js' %}"></script>
     <script src="{% static 'js/validator.js' %}"></script>
+
+    {% include 'includes/dialog.html' with dialog_title=dialog_title dialog_text=dialog_text dialog_action=dialog_action %}
 </form>

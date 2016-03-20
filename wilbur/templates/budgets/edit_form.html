@@ -1,7 +1,5 @@
-<form id="form-grab" class="form" method="post" action="{% url 'wilbur:edit-budget' budget.id %}" data-next="{% url 'wilbur:budgets' %}">
+<form id="form-grab" class="form" method="post" action="{% url 'wilbur:budgets-edit' budget.id %}" data-next="{% url 'wilbur:budgets' %}">
     {% csrf_token %}
-    {% load staticfiles %}
-    <script src="{% static 'js/coffeecounter.js' %}"></script>
 
     {% include 'includes/form_fields.html' %}
 
@@ -9,12 +7,8 @@
     <a href="{% url 'wilbur:budgets' %}" class="button-default mar-l-2" role="button">Cancel</a>
     <a class="button-error pull-right dialog-trigger" role="button">Delete</a>
 
-    <script>
-        $("#id_description").coffeeCounter();
-    </script>
-
     {% load staticfiles %}
     <script src="{% static 'js/validator.js' %}"></script>
 
-    {% include 'includes/dialog.html' %}
+    {% include 'includes/dialog.html' with dialog_title=dialog_title dialog_text=dialog_text dialog_action=dialog_action %}
 </form>

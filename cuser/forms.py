@@ -1,11 +1,17 @@
 from django import forms
-from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm, SetPasswordForm
 from django.contrib.auth import password_validation
+from django.contrib.auth.forms import (AuthenticationForm,
+                                       ReadOnlyPasswordHashField,
+                                       SetPasswordForm)
 
 from cuser.models import CUser
 
 
 class UserAuthenticationForm(AuthenticationForm):
+
+    error_messages = {
+        'invalid_login': "Invalid credentials."
+    }
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')

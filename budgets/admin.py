@@ -22,4 +22,3 @@ class TransactionAdmin(admin.ModelAdmin):
 admin.site.register(Budget, BudgetAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Transaction, TransactionAdmin)
-

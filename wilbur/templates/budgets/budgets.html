@@ -11,14 +11,14 @@
 
         <section class="row mar-b-3">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
-                <a href="{% url 'wilbur:add-budget' %}" class="button-outline-default small">Add budget</a>
+                <a href="{% url 'wilbur:budgets-add' %}" class="button-outline-default small">Add budget</a>
                 {% include 'includes/select_date.html' %}
             </div>
         </section>
 
         {% include 'budgets/meters.html' %}
     {% else %}
-        {% include 'includes/empty.html' with empty_title="No Budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
+        {% include 'includes/empty.html' with empty_title="No Budgets" empty_text="No time like the present."  button_title="Add budget" button_link="wilbur:budgets-add"|rev %}
     {% endif %}
 
 {% endblock %}

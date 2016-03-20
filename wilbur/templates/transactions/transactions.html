@@ -7,15 +7,15 @@
 {% block content %}
 
     {% if hasBudget %}
-        {% include 'includes/empty.html' with empty_title="No Budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
+        {% include 'includes/empty.html' with empty_title="No Budgets" empty_text="Let's get started – shall we?" button_title="Add budget" button_link="wilbur:budgets-add"|rev %}
     {% else %}
         {% include 'includes/messages.html' %}
 
         <section class="row mar-b-3">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
-                <a href="{% url 'wilbur:add-transaction' %}" class="button-outline-default small pull-left mar-r-2">Add transaction</a>
+                <a href="{% url 'wilbur:transactions-add' %}" class="button-outline-default small pull-left mar-r-2">Add transaction</a>
                 {% include 'includes/select_date.html' %}
-                {% include 'includes/filter_budget.html' %}
+                {% include 'includes/select_budget.html' %}
             </div>
         </section>
 

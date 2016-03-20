@@ -21,8 +21,8 @@
         <p class="pull-left small">${{ meter_amount_spent|floatformat:0|intcomma }} of ${{ meter_amount|floatformat:0|intcomma }}</p>
         {% if meter_id %}
             <ul class="pull-right small">
-                <li><a href="{% url 'wilbur:edit-budget' meter_id %}">Edit</a></li>
-                <li><a href="{% url 'wilbur:transactions-filter' meter_id %}">View Transactions</a></li>
+                <li><a href="{% url 'wilbur:budgets-edit' meter_id %}">Edit</a></li>
+                <li><a href="{% url 'wilbur:transactions-budget' meter_id %}">View Transactions</a></li>
             </ul>
         {% endif %}
     </div>

@@ -402,7 +402,6 @@
         var mc, today;
         mc = this.data('minical');
         today = new Date;
-        alert(today);
         this.trigger('hide.minical');
         return mc.selectDay(today, true);
       }

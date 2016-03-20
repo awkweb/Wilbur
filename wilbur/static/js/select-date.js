@@ -1,12 +1,11 @@
 (function() {
   var select;
 
-  select = $('#selectdate');
+  select = $('#select-date');
 
   select.change(function() {
-    var month, option, value, year;
-    option = $('#selectdate option:selected');
-    value = option.val();
+    var month, option, year;
+    option = select.find(":selected");
     year = option.data('year');
     month = option.data('month');
     $.ajaxSetup({
@@ -18,7 +17,6 @@
       url: window.location.pathname,
       type: 'post',
       data: {
-        'selectdate_value': value,
         'year': year,
         'month': month
       },
@@ -30,7 +28,7 @@
         }
       },
       error: function() {
-        form.find('.error-message').show();
+        alert('Error');
       }
     });
   });

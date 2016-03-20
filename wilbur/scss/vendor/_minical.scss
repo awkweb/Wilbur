@@ -122,8 +122,9 @@ ul.minical {
                   background-color: $gray-light;
                 }
                 &.minical_selected a {
-                  border-color: $green;
-                  background-color: $white;
+                  border-color: $green !important;
+                  background-color: $green !important;
+                  color: $white;
                 }
                 &.minical_past_month a,
                 &.minical_future_month a {
@@ -132,8 +133,7 @@ ul.minical {
                 &.minical_today_date a {
                   @include clearfix();
                   border-color: $green;
-                  background: $green;
-                  color: $white;
+                  background-color: $white;
                 }
                 &.minical_disabled a {
                   color: transparentize($gray-darkest, 0.5);

@@ -1,17 +1,19 @@
 <form class="pull-right">
-    <select id="selectdate" class="form-control small">
-        {% for month in months %}
-            <option value="{{ month.month }}{{ month.year }}" data-year="{{ month.year }}" data-month="{{ month.month }}">{{ month|date:"F Y" }}</option>
+    <select id="select-date" class="form-control small">
+        {% for m in month_list %}
+            <option value="{{ m.year }}{{ m.month }}" data-year="{{ m.year }}" data-month="{{ m.month }}">{{ m.name }}</option>
         {% endfor %}
     </select>
 </form>
+
 <script>
     $(document).ready(function() {
-        var select = $('#selectdate');
-        select.val({{ selectdate_value }});
+        var select = $('#select-date');
+        select.val({{ select_date_value }});
         select.niceSelect();
     });
 </script>
+
 {% load staticfiles %}
 <script src="{% static 'js/niceselect.js' %}"></script>
-<script src="{% static 'js/niceselectdate.js' %}"></script>
+<script src="{% static 'js/select-date.js' %}"></script>

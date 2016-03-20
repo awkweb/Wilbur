@@ -1,0 +1,21 @@
+<form class="pull-left">
+    <select id="select-budget" class="form-control small filter">
+        <option value="0" data-display="Filter budgets" data-link="/transactions/">All</option>
+        {% for budget in budget_list %}
+            <option value="{{ budget.id }}" data-link="{{ budget.link }}">{{ budget.name.title }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<script>
+    $(document).ready(function() {
+        var select = $('#select-budget');
+        select.val({{ budget_filter_value }});
+        select.niceSelect();
+        select.selectFilter();
+    });
+</script>
+
+{% load staticfiles %}
+<script src="{% static 'js/niceselect.js' %}"></script>
+<script src="{% static 'js/select-budget.js' %}"></script>

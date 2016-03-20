@@ -18,7 +18,7 @@
           form.replaceWith(data['form_html']);
         } else {
           next = form.data('next');
-          window.location.replace(next);
+          location.href = next;
         }
       },
       error: function() {

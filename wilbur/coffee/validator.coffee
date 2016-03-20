@@ -11,7 +11,7 @@ $('#form-submit').click (e) ->
         form.replaceWith data['form_html']
       else
         next = form.data('next')
-        window.location.replace next
+        location.href = next
       return
     error: ->
       form.find('.error-message').show()

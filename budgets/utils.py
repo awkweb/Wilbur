@@ -1,8 +1,9 @@
+from datetime import date
+
 from django.contrib.auth import get_user_model
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Sum
 from django.utils.timezone import now
-from datetime import date
 
 from budgets.models import Budget, Category, Transaction
 
@@ -24,30 +25,33 @@ def get_budgets_for_user(user):
         return budgets
 
 
-def get_months_for_select_date_with_user(user):
+def get_months_for_user(user):
     months = Transaction.objects.filter(budget__user=user).dates('transaction_date', 'month', 'DESC')
     month_list = []
-    today = now()
-    current_month = date(today.year, today.month, 1)
     if months.count() == 0:
-        month_list.append(current_month)
+        today = now()
+        m = {
+            'year': today.year,
+            'month': today.month,
+            'name': date(today.year, today.month, 1).strftime('%B %Y'),
+        }
+        month_list.append(m)
     else:
-        month_list.append(current_month)
         for m in months:
-            if m != current_month:
-                month_list.append(m)
+            m = {
+                'year': m.year,
+                'month': m.month,
+                'name': m.strftime('%B %Y'),
+            }
+            month_list.append(m)
     return month_list
 
 
-def get_transactions_with_month_and_year(user, month, year):
-    transactions = Transaction.objects.filter(budget__user=user, transaction_date__year=year, transaction_date__month=month)\
-        .order_by('-transaction_date', '-amount')
-    return transactions
-
-
-def get_transactions_for_budget_with_month_and_year(budget, month, year):
-    transactions = Transaction.objects.filter(budget=budget, transaction_date__year=year, transaction_date__month=month)\
-        .order_by('-transaction_date', '-amount')
+def get_transactions_for_user_with_month_and_year(user, year, month, budget=None):
+    transactions = Transaction.objects.filter(budget__user=user, transaction_date__year=year, transaction_date__month=month)
+    if budget != 0:
+        transactions = transactions.filter(budget=budget)
+    transactions = transactions.order_by('-transaction_date', 'creation_date')
     return transactions
 
 

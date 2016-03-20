@@ -27,29 +27,29 @@
                 <ul class="overview-list">
                     {% for budget in budget_list %}
                         <li class="mar-b-3">
-                            <a class="lead" href="{% url 'wilbur:transactions-filter' budget.id %}">{{ budget.name }}
+                            <a class="lead" href="{% url 'wilbur:transactions-budget' budget.id %}">{{ budget.name }}
                             <span class="token-{% if budget.percent <= 85 and budget.percent >= 0 %}success
                             {% elif budget.percent > 86 and budget.percent < 95 %}warning
                             {% else %}error{% endif %} small">${{ budget.amount_left|abs|floatformat:0|intcomma }}</span>
                                 {% if budget.amount_left >= 0 %}left{% else %}over{% endif %}</a>
                         </li>
                     {% endfor %}
-                    <li><a class="overview-callout small" href="{% url 'wilbur:add-budget' %}">Add budget</a></li>
+                    <li><a class="overview-callout small" href="{% url 'wilbur:budgets-add' %}">Add budget</a></li>
                 </ul>
             </div>
             <div class="col-md-5 col-sm-5">
                 <h2>Recent Transactions</h2>
                 <ul class="overview-list">
                     {% for transaction in transaction_list %}
-                        <li class="mar-b-3"><a class="overview-callout small" href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|date:"F j" }}
+                        <li class="mar-b-3"><a class="overview-callout small" href="{% url 'wilbur:transactions-edit' transaction.id %}">{{ transaction.transaction_date|date:"F j" }}
                             {{ transaction.budget.category.name.title }} <span class="overview-span">${{ transaction.amount|intcomma }}</span></a></li>
                     {% endfor %}
-                    <li><a class="overview-callout small" href="{% url 'wilbur:add-transaction' %}">Add transaction</a></li>
+                    <li><a class="overview-callout small" href="{% url 'wilbur:transactions-add' %}">Add transaction</a></li>
                 </ul>
             </div>
         </section>
     {% else %}
-        {% include 'includes/empty.html' with empty_title="No Budgets" button_title="Add budget" button_link="wilbur:add-budget"|rev %}
+        {% include 'includes/empty.html' with empty_title="No Budgets" empty_text="Roger, you're clear for takeoff!"  button_title="Add budget" button_link="wilbur:budgets-add"|rev %}
     {% endif %}
 
 {% endblock %}

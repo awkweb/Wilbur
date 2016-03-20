@@ -1,8 +1,7 @@
-select = $('#selectdate')
+select = $('#select-date')
 
 select.change ->
-  option = $('#selectdate option:selected')
-  value = option.val()
+  option = select.find(":selected")
   year = option.data 'year'
   month = option.data 'month'
   $.ajaxSetup headers: 'X-CSRFToken': Cookies.get('csrftoken')
@@ -10,7 +9,6 @@ select.change ->
     url: window.location.pathname
     type: 'post'
     data: {
-      'selectdate_value': value,
       'year': year,
       'month': month
     }
@@ -20,6 +18,6 @@ select.change ->
         html.replaceWith data['html']
       return
     error: ->
-      form.find('.error-message').show()
+      alert 'Error'
       return
   return

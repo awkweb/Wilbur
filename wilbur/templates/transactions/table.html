@@ -2,7 +2,7 @@
 {% load budgets %}
 
 <section id="content-ajax" class="row">
-    {% if transactions|length > 0 %}
+    {% if transaction_list|length > 0 %}
         <div class="col-md-10 col-md-offset-1 col-sm-12 mar-b-2">
             <div class="table-bordered table-responsive">
                 <table class="table">
@@ -15,10 +15,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for transaction in transactions %}
+                    {% for transaction in transaction_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'wilbur:edit-transaction' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }}</a>
+                                <a href="{% url 'wilbur:transactions-edit' transaction.id %}">{{ transaction.transaction_date|naturalday|capfirst }}</a>
                             </td>
                             <td>{{ transaction.budget.category.name.title }}</td>
                             <td>{{ transaction.amount|intcomma }}</td>
@@ -31,9 +31,9 @@
         </div>
 
         <div class="col-md-10 col-md-offset-1 col-sm-12">
-            {% include 'includes/pagination.html' with pagination=transactions %}
+            {% include 'includes/pagination.html' with pagination=transaction_list %}
         </div>
     {% else %}
-        {% include 'includes/empty.html' with empty_title="No Transactions" button_title="Add transaction" button_link="wilbur:add-transaction"|rev %}
+        {% include 'includes/empty.html' with empty_title="No Transactions" empty_text="This is your moment of glory." button_title="Add transaction" button_link="wilbur:transactions-add"|rev %}
     {% endif %}
 </section>
