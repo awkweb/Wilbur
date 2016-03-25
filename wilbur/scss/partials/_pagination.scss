@@ -1,6 +1,11 @@
 .pager {
   @include clearfix();
+  float: right;
   padding: 0;
+
+  @media screen and (max-width: $sm) {
+    float: none;
+  }
 
   li {
     float: left;

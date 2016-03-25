@@ -11,7 +11,6 @@
 }
 
 .footer-inline {
-  @extend .mar-0;
   text-align: center;
   padding: 1.5rem 0;
   font-size: .9rem;
@@ -19,7 +18,7 @@
   li:first-child { @extend .mar-l-0; }
 
   li {
-    @extend .mar-l-3;
+    margin-left: 1rem;
     display: inline-block;
     font-family: $sans;
     list-style-type: none;

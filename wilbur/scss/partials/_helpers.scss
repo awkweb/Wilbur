@@ -1,5 +1,6 @@
 .pull-left { float: left !important; }
 .pull-right { float: right !important; }
+.float-none { float: none !important; }
 
 .text-left { text-align: left; }
 .text-center { text-align: center; }
@@ -17,7 +18,13 @@
 .background-success { background-color: $green; }
 .background-info { background-color: $blue; }
 
-@each $level, $size in (0, 0), (1, 6px), (2, 12px), (3, 18px), (4, 24px), (5, 30px), (6, 36px) {
+.hidden-sm {
+  @media screen and (max-width: $sm) {
+    display: none;
+  }
+}
+
+@each $level, $size in (0, 0), (1, $l1), (2, $l2), (3, $l3), (4, $l4), (5, $l5), (6, $l6) {
   .mar-#{$level} { margin: #{$size}; }
   .mar-t-#{$level} { margin-top: #{$size}; }
   .mar-r-#{$level} { margin-right: #{$size}; }
@@ -29,7 +36,7 @@
   }
 }
 
-@each $level, $size in (0, 0), (1, 6px), (2, 12px), (3, 18px), (4, 24px), (5, 30px), (6, 36px) {
+@each $level, $size in (0, 0), (1, $l1), (2, $l2), (3, $l3), (4, $l4), (5, $l5), (6, $l6) {
   .pad-#{$level} { padding: #{$size}; }
   .pad-t-#{$level} { padding-top: #{$size}; }
   .pad-r-#{$level} { padding-right: #{$size}; }
