@@ -86,8 +86,8 @@ minical =
   initialize_with_date: true
   move_on_resize: true
   read_only: true
-  show_clear_link: true
-  show_today_link: true
+  show_clear_link: false
+  show_today_link: false
   add_timezone_offset: true
   appendCalendarTo: -> $('body')
   date_format: (date) ->
@@ -281,6 +281,7 @@ minical =
     else if initial_date
       Date.parse(initial_date)
     else
+      @add_timezone_offset = false
       new Date().getTime()
     millis = parseInt(millis) + if @add_timezone_offset then (new Date().getTimezoneOffset() * 60 * 1000) else 0
     new Date(millis)

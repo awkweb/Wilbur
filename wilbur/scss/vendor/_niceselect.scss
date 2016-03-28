@@ -18,7 +18,6 @@ $dropdown_padding: 10px !default;
 
   // Arrow
   &:after {
-    transition: all 0.15s ease-in-out;
     transform: rotate(45deg);
     border-bottom: 1px solid $gray-dark;
     border-right: 1px solid $gray-dark;
@@ -35,9 +34,6 @@ $dropdown_padding: 10px !default;
   }
 
   &.open {
-    &:after {
-      transform: rotate(-135deg);
-    }
     .list {
       opacity: 1;
       pointer-events: auto;

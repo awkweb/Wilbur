@@ -75,8 +75,8 @@
     initialize_with_date: true,
     move_on_resize: true,
     read_only: true,
-    show_clear_link: true,
-    show_today_link: true,
+    show_clear_link: false,
+    show_today_link: false,
     add_timezone_offset: true,
     appendCalendarTo: function() {
       return $('body');
@@ -377,7 +377,7 @@
     detectInitialDate: function() {
       var initial_date, millis;
       initial_date = this.$el.attr("data-minical-initial") || this.$el.val();
-      millis = /^\d+$/.test(initial_date) ? initial_date : initial_date ? Date.parse(initial_date) : new Date().getTime();
+      millis = /^\d+$/.test(initial_date) ? initial_date : initial_date ? Date.parse(initial_date) : (this.add_timezone_offset = false, new Date().getTime());
       millis = parseInt(millis) + (this.add_timezone_offset ? new Date().getTimezoneOffset() * 60 * 1000 : 0);
       return new Date(millis);
     },

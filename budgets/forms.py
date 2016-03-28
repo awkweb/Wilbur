@@ -63,7 +63,7 @@ class TransactionForm(WilburForm):
     )
     description = forms.CharField(
             label='Description',
-            max_length=75,
+            max_length=50,
             required=False,
             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Netflix – and chill?',
                                           'data_coffee': "description"}),
