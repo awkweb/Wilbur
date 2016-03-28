@@ -302,8 +302,6 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
     redirect_field_name = 'next'
 
     def get(self, request, *args, **kwargs):
-        # print(request.GET.get('budget'))
-
         user = get_user_in_session(request.session)
         today = now()
         year = request.session.get('year', today.year)

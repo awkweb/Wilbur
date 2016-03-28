@@ -1,5 +1,5 @@
 <div class="message message-{{ message_type }} mar-t-0 mar-b-3" role="alert">
-    <strong>{{ message_title }} </strong> {{ message_text }}
+    {{ message_text }}
     {% if message_url %}
         <a class="message-button" href="{{ message_url }}">View</a>
     {% endif %}

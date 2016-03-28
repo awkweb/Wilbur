@@ -1,7 +1,7 @@
-<p class="pager-total hidden-sm"><span>{{ pagination.start_index }}</span> – <span>{{ pagination.end_index }}</span>
+<p class="pager-total hidden-sm mar-0"><span>{{ pagination.start_index }}</span> – <span>{{ pagination.end_index }}</span>
     of <span>{{ pagination.paginator.count }}</span></p>
 
-<ul class="pager">
+<ul class="pager mar-0">
     {% if pagination.has_other_pages %}
         <li><a {% if pagination.has_previous %}href="?page={{ pagination.previous_page_number }}"{% endif %}
                class="previous {% if not pagination.has_previous %}disabled{% endif %}">Newer</a>
