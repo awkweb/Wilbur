@@ -1,23 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %} – Wilbur</title>
-
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/grid.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,600">
-
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/js.cookie.js' %}"></script>
-
-    <link rel="icon" type="image/png" href="{% static 'img/favicon-32x32.png' %}" sizes="32x32">
-    <link rel="icon" type="image/png" href="{% static 'img/favicon-96x96.png' %}" sizes="96x96">
-    <link rel="icon" type="image/png" href="{% static 'img/favicon-16x16.png' %}" sizes="16x16">
-</head>
+{% include 'includes/head.html' %}
 <body>
     {% block section %}
     {% endblock %}
