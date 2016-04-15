@@ -39,20 +39,15 @@
   background-color: $gray-darkest;
 }
 
-code {
-  font-size: 14px;
-  line-height: 18px;
-  font-family: "Source Code Pro", Consolas, "Lucida Console", Courier, monospace;
-  color: $white;
-  word-spacing: normal;
-  word-wrap: break-word;
-}
-
 .color-disc {
   border-radius: 50px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: 100px;
   width: 100px;
+
+  p { color: $white; }
 }
 
 // Error Pages

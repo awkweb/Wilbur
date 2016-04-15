@@ -22,8 +22,8 @@
         </section>
 
         <section class="row">
-            <div class="col-md-5 col-md-offset-1 col-sm-5 overview-spacer">
-                <h2>Approaching Budgets</h2>
+            <div class="col-md-5 col-md-offset-1 col-sm-6 overview-spacer">
+                <h2>Upcoming Budgets</h2>
                 <ul class="overview-list">
                     {% for budget in budget_list %}
                         <li class="mar-b-3">
@@ -37,7 +37,7 @@
                     <li><a class="overview-callout small" href="{% url 'wilbur:budgets-add' %}">Add budget</a></li>
                 </ul>
             </div>
-            <div class="col-md-5 col-sm-5">
+            <div class="col-md-5 col-sm-6">
                 <h2>Recent Transactions</h2>
                 <ul class="overview-list">
                     {% for transaction in transaction_list %}

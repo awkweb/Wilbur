@@ -112,7 +112,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         return render(request, 'budgets/budgets.html', {
             'title': 'Budgets',
             'budget': budget_overall,
-            'select_date_value': "%s%s" % (year, month),
+            'select_date_value': "{}{}".format(year, month),
             'budget_list': budget_list,
             'month_list': month_list,
             'message_url': message_url,
@@ -128,7 +128,7 @@ class BudgetsView(LoginRequiredMixin, TemplateView):
         month = data['month']
         request.session['month'] = month
         request.session['year'] = year
-        select_date_value = "%s%s" % (year, month)
+        select_date_value = "{}{}".format(year, month)
         request.session['select_date_value'] = select_date_value
 
         remaining, total = 0, 0
@@ -236,7 +236,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
                 'budget': budget,
                 'budget_transaction_count': budget_transaction_count,
                 'dialog_title': 'Delete Budget',
-                'dialog_text': 'Are you sure you want to delete %s?' % budget.category.name.title(),
+                'dialog_text': 'Are you sure you want to delete {}s?'.format(budget.category.name.title()),
                 'dialog_action': reverse(viewname='wilbur:budgets-delete', kwargs={'budget_id': budget.id}),
             })
         else:
@@ -275,7 +275,7 @@ class BudgetsEditView(LoginRequiredMixin, TemplateView):
             'form': form,
             'budget': budget,
             'dialog_title': 'Delete Budget',
-            'dialog_text': 'Are you sure you want to delete %s?' % budget.category.name.title(),
+            'dialog_text': 'Are you sure you want to delete {}s?'.format(budget.category.name.title()),
             'dialog_action': reverse(viewname='wilbur:budgets-delete', kwargs={'budget_id': budget.id}),
         })
         form_html = form_html.content.decode('utf-8')
@@ -309,8 +309,8 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         budget_filter_value = kwargs.get('budget_id', 0)
 
         month_list = get_months_for_user(user)
-        months = ["%s%s" % (m['year'], m['month']) for m in month_list]
-        if "%s%s" % (year, month) not in months:
+        months = ["{}{}".format(m['year'], m['month']) for m in month_list]
+        if "{}{}".format(year, month) not in months:
             if len(months) == 1:
                 year, month = month_list[0]['year'], month_list[0]['month']
             else:
@@ -339,7 +339,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             'title': 'Transactions',
             'hasBudget': budgets.count() == 0,
             'budget_filter_value': budget_filter_value,
-            'select_date_value': "%s%s" % (year, month),
+            'select_date_value': "{}{}".format(year, month),
             'transaction_list': transaction_list,
             'month_list': month_list,
             'budget_list': budget_list,
@@ -355,7 +355,7 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
         month = data['month']
         request.session['month'] = month
         request.session['year'] = year
-        select_date_value = "%s%s" % (year, month)
+        select_date_value = "{}{}".format(year, month)
         request.session['select_date_value'] = select_date_value
         budget_filter_value = kwargs.get('budget_id', 0)
 
@@ -443,7 +443,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
                 'form': form,
                 'transaction_id': transaction_id,
                 'dialog_title': 'Delete Transaction',
-                'dialog_text': 'Are you sure you want to delete %s %s?' % (transaction.budget.category.name.title(), transaction.amount),
+                'dialog_text': 'Are you sure you want to delete {} {}?'.format(transaction.budget.category.name.title(), transaction.amount),
                 'dialog_action': reverse(viewname='wilbur:transactions-delete', kwargs={'transaction_id': transaction.id}),
             })
         else:
@@ -484,7 +484,7 @@ class TransactionsEditView(LoginRequiredMixin, TemplateView):
             'form': form,
             'transaction_id': transaction_id,
             'dialog_title': 'Delete Transaction',
-            'dialog_text': 'Are you sure you want to delete %s %s?' % (transaction.budget.category.name.title(), transaction.amount),
+            'dialog_text': 'Are you sure you want to delete {} {}?'.format(transaction.budget.category.name.title(), transaction.amount),
             'dialog_action': reverse(viewname='wilbur:transaction-delete', kwargs={'transaction_id': transaction.id}),
         })
         form_html = form_html.content.decode('utf-8')

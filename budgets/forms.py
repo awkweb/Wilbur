@@ -20,7 +20,7 @@ class BudgetForm(WilburForm):
     )
     amount = forms.DecimalField(
             label='Amount',
-            min_value=0,
+            min_value=.009,
             max_digits=10,
             decimal_places=2,
             required=True,
@@ -50,7 +50,7 @@ class TransactionForm(WilburForm):
     )
     amount = forms.DecimalField(
             label='Amount',
-            min_value=0,
+            min_value=.009,
             max_digits=10,
             decimal_places=2,
             required=True,

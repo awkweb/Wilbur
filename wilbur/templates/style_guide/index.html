@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Typography</h2>
             <h1>Main heading</h1>
             <h2>Sub page title</h2>
@@ -23,19 +23,19 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Colors</h2>
             <h3>Main colors</h3>
-            <div class="background-default color-disc"></div>
-            <div class="background-info color-disc"></div>
-            <div class="background-success color-disc"></div>
-            <div class="background-warning color-disc"></div>
-            <div class="background-error color-disc"></div>
+            <div class="background-default color-disc mar-b-1 mar-r-1"><p class="mar-0 semi-bold">#ABABAB</p></div>
+            <div class="background-info color-disc mar-b-1 mar-r-1"><p class="mar-0 semi-bold">#5898f1</p></div>
+            <div class="background-success color-disc mar-b-1 mar-r-1"><p class="mar-0 semi-bold">#00B27F</p></div>
+            <div class="background-warning color-disc mar-b-1 mar-r-1"><p class="mar-0 semi-bold">#FEC04C</p></div>
+            <div class="background-error color-disc mar-b-1"><p class="mar-0 semi-bold">#FA5744</p></div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Buttons</h2>
             <h3>With a or button elements</h3>
             <div>
@@ -89,24 +89,24 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Forms</h2>
 
             <h3>Input types</h3>
             <form>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     <div class="form-label">
                         <label>Text</label>
                     </div>
                     <input class="form-control" placeholder="Text" type="text">
                 </div>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     <div class="form-label">
                         <label>Number</label>
                     </div>
                     <input class="form-control" min="0" placeholder="7.99" step="0.01" type="number">
                 </div>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     <div class="form-label">
                         <label>Select</label>
                     </div>
@@ -117,7 +117,7 @@
                         <option>3</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     {% load staticfiles %}
                     <script src="{% static 'js/minical.js' %}"></script>
                     <div class="form-label">
@@ -142,19 +142,19 @@
 
             <h3>Labels & more</h3>
             <form>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     <div class="form-label">
                         <label>Default input label</label>
                     </div>
                     <input class="form-control" placeholder="Default input label" type="text">
                 </div>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     <div class="form-label required">
                         <label>Required input label</label>
                     </div>
                     <input class="form-control" placeholder="Required input label" type="text" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     <div class="form-label">
                         <label>Validation error</label>
                     </div>
@@ -163,7 +163,7 @@
                         <ul class="errorlist"><li>This field is required.</li></ul>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group mar-b-2">
                     <div class="form-label">
                         <label>Input accessory</label>
                         <span class="accessory">Input accessory</span>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Tables</h2>
             <div class="table-bordered table-responsive">
                 <table class="table">
@@ -227,7 +227,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Pagination</h2>
             <h3>Pager</h3>
             <ul class="pager float-none">
@@ -248,7 +248,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Messages</h2>
             <h3>With or without buttons</h3>
             <div class="message message-default mar-b-2" role="alert">
@@ -285,7 +285,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Meters</h2>
             <div class="meter">
                 <div class="meter-container">
@@ -343,7 +343,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Dialogs</h2>
             <a class="button-info dialog-trigger" role="button">Open dialog</a>
 
@@ -388,7 +388,7 @@
             </script>
         </div>
     </div><div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-md-10 col-md-offset-1 col-sm-12">
         <h2>Tokens</h2>
         <span class="token-info">$500</span>
         <span class="token-success">$500</span>
@@ -398,7 +398,7 @@
 </div>
 
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-sm-12">
             <h2>Helpers</h2>
             <h3>Text</h3>
             <p class="text-left">Left</p>

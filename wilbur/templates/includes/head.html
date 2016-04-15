@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if title %}{% block title %}{% endblock %} —{% endif %} Wilbur</title>
+    <title>{% if title %}{{ title }} —{% endif %} Wilbur</title>
 
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
